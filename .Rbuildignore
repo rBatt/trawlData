@@ -1,0 +1,17 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+.DS_Store
+ETOPO.RData
+HadISST.RData
+soda_200W-20E_0N-90N_1958-2008.RData
+soda.annMax_200W-20E_0N-90N_1958-2008.RData
+soda.annMean_200W-20E_0N-90N_1958-2008.RData
+HadISST.zip
+soda.zip
+inst/extdata/soda/
+inst/extdata/taxPictures/
+inst/extdata/depthData/
+inst/extdata/gmex/
+inst/extdata/newf/
+inst/extdata/sa/
+inst/extdata/wctri/

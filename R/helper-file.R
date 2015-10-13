@@ -10,7 +10,7 @@ fread.fwf <- function(..., cols){
 	end_col <- cumsum(cols)
 	start_col <- end_col - cols + 1
 	start_end <- cbind(start_col, end_col) # matrix of start and end positions
-
+ 
 	text <- data.initial[ , apply(start_end, 1, function(y) substr(V1, y[1], y[2]))] %>% data.table(.)
 	
 	return(text)

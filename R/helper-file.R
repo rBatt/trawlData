@@ -26,6 +26,12 @@ fread.fwf <- function(..., cols){
 # ===================================
 read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, ...){
 	
+	# dots <- list(...)
+	# colClasses <- dots$colClasses
+	# drop <- dots$drop
+	# select <- dots$select
+	# print(select)
+	
 	# Create a name for the dir where we'll unzip
 	zipdir <- tempfile()
 	
@@ -60,8 +66,10 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 	
 		if(grepl("\\.fwf$", pattern[i]) | use.fwf[i]){
 			fread2 <- fread.fwf
+			# fread2 <- function(..., cols, colClasses, drop, select)fread.fwf(...,colClasses=colClasses[[i]], drop=drop[[i]], select=select[[i]])
 		}else{
 			fread2 <- function(..., cols)fread(...)
+			# fread2 <- function(..., cols, colClasses, drop, select)fread(...,colClasses=colClasses[[i]], drop=drop[[i]], select=select[[i]])
 		}
 	
 		# Create a list of the imported files

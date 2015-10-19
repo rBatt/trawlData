@@ -58,10 +58,10 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 		# Get a list of csv files in the dir
 		files <- list.files(zipdir, rec=TRUE, pattern=pattern[i])
 	
-		if(grepl("\\.fwf", "\\.fwf$") | use.fwf[i]){
+		if(grepl("\\.fwf$", pattern[i]) | use.fwf[i]){
 			fread2 <- fread.fwf
 		}else{
-			fread2 <- function(..., col)fread(...)
+			fread2 <- function(..., cols)fread(...)
 		}
 	
 		# Create a list of the imported files
@@ -103,4 +103,4 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 	return(data.out)
 }
 
-data.fwf <- read.zip("newf.zip", pattern=c("\\.fwf$", "\\.DAT"), SIMPLIFY=FALSE)
+# data.fwf <- read.zip("newf.zip", pattern=c("\\.fwf$", "\\.DAT"), SIMPLIFY=FALSE)

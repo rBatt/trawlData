@@ -1,3 +1,4 @@
+
 read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), ...){
 	reg <- match.arg(reg, several.ok=TRUE)
 	
@@ -23,27 +24,12 @@ read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf"
 	
 	if(length(reg)>1){
 		dat <- lapply(reg, get.raw)
+		names(dat) <- reg
 	}else{
 		stopifnot(length(reg)>=1)
 		dat <- get.raw(reg)
 	}
 	
-	
-	
-	# dat <- switch(reg,
-# 		ai = read.ai(),
-# 		ebs = read.ebs(),
-# 		gmex = read.gmex(),
-# 		goa = read.goa(),
-# 		neus = read.neus(),
-# 		newf = read.newf(),
-# 		ngulf = read.ngulf(),
-# 		sa = read.sa(),
-# 		sgulf = read.sgulf(),
-# 		shelf = read.shelf(),
-# 		wcann = read.wcann(),
-# 		wctri = read.wctri()
-# 	)
 	
 	return(dat)	
 }

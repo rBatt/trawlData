@@ -543,16 +543,21 @@ read.wcann <- function(){
 # ==========
 read.wctri <- function(){
 	
+	# read
 	X.all <- read.zip("inst/extdata/wctri.zip", SIMPLIFY=F)
-	
 	X.catch <- X.all[["wctri-CATCHWCTRIALLCOAST.csv"]]
 	X.haul <- X.all[["wctri-HAULWCTRIALLCOAST.csv"]]
 	X.spp <- X.all[["wctri-RACEBASE_SPECIES.csv"]]
 	
-
-	wctri <- merge(X.catch, X.haul, by=intersect(names(X.catch), names(X.haul)), all.x=TRUE)
-
-	wctri <- merge(wctri, X.spp, by=intersect(names(wctri), names(X.spp)), all.x=TRUE)
+	# modifications to avoid conflicting columns
+	# X.catch[,AUDITJOIN:=NULL]
+	X.haul[,AUDITJOIN:=NULL]
+	X.spp[,AUDITJOIN:=NULL]
+	
+	# merge
+	m.cols1 <- c("CRUISEJOIN", "HAULJOIN", "REGION", "VESSEL", "CRUISE", "HAUL")
+	wctri <- merge(X.catch, X.haul, by=m.cols1, all.x=TRUE)
+	wctri <- merge(wctri, X.spp, by="SPECIES_CODE", all.x=TRUE)
 	
 	return(wctri)
 	

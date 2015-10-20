@@ -334,7 +334,8 @@ read.neus <- function(){
 	neus <- merge(neus, neus.spp, by="SVSPP") # add species names
 	neus <- merge(neus, neus.strata, by="STRATUM", all.x=TRUE)
 	neus <- merge(neus, neus.station, all.x=TRUE, by=c("STATION","STRATUM","CRUISE6"))
-
+	
+	# trim columns duplicated from merge 
 	trim.autoColumn(neus)
 	
 	return(neus)
@@ -451,6 +452,20 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 # = SGULF =
 # =========
 read.sgulf <- function(){
+	
+	X.all <- read.zip("inst/extdata/sgulf.zip", SIMPLIFY=F)
+	X.catch <- X.all[["sgulf-southern Gulf survey data.csv"]]
+	X.set <- X.all[[names(X.all)[grepl("sgulf-sGSL_RV Survey sets.*", names(X.all))]]]
+	X.strata <- X.all[["sgulf-4T_RV_strata.csv"]]
+
+
+	# merge
+	sgulf <- merge(X.catch, X.set, all.x=TRUE, all.y=FALSE, by=c("vessel","cruise","year","set"))
+	trim.autoColumn(sgulf) # remove redundant columns
+	setnames(sgulf, "strat", "stratum")# formatting needed for merge
+	sgulf <- merge(sgulf, X.strata, all.x=TRUE, by="stratum")
+	
+	return(sgulf)
 	
 }
 

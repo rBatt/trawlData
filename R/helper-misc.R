@@ -123,7 +123,10 @@ trim.autoColumn <- function(X){
 		X[,c(paste0(x,".y")):=NULL]
 		setnames(X, paste0(x,".x"), x)
 	}
-	drop.y(dup.names[dup.names.same])
+	if(any(dup.names.same & !is.na(dup.names.same))){
+		drop.y(dup.names[dup.names.same])
+	}
+	
 
 	if(any(!dup.names.same | is.na(dup.names.same))){
 		message("These columns had names that differed only in the suffix '.x' or '.y',\nbut they had different values, implying conflict in merged tables:\n",paste(dup.names[!dup.names.same | is.na(dup.names.same)], collapse="\n"))

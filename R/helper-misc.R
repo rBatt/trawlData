@@ -76,3 +76,56 @@ cy <- function(x){
 		unique(x)	
 	}
 }
+
+
+# Added a check to make sure that names repeated in different tables did 
+# not have different values, or were reported as such
+# also drops columns duplicated from merging,
+# and handles 'conflicts' arising from one column being
+# NA, and the other !is.na(), replacing the NA with the non-NA value
+# These checks and changes make the function a bit slow
+trim.autoColumn <- function(X){
+	strip.names <- gsub("\\.[xy]", "", names(X))
+	dup.names <- strip.names[duplicated(strip.names)]
+	if(length(dup.names)==0){
+		message("No names duplicated in the form of 'column.x' 'column.y'")
+		return(NULL)
+	}
+	
+	reduce.na <- function(x){
+		# if only 1 column has an NA for that row,
+		# because the columns presumably represent same measurements,
+		# replace the NA value with the non-NA value
+		x.x <- X[,eval(s2c(paste0(x,".x")))][[1]]
+		x.y <- X[,eval(s2c(paste0(x,".y")))][[1]]
+		
+		na.only.x <- is.na(x.x) & !is.na(x.y)
+		if(any(na.only.x)){
+			X[na.only.x, c(paste0(x,".x")):=eval(s2c(paste0(x,".y")))]
+		}
+		
+		na.only.y <- is.na(x.y) & !is.na(x.x)
+		if(any(na.only.y)){
+			X[na.only.y, c(paste0(x,".y")):=eval(s2c(paste0(x,".x")))]
+		}
+		
+	}
+	suppressWarnings(invisible(sapply(dup.names, reduce.na)))
+	
+	test.match <- function(x){
+		x.x <- X[,eval(s2c(paste0(x,".x")))][[1]]
+		x.y <- X[,eval(s2c(paste0(x,".y")))][[1]]
+		!any((x.x != x.y) & (!is.na(x.x) & !is.na(x.y)))
+	}
+	dup.names.same <- sapply(dup.names, test.match)
+
+	drop.y <- function(x){
+		X[,c(paste0(x,".y")):=NULL]
+		setnames(X, paste0(x,".x"), x)
+	}
+	drop.y(dup.names[dup.names.same])
+
+	if(any(!dup.names.same | is.na(dup.names.same))){
+		message("These columns had names that differed only in the suffix '.x' or '.y',\nbut they had different values, implying conflict in merged tables:\n",paste(dup.names[!dup.names.same | is.na(dup.names.same)], collapse="\n"))
+	}
+}

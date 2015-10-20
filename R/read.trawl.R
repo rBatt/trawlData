@@ -335,29 +335,7 @@ read.neus <- function(){
 	neus <- merge(neus, neus.strata, by="STRATUM", all.x=TRUE)
 	neus <- merge(neus, neus.station, all.x=TRUE, by=c("STATION","STRATUM","CRUISE6"))
 
-	
-	# Added a check to make sure that names repeated in different tables did 
-	# not have different values, or were reported as such
-	# also drops columns duplicated from merging
-	# this makes the function a bit slow
-	# strip.names <- gsub("\\.[xy]", "", names(neus))
-# 	dup.names <- strip.names[duplicated(strip.names)]
-# 	test.match <- function(x){
-# 		x.x <- neus[,eval(s2c(paste0(x,".x")))[[1]]]
-# 		x.y <- neus[,eval(s2c(paste0(x,".y")))[[1]]]
-# 		all((x.x==x.y) | (is.na(x.x) & is.na(x.y)))
-# 	}
-# 	dup.names.same <- sapply(dup.names, test.match)
-#
-# 	drop.y <- function(x){
-# 		neus[,c(paste0(x,".y")):=NULL]
-# 		setnames(neus, paste0(x,".x"), x)
-# 	}
-# 	drop.y(dup.names[dup.names.same])
-#
-# 	if(any(!dup.names.same)){
-# 		message("The following NEUS columns had different values in different tables:\n",paste(dup.names[dup.names.same], collapse="\n"))
-# 	}
+	trim.autoColumn(neus)
 	
 	return(neus)
 	
@@ -463,55 +441,7 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 	# merge 
 	sa <- merge(sa.mass, sa.strat, all.x=T, by=c("COLLECTIONNUMBER"))
 	
-	
-	# Added a check to make sure that names repeated in different tables did 
-	# not have different values, or were reported as such
-	# also drops columns duplicated from merging,
-	# and handles 'conflicts' arising from one column being
-	# NA, and the other !is.na(), replacing the NA with the non-NA value
-	# These checks and changes make the function a bit slow
-	trim.autoColumn <- function(X){
-		strip.names <- gsub("\\.[xy]", "", names(X))
-		dup.names <- strip.names[duplicated(strip.names)]
-		
-		reduce.na <- function(x){
-			# if only 1 column has an NA for that row,
-			# because the columns presumably represent same measurements,
-			# replace the NA value with the non-NA value
-			x.x <- X[,eval(s2c(paste0(x,".x")))][[1]]
-			x.y <- X[,eval(s2c(paste0(x,".y")))][[1]]
-			
-			na.only.x <- is.na(x.x) & !is.na(x.y)
-			if(any(na.only.x)){
-				X[na.only.x, c(paste0(x,".x")):=eval(s2c(paste0(x,".y")))]
-			}
-			
-			na.only.y <- is.na(x.y) & !is.na(x.x)
-			if(any(na.only.y)){
-				X[na.only.y, c(paste0(x,".y")):=eval(s2c(paste0(x,".x")))]
-			}
-			
-		}
-		suppressWarnings(invisible(sapply(dup.names, reduce.na)))
-		
-		test.match <- function(x){
-			x.x <- X[,eval(s2c(paste0(x,".x")))][[1]]
-			x.y <- X[,eval(s2c(paste0(x,".y")))][[1]]
-			!any((x.x != x.y) & (!is.na(x.x) & !is.na(x.y)))
-		}
-		dup.names.same <- sapply(dup.names, test.match)
-
-		drop.y <- function(x){
-			X[,c(paste0(x,".y")):=NULL]
-			setnames(X, paste0(x,".x"), x)
-		}
-		drop.y(dup.names[dup.names.same])
-
-		if(any(!dup.names.same | is.na(dup.names.same))){
-			message("These columns had names that differed only in the suffix '.x' or '.y',\nbut they had different values, implying conflict in merged tables:\n",paste(dup.names[!dup.names.same | is.na(dup.names.same)], collapse="\n"))
-		}
-	}
-	
+	# trim columns duplicated from merge
 	trim.autoColumn(sa)
 	
 	return(sa)

@@ -504,6 +504,23 @@ read.shelf <- function(){
 # ==========
 read.wcann <- function(){
 	
+	X.all <- read.zip("inst/extdata/wcann.zip", SIMPLIFY=F)
+	X.fish <- X.all[[names(X.all)[grepl("wcann.+fish\\.csv",names(X.all))]]]
+	X.haul <- X.all[[names(X.all)[grepl("wcann.+haul\\.csv",names(X.all))]]]
+	X.invert <- X.all[[names(X.all)[grepl("wcann.+invert\\.csv",names(X.all))]]]
+
+	# do this to make some reasonable names ... 
+	# so hard to resist
+	# setnames(X.fish, names(X.fish), make.names(names(X.fish)))
+# 	setnames(X.haul, names(X.haul), make.names(names(X.haul)))
+# 	setnames(X.invert, names(X.invert), make.names(names(X.invert)))
+
+	# merge/ rbind
+	X.catch <- rbind(X.fish[, names(X.invert), with=FALSE], X.invert)
+	wcann <- merge(X.catch, X.haul, by=intersect(names(X.catch), names(X.haul)), all.x=TRUE)
+	
+	return(wcann)
+	
 }
 
 # ==========

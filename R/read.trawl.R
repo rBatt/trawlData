@@ -67,12 +67,6 @@ read.ai <- function(){
 	raw.spaces <- grepl("^\\s* | \\s*$", "", names(ai.raw))
 	if(strata.spaces | raw.spaces){
 		message("AI data files have column names with leading or traililing whitespace")
-		
-		# uncomment lines below if you want to remove
-		# leading or trailing whitespace
-		# in the column names
-		# setnames(ai.raw, names(ai.raw), gsub("^\\s* | \\s*$", "", names(ai.raw)))
-		# setnames(ai.strata, names(ai.strata), gsub("^\\s* | \\s*$", "", names(ai.strata)))
 	}
 	
 	
@@ -123,21 +117,6 @@ read.ebs <- function(){
 	# read in stratum data file
 	which.strat <- which(names(X.all)=="ebs-Strata.csv") # use which so next step can use [[]]
 	X.strata <- X.all[[which.strat]][,list(StratumCode, Areakm2)] # subset X.all, then choose 2 columns
-	
-	
-	# # check for leading or trXling
-# 	# whitespace in col names
-# 	strata.spaces <- grepl("^\\s* | \\s*$", "", names(X.strata))
-# 	raw.spaces <- grepl("^\\s* | \\s*$", "", names(X.raw))
-# 	if(strata.spaces | raw.spaces){
-# 		message("AI data files have column names with leading or trXliling whitespace")
-#
-# 		# uncomment lines below if you want to remove
-# 		# leading or trXling whitespace
-# 		# in the column names
-# 		# setnames(X.raw, names(X.raw), gsub("^\\s* | \\s*$", "", names(X.raw)))
-# 		# setnames(X.strata, names(X.strata), gsub("^\\s* | \\s*$", "", names(X.strata)))
-# 	}
 	
 	
 	# adjust strat column to X.strata
@@ -266,21 +245,6 @@ read.goa <- function(){
 	# read in stratum data file
 	which.strat <- which(names(X.all)=="goa-Strata.csv") # use which so next step can use [[]]
 	X.strata <- X.all[[which.strat]][,list(StratumCode, Areakm2)] # subset X.all, then choose 2 columns
-	
-	
-	# # check for leading or trXling
-# 	# whitespace in col names
-# 	strata.spaces <- grepl("^\\s* | \\s*$", "", names(X.strata))
-# 	raw.spaces <- grepl("^\\s* | \\s*$", "", names(X.raw))
-# 	if(strata.spaces | raw.spaces){
-# 		message("AI data files have column names with leading or trXliling whitespace")
-#
-# 		# uncomment lines below if you want to remove
-# 		# leading or trXling whitespace
-# 		# in the column names
-# 		# setnames(X.raw, names(X.raw), gsub("^\\s* | \\s*$", "", names(X.raw)))
-# 		# setnames(X.strata, names(X.strata), gsub("^\\s* | \\s*$", "", names(X.strata)))
-# 	}
 	
 	
 	# adjust strat column to X.strata
@@ -454,6 +418,7 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 # =========
 read.sgulf <- function(){
 	
+	# read
 	X.all <- read.zip("inst/extdata/sgulf.zip", SIMPLIFY=F)
 	X.catch <- X.all[["sgulf-southern Gulf survey data.csv"]]
 	X.set <- X.all[[names(X.all)[grepl("sgulf-sGSL_RV Survey sets.*", names(X.all))]]]
@@ -505,16 +470,12 @@ read.shelf <- function(){
 # ==========
 read.wcann <- function(){
 	
+	# read
 	X.all <- read.zip("inst/extdata/wcann.zip", SIMPLIFY=F)
 	X.fish <- X.all[[names(X.all)[grepl("wcann.+fish\\.csv",names(X.all))]]]
 	X.haul <- X.all[[names(X.all)[grepl("wcann.+haul\\.csv",names(X.all))]]]
 	X.invert <- X.all[[names(X.all)[grepl("wcann.+invert\\.csv",names(X.all))]]]
-
-	# do this to make some reasonable names ... 
-	# so hard to resist
-	# setnames(X.fish, names(X.fish), make.names(names(X.fish)))
-# 	setnames(X.haul, names(X.haul), make.names(names(X.haul)))
-# 	setnames(X.invert, names(X.invert), make.names(names(X.invert)))
+	
 
 	# merge/ rbind
 	X.catch <- rbind(X.fish[, names(X.invert), with=FALSE], X.invert)
@@ -536,7 +497,6 @@ read.wctri <- function(){
 	X.spp <- X.all[["wctri-RACEBASE_SPECIES.csv"]]
 	
 	# modifications to avoid conflicting columns
-	# X.catch[,AUDITJOIN:=NULL]
 	X.haul[,AUDITJOIN:=NULL]
 	X.spp[,AUDITJOIN:=NULL]
 	

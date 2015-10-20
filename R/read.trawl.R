@@ -1,34 +1,49 @@
-read.trawl <- function(reg, ...){
-	reg <- match.arg(reg, choices=c(
-				"ai",
-				"ebs",
-				"gmex",
-				"goa",
-				"neus",
-				"newf",
-				"ngulf",
-				"sa",
-				"sgulf",
-				"shelf",
-				"wcann",
-				"wctri"
-			)
-	)
+read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), ...){
+	reg <- match.arg(reg, several.ok=TRUE)
 	
-	dat <- switch(reg,
-		ai = read.ai(),
-		ebs = read.ebs(),
-		gmex = read.gmex(),
-		goa = read.goa(),
-		neus = read.neus(),
-		newf = read.newf(),
-		ngulf = read.ngulf(),
-		sa = read.sa(),
-		sgulf = read.sgulf(),
-		shelf = read.shelf(),
-		wcann = read.wcann(),
-		wctri = read.wctri()
-	)
+	# dots <- list(...)
+	
+	get.raw <- function(x){
+		switch(x,
+			ai = read.ai(),
+			ebs = read.ebs(),
+			gmex = read.gmex(),
+			goa = read.goa(),
+			neus = read.neus(),
+			newf = read.newf(),
+			ngulf = read.ngulf(),
+			# sa = read.sa(dots[[x]]),
+			sa = read.sa(),
+			sgulf = read.sgulf(),
+			shelf = read.shelf(),
+			wcann = read.wcann(),
+			wctri = read.wctri()
+		)
+	}
+	
+	if(length(reg)>1){
+		dat <- lapply(reg, get.raw)
+	}else{
+		stopifnot(length(reg)>=1)
+		dat <- get.raw(reg)
+	}
+	
+	
+	
+	# dat <- switch(reg,
+# 		ai = read.ai(),
+# 		ebs = read.ebs(),
+# 		gmex = read.gmex(),
+# 		goa = read.goa(),
+# 		neus = read.neus(),
+# 		newf = read.newf(),
+# 		ngulf = read.ngulf(),
+# 		sa = read.sa(),
+# 		sgulf = read.sgulf(),
+# 		shelf = read.shelf(),
+# 		wcann = read.wcann(),
+# 		wctri = read.wctri()
+# 	)
 	
 	return(dat)	
 }

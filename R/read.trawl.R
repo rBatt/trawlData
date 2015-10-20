@@ -444,22 +444,21 @@ read.ngulf <- function(){
 # ======
 # = SA =
 # ======
-read.sa <- function(){
+read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
+	catch <- match.arg(catch)
 	
 	
 	sa.all <- read.zip("inst/extdata/sa.zip", SIMPLIFY=F)
-	sa.all.names1 <- names(sa.all[[1]])
+	sa.all.names1 <- names(sa.all[[catch]])
 	sa.all.keep1 <- sa.all.names1[!grepl("^V[0-9]*$", sa.all.names1)]
-	sa.all[[1]] <- sa.all[[1]][,eval(s2c(sa.all.keep1))]
+	sa.all[[catch]] <- sa.all[[catch]][,eval(s2c(sa.all.keep1))]
 	
-	sa.mass <- sa.all[["sa-Coastalbiomass.csv"]]
+	sa.mass <- sa.all[[catch]]
 	sa.strat <- sa.all[["sa-CoastalEvent.csv"]]
 	
 	# adjustments needed for merge
-	# sa.mass[,EVENTNAME:=as.character(EVENTNAME)]
 	sa.mass[,COLLECTIONNUMBER:=as.character(COLLECTIONNUMBER)]
-# 	sa.mass[,GEARCODE:=as.character(GEARCODE)]
-
+	sa.strat <- sa.strat[!duplicated(COLLECTIONNUMBER)] # not needed for catch 1
 
 	# merge 
 	sa <- merge(sa.mass, sa.strat, all.x=T, by=c("COLLECTIONNUMBER"))
@@ -515,13 +514,7 @@ read.sa <- function(){
 	
 	trim.autoColumn(sa)
 	
-	
-	
-	
-
-	
-	
-	
+	return(sa)
 }
 
 # =========

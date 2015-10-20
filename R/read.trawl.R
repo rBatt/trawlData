@@ -474,6 +474,29 @@ read.sgulf <- function(){
 # =========
 read.shelf <- function(){
 	
+	# read in
+	X.all <- read.zip("inst/extdata/shelf.zip", SIMPLIFY=F)
+	X.catch <- X.all[[names(X.all)[grepl("shelf-gscat.*",names(X.all))]]]
+	X.set <- X.all[[names(X.all)[grepl("shelf-gsinf.*",names(X.all))]]]
+	X.spp <- X.all[[names(X.all)[grepl("shelf-species list.*",names(X.all))]]]
+	X.strata <- X.all[[names(X.all)[grepl("shelf-strata.*",names(X.all))]]]
+	
+	
+	# format/ adjustment needed for merge
+	setnames(X.catch, "SPEC","CODE")
+	X.set[,REMARKS:=NULL]
+	setnames(X.set, "STRAT", "stratum")
+	X.strata[,stratum:=as.character(stratum)]
+	
+	
+	# merge
+	shelf <- merge(X.catch, X.set, all.x=TRUE, all.y=FALSE, by=c("MISSION","SETNO"))
+	shelf <- merge(shelf, X.strata, all.x=TRUE, by="stratum")
+	shelf <- merge(shelf, X.spp, all.x=TRUE, by="CODE")
+	
+	
+	return(shelf)
+	
 }
 
 # ==========

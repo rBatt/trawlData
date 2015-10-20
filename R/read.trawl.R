@@ -241,12 +241,125 @@ read.gmex <- function(){
 # =======
 read.goa <- function(){
 	
+
+	# Read in all files from X zip file
+	# default pattern is a .csv, and X is all .csv
+	X.all <- read.zip(zipfile="./inst/extdata/goa.zip", SIMPLIFY=F)
+	
+	
+	# Fix whitespace in column names
+	# necessary for combining files
+	X.all <- lapply(X.all, function(x)setnames(x, names(x), gsub("^\\s* | \\s*$", "", names(x))))
+	
+	
+	# Concat raw X data files
+	# Have to make some assumption about which files 
+	# If later I list exact names of files, can use those
+	# instead of picking them by the number of columns
+	file.ncol <- sapply(X.all, function(x)ncol(x))
+	data.ncol <- 17 # the mXn data files have 17 columns
+	which.raw <- which(file.ncol==data.ncol) # list elements from mXn raw files
+	X.raw <- do.call(rbind, X.all[which.raw])
+	
+	
+	# read in stratum data file
+	which.strat <- which(names(X.all)=="goa-Strata.csv") # use which so next step can use [[]]
+	X.strata <- X.all[[which.strat]][,list(StratumCode, Areakm2)] # subset X.all, then choose 2 columns
+	
+	
+	# # check for leading or trXling
+# 	# whitespace in col names
+# 	strata.spaces <- grepl("^\\s* | \\s*$", "", names(X.strata))
+# 	raw.spaces <- grepl("^\\s* | \\s*$", "", names(X.raw))
+# 	if(strata.spaces | raw.spaces){
+# 		message("AI data files have column names with leading or trXliling whitespace")
+#
+# 		# uncomment lines below if you want to remove
+# 		# leading or trXling whitespace
+# 		# in the column names
+# 		# setnames(X.raw, names(X.raw), gsub("^\\s* | \\s*$", "", names(X.raw)))
+# 		# setnames(X.strata, names(X.strata), gsub("^\\s* | \\s*$", "", names(X.strata)))
+# 	}
+	
+	
+	# adjust strat column to X.strata
+	# to match that in X.raw
+	# so they can be merged
+	setnames(X.strata, "StratumCode", "STRATUM")
+	
+	
+	# set keys
+	setkey(X.raw, STRATUM)
+	setkey(X.strata, STRATUM)
+	
+	
+	# merge X.raw and X.strata
+	X <- merge(X.raw, X.strata, all.x=TRUE)
+	
+	
+	return(X)
+	
 }
 
 # ========
 # = NEUS =
 # ========
 read.neus <- function(){
+	
+	
+	
+	neus.strata <- fread("inst/extdata/neus/neus-neusStrata.csv", select=c('StratumCode', 'Areanmi2')) # Need neusStrata.csv file from Malin (18-Aug-2014)
+	local({ # create a local environment to read in .RData, to ensure that other objects aren't overwritten
+
+		load("inst/extdata/neus/neus-station.RData") # station
+		load("inst/extdata/neus/neus-Survdat.RData") # survdat
+		load("inst/extdata/neus/neus-SVSPP.RData") # spp
+
+		# assign variables in global environment
+		assign("neus.station", station, envir=environment(read.neus))
+		assign("neus.survdat.raw", survdat, envir=environment(read.neus))
+		assign("neus.spp", spp, envir=environment(read.neus))
+	
+	}) # end expressions to be carried out in new local environment
+
+	# make changes to neus.strata
+	setkey(neus.strata, StratumCode)
+	setnames(neus.strata, "StratumCode", "STRATUM") # updates the key, too; this was done b/c data.table:::merege.data.table does not accept by.x and by.y
+
+	# make changes to neus.survdat.raw
+	# setkey(neus.survdat.raw, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
+
+	# Merge spp and strata into neus data.table
+	neus <- neus.survdat.raw
+	neus <- merge(neus, neus.spp, by="SVSPP") # add species names
+	neus <- merge(neus, neus.strata, by="STRATUM", all.x=TRUE)
+	neus <- merge(neus, neus.station, all.x=TRUE, by=c("STATION","STRATUM","CRUISE6"))
+
+	
+	# Added a check to make sure that names repeated in different tables did 
+	# not have different values, or were reported as such
+	# also drops columns duplicated from merging
+	# this makes the function a bit slow
+	# strip.names <- gsub("\\.[xy]", "", names(neus))
+# 	dup.names <- strip.names[duplicated(strip.names)]
+# 	test.match <- function(x){
+# 		x.x <- neus[,eval(s2c(paste0(x,".x")))[[1]]]
+# 		x.y <- neus[,eval(s2c(paste0(x,".y")))[[1]]]
+# 		all((x.x==x.y) | (is.na(x.x) & is.na(x.y)))
+# 	}
+# 	dup.names.same <- sapply(dup.names, test.match)
+#
+# 	drop.y <- function(x){
+# 		neus[,c(paste0(x,".y")):=NULL]
+# 		setnames(neus, paste0(x,".x"), x)
+# 	}
+# 	drop.y(dup.names[dup.names.same])
+#
+# 	if(any(!dup.names.same)){
+# 		message("The following NEUS columns had different values in different tables:\n",paste(dup.names[dup.names.same], collapse="\n"))
+# 	}
+	
+	return(neus)
 	
 }
 
@@ -255,6 +368,68 @@ read.neus <- function(){
 # = NEWF =
 # ========
 read.newf <- function(){
+	
+	# read survey info
+	newf.surv1 <- read.zip("inst/extdata/newf.zip", pattern="surveys_table\\.csv", colClasses=rep("character", 16), drop=c("Comment"), SIMPLIFY=F)[[1]] #
+	newf.surv2 <- read.zip("inst/extdata/newf.zip", pattern="surveys_table2009-2011\\.csv", colClasses=rep("character", 7), SIMPLIFY=F)[[1]] #
+
+	# read strata
+	# I can't figure out what I needed these for,
+	# so for now I'm commenting-out this code
+	# but this code does work
+	# strat.widths <- c(3,4,4,3)
+# 	strat <- read.zip("inst/extdata/newf.zip", pattern="stratum_areas", cols=strat.widths, use.fwf=T, SIMPLIFY=F)
+# 	strat <- lapply(strat, function(x)setnames(x, names(x), c('stratum', 'area', 'maxdepth', 'nafo')))
+	
+	# read species information
+	newf.spp <- read.zip("inst/extdata/newf.zip", pattern="GFSPCY\\.CODE", SIMPLIFY=F, drop="V1", , colClasses=c("character","integer", rep("character",2)))[[1]]
+		
+	# read main data files
+	data.widths <- c(1, 2, 3, 3, 2, 2, 2, 2, 3, 2, 3, 3, 1, 1, 1, 1, 4, 3, 3, 1, 4, 4, 4, 4, 3, 3, 5, 5, 1, 4, 4, 6, 7, 5, 5, 2, 2) # column widths
+	data.pattern <- "199[23456789]|200[0123456789]|201[012]" # pattern for main data files
+	newf.names <- c('recordtype', 'vessel', 'trip', 'set', 'yearl', 'monthl', 'dayl', 'settype', 'stratum', 'nafo', 'unitarea', 'light', 'winddir', 'windforce', 'sea', 'bottom', 'timel', 'duration', 'distance', 'operation', 'depth', 'depthmin', 'depthmax', 'depthbottom', 'surftemp', 'bottemp', 'latstart', 'lonstart', 'posmethod', 'gear', 'sppcode', 'num', 'wgt', 'latend', 'lonend', 'bottempmeth', 'geardevice') # column names
+	newf <- read.zip("inst/extdata/newf.zip", pattern=data.pattern, SIMPLIFY=F, use.fwf=T, cols=data.widths) # read data set
+	newf <- do.call(rbind, newf) # combine into 1 data.table
+	setnames(newf, names(newf), newf.names) # set names
+	
+	# merge main data set w/ species names
+	newf[,sppcode:=as.integer(sppcode)]
+	newf <- merge(newf, newf.spp, all.x=T, by="sppcode")
+
+
+	# Use the "surv" files to add
+	# the "seson" column to newf
+	fall.surv1 <- c(
+		'2GH - Stratified Random Bottom Trawl Survey - Campelen 1800', 
+		'Fall - Stratified Random Bottom Trawl Survey - Campelen 1800'
+	)
+	fallseries <- c(
+		newf.surv1[Series%in%fall.surv1, as.character(CRUISE)],
+		newf.surv2[season=='fall', as.character(cruise)]
+	)
+
+	spring.surv1 <- c(
+		'Annual 3P - Stratified Random Bottom Trawl Survey - Campelen 1800', 
+		'Spring 3LNO - Stratified Random Bottom Trawl Survey - Campelen 1800'
+	)
+	springseries <- c(
+		newf.surv1[Series%in%spring.surv1, as.character(CRUISE)],
+		newf.surv2[season=="spring", as.character(cruise)]
+	)
+	
+	cruiseid <- newf[,paste(vessel, formatC(trip, width=3, flag=0), sep='')]
+	is.fall <- cruiseid %in% fallseries
+	is.spring <- cruiseid %in% springseries
+	
+	newf.season <- rep(NA, nrow(newf))
+	newf.season[is.fall] <- "fall"
+	newf.season[is.spring] <- "spring"
+
+	newf[, season:=newf.season]
+	
+
+	return(newf)
+	
 	
 }
 

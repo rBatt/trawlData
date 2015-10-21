@@ -147,9 +147,8 @@ clean.format.newf <- function(X){
 	# strat3$nafo <- gsub(" ", "", strat3$nafo)
 	# strat4$nafo <- gsub(" ", "", strat4$nafo)
 	
-	setnames(newf.raw, "yearl", "year")
-	newf.raw[,year:=year+1900]
-	newf.raw[newf.raw$year<1950, year:=year+100]
+	X[,year:=year+1900]
+	X[year<1950, year:=year+100]
 	
 	
 	
@@ -179,10 +178,10 @@ clean.format.newf <- function(X){
 		}
 		-(as.numeric(substr(x,1,2))+as.numeric(substr(x,3,5))/600)
 	}
-	newf[, lat.start:=conv.newf.lat(lat.start)]
-	newf[, lat.end:=conv.newf.lat(lat.end)]
-	newf[, lon.start:=conv.newf.lon(lon.start)]
-	newf[, lon.end:=conv.newf.lon(lon.end)]
+	X[, lat.start:=conv.newf.lat(lat.start)]
+	X[, lat.end:=conv.newf.lat(lat.end)]
+	X[, lon.start:=conv.newf.lon(lon.start)]
+	X[, lon.end:=conv.newf.lon(lon.end)]
 
 
 
@@ -198,20 +197,23 @@ clean.format.newf <- function(X){
 	# ====================
 	# = Fix temperatures =
 	# ====================
+	
 	# Fix the surface temp
-	fixT.surf <- newf.raw[,surftemp >= 900 & !is.na(surftemp)]
-	newf.raw[fixT.surf, surftemp:= -(surftemp - 900)/10]
+	fixT.surf <- X[,stemp >= 900 & !is.na(stemp)]
+	X[fixT.surf, stemp:= -(stemp - 900)/10]
 
-	fixT.surf2 <- newf.raw[,surftemp < 900 & surftemp > 0 & !is.na(surftemp)]
-	newf.raw[fixT.surf2, surftemp:=surftemp/10]
-	summary(newf.raw$surftemp) # 379,007 NAs (of 383,710 rows): nearly all missing # Ryan gets 379,007 NA's too
+	fixT.surf2 <- X[,stemp < 900 & stemp > 0 & !is.na(stemp)]
+	X[fixT.surf2, stemp:=stemp/10]
+	
+	# X[,summary(stempt)] # 379,007 NAs (of 383,710 rows): nearly all missing # Ryan gets 379,007 NA's too
+	
 
 	# Fix the bottom temp
-	fixT.bot <- newf.raw[,bottemp >= 900 & !is.na(bottemp)]
-	newf.raw[fixT.bot, bottemp:= -(bottemp - 900)/10]
+	fixT.bot <- X[,btemp >= 900 & !is.na(btemp)]
+	X[fixT.bot, btemp:= -(btemp - 900)/10]
 
-	fixT.bot2 <- newf.raw[,bottemp < 900 & bottemp > 0 & !is.na(bottemp)]
-	newf.raw[fixT.bot2, bottemp:=bottemp/10]
+	fixT.bot2 <- X[,btemp < 900 & btemp > 0 & !is.na(btemp)]
+	X[fixT.bot2, btemp:=btemp/10]
 	summary(newf.raw$bottemp) # only 6459 NAs
 	
 }

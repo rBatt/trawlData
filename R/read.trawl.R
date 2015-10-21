@@ -343,6 +343,9 @@ read.newf <- function(){
 
 	# Use the "surv" files to add
 	# the "seson" column to newf
+	# doing this "formatting"/ "column addtion"
+	# in the read file b/c it's only use for 
+	# the surv files
 	fall.surv1 <- c(
 		'2GH - Stratified Random Bottom Trawl Survey - Campelen 1800', 
 		'Fall - Stratified Random Bottom Trawl Survey - Campelen 1800'

@@ -24,7 +24,10 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	# = Fix Column Classes =
 	# ======================
 	# standard column names that should be numeric
-	numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.end", "lat.min.end", "lat.min.start", "lat.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.end", "lon.min.end", "lon.min.start", "lon.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
+	# can't do the lat/lon.start/end as numeric because newf needs them to stay as character 
+	# in order for their conversion to decimal units to be simple
+	# numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.end", "lat.min.end", "lat.min.start", "lat.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.end", "lon.min.end", "lon.min.start", "lon.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
+	numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.min.end", "lat.min.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.min.end", "lon.min.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
 	
 	# standard column names that should be character
 	character.cols <- c("comment", "common", "cruise", "date", "date.end", "datetime", "day", "dayl", "geartype","genus", "haul", "haulid", "month", "monthl", "season", "set", "station", "station.comment", "stratum", "str", "survey.name", "time", "timel", "timezone", "towID", "vessel", "year", "yearl")
@@ -78,7 +81,7 @@ clean.format.ai <- function(X){
 # =======
 clean.format.ebs <- function(X){
 
-
+	# nothing to add beyond generic
 
 }
 
@@ -88,7 +91,14 @@ clean.format.ebs <- function(X){
 # ========
 clean.format.gmex <- function(X){
 	
+	X[lat.deg.start==0, lat.deg.start:=NA_real_]
+	X[lon.deg.start==0, lon.deg.start:=NA_real_]
+	X[lat.deg.end==0, lat.deg.end:=NA_real_]
+	X[lon.deg.end==0, lon.deg.end:=NA_real_]
 
+	X[,depth:=depth*1.8288] # convert fathoms to meters
+
+	X[towspeed==30, towspeed:=3] # fix typo according to Jeff Rester: 30 = 3
 	
 }
 
@@ -98,8 +108,9 @@ clean.format.gmex <- function(X){
 # =======
 clean.format.goa <- function(X){
 	
-
-
+	# no changes to be made beyond what's 
+	# already done in generic
+	
 	
 }
 
@@ -108,7 +119,8 @@ clean.format.goa <- function(X){
 # ========
 clean.format.neus <- function(X){
 	
-	
+	X[,stratumarea:=stratumarea*3.429904] # convert square nautical miles to square kilometers
+	X[,stratumarea:=Areanmi2*3.429904]
 	
 	
 }
@@ -119,8 +131,88 @@ clean.format.neus <- function(X){
 # ========
 clean.format.newf <- function(X){
 	
-
+	# The formatting below is for the 
+	# "strata" data files in read.newf,
+	# but I currently don't bother with it
+	# because the information doesn't seem to be needed
+	# # Convert square nautical miles to square meters
+	# strat1$aream2 <- strat1$area*3429904
+	# strat2$aream2 <- strat2$area*3429904
+	# strat3$aream2 <- strat3$area*3429904
+	# strat4$aream2 <- strat4$area*3429904
+	#
+	# # Trim out spaces in NAFO division names
+	# strat1$nafo <- gsub(" ", "", strat1$nafo)
+	# strat2$nafo <- gsub(" ", "", strat2$nafo)
+	# strat3$nafo <- gsub(" ", "", strat3$nafo)
+	# strat4$nafo <- gsub(" ", "", strat4$nafo)
 	
+	setnames(newf.raw, "yearl", "year")
+	newf.raw[,year:=year+1900]
+	newf.raw[newf.raw$year<1950, year:=year+100]
+	
+	
+	
+	# # ==================
+	# # = Format lat/lon =
+	# # ==================
+	# # first, fix latitude
+	# lat.1 <- newf.raw[,(lat.start>0&lat.end>0)]
+	# lat.2 <- newf.raw[,(lat.start>0&lat.end==0)]
+	# # lat.3 <- newf.raw[,(latstart==0&latend>0)] # no instances of this case
+	#
+	# newf.raw[lat.1,lat:=(as.numeric(substr(lat.start, 1, 2)) + as.numeric(substr(lat.start, 3, 5))/600 + as.numeric(substr(latend, 1, 2)) + as.numeric(substr(latend, 3, 5))/600)/2]
+	#
+	# newf.raw[lat.2, lat:=as.numeric(substr(lat.start, 1, 2)) + as.numeric(substr(lat.start, 3, 5))/600]
+
+	conv.newf.lat <- function(x){
+		if(!is.character(x)){
+			message("already converted newf lat; no changes made")
+			return(x)
+		}
+		as.numeric(substr(x,1,2))+as.numeric(substr(x,3,5))/600
+	}
+	conv.newf.lon <- function(x){
+		if(!is.character(x)){
+			message("already converted newf lon; no changes made")
+			return(x)
+		}
+		-(as.numeric(substr(x,1,2))+as.numeric(substr(x,3,5))/600)
+	}
+	newf[, lat.start:=conv.newf.lat(lat.start)]
+	newf[, lat.end:=conv.newf.lat(lat.end)]
+	newf[, lon.start:=conv.newf.lon(lon.start)]
+	newf[, lon.end:=conv.newf.lon(lon.end)]
+
+
+
+	# # fix longitude
+# 	lon.1 <- newf.raw[,(lonstart>0&lonend>0)]
+# 	lon.2 <- newf.raw[,(lonstart>0&lonend==0)]
+#
+# 	newf.raw[lon.1, lon:=-(as.numeric(substr(lonstart, 1, 2)) + as.numeric(substr(lonstart, 3, 5))/600 + as.numeric(substr(lonend, 1, 2)) + as.numeric(substr(lonend, 3, 5))/600)/2]
+#
+# 	newf.raw[lon.2, lon:=-(as.numeric(substr(lonstart, 1, 2)) + as.numeric(substr(lonstart, 3, 5))/600)]
+#
+	
+	# ====================
+	# = Fix temperatures =
+	# ====================
+	# Fix the surface temp
+	fixT.surf <- newf.raw[,surftemp >= 900 & !is.na(surftemp)]
+	newf.raw[fixT.surf, surftemp:= -(surftemp - 900)/10]
+
+	fixT.surf2 <- newf.raw[,surftemp < 900 & surftemp > 0 & !is.na(surftemp)]
+	newf.raw[fixT.surf2, surftemp:=surftemp/10]
+	summary(newf.raw$surftemp) # 379,007 NAs (of 383,710 rows): nearly all missing # Ryan gets 379,007 NA's too
+
+	# Fix the bottom temp
+	fixT.bot <- newf.raw[,bottemp >= 900 & !is.na(bottemp)]
+	newf.raw[fixT.bot, bottemp:= -(bottemp - 900)/10]
+
+	fixT.bot2 <- newf.raw[,bottemp < 900 & bottemp > 0 & !is.na(bottemp)]
+	newf.raw[fixT.bot2, bottemp:=bottemp/10]
+	summary(newf.raw$bottemp) # only 6459 NAs
 	
 }
 

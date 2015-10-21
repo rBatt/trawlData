@@ -143,7 +143,7 @@ clean.names.gmex <- function(X){
 		"S_LOND"= "lon.deg.start", # paste("start", "lon.deg",sep="."),
 		"S_LONM"= "lon.min.start", # paste("start", "lon.min",sep="."),
 	
-		"DEPTH_SSTA" = "depth2.start", # paste("start", "depth2",sep="."),
+		"DEPTH_SSTA" = "depth", # paste("start", "depth2",sep="."),
 		"MO_DAY_YR" = "date",
 	
 		"E_LATD"= "lat.deg.end", # paste("end", "lat.deg",sep="."),
@@ -217,7 +217,7 @@ clean.names.neus <- function(X){
 		"BIOMASS" = "weight", # corrected for certain gear changes, but not necessarily for total area hauled
 		"ABUNDANCE" = "cnt", # same as biomass – linear correction factors applied to account for gear/ method changes, but not necessarily area trawled (effort only partially accounted for, perhaps)
 		"SCINAME" = "spp",
-		"Areanmi2" = "stratumarea2",
+		"Areanmi2" = "stratumarea",
 		
 		# below here not in ocean adapt
 		"SVVESSEL" = "vessel",
@@ -248,9 +248,9 @@ clean.names.newf <- function(X){
 # 		"vessel",
 # 		"trip",
 # 		"set",
-# 		"yearl",
-# 		"monthl",
-# 		"dayl",
+		"yearl" = "year",
+		"monthl" = "month",
+		"dayl" = "day",
 # 		"settype",
 # 		"stratum",
 # 		"nafo",
@@ -260,7 +260,7 @@ clean.names.newf <- function(X){
 # 		"windforce",
 # 		"sea",
 # 		"bottom",
-# 		"timel",
+		"timel" = "time",
 		"duration" = "towduration", 
 		"distance" = "towdistance", 
 		# "operation",

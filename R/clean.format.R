@@ -277,6 +277,21 @@ clean.format.sgulf <- function(X){
 # =========
 clean.format.shelf <- function(X){
 	
+	X[,stratumarea:=stratumarea*1.852^2]
+	
+	date.fix <- function(x){
+		as.POSIXct(gsub("-", "/", x), format="%y/%m/%d", tz="GMT")
+	}
+	X[,date:=date.fix(date)]
+	X[,date.end:=date.fix(date.end)]
+	
+	fix.ll <- function(x){
+		as.numeric(substr(x,1,2))+as.numeric(substr(x,3,4))/60
+	}
+	X[,lat.start:=fix.ll(lat.start)]
+	X[,lon.start:= -fix.ll(lon.start)]
+	X[,lat.end:=fix.ll(lat.end)]
+	X[,lon.end:= -fix.ll(lon.end)]
 	
 	
 }

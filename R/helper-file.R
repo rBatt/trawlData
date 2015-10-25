@@ -1,19 +1,36 @@
 
 
-fread.fwf <- function(..., cols){
+fread.fwf <- function(..., cols, column_types, column_names){
 	# library(magrittr)
+	# library(laf)
+	# library(data.table)
 	if(missing(cols)){
 		cols <- c(3,4,4,3) # for newf data
 	}
-	data.initial <- fread(..., sep="\n", header=F)
-
-	end_col <- cumsum(cols)
-	start_col <- end_col - cols + 1
-	start_end <- cbind(start_col, end_col) # matrix of start and end positions
- 
-	text <- data.initial[ , apply(start_end, 1, function(y) substr(V1, y[1], y[2]))] %>% data.table(.)
 	
-	return(text)
+	if(missing(column_types)){
+		column_types <- rep("character", length(cols))
+	}
+	if(missing(column_names)){
+		column_names <- paste0("V", seq_len(length(cols)))
+	}
+	
+	laf <- laf_open_fwf(..., column_widths=cols, column_types=column_types, column_names=column_names) #
+	laf_open_fwf("inst/extdata/newf.zip", column_widths=cols, column_types=column_types, column_names=column_names)
+	# print(str(laf))
+	laf <- as.data.table(laf[,])
+	
+	
+	
+	# data.initial <- fread(..., sep="\n", header=F)
+#
+# 	end_col <- cumsum(cols)
+# 	start_col <- end_col - cols + 1
+# 	start_end <- cbind(start_col, end_col) # matrix of start and end positions
+#
+# 	text <- data.initial[ , apply(start_end, 1, function(y) substr(V1, y[1], y[2]))] %>% data.table(.)
+	
+	return(laf)
 }
 
 # fread.fwf("newf-stratum_areas.ver2.fwf")
@@ -78,6 +95,7 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 				function(f){
 				    fp <- file.path(zipdir, f)
 					dat <- fread2(fp, ...)
+					# fread2(fp, cols=data.widths, column_types=col.types, column_names=newf.names)
 				    return(dat)
 				}
 			)

@@ -330,9 +330,10 @@ read.newf <- function(){
 		
 	# read main data files
 	data.widths <- c(1, 2, 3, 3, 2, 2, 2, 2, 3, 2, 3, 3, 1, 1, 1, 1, 4, 3, 3, 1, 4, 4, 4, 4, 3, 3, 5, 5, 1, 4, 4, 6, 7, 5, 5, 2, 2) # column widths
-	data.pattern <- "199[23456789]|200[0123456789]|201[012]" # pattern for main data files
-	newf.names <- c('recordtype', 'vessel', 'trip', 'set', 'yearl', 'monthl', 'dayl', 'settype', 'stratum', 'nafo', 'unitarea', 'light', 'winddir', 'windforce', 'sea', 'bottom', 'timel', 'duration', 'distance', 'operation', 'depth', 'depthmin', 'depthmax', 'depthbottom', 'surftemp', 'bottemp', 'latstart', 'lonstart', 'posmethod', 'gear', 'sppcode', 'num', 'wgt', 'latend', 'lonend', 'bottempmeth', 'geardevice') # column names
-	newf <- read.zip("inst/extdata/newf.zip", pattern=data.pattern, SIMPLIFY=F, use.fwf=T, cols=data.widths) # read data set
+	col.types <- c(recordtype="integer", vessel="integer", trip="integer", set="integer", yearl="integer", monthl="integer", dayl="integer", settype="integer", stratum="character", nafo="character", unitarea="character", light="double", winddir="double", windforce="double", sea="double", bottom="double", timel="character", duration="double", distance="double", operation="double", depth="character", depthmin="character", depthmax="character", depthbottom="character", surftemp="double", bottemp="double", latstart="character", lonstart="character", posmethod="double", gear="double", sppcode="double", num="double", wgt="double", latend="character", lonend="character", bottempmeth="double", geardevice="double")
+	data.pattern <- "(199[23456789]|200[0123456789]|201[012])\\.DAT$" # pattern for main data files
+	newf.names <- names(col.types) # column names
+	newf <- read.zip("inst/extdata/newf.zip", pattern=data.pattern, SIMPLIFY=F, use.fwf=T, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
 	newf <- do.call(rbind, newf) # combine into 1 data.table
 	setnames(newf, names(newf), newf.names) # set names
 	

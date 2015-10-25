@@ -230,7 +230,37 @@ clean.format.ngulf <- function(X){
 # = SA =
 # ======
 clean.format.sa <- function(X){
+	
+	# =====================================================
+	# = Fix terrible ="asd" convention used in 10 columns =
+	# =====================================================
+	# Fix catch first
+	# names(sa.catch00)[grepl("[\"=]", head(sa.catch00)[1,])]
+	X[,PROJECTNAME:=gsub("[\"=]", "", PROJECTNAME)]
+	X[,PROJECTAGENCY:=gsub("[\"=]", "", PROJECTAGENCY)]
+	X[,haulid:=gsub("[\"=]", "", haulid)]
+	X[,GEARCODE:=gsub("[\"=]", "", GEARCODE)]
+	X[,spp:=gsub("[\"=]", "", spp)]
+	X[,common:=gsub("[\"=]", "", common)]
+	X[,LOCATION:=gsub("[\"=]", "", LOCATION)]
+	X[,REGION:=gsub("[\"=]", "", REGION)]
+	X[,DEPTHZONE:=gsub("[\"=]", "", DEPTHZONE)]
+	X[,STATIONCODE:=gsub("[\"=]", "", STATIONCODE)]
 
+	# Fix strata column
+	X[,haulid:=gsub("[\"=]", "", haulid)]
+	
+	
+	# ================================
+	# = Fix lat/lon, add stratumarea =
+	# ================================
+	# this was weird, so I took a guess
+	X[lon.start > -782.000 & lon.start < -780.000, lon.start:=-79.0]
+	X[lon.end > -782.000 & lon.end < -780.000, lon.end:=-78.988]
+	X[lon.start > -802.000 & lon.start < -800.000, lon.start:= -81.006+0.01]
+	X[lat.end>40, lat.end:=lat.start+0.009]
+	
+	
 }
 
 # =========

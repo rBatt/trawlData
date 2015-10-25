@@ -268,7 +268,7 @@ clean.format.sa <- function(X){
 # =========
 clean.format.sgulf <- function(X){
 	
-
+	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
 	
 }
 
@@ -277,7 +277,7 @@ clean.format.sgulf <- function(X){
 # =========
 clean.format.shelf <- function(X){
 	
-
+	
 	
 }
 
@@ -286,7 +286,7 @@ clean.format.shelf <- function(X){
 # ==========
 clean.format.wcann <- function(X){
 	
-
+	
 	
 }
 

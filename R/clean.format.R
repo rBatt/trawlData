@@ -284,6 +284,8 @@ clean.format.shelf <- function(X){
 	X[,date:=date.fix(date)]
 	X[,date.end:=date.fix(date.end)]
 	
+	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
+	
 	fix.ll <- function(x){
 		as.numeric(substr(x,1,2))+as.numeric(substr(x,3,4))/60
 	}

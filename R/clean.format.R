@@ -123,6 +123,8 @@ clean.format.neus <- function(X){
 	
 	X[,stratumarea:=stratumarea*3.429904] # convert square nautical miles to square kilometers
 	
+	X[,season:=tolower(season)]
+	
 	
 }
 

@@ -1,3 +1,24 @@
+# preparation to be deleted
+library(data.table)
+library(LaF)
+library(stringr)
+library(bit64)
+library(PBSmapping) # for calculating stratum areas
+library(maptools) # for calculating stratum areas
+library(Hmisc)
+
+
+setwd("~/Documents/School&Work/pinskyPost/trawlData/")
+
+source("./R/read.trawl.R")
+source("./R/clean.names.R")
+source("./R/clean.format.R")
+source("./R/clean.columns.R")
+source("./R/helper-file.R")
+source("./R/helper-misc.R")
+source("./R/format-value.R")
+source("./R/format-strat.R")
+
 ai <- read.trawl("ai")
 clean.names(ai, "ai")
 clean.format(ai, "ai")
@@ -74,13 +95,27 @@ for(i in 1:length(regions)){
 # clean up column names
 for(i in 1:length(regions)){
 	nm <- paste0("raw.", regions[i])
-	assign(regions[i], clean.names(get(nm), regions[i]))
+	assign(regions[i], copy(get(nm)))
+	clean.names(get(regions[i]), regions[i])
 }
 
 # format column values
 for(i in 1:length(regions)){
-	nm <- paste0("raw.", regions[i])
-	assign(regions[i], clean.format(get(nm), regions[i]))
+	nm <- regions[i]
+	clean.format(get(nm), nm)
+}
+
+# clean column content, add columns
+for(i in 1:length(regions)){
+	nm <- regions[i]
+	clean.columns(get(nm), nm)
+}
+
+# save clean
+for(i in 1:length(regions)){
+	nm <- paste0("clean.", regions[i])
+	assign(nm, copy(get(regions[i])))
+	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
 }
 
 cnames <- sort(unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(newf), names(sa), names(sgulf), names(shelf), names(wcann), names(wctri))))

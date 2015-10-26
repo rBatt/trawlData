@@ -492,7 +492,7 @@ clean.names.wcann <- function(X){
 		"Best.Depth..m." = "depth", 
 		# "Best.Depth.Type" = "how depth was determined",
 		"Trawl.Duration..min." = "towduration", 
-		"Area.Swept.by.the.Net..hectares." = "areaswept", 
+		"Area.Swept.by.the.Net..hectares." = "towarea", 
 		"Temperature.At.the.Gear..degs.C." = "btemp"
 	)
 	

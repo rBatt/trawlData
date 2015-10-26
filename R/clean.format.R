@@ -100,6 +100,8 @@ clean.format.gmex <- function(X){
 
 	X[towspeed==30, towspeed:=3] # fix typo according to Jeff Rester: 30 = 3
 	
+	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
+	
 }
 
 

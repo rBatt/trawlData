@@ -334,7 +334,7 @@ clean.names.sa <- function(X){
 		# "REGION",
 		# "DEPTHZONE",
 		# "ACCSPGRIDCODE",
-		# "STATIONCODE",
+		"STATIONCODE" = "stratum",
 		# "EVENTTYPEDESCRIPTION",
 		"TEMPSURFACE" = "stemp", 
 		"TEMPBOTTOM" = "btemp", 

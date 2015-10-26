@@ -53,7 +53,7 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	
 	
 	
-	clean.format0(reg)
+	invisible(clean.format0(reg))
 	
 }
 
@@ -120,7 +120,6 @@ clean.format.goa <- function(X){
 clean.format.neus <- function(X){
 	
 	X[,stratumarea:=stratumarea*3.429904] # convert square nautical miles to square kilometers
-	X[,stratumarea:=Areanmi2*3.429904]
 	
 	
 }
@@ -301,7 +300,7 @@ clean.format.shelf <- function(X){
 # ==========
 clean.format.wcann <- function(X){
 	
-	
+	# nothing to add beyond generic
 	
 }
 
@@ -309,7 +308,8 @@ clean.format.wcann <- function(X){
 # = WC TRI =
 # ==========
 clean.format.wctri <- function(X){
-
+	
+	# nothing to add beyond generic
 	
 }
 

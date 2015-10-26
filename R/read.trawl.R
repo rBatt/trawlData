@@ -482,6 +482,7 @@ read.wcann <- function(){
 	
 
 	# merge/ rbind
+	X.invert[,setdiff(names(X.fish), names(X.invert)):=NA]
 	X.catch <- rbind(X.fish[, names(X.invert), with=FALSE], X.invert)
 	wcann <- merge(X.catch, X.haul, by=intersect(names(X.catch), names(X.haul)), all.x=TRUE)
 	

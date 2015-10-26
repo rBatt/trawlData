@@ -248,7 +248,7 @@ clean.format.sa <- function(X){
 	X[,LOCATION:=gsub("[\"=]", "", LOCATION)]
 	X[,REGION:=gsub("[\"=]", "", REGION)]
 	X[,DEPTHZONE:=gsub("[\"=]", "", DEPTHZONE)]
-	X[,STATIONCODE:=gsub("[\"=]", "", STATIONCODE)]
+	X[,stratum:=gsub("[\"=]", "", stratum)]
 
 	# Fix strata column
 	X[,haulid:=gsub("[\"=]", "", haulid)]

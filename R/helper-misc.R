@@ -163,7 +163,7 @@ match.tbl <- function(ref, tbl.ref, tbl.val){
 		}
 		m3 <- na.vec
 		nav <- is.na(val)
-		m3[nav] <- sapply(ref[nav], qa, y=tbl.ref[nav])
+		m3[nav] <- sapply(ref[nav], qa, y=tbl.ref)
 		m3.fill <- !is.na(m3)
 		val[m3.fill] <- tbl.val[m3[m3.fill]]
 	}else{
@@ -173,7 +173,7 @@ match.tbl <- function(ref, tbl.ref, tbl.val){
 	if(any(is.na(val))){
 		m4 <- na.vec
 		nav <- is.na(val)
-		m4[nav] <- sapply(ref.for[nav], qa, y=tbl.ref[nav])
+		m4[nav] <- sapply(ref.for[nav], qa, y=tbl.ref)
 		m4.fill <- !is.na(m4)
 		val[m4.fill] <- tbl.val[m4[m4.fill]]
 	}else{

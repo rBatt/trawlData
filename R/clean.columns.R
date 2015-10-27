@@ -145,7 +145,7 @@ clean.columns.gmex <- function(X){
 	X[,stratum:=paste(floor(lat)+0.5, floor(lon)+0.5, floor(depth/100)*100+50, sep="-")]
 	
 	# stratum area
-	X[,stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
+	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
 	
 	# towarea/ effort
 	X[,towarea:=(towspeed*1.85200*1E3*towduration/60*gearsize*0.3048)]
@@ -491,7 +491,7 @@ clean.columns.wcann <- function(X){
 	X[,stratum:=paste(floor(lat)+0.5, floor(lon/100)*100+50, sep="-")]
 	
 	# stratum area
-	X[,stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
+	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
 	
 	# towarea/ effort
 	X[,effort:=towarea]
@@ -534,7 +534,7 @@ clean.columns.wctri <- function(X){
 	X[,stratum:=paste(floor(lat)+0.5, floor(depth/100)*100+50, sep="-")]
 	
 	# stratum area
-	X[,stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
+	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
 	
 	# towarea/ effort
 	X[,towarea:=towdistance*1E3*gearsize/1E4]

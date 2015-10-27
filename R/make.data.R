@@ -18,6 +18,12 @@ source("./R/helper-file.R")
 source("./R/helper-misc.R")
 source("./R/format-value.R")
 source("./R/format-strat.R")
+source("./R/tax-getSpp.R")
+source("./R/tax-grb.spp1.R")
+source("./R/tax-getTL.R")
+source("./R/tax-getCmmn.R")
+
+
 
 ai <- read.trawl("ai")
 clean.names(ai, "ai")
@@ -136,8 +142,17 @@ for(i in 1:length(regions)){
 	setTxtProgressBar(pb, i)
 }
 
+# rename clean, rm old
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- paste0("clean.", regions[i])
+	assign(regions[i], copy(get(nm)))
+	rm(list=nm)
+	setTxtProgressBar(pb, i)
+}
+
 cnames <- sort(unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(newf), names(sa), names(sgulf), names(shelf), names(wcann), names(wctri))))
 
 
-spp <- sort(unique(c(ai[,unique(spp)], ebs[,unique(spp)], gmex[,unique(spp)], goa[,unique(spp)], neus[,unique(spp)], newf[,unique(spp)], sa[,unique(spp)], sgulf[,unique(spp)], shelf[,unique(spp)], wcann[,unique(spp)], wctri[,unique(spp)])))
+spp <- sort(unique(c(ai[,unique(spp)], ebs[,unique(spp)], gmex[,unique(spp)], goa[,unique(spp)], neus[,unique(spp)], newf[,unique(spp)], sa[,unique(spp)], sgulf[,unique(spp)], shelf[,unique(spp)], wcann[,unique(spp)], wctri[,unique(spp)]))) # use this in creat.spp.key.R
 

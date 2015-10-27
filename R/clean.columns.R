@@ -369,7 +369,7 @@ clean.columns.sa <- function(X){
 	# not needed
 	
 	# stratum area
-	X[,stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum] 
+	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum] 
 	
 	# towarea/ effort
 	# not needed

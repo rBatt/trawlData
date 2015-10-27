@@ -26,24 +26,8 @@ is.species <- function(x){
 
 rmWhite <- function(x){
 	stopifnot(is.data.table(x))
-	nmx <- names(x)
-	classes <- sapply(x, class)
-	# setClass <- classes%in%c("character","numeric","integer","logical") # leaving out factor b/c can't convert char to factor #"integer64",
-	setClass <- classes%in%c("character") # I can't remember why I would try to trim whitespace from an integer or numeric or logical ...
-	for(i in 1:ncol(x)){
-		t.name <- as.name(nmx[i])
-		if(setClass[i]){
-			# expr <- bquote(.(t.name):=as(gsub("^\\s* | \\s*$", "", .(t.name)), Class=classes[i]))
-			expr <- bquote(.(t.name):=as(str_trim(.(t.name)), Class=classes[i]))
-			x[,eval(expr)]
-		}else{
-			# expr <- bquote(.(t.name):=gsub("^\\s* | \\s*$", "", .(t.name)))
-			# expr <- bquote(.(t.name):=str_trim(.(t.name)))
-			# x[,eval(expr)]
-			# I'm thinking that if it's not a character, I shouldn't even bother 
-		}
-		
-	}
+	has.cc <- names(x)[sapply(x, is.character)]
+	x[,c(has.cc):=lapply(eval(s2c(has.cc)), str_trim)]
 }
 
 
@@ -58,8 +42,12 @@ rm9s <- function(x){
 		t.class <- class(t.x)
 		# set(x, i=which(x[[i]]==-9999L), j=i, value=as.character(NA))
 		# set(x, i=which(x[[i]]==-9999.0), j=i, value=as.character(NA))
+		if(t.class=="integer64"){
+			set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as.integer64(NA))
+		}else{
+			set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as(NA,Class=t.class))
+		}
 		
-		set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as(NA,Class=t.class))
 	}
 }
 

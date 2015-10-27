@@ -43,7 +43,7 @@ clean.columns.ai <- function(X){
 	make.haul(X)
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M")]
+	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -84,7 +84,7 @@ clean.columns.ebs <- function(X){
 	make.haul(X)
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M")]
+	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -124,7 +124,7 @@ clean.columns.gmex <- function(X){
 	X[,haulid:=paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-')]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M")]
+	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
 	
 	# season
 	# just naming from the survey name
@@ -171,7 +171,7 @@ clean.columns.goa <- function(X){
 	make.haul(X)
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M")]
+	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -209,7 +209,7 @@ clean.columns.neus <- function(X){
 	X[,haulid:=paste(formatC(cruise, width=6, flag=0), formatC(station, width=3, flag=0), formatC(stratum, width=4, flag=0), sep='-')]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(as.character(year),substr(cruise,5,6),"01",sep="-"), format="%Y-%m-%d")]
+	X[,datetime:=as.POSIXct(paste(as.character(year),substr(cruise,5,6),"01",sep="-"), format="%Y-%m-%d", tz="GMT")]
 	
 	# season
 	# not needed
@@ -353,7 +353,7 @@ clean.columns.sa <- function(X){
 	
 	# date, time, datetime
 	X[,year:=as.integer(substr(haulid, 1, 4))]
-	X[,datetime:=as.POSIXct(paste(date, time), format="%y/%m/%d %H:%M")]
+	X[,datetime:=as.POSIXct(paste(date, time), format="%y/%m/%d %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -395,7 +395,7 @@ clean.columns.sgulf <- function(X){
 	X[,haulid:=paste(vessel, cruise, set, sep="-")]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(paste(year, month, day, sep="-"), time), format="%Y-%m-%d %H:%M")]
+	X[,datetime:=as.POSIXct(paste(paste(year, month, day, sep="-"), time), format="%Y-%m-%d %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -434,7 +434,7 @@ clean.columns.shelf <- function(X){
 	X[,haulid:=paste(MISSION, formatC(SETNO, width=3, flag=0))]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(date, time))]
+	X[,datetime:=as.POSIXct(paste(date, time), tz="GMT")]
 	X[,year:=as.numeric(format.Date(datetime, format="%Y"))]
 	
 	# season
@@ -476,7 +476,7 @@ clean.columns.wcann <- function(X){
 	# not needed
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%y %H:%M")]
+	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%y %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]
@@ -518,7 +518,7 @@ clean.columns.wctri <- function(X){
 	
 	# date, time, datetime
 	X[,year:=as.numeric(substr(cruise, 1, 4))]
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M:%S")]
+	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M:%S", tz="GMT")]
 	
 	# season
 	# ...

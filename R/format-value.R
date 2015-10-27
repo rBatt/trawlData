@@ -28,7 +28,8 @@ rmWhite <- function(x){
 	stopifnot(is.data.table(x))
 	nmx <- names(x)
 	classes <- sapply(x, class)
-	setClass <- classes%in%c("character","numeric","integer","logical") # leaving out factor b/c can't convert char to factor #"integer64",
+	# setClass <- classes%in%c("character","numeric","integer","logical") # leaving out factor b/c can't convert char to factor #"integer64",
+	setClass <- classes%in%c("character") # I can't remember why I would try to trim whitespace from an integer or numeric or logical ...
 	for(i in 1:ncol(x)){
 		t.name <- as.name(nmx[i])
 		if(setClass[i]){
@@ -37,8 +38,9 @@ rmWhite <- function(x){
 			x[,eval(expr)]
 		}else{
 			# expr <- bquote(.(t.name):=gsub("^\\s* | \\s*$", "", .(t.name)))
-			expr <- bquote(.(t.name):=str_trim(.(t.name)))
-			x[,eval(expr)]
+			# expr <- bquote(.(t.name):=str_trim(.(t.name)))
+			# x[,eval(expr)]
+			# I'm thinking that if it's not a character, I shouldn't even bother 
 		}
 		
 	}

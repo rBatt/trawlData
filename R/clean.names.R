@@ -518,7 +518,7 @@ clean.names.wctri <- function(X){
 		"NUMBER_FISH" = "cnt",
 		# "HAUL_TYPE" = "type of haul",
 		# "PERFORMANCE" = "performance code of the haul",
-		"START_TIME" = "time",
+		"START_TIME" = "datetime",
 		"DURATION" = "towduration", # hours?
 		"DISTANCE_FISHED" = "towdistance", #"distance fished", # in km
 		"NET_WIDTH" = "gearsize", # m?

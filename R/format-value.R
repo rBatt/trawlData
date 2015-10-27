@@ -19,6 +19,12 @@ cullParen <- function(x){
 	gsub("\\s?\\(.*\\)", "", x)
 }
 
+cullPost2 <- function(x){
+	gsub("^(\\b[A-Za-z]{1,}\\b\\s+)(\\b[A-Za-z]{1,}\\b).*", "\\1\\2", x)
+}
+
+c.all <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
+
 is.species <- function(x){
 	sapply(strsplit(x, " "), length) >= 2
 }

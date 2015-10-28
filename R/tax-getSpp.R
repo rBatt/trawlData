@@ -36,7 +36,7 @@ getSpp <- function(uspp, oldSpp=NULL){
 		u.uspp.chunks <- unique(uspp.chunks) # unique chunks
 		
 		# Loop through species to look up
-		spp.pb <- txtProgressBar(min=1, max=length(u.spp.chunks), style=3) # create progress bar for lookup process
+		spp.pb <- txtProgressBar(min=1, max=length(u.uspp.chunks), style=3) # create progress bar for lookup process
 		for(s in seq_along(u.uspp.chunks)){ # for each chunk ...
 		
 			# Define chunks and get current species to check
@@ -60,9 +60,9 @@ getSpp <- function(uspp, oldSpp=NULL){
 		
 		close(spp.pb) # close progress bar
 		
-		setnames(spp.corr1, c("submitted_name", "matched_name2"), c("spp", "sppCorr"))
+		setnames(spp.corr1, c("submitted_name", "matched_name"), c("spp", "sppCorr"))
 		
-		setkey(spp.corr1, spp)
+		# setkey(spp.corr1, spp)
 		# save(spp.corr1, file="/Users/Battrd/Documents/School&Work/pinskyPost/trawl/Data/Taxonomy/spp.corr1.RData")
 	
 	} # end first case
@@ -105,25 +105,13 @@ getSpp <- function(uspp, oldSpp=NULL){
 			close(spp.pb) # close progress bar
 			
 			# format accumulated data.table of checked names
-			setnames(spp.corr2, c("submitted_name", "matched_name2"), c("spp", "sppCorr"))
-			setkey(spp.corr2, spp) # set key for spp.corr2 (should already be set for spp.corr1)
+			setnames(spp.corr2, c("submitted_name", "matched_name"), c("spp", "sppCorr"))
+			# setkey(spp.corr2, spp) # set key for spp.corr2 (should already be set for spp.corr1)
 
 			# Combine newly-checked w/ previously-checked names
 			spp.corr1 <- rbind(oldSpp, spp.corr2)
 		
-				# ===========================
-				# = Some manual corrections =
-				# ===========================
-				# spp.corr1[is.na(sppCorr)]
-				spp.corr1[spp=="Antipatharian", sppCorr:="Antipatharia"]
-				spp.corr1[spp=="Gorgonian", sppCorr:="Gorgonacea"]
-				spp.corr1[spp=="Gymothorax igromargiatus", sppCorr:="Gymnothorax nigromargiatus"]
-				spp.corr1[spp=="Micropaope uttigii", sppCorr:="Micropanope nuttingi"]
-				spp.corr1[spp=="Neptheid", sppCorr:="Neptheidae"]
-				spp.corr1[spp=="Ogocephalidae", sppCorr:="Ogcocephalidae"]
-				spp.corr1[spp=="Raioides", sppCorr:="Raioidea"]
-				spp.corr1[spp=="Seapen", sppCorr:="Pennatulacea"]
-				spp.corr1 <- spp.corr1[!is.na(sppCorr),]
+				
 		
 			# Save the new spp.corr1 file, which has been updated with new species
 			# save(spp.corr1, file="/Users/Battrd/Documents/School&Work/pinskyPost/trawl/Data/Taxonomy/spp.corr1.RData")
@@ -134,6 +122,22 @@ getSpp <- function(uspp, oldSpp=NULL){
 		} # end case 2b
 		
 	} # end case 2 (total)
+	
+	# ===========================
+	# = Some manual corrections =
+	# ===========================
+	# spp.corr1[is.na(sppCorr)]
+	spp.corr1[spp=="Antipatharian", sppCorr:="Antipatharia"]
+	spp.corr1[spp=="Gorgonian", sppCorr:="Gorgonacea"]
+	spp.corr1[spp=="Gymothorax igromargiatus", sppCorr:="Gymnothorax nigromargiatus"]
+	spp.corr1[spp=="Micropaope uttigii", sppCorr:="Micropanope nuttingi"]
+	spp.corr1[spp=="Neptheid", sppCorr:="Neptheidae"]
+	spp.corr1[spp=="Ogocephalidae", sppCorr:="Ogcocephalidae"]
+	spp.corr1[spp=="Raioides", sppCorr:="Raioidea"]
+	spp.corr1[spp=="Seapen", sppCorr:="Pennatulacea"]
+	spp.corr1[spp=="Eoraja siusmexicaus", sppCorr:="Neoraja sinusmexicanus"]
+	
+	# spp.corr1 <- spp.corr1[!is.na(sppCorr),]
 	
 	return(spp.corr1) # return checked names as a data.table
 }

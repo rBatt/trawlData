@@ -29,9 +29,10 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	sk.agree <- spp.key0[,list(matchesAgree=(length(unique(val[!is.na(val)]))<=1L)),by=ref] # all non-NA matches should be same
 	setkey(spp.key0, ref)
 	conflict.key <- spp.key0[sk.agree[!(matchesAgree)]]
-	setorder(spp.key0, ref, mtch.src)
+	setorder(spp.key0, ref, val, mtch.src, na.last=T)
 	
-	spp.key <- unique(spp.key0[!is.na(val)])
+	# spp.key <- unique(spp.key0[!is.na(val)])
+	spp.key <- unique(spp.key0)
 	setnames(spp.key, "val", "spp")
 	setkey(spp.key, spp)
 	
@@ -47,8 +48,13 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	spp.key <- merge(spp.key, ti2, by="spp", all.x=T)
 	setcolorder(spp.key, c("ref", "val.src", "tbl.row", "mtch.src", "spp", "common", "taxLvl", "species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom", "trophicDiet", "trophicOrig", "Picture", "trophicLevel", "trophicLevel.se"))
 	
+	spp.key[is.na(spp), mtch.src:=NA_real_]
+	
+	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
+	
+	save(spp.key, file="data/spp.key.RData")
+	write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
+	
 	return(spp.key)
 }
 
-save(spp.key, file="data/spp.key.RData")
-write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)

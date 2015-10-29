@@ -23,7 +23,7 @@ source("./R/tax-grb.spp1.R")
 source("./R/tax-getTL.R")
 source("./R/tax-getCmmn.R")
 
-regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")
+regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri") 
 
 
 

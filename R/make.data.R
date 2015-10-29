@@ -23,6 +23,8 @@ source("./R/tax-grb.spp1.R")
 source("./R/tax-getTL.R")
 source("./R/tax-getCmmn.R")
 
+regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")
+
 
 
 ai <- read.trawl("ai")
@@ -84,7 +86,6 @@ clean.columns(wctri, "wctri")
 cnames <- unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(wcann), names(wctri)))
 
 
-regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")
 # read in raw
 for(i in 1:length(regions)){
 	nm <- paste0("raw.", regions[i])

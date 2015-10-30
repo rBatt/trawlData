@@ -136,61 +136,81 @@ trim.autoColumn <- function(X){
 
 
 # handy lookup function
-match.tbl <- function(ref, tbl.ref, tbl.val){
+match.tbl <- function(ref, tbl.ref, tbl.val, exact=FALSE){
 	# ref = gmex[,spp.orig]
 	# tbl.ref = taxInfo[,raw.spp]
 	# tbl.val = taxInfo[,spp]
 	
 	nref <- length(ref)
 	na.vec <- rep(NA, nref)
-	ref.for <- cullParen(cullSp(fixCase(cullExSpace(ref))))
+	if(!exact){
+		ref.for <- cullParen(cullSp(fixCase(cullExSpace(ref))))
+	}
+	
 	
 	m1 <- match(ref, tbl.ref)
-	m2 <- match(ref.for, tbl.ref)
+	if(!exact){
+		m2 <- match(ref.for, tbl.ref)
+	}
+	
 	
 	m1.na <- is.na(m1)
 	m1.fill <- !m1.na
-	m2.na <- is.na(m2)
-	m2.fill <- m1.na & !m2.na
+	if(!exact){
+		m2.na <- is.na(m2)
+		m2.fill <- m1.na & !m2.na
+	}
+	
 	
 	val <- na.vec
 	val[m1.fill] <- tbl.val[m1[m1.fill]]
-	val[m2.fill] <- tbl.val[m2[m2.fill]]
+	if(!exact){
+		val[m2.fill] <- tbl.val[m2[m2.fill]]
+	}
 	
-	if(any(is.na(val))){
-		qa <- function(x,y){
-			agrep(pattern=x, x=y, ignore.case=T, value=F, max.distance=0.25)[1]
+	if(!exact){
+		if(any(is.na(val))){
+			qa <- function(x,y){
+				agrep(pattern=x, x=y, ignore.case=T, value=F, max.distance=0.25)[1]
+			}
+			m3 <- na.vec
+			nav <- is.na(val)
+			m3[nav] <- sapply(ref[nav], qa, y=tbl.ref)
+			m3.fill <- !is.na(m3)
+			val[m3.fill] <- tbl.val[m3[m3.fill]]
+		}else{
+			m3.fill <- rep(FALSE, nref)
 		}
-		m3 <- na.vec
-		nav <- is.na(val)
-		m3[nav] <- sapply(ref[nav], qa, y=tbl.ref)
-		m3.fill <- !is.na(m3)
-		val[m3.fill] <- tbl.val[m3[m3.fill]]
-	}else{
-		m3.fill <- rep(FALSE, nref)
+	
+		if(any(is.na(val))){
+			m4 <- na.vec
+			nav <- is.na(val)
+			m4[nav] <- sapply(ref.for[nav], qa, y=tbl.ref)
+			m4.fill <- !is.na(m4)
+			val[m4.fill] <- tbl.val[m4[m4.fill]]
+		}else{
+			m4.fill <- rep(FALSE, nref)
+		}
 	}
 	
-	if(any(is.na(val))){
-		m4 <- na.vec
-		nav <- is.na(val)
-		m4[nav] <- sapply(ref.for[nav], qa, y=tbl.ref)
-		m4.fill <- !is.na(m4)
-		val[m4.fill] <- tbl.val[m4[m4.fill]]
-	}else{
-		m4.fill <- rep(FALSE, nref)
-	}
 	
 	val.src <- na.vec
 	val.src[m1.fill] <- "m1"
-	val.src[m2.fill] <- "m2"
-	val.src[m3.fill] <- "m3"
-	val.src[m4.fill] <- "m4"
+	if(!exact){
+		val.src[m2.fill] <- "m2"
+		val.src[m3.fill] <- "m3"
+		val.src[m4.fill] <- "m4"
+	}
+	
 	
 	tbl.row <- na.vec
 	tbl.row[m1.fill] <- m1[m1.fill]
-	tbl.row[m2.fill] <- m2[m2.fill]
-	tbl.row[m3.fill] <- m3[m3.fill]
-	tbl.row[m4.fill] <- m4[m4.fill]
+	if(!exact){
+		tbl.row[m2.fill] <- m2[m2.fill]
+		tbl.row[m3.fill] <- m3[m3.fill]
+		tbl.row[m4.fill] <- m4[m4.fill]
+	}
+	
 	
 	
 	out <- data.table(

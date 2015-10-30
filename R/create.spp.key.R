@@ -50,6 +50,68 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	spp.key[is.na(spp), mtch.src:=NA_real_]
 	
+	
+	
+	# ===========================
+	# = Search and Update Again =
+	# ===========================
+	# Taxonomny always seems to be a highly iterative process
+	match.badSpp <- function(x, value=FALSE){
+		
+		ux <- unique(x)
+		badEgg <- grepl("[eE][gG]{2}", ux)
+		badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+		badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+		badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+		missSpp <- ux=="" | is.na(ux)
+		bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
+		bad.i <- (x%in%bad.x)
+		if(value){
+			return(x[bad.i])
+		}else{
+			return(bad.i)
+		}
+		
+	}
+	
+	# index of things to not bother trying to find
+	badSpp <- spp.key[,match.badSpp(ref)]
+	noID <- spp.key[,spp=="" | is.na(spp)]
+	
+	# index of things to lookup for COMMON
+	lookup.cmmn.i <- (!badSpp & !noID) & spp.key[,is.na(common) | common==""]
+	lookup.cmmn <- spp.key[lookup.cmmn.i, spp]
+	
+	# index of things to lookup for CLASS
+	class.names <- c("species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom")
+	lookup.class.i <- (!badSpp & !noID) & rowSums(!is.na(spp.key[,eval(s2c(class.names))]))==0
+	lookup.class <- spp.key[lookup.class.i, spp]
+	
+	# lookup both COMMON & CLASS
+	find.class <- getTax(unique(lookup.class))
+	find.cmmn <- getCmmn(unique(lookup.cmmn))
+	
+	# insert non-NA COMMON names where needed
+	cn.cols <- c("taxLvl",class.names)
+	for(cn in 1:length(cn.cols)){
+		t.cn <- cn.cols[cn]
+		t.m <- find.class[, match.tbl(spp.key[,spp], sppCorr, eval(s2c(t.cn))[[1]], exact=T)]
+		setorder(t.m, ref, na.last=TRUE)
+		setorder(spp.key, spp, na.last=TRUE)
+		needs <- spp.key[,is.na(eval(s2c(t.cn))[[1]])]
+		has <- t.m[,!is.na(val)]
+		spp.key[needs&has,(t.cn):=t.m[needs&has,val]]
+	}
+	
+	# insert non-NA taxonomnic CLASSifications where needed
+	match.cmmn <- find.cmmn[, match.tbl(spp.key[,spp], sppCorr, common, exact=T)]
+	needs.cmmn <- spp.key[,is.na(common)]
+	has.cmmn <- match.cmmn[,!is.na(val)]
+	spp.key[needs.cmmn&has.cmmn,common:=match.cmmn[needs.cmmn&has.cmmn,val]]
+	
+	
+	
+	
 	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	
 	save(spp.key, file="data/spp.key.RData")

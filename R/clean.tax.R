@@ -20,9 +20,6 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 		)
 	}
 	
-	# [1] 2325
-	# > sum(!X[,unique(spp)] %in% spp.key[,ref])
-	# [1] 1
 	
 	# X <- copy(gmex)
 	setnames(X, "spp", "ref")
@@ -37,6 +34,20 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 		setnames(X, paste0(x,".y"), x)
 	}
 	drop.x(rmX.names)
+	
+	# smry.tax0 <- X[,table(taxLvl[!duplicated(spp)])]
+# 	nst <- names(smry.tax0)
+# 	sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=T)]])}
+# 	smry.tax <- c(
+# 		kingdom = sum.tax("kingdom"),
+# 		phylum = sum.tax("phylum"),
+# 		class = sum.tax("class"),
+# 		order = sum.tax("order"),
+# 		family = sum.tax("family"),
+# 		genus = sum.tax("genus"),
+# 		species = sum.tax("species")
+# 	)
+	
 	
 	
 	

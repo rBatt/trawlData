@@ -111,6 +111,181 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
+	# ======================
+	# = Manual Corrections =
+	# ======================	
+	# noticed in GMEX
+	# match.badSpp <- function(x, value=FALSE){
+	#
+	# 	ux <- unique(x)
+	# 	badEgg <- grepl("[eE][gG]{2}", ux)
+	# 	badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+	# 	badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+	# 	badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+	# 	missSpp <- ux=="" | is.na(ux)
+	# 	bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
+	# 	bad.i <- (x%in%bad.x)
+	# 	if(value){
+	# 		return(x[bad.i])
+	# 	}else{
+	# 		return(bad.i)
+	# 	}
+	#
+	# }
+	# badSpp <- X[,match.badSpp(ref)]
+	# noID <- X[,spp=="" | is.na(spp)]
+	# dput(X[!badSpp&!noID&taxLvl!="species"&!is.na(taxLvl)&is.species(spp)&is.na(common),unique(spp)])
+	# c("Astrea Orbicella", "Bathynectes superba", "Centropristes ocyurus", "Glyphocrangon aculeata", "Lycoteuthis diadema", "Moira atropus", 	"Mustellus canis", "Phenacoscorpius nebris", "Synagrops bella", "Synagrops microlepis")
+	# Function to see if the corrected version of a bad spp name
+	# already exists in a data set; if it does,
+	# then the wrong version is overwritten with the content 
+	check.and.set <- function(wrong, corrected){
+		check <- spp.key[,corrected%in%spp]
+		if(check){
+			# if the corrected name already exists,
+			# make sure to have all the rows with the wrong name match up with the corrected rows,
+			# that way if we make any changes, both sets get updated
+			# For example, if a name XX is wrong, and Xx is the corrected name,
+			# say that we are going to set the trophic level of Xx to 42, 
+			# but the current entry is 40. If we were to say 'change all rows
+			# with name XX to have a TL to 42, and also switch the bad XX name to the good Xx name',
+			# then we would have some rows with TL of 42 (the ones that originally had the bad name), and 
+			# some rows with TL of 40 (the ones that originally had the corrected name).
+			# Thus, we have to get the names and other content to match before changing anything.
+			# Bottom line is that we need to be sure that all things are consistent, and that this requires
+			# more care when we are switching the 'spp' of an entry to a 'spp' that is already there.
+			# 
+			# stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x[!is.na(x)]))<=1))) # this check is to ensure that the contents of the corrected data set do not contain conflicts (NA's aside, which may or may not be a good idea)
+			stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x))<=1)))
+			noSet <- c("ref")
+			all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
+			spp.key[spp==wrong, c(all.but.noSet):=spp.key[spp==corrected,eval(s2c(all.but.noSet))]]			
+		}else{
+			# if the corrected name doesn't already exist,
+			# then simply switch the wrong name to the corrected name,
+			spp.key[spp==wrong, spp:=corrected]
+		}
+	}
+	
+	check.and.set(wrong="Moira atropus", corrected="Moira atropos")
+	spp.key[spp=="Moira atropos",
+		':='(
+			taxLvl="species",
+			species="Moira atropos",
+			genus="Moira",
+			website="http://www.marinespecies.org/echinoidea/aphia.php?p=taxdetails&id=158067"
+		)
+	]
+	
+	# spp.key[spp=="Astrea Orbicella", # couldn't find this one
+	# ]
+	
+	check.and.set(wrong="Bathynectes superba", corrected="Bathynectes maravigna")
+	spp.key[spp=="Bathynectes maravigna",
+		':='(
+			taxLvl="species",
+			species="Bathynectes maravigna",
+			genus="Bathynectes",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107377"
+		
+		)
+	]
+	
+	check.and.set(wrong="Centropristes ocyurus", corrected="Centropristis ocyurus")
+	spp.key[spp=="Centropristis ocyurus",
+		':='(
+			taxLvl="species",
+			species="Centropristis ocyurus",
+			genus="Centropristis",
+			common="Bank sea bass", 
+			Picture="y", 
+			trophicLevel=3.5, 
+			trophicLevel.se=0.53,  
+			website="http://www.fishbase.org/summary/3316"
+		)
+	]
+	
+	check.and.set(wrong="Glyphocrangon aculeata", corrected="Glyphocrangon aculeata")
+	spp.key[spp=="Glyphocrangon aculeata",
+		':='(
+			taxLvl="species",
+			species="Glyphocrangon aculeata",
+			genus="Glyphocrangon",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421812"
+		
+		)
+	]
+	
+	check.and.set(wrong="Lycoteuthis diadema", corrected="Lycoteuthis lorigera")
+	spp.key[spp=="Lycoteuthis lorigera",
+		':='(
+			taxLvl="species",
+			species="Lycoteuthis lorigera",
+			genus="Lycoteuthis",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=342361"
+
+		)
+	]
+	
+	# found a fix for Mustellus canis (only 1 l), but new information tells we
+	# that we already have the correct name somewhere, so I have to fix then update both
+	# spp.key[spp=="Mustelus canis"]
+	
+	check.and.set(wrong="Mustellus canis", corrected="Mustelus canis")
+	spp.key[spp=="Mustelus canis",
+		':='(
+			taxLvl="species",
+			common="Dusky smooth-hound",
+			Picture="y",
+			trophicLevel=3.6,
+			# trophicLevel.se=0.2,
+			website="http://www.fishbase.org/summary/Mustelus-canis.html"
+		)
+	]
+	
+	check.and.set(wrong="Phenacoscorpius nebris", corrected="Phenacoscorpius nebris")
+	spp.key[spp=="Phenacoscorpius nebris",
+		':='(
+			taxLvl="species",
+			species="Phenacoscorpius nebris",
+			genus="Phenacoscorpius",
+			common="Short-tube scorpionfish",
+			Picture="y",
+			trophicLevel=3.5,
+			trophicLevel.se=0.6,
+			website="http://www.fishbase.org/summary/12454"
+		)
+	]
+	
+	
+	
+	spp.key[spp=="Synagrops bellus",
+		':='(
+			taxLvl="species",
+			species="Synagrops bellus",
+			genus="Synagrops",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=159584"
+		)
+	]
+	
+	
+	spp.key[spp=="Synagrops microlepis",
+		':='(
+			taxLvl="species",
+			species="Synagrops microlepis",
+			genus="Synagrops",
+			common="Thinlip splitfin",
+			Picture="y",
+			trophicLevel=3.2,
+			trophicLevel.se=0.37,
+			website="http://www.fishbase.org/summary/5059"
+
+		)
+	]
+	
+	
+	
+	
 	
 	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	

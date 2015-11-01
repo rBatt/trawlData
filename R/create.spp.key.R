@@ -3,36 +3,55 @@ library(data.table)
 
 load("./data/taxInfo.RData")
 load("./data/spp.corr1.RData")
+load("data/getSppData.RData")
+load("data/getTaxData.RData")
+load("data/getCmmnData.RData")
 
 create.spp.key <- function(spp, taxInfo, spp.corr1){
 	X.match <- match.tbl(ref=spp[-1], tbl.ref=taxInfo[,raw.spp], tbl.val=taxInfo[,spp])
 	X.match[,mtch.src:=1]
 	X.match2 <- match.tbl(ref=spp[-1], tbl.ref=spp.corr1[,spp], tbl.val=spp.corr1[,sppCorr])
 	X.match2[,mtch.src:=2]
+	# X.match3.1 <- match.tbl(ref=spp[-1],tbl.ref=match.gs[,spp],tbl.val=match.gs[,sppCorr])
+	X.match3 <- match.tbl(ref=spp[-1],tbl.ref=getSppData[,spp],tbl.val=getSppData[,sppCorr], exact=T)
+	X.match3[,mtch.src:=3]
 	
-	need.search.i <- X.match[,is.na(val)] & X.match2[,is.na(val)]
-	need.search <- spp[-1][need.search.i]
-	match.gs <- getSpp(c.all(need.search))
-	match.gs[,sppCorr:=cullPost2(sppCorr)]
-	# match.gs[,spp.orig:=need.search]
-	X.match3 <- data.table(
-		ref = X.match[,ref],
+	# need.search.i <- X.match[,is.na(val)] & X.match2[,is.na(val)]
+	# need.search <- spp[need.search.i][-1]
+	# getSppData <- getSpp(c.all(need.search))
+	# getSppData[,sppCorr:=cullPost2(sppCorr)]
+	# getSppData[,spp.orig:=need.search]
+	# X.match3 <- data.table(
+# 		ref = X.match[,ref],
+# 		val = NA_character_,
+# 		val.src = NA_character_,
+# 		tbl.row = NA_real_,
+# 		mtch.src = 3
+# 	)
+# 	X.match3[need.search.i,val:=getSppData[,sppCorr]]
+	
+	# spp.key0 <- rbind(X.match, X.match2, X.match3)
+	spp.key00 <- rbind(X.match[!is.na(val)], X.match2[!is.na(val)], X.match3[!is.na(val)])
+	spp.noMatch <- X.match[!ref%in%spp.key00[,ref], ref]
+	X.noMatch <- data.table(
+		ref = spp.noMatch,
 		val = NA_character_,
 		val.src = NA_character_,
 		tbl.row = NA_real_,
-		mtch.src = 3
+		mtch.src = NA_real_
 	)
-	X.match3[need.search.i,val:=match.gs[,sppCorr]]
+	spp.key0 <- rbind(spp.key00, X.noMatch)
 	
-	spp.key0 <- rbind(X.match, X.match2, X.match3)
 	
 	sk.agree <- spp.key0[,list(matchesAgree=(length(unique(val[!is.na(val)]))<=1L)),by=ref] # all non-NA matches should be same
 	setkey(spp.key0, ref)
 	conflict.key <- spp.key0[sk.agree[!(matchesAgree)]]
-	setorder(spp.key0, ref, val, mtch.src, na.last=T)
+	setorder(spp.key0, ref, mtch.src, val, na.last=T)
+	
 	
 	# spp.key <- unique(spp.key0[!is.na(val)])
 	spp.key <- unique(spp.key0)
+	# X.match2[!is.na(val)][X.match2[!is.na(val),ref] %in% spp.key[is.na(spp), unique(ref)]]
 	setnames(spp.key, "val", "spp")
 	setkey(spp.key, spp)
 	
@@ -44,71 +63,196 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	ti2[,correctSpp:=NULL]
 	ti2[,isSpecies:=NULL]
 	ti2[,taxLvl:=tolower(taxLvl)]
+	ti2[,tax.src:="taxInfo"]
 	
 	spp.key <- merge(spp.key, ti2, by="spp", all.x=T)
-	setcolorder(spp.key, c("ref", "val.src", "tbl.row", "mtch.src", "spp", "common", "taxLvl", "species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom", "trophicDiet", "trophicOrig", "Picture", "trophicLevel", "trophicLevel.se"))
-	
-	spp.key[is.na(spp), mtch.src:=NA_real_]
+	setcolorder(spp.key, c("ref", "val.src", "tbl.row", "mtch.src", "tax.src", "spp", "common", "taxLvl", "species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom", "trophicDiet", "trophicOrig", "Picture", "trophicLevel", "trophicLevel.se"))
 	
 	
-	
-	# ===========================
-	# = Search and Update Again =
-	# ===========================
-	# Taxonomny always seems to be a highly iterative process
-	match.badSpp <- function(x, value=FALSE){
-		
-		ux <- unique(x)
-		badEgg <- grepl("[eE][gG]{2}", ux)
-		badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-		badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-		badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-		missSpp <- ux=="" | is.na(ux)
-		bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
-		bad.i <- (x%in%bad.x)
-		if(value){
-			return(x[bad.i])
-		}else{
-			return(bad.i)
+	for(i in 2:length(names(getTaxData))){
+		tn <- names(getTaxData)[i]
+		if(!tn%in%names(spp.key)){
+			# If we're trying to add a column that spp.key doesn't have, then skip
+			next
 		}
 		
+		t.gTD <- getTaxData[,eval(s2c(tn))][[1]]
+		t.s.k <- spp.key[,eval(s2c(tn))][[1]]
+		
+		can.help <- spp.key[is.na(t.s.k), spp] %in%  getTaxData[!is.na(t.gTD), sppCorr]
+		
+		if(any(can.help)){
+			mt <- match.tbl(ref=spp.key[can.help,spp], tbl.ref=getTaxData[,sppCorr], tbl.val=getTaxData[,eval(s2c(tn))][[1]], exact=T)
+			spp.key[can.help, c(tn, "tax.src2"):=list(mt[,val],"getTaxData")]
+		}else{
+			next
+		}
 	}
 	
-	# index of things to not bother trying to find
-	badSpp <- spp.key[,match.badSpp(ref)]
-	noID <- spp.key[,spp=="" | is.na(spp)]
+	# spp.key[is.na(spp), mtch.src:=NA_real_]
 	
-	# index of things to lookup for COMMON
-	lookup.cmmn.i <- (!badSpp & !noID) & spp.key[,is.na(common) | common==""]
-	lookup.cmmn <- spp.key[lookup.cmmn.i, spp]
 	
-	# index of things to lookup for CLASS
-	class.names <- c("species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom")
-	lookup.class.i <- (!badSpp & !noID) & rowSums(!is.na(spp.key[,eval(s2c(class.names))]))==0
-	lookup.class <- spp.key[lookup.class.i, spp]
 	
-	# lookup both COMMON & CLASS
-	find.class <- getTax(unique(lookup.class))
-	find.cmmn <- getCmmn(unique(lookup.cmmn))
-	
-	# insert non-NA COMMON names where needed
-	cn.cols <- c("taxLvl",class.names)
-	for(cn in 1:length(cn.cols)){
-		t.cn <- cn.cols[cn]
-		t.m <- find.class[, match.tbl(spp.key[,spp], sppCorr, eval(s2c(t.cn))[[1]], exact=T)]
-		setorder(t.m, ref, na.last=TRUE)
-		setorder(spp.key, spp, na.last=TRUE)
-		needs <- spp.key[,is.na(eval(s2c(t.cn))[[1]])]
-		has <- t.m[,!is.na(val)]
-		spp.key[needs&has,(t.cn):=t.m[needs&has,val]]
-	}
+	# # ===========================
+# 	# = Search and Update Again =
+# 	# ===========================
+# 	# Taxonomny always seems to be a highly iterative process
+# 	match.badSpp <- function(x, value=FALSE){
+#
+# 		ux <- unique(x)
+# 		badEgg <- grepl("[eE][gG]{2}", ux)
+# 		badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+# 		badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+# 		badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+# 		missSpp <- ux=="" | is.na(ux)
+# 		bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
+# 		bad.i <- (x%in%bad.x)
+# 		if(value){
+# 			return(x[bad.i])
+# 		}else{
+# 			return(bad.i)
+# 		}
+#
+# 	}
+#
+# 	# index of things to not bother trying to find
+# 	badSpp <- spp.key[,match.badSpp(ref)]
+# 	noID <- spp.key[,spp=="" | is.na(spp)]
+#
+# 	# index of things to lookup for COMMON
+# 	lookup.cmmn.i <- (!badSpp & !noID) & spp.key[,is.na(common) | common==""]
+# 	lookup.cmmn <- spp.key[lookup.cmmn.i, spp]
+#
+# 	# index of things to lookup for CLASS
+# 	class.names <- c("species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom")
+# 	lookup.class.i <- (!badSpp & !noID) & rowSums(!is.na(spp.key[,eval(s2c(class.names))]))==0
+# 	lookup.class <- spp.key[lookup.class.i, spp]
+#
+# 	# lookup both COMMON & CLASS
+# 	find.class <- getTax(unique(lookup.class))
+# 	find.cmmn <- getCmmn(unique(lookup.cmmn))
+#
+# 	# insert non-NA COMMON names where needed
+# 	cn.cols <- c("taxLvl",class.names)
+# 	for(cn in 1:length(cn.cols)){
+# 		t.cn <- cn.cols[cn]
+# 		t.m <- find.class[, match.tbl(spp.key[,spp], sppCorr, eval(s2c(t.cn))[[1]], exact=T)]
+# 		setorder(t.m, ref, na.last=TRUE)
+# 		setorder(spp.key, spp, na.last=TRUE)
+# 		needs <- spp.key[,is.na(eval(s2c(t.cn))[[1]])]
+# 		has <- t.m[,!is.na(val)]
+# 		spp.key[needs&has,(t.cn):=t.m[needs&has,val]]
+# 	}
 	
 	# insert non-NA taxonomnic CLASSifications where needed
-	match.cmmn <- find.cmmn[, match.tbl(spp.key[,spp], sppCorr, common, exact=T)]
+	match.cmmn <- getCmmnData[, match.tbl(spp.key[,spp], sppCorr, common, exact=T)]
 	needs.cmmn <- spp.key[,is.na(common)]
 	has.cmmn <- match.cmmn[,!is.na(val)]
 	spp.key[needs.cmmn&has.cmmn,common:=match.cmmn[needs.cmmn&has.cmmn,val]]
 	
+	spp.key[!is.na(spp)&(!is.na(tax.src)|!is.na(tax.src2)|!is.na(common))]
+	spp.key[!is.na(spp)&!is.na(taxLvl)&taxLvl=="species"]
+	
+	spp.key[!is.na(spp), conflict:=any(!sapply(.SD, function(x)lu(x[!is.na(x)])<=1)), by="spp"]
+	
+	
+	
+	kill.badKey <- function(Z, index){
+		print(Z[index], nrow=Inf)
+		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag all rows for which val.src is m3\n [no]   do nothing, go on to next\n [0-9]  Enter the numbers of the rows to flag, with each integer row number sep by a space\n")
+		
+		kill.action <- function(code){
+			if(code=="no"){
+				# nada
+			}
+			if(code=="m3"){
+				Z[index & val.src=="m3",flag:="bad"]
+				Z[index & val.src!="m3" | is.na(val.src),flag:="ok"]
+			}
+			if(code!="no" & code!="m3"){
+				num2kill <- seq_len(nrow(Z[index])) %in% as.integer(strsplit(code, split=" ")[[1]])
+				Z[index] [num2kill, flag:="bad"]
+				Z[index] [!num2kill, flag:="ok"]
+			}
+		} # end kill.action
+		
+		kill.action(kill.code)
+		
+	}
+	spp2loop <- spp.key[!is.na(spp) & conflict,unique(spp)]
+	for(i in 1:length(spp2loop)){
+		t.spp <- spp2loop[i]
+		t.index <- spp.key[,spp==t.spp & !is.na(spp)]
+		print(paste0(t.spp, "; ", i, " of ",length(spp2loop)))
+		kill.badKey(spp.key, t.index)
+	}
+	
+	
+	# =========================================
+	# = Check for and Correct Inconsistencies =
+	# =========================================
+	check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag")){
+		replacementsMade <- 0
+		replacementsFailed <- 0
+		replacementUnneeded <- 0
+		
+		taxProblemSolution <- data.table(spp=character(), prob.col=character(), solution=character())
+		tPS <- FALSE
+		
+		for(i in unique(Z[,eval(s2c(by.col))][[1]])){
+			for(j in col2check){
+				t.out <- Z[i,get(j)] # temporary value for a given `spp` and the j column
+				if(lu(t.out)>1){
+					if(lu(t.out[!is.na(t.out)])==1){ # if the 2+ values are just an NA and something else
+						# then just replace the NA with the something else
+						replacementsMade <- replacementsMade + 1L
+						Z[i,c(j):=list(unique(t.out[!is.na(t.out)]))]
+					}else{ # otherwise, if there are more than 2 non-NA unique values
+						prob.spp <- i # prob. means "problem" / "problematic"
+						prob.col <- j
+						prob.opts <- unique(t.out[!is.na(t.out)])
+				
+
+						fix.taxProb <- function(){ # defining in function in loop for readability
+							readline(paste(
+								"Pick your solution. SKIP to skip, otherwise enter one of the following exactly (don't add quotes, etc.):\n ", 
+								paste0(prob.opts, collapse="\n  "), "\n"
+							))
+						}
+				
+						if(tPS){ # FALSE; a prompt from when I had this in a script, was TRUE if reading in a file that had some answers
+							prob.fix.t <- taxProblemSolution[spp==i & prob.col==j,solution]
+							if(length(prob.fix.t)>0){
+								prob.fix <- prob.fix.t
+							}else{
+								print(j)
+								print(Z[i])
+								prob.fix <- fix.taxProb()
+								taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
+							}
+						}else{
+							print(j)
+							print(Z[i])
+							prob.fix <- fix.taxProb()
+							taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
+						}
+				
+				
+						if(prob.fix!="SKIP"){ # I've never tested the use of the SKIP response ...
+							Z[i,c(j):=list(prob.fix)]
+							replacementsMade <- replacementsMade + 1L
+						}else{
+							replacementsFailed <- replacementsFailed + 1L
+						}
+				
+					}
+				}else{
+					replacementUnneeded <- replacementUnneeded + 1L
+				}
+			}
+	
+		}
+	}
 	
 	
 	# ======================
@@ -173,25 +317,26 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			taxLvl="species",
 			species="Moira atropos",
 			genus="Moira",
-			website="http://www.marinespecies.org/echinoidea/aphia.php?p=taxdetails&id=158067"
+			website="http://www.marinespecies.org/echinoidea/aphia.php?p=taxdetails&id=158067",
+			flag="manual"
 		)
 	]
 	
 	# spp.key[spp=="Astrea Orbicella", # couldn't find this one
 	# ]
 	
-	check.and.set(wrong="Bathynectes superba", corrected="Bathynectes maravigna")
-	spp.key[spp=="Bathynectes maravigna",
-		':='(
-			taxLvl="species",
-			species="Bathynectes maravigna",
-			genus="Bathynectes",
-			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107377"
-		
-		)
-	]
+	# check.and.set(wrong="Bathynectes superba", corrected="Bathynectes maravigna")
+	# spp.key[spp=="Bathynectes maravigna",
+	# 	':='(
+	# 		taxLvl="species",
+	# 		species="Bathynectes maravigna",
+	# 		genus="Bathynectes",
+	# 		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107377"
+	#
+	# 	)
+	# ]
 	
-	check.and.set(wrong="Centropristes ocyurus", corrected="Centropristis ocyurus")
+	check.and.set(wrong="Centropristis ocyurus", corrected="Centropristis ocyurus")
 	spp.key[spp=="Centropristis ocyurus",
 		':='(
 			taxLvl="species",
@@ -201,31 +346,32 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y", 
 			trophicLevel=3.5, 
 			trophicLevel.se=0.53,  
-			website="http://www.fishbase.org/summary/3316"
+			website="http://www.fishbase.org/summary/3316",
+			flag="manual"
 		)
 	]
-	
-	check.and.set(wrong="Glyphocrangon aculeata", corrected="Glyphocrangon aculeata")
-	spp.key[spp=="Glyphocrangon aculeata",
-		':='(
-			taxLvl="species",
-			species="Glyphocrangon aculeata",
-			genus="Glyphocrangon",
-			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421812"
-		
-		)
-	]
-	
-	check.and.set(wrong="Lycoteuthis diadema", corrected="Lycoteuthis lorigera")
-	spp.key[spp=="Lycoteuthis lorigera",
-		':='(
-			taxLvl="species",
-			species="Lycoteuthis lorigera",
-			genus="Lycoteuthis",
-			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=342361"
-
-		)
-	]
+	#
+	# check.and.set(wrong="Glyphocrangon aculeata", corrected="Glyphocrangon aculeata")
+	# spp.key[spp=="Glyphocrangon aculeata",
+	# 	':='(
+	# 		taxLvl="species",
+	# 		species="Glyphocrangon aculeata",
+	# 		genus="Glyphocrangon",
+	# 		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421812"
+	#
+	# 	)
+	# ]
+	#
+	# check.and.set(wrong="Lycoteuthis diadema", corrected="Lycoteuthis lorigera")
+# 	spp.key[spp=="Lycoteuthis lorigera",
+# 		':='(
+# 			taxLvl="species",
+# 			species="Lycoteuthis lorigera",
+# 			genus="Lycoteuthis",
+# 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=342361"
+#
+# 		)
+# 	]
 	
 	# found a fix for Mustellus canis (only 1 l), but new information tells we
 	# that we already have the correct name somewhere, so I have to fix then update both
@@ -239,7 +385,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			trophicLevel=3.6,
 			# trophicLevel.se=0.2,
-			website="http://www.fishbase.org/summary/Mustelus-canis.html"
+			website="http://www.fishbase.org/summary/Mustelus-canis.html",
+			flag="manual"
 		)
 	]
 	
@@ -253,7 +400,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			trophicLevel=3.5,
 			trophicLevel.se=0.6,
-			website="http://www.fishbase.org/summary/12454"
+			website="http://www.fishbase.org/summary/12454",
+			flag="manual"
 		)
 	]
 	
@@ -264,7 +412,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			taxLvl="species",
 			species="Synagrops bellus",
 			genus="Synagrops",
-			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=159584"
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=159584",
+			flag="manual"
 		)
 	]
 	
@@ -278,11 +427,339 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			trophicLevel=3.2,
 			trophicLevel.se=0.37,
-			website="http://www.fishbase.org/summary/5059"
+			website="http://www.fishbase.org/summary/5059",
+			flag="manual"
 
 		)
 	]
 	
+	
+	spp.key[ref=="EZUMIA BAIRDII",
+		':='(
+			spp="Nezumia bairdii",
+			taxLvl="species",
+			genus="Nezumia",
+			species="Nezumia bairdii",
+			trophicLevel=3.3,
+			trophicLevel.se=0.1,
+			Picture="y",
+			common="Marlin=spike",
+			website="http://www.fishbase.org/summary/3104",
+			flag="manual"
+		)
+	
+	]
+	
+	
+	spp.key[ref=="PORTUNUS FLORIDANUS",
+		':='(
+			spp="Achelous floridanus",
+			taxLvl="species",
+			species="Portunus floridanus",
+			genus="Achelous",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=557882",
+			flag="manual"
+			
+		)
+	
+	]
+	
+	
+	spp.key[ref=="ASTROPECTE COMPTUS",
+		':='(
+			spp="Astropecten comptus",
+			taxLvl="species",
+			genus="Astropecten",
+			species="Astropecten comptus",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=178649",
+			flag="manual"
+			
+		)
+	
+	]
+	
+	spp.key[ref=="BATHYPTEROIS BIGELOWI",
+		':='(
+			spp="Bathypterois bigelowi",
+			taxLvl="species",
+			genus="Bathypterois",
+			species="Bathypterois bigelowi",
+			website="http://www.fishbase.org/summary/Bathypterois-bigelowi.html",
+			Picture="y",
+			flag="manual"
+			
+		)
+	]
+	
+	spp.key[ref=="PENNATULA BOREALIS",
+		':='(
+			spp="Pennatula grandis",
+			taxLvl="species",
+			genus="Pennatula",
+			species="Pennatula grandis",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=128516",
+			flag="manual"
+			
+		)
+	]
+	
+	
+	spp.key[spp=="Bollmannia communis",
+		':='(
+			spp="Bollmannia communis",
+			taxLvl="species",
+			genus="Bollmannia",
+			species="Bollmannia communis",
+			flag="manual"
+		)
+	]
+	
+	
+	
+	
+	spp.key[spp=="Brisaster townsendi",
+		':='(
+			spp="Brisaster townsendi",
+			taxLvl="species",
+			genus="Brisaster",
+			species="Brisaster townsendi",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=513144",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="Buccinum transliratum",
+		':='(
+			spp="Buccinum angulosum",
+			common="angular whelk",
+			family="Buccinidae",
+			order="Neogastropoda",
+			class="Gastropoda",
+			phylum="Mollusca",
+			kingdom="Animalia",
+			taxLvl="species",
+			genus="Buccinum",
+			species="Buccinum angulosum",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=138858",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="CHILOMYCTERUS ATINGA",
+		':='(
+			spp="Chilomycterus reticulatus",
+			common="spotfin burrfish",
+			taxLvl="species",
+			genus="Chilomycterus",
+			species="Chilomycterus reticulatus",
+			trophicLevel=3.45, # should just be 3.5?
+			trophicLevel.se=0.41,
+			Picture="y",
+			website="http://www.fishbase.org/summary/Chilomycterus-reticulatus.html",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=403539",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="CHLAMYS SETIS",
+		':='(
+			spp="Caribachlamys sentis",
+			taxLvl="species",
+			genus="Caribachlamys",
+			species="Caribachlamys sentis",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=393711",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="Colus hypolispus",
+		':='(
+			spp="Latisipho hypolispus",
+			taxLvl="species",
+			genus="Latisipho",
+			species="Latisipho hypolispus",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=491062",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=254476",
+			flag="manual"
+			
+		)
+	]
+	
+	spp.key[ref=="CYCLOTHONE BRAUERI",
+		':='(
+			spp="Cyclothone braueri",
+			taxLvl="species",
+			common="Garrick",
+			genus="Cyclothone",
+			species="Cyclothone braueri",
+			family="Gonostomatidae",
+			order="Stomiiformes",
+			class="Actinopterygii",
+			trophicLevel=3.1,
+			trophicLevel.se=0.18,
+			Picture="y",
+			website="http://www.fishbase.de/summary/Cyclothone-braueri.html",
+			flag="manual"
+		)
+	]
+	
+	
+	
+	
+	spp.key[ref=="DIAPHUS SPLEDIDUS",
+		':='(
+			spp="Diaphus splendidus",
+			taxLvl="species",
+			common="Horned lanternfish",
+			genus="Diaphus",
+			species="Diaphus splendidus",
+			family="Myctophidae",
+			order="Myctophiformes",
+			class="Actinopterygii",
+			trophicLevel=3.0,
+			trophicLevel.se=0,
+			Picture="y",
+			website="http://www.fishbase.org/summary/10174",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="DISTORSIO MCGITYI",
+		':='(
+			spp="Distorsio constricta mcgintyi",
+			taxLvl="species",
+			genus="Distorsio",
+			species="Distorsio constricta",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=422768",
+			flag="manual"
+			
+		)
+	]
+	
+	
+	spp.key[ref=="LEPIDOPA BEEDICTI",
+		':='(
+			spp="Lepidopa benedicti",
+			genus="Lepidopa",
+			species="Lepidopa benedicti",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421881",
+			flag="manual"
+		)
+	
+	]
+	
+	
+	spp.key[ref=="EPINEPHELUS NIVEATUS",
+		':='(
+			spp="Hyporthodus niveatus",
+			genus="Hyporthodus",
+			species="Hyporthodus niveatus",
+			common="snowy grouper",
+			family="Serranidae",
+			order="Perciformes",
+			class="Actinopteri",
+			superclass="Osteichthyes",
+			subphylum="Vertebrata",
+			phylum="Chordata",
+			kingdom="Animalia",
+			trophicDiet="n",
+			trophicOrig="y",
+			taxLvl="species",
+			trophicLevel=4.04,
+			trophicLevel.se=0.58,
+			Picture="y",
+			flag="manual"
+		)
+	
+	]
+	
+	
+	spp.key[ref=="EQUETUS ACUMINATUS",
+		':='(
+			spp="Pareques acuminatus",
+			genus="Pareques",
+			species="Pareques acuminatus",
+			taxLvl="species",
+			common="high-hat",
+			family="Sciaenidae",
+			order="Perciformes",
+			class="Actinopterygii",
+			superclass="Osteichthyes",
+			subphylum="Vertebrata",
+			phylum="Chordata",
+			kingdom="Animalia",
+			trophicDiet="y",
+			trophicOrig="y",
+			Picture="y",
+			trophicLevel=3.59,
+			trophicLevel.se=0.46,
+			flag="manual"
+		)
+	
+	]
+	
+	
+	
+	spp.key[ref=="ETMOPTERUS VIRES",
+		':='(
+			spp="Etmopterus virens",
+			genus="Etmopterus",
+			species="Etmopterus virens",
+			common="green lantern shark",
+			trohpicLevel=4.2,
+			trophicLevel.se=0.73,
+			Picture="y",
+			website="http://www.fishbase.org/summary/690",
+			flag="manual"
+			
+		)
+	
+	]
+	
+	
+	spp.key[ref=="LUIDIA ELEGAS",
+		':='(
+			spp="Luidia sarsii elegans",
+			genus="Luidia",
+			species="Luidia sarsii",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=752124",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=368112",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="HALICHOERES RADIATUS",
+		':='(
+			spp="Halichoeres radiatus",
+			genus="Halichoeres",
+			species="Halichoeres radiatus",
+			taxLvl="species",
+			common="Puddingwife wrasse",
+			trophicLevel=3.5,
+			trophicLevel.se=0.1,
+			Picture="y",
+			website="http://www.fishbase.org/summary/1068",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="Henricia aleutica",
+		':='(
+			spp="Henricia longispina aleutica",
+			genus="Henricia",
+			species="Henricia longispina",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=369124",
+			flag="manual"
+		)
+	]
 	
 	
 	

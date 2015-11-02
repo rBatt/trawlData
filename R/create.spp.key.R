@@ -157,25 +157,29 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
+	kill.action <- function(code){
+		if(code=="SKIP"){
+			# truly skip; leave all flags as-is
+		}
+		if(code=="no"){
+			# nada
+			Z[index, flag:="fine"]
+		}
+		if(code=="m3"){
+			Z[index & val.src=="m3",flag:="bad"]
+			Z[index & val.src!="m3" | is.na(val.src),flag:="ok"]
+		}
+		if(code!="no" & code!="m3" & code!="SKIP"){
+			num2kill <- which(seq_len(nrow(Z[index])) %in% as.integer(strsplit(code, split=" ")[[1]]))
+			Z[index & cumsum(index)%in%num2kill, flag:="bad"]
+			Z[index & !cumsum(index)%in%num2kill, flag:="ok"]
+		}
+	} # end kill.action
+	
+	
 	kill.badKey <- function(Z, index){
 		print(Z[index], nrow=Inf)
 		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag all rows for which val.src is m3\n [no]   do nothing, go on to next\n [0-9]  Enter the numbers of the rows to flag, with each integer row number sep by a space\n")
-		
-		kill.action <- function(code){
-			if(code=="no"){
-				# nada
-				Z[index, flag:="fine"]
-			}
-			if(code=="m3"){
-				Z[index & val.src=="m3",flag:="bad"]
-				Z[index & val.src!="m3" | is.na(val.src),flag:="ok"]
-			}
-			if(code!="no" & code!="m3"){
-				num2kill <- seq_len(nrow(Z[index])) %in% as.integer(strsplit(code, split=" ")[[1]])
-				Z[index] [num2kill, flag:="bad"]
-				Z[index] [!num2kill, flag:="ok"]
-			}
-		} # end kill.action
 		
 		kill.action(kill.code)
 		
@@ -766,7 +770,100 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
+	spp.key[ref=="ALUTERUS HEUDELOTTI" | ref == "ALUTERUS HEUDELOTI",
+		':='(
+			spp="Aluterus heudelotii"
+		)
+	]
+	spp.key[spp=="Aluterus heudelotii",
+		':='(
+			common="Dotterel filefish",
+			taxLvl="species",
+			genus="Aluterus",
+			species="Aluterus heudelotii",
+			family="Monacanthidae",
+			order="Tetraodontiformes",
+			class="Actinopteri",
+			superclass="Actinopterygii",
+			subphylum="Craniata",
+			phylum="Chordata",
+			kingdom="Metazoa",
+			Picture="y",
+			trophicLevel=2.0,
+			trophicLevel.se=0,
+			website="http://www.fishbase.org/summary/4273",
+			flag="manual"
+		)
+	]
 	
+	
+	spp.key[ref=="ALPHEUS ARMATUS",
+		':='(
+			spp="Alpheus armatus",
+			taxLvl="species",
+			genus="Alpheus",
+			species="Alpheus armatus",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421729",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="COOKEOLUS JAPONICUS",
+		':='(
+			spp="Cookeolus japonicus",
+		)
+	]
+	spp.key[spp=="Cookeolus japonicus",
+		':='(
+			species="Cookeolus japonicus",
+			genus="Cookeolus",
+			taxLvl="species",
+			common="Longfinned bullseye",
+			Picture="y",
+			trophicLevel=3.5,
+			trophicLevel.se=0.6,
+			website="http://www.fishbase.org/summary/3517",
+			flag="manual"
+			
+			)
+	]
+	
+	spp.key[ref=="APRISTURUS IDICUS",
+		':='(
+			spp="Apristurus indicus",
+			species="Apristurus indicus",
+			genus="Apristurus",
+			taxLvl="species",
+			common="Smallbelly catshark",
+			trophicLevel=3.7,
+			trophicLevel.se=0.3,
+			Picture="y",
+			website="http://www.fishbase.org/Summary/speciesSummary.php?ID=766&AT=Kleinbuikkathaai",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="Arctomelon sp. cf. stearnsii (Clark & McLean)",
+		':='(
+			spp="Arctomelon stearnsii",
+			species="Arctomelon stearnsii",
+			genus="Arctomelon",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=384681",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="ASTARTE GLOBULA",
+		':='(
+			spp="Astarte globula",
+			species="Astarte globula",
+			genus="Astarte",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=420839",
+			flag="manual"
+		)
+	]
 	
 	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	

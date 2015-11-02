@@ -164,6 +164,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		kill.action <- function(code){
 			if(code=="no"){
 				# nada
+				Z[index, flag:="fine"]
 			}
 			if(code=="m3"){
 				Z[index & val.src=="m3",flag:="bad"]
@@ -179,7 +180,10 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		kill.action(kill.code)
 		
 	}
-	spp2loop <- spp.key[!is.na(spp) & conflict,unique(spp)]
+	if(!"flag"%in%names(spp.key)){
+		spp.key[,flag:=NA_character_]
+	}
+	spp2loop <- spp.key[!is.na(spp) & conflict & is.na(flag),unique(spp)]
 	for(i in 1:length(spp2loop)){
 		t.spp <- spp2loop[i]
 		t.index <- spp.key[,spp==t.spp & !is.na(spp)]

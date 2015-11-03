@@ -12,25 +12,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	X.match[,mtch.src:=1]
 	X.match2 <- match.tbl(ref=spp[-1], tbl.ref=spp.corr1[,spp], tbl.val=spp.corr1[,sppCorr])
 	X.match2[,mtch.src:=2]
-	# X.match3.1 <- match.tbl(ref=spp[-1],tbl.ref=match.gs[,spp],tbl.val=match.gs[,sppCorr])
 	X.match3 <- match.tbl(ref=spp[-1],tbl.ref=getSppData[,spp],tbl.val=getSppData[,sppCorr], exact=T)
 	X.match3[,mtch.src:=3]
 	
-	# need.search.i <- X.match[,is.na(val)] & X.match2[,is.na(val)]
-	# need.search <- spp[need.search.i][-1]
-	# getSppData <- getSpp(c.all(need.search))
-	# getSppData[,sppCorr:=cullPost2(sppCorr)]
-	# getSppData[,spp.orig:=need.search]
-	# X.match3 <- data.table(
-# 		ref = X.match[,ref],
-# 		val = NA_character_,
-# 		val.src = NA_character_,
-# 		tbl.row = NA_real_,
-# 		mtch.src = 3
-# 	)
-# 	X.match3[need.search.i,val:=getSppData[,sppCorr]]
+
 	
-	# spp.key0 <- rbind(X.match, X.match2, X.match3)
 	spp.key00 <- rbind(X.match[!is.na(val)], X.match2[!is.na(val)], X.match3[!is.na(val)])
 	spp.noMatch <- X.match[!ref%in%spp.key00[,ref], ref]
 	X.noMatch <- data.table(
@@ -49,9 +35,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	setorder(spp.key0, ref, mtch.src, val, na.last=T)
 	
 	
-	# spp.key <- unique(spp.key0[!is.na(val)])
 	spp.key <- unique(spp.key0)
-	# X.match2[!is.na(val)][X.match2[!is.na(val),ref] %in% spp.key[is.na(spp), unique(ref)]]
 	setnames(spp.key, "val", "spp")
 	setkey(spp.key, spp)
 	
@@ -142,8 +126,6 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			# Thus, we have to get the names and other content to match before changing anything.
 			# Bottom line is that we need to be sure that all things are consistent, and that this requires
 			# more care when we are switching the 'spp' of an entry to a 'spp' that is already there.
-			# 
-			# stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x[!is.na(x)]))<=1))) # this check is to ensure that the contents of the corrected data set do not contain conflicts (NA's aside, which may or may not be a good idea)
 			stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x))<=1)))
 			noSet <- c("ref")
 			all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
@@ -218,19 +200,6 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	# spp.key[spp=="Astrea Orbicella", # couldn't find this one
-	# ]
-	
-	# check.and.set(wrong="Bathynectes superba", corrected="Bathynectes maravigna")
-	# spp.key[spp=="Bathynectes maravigna",
-	# 	':='(
-	# 		taxLvl="species",
-	# 		species="Bathynectes maravigna",
-	# 		genus="Bathynectes",
-	# 		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107377"
-	#
-	# 	)
-	# ]
 	
 	check.and.set(wrong="Centropristis ocyurus", corrected="Centropristis ocyurus")
 	spp.key[spp=="Centropristis ocyurus",
@@ -246,32 +215,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			flag="manual"
 		)
 	]
-	#
-	# check.and.set(wrong="Glyphocrangon aculeata", corrected="Glyphocrangon aculeata")
-	# spp.key[spp=="Glyphocrangon aculeata",
-	# 	':='(
-	# 		taxLvl="species",
-	# 		species="Glyphocrangon aculeata",
-	# 		genus="Glyphocrangon",
-	# 		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421812"
-	#
-	# 	)
-	# ]
-	#
-	# check.and.set(wrong="Lycoteuthis diadema", corrected="Lycoteuthis lorigera")
-# 	spp.key[spp=="Lycoteuthis lorigera",
-# 		':='(
-# 			taxLvl="species",
-# 			species="Lycoteuthis lorigera",
-# 			genus="Lycoteuthis",
-# 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=342361"
-#
-# 		)
-# 	]
 	
-	# found a fix for Mustellus canis (only 1 l), but new information tells we
-	# that we already have the correct name somewhere, so I have to fix then update both
-	# spp.key[spp=="Mustelus canis"]
 	
 	check.and.set(wrong="Mustellus canis", corrected="Mustelus canis")
 	spp.key[spp=="Mustelus canis",
@@ -1093,7 +1037,6 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	]
 	
-	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	
 	save(spp.key, file="data/spp.key.RData")
 	write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)

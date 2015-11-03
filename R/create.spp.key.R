@@ -123,28 +123,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	# ======================
 	# = Manual Corrections =
 	# ======================	
-	# noticed in GMEX
-	# match.badSpp <- function(x, value=FALSE){
-	#
-	# 	ux <- unique(x)
-	# 	badEgg <- grepl("[eE][gG]{2}", ux)
-	# 	badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-	# 	badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-	# 	badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
-	# 	missSpp <- ux=="" | is.na(ux)
-	# 	bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
-	# 	bad.i <- (x%in%bad.x)
-	# 	if(value){
-	# 		return(x[bad.i])
-	# 	}else{
-	# 		return(bad.i)
-	# 	}
-	#
-	# }
-	# badSpp <- X[,match.badSpp(ref)]
-	# noID <- X[,spp=="" | is.na(spp)]
-	# dput(X[!badSpp&!noID&taxLvl!="species"&!is.na(taxLvl)&is.species(spp)&is.na(common),unique(spp)])
-	# c("Astrea Orbicella", "Bathynectes superba", "Centropristes ocyurus", "Glyphocrangon aculeata", "Lycoteuthis diadema", "Moira atropus", 	"Mustellus canis", "Phenacoscorpius nebris", "Synagrops bella", "Synagrops microlepis")
+	
 	# Function to see if the corrected version of a bad spp name
 	# already exists in a data set; if it does,
 	# then the wrong version is overwritten with the content 

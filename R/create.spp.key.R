@@ -157,33 +157,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
-	kill.action <- function(Z, index, code){
-		if(code=="SKIP"){
-			# truly skip; leave all flags as-is
-		}
-		if(code=="no"){
-			# nada
-			Z[index, flag:="fine"]
-		}
-		if(code=="m3"){
-			Z[index & val.src=="m3",flag:="bad"]
-			Z[index & val.src!="m3" | is.na(val.src),flag:="ok"]
-		}
-		if(code!="no" & code!="m3" & code!="SKIP"){
-			num2kill <- which(seq_len(nrow(Z[index])) %in% as.integer(strsplit(code, split=" ")[[1]]))
-			Z[index & cumsum(index)%in%num2kill, flag:="bad"]
-			Z[index & !cumsum(index)%in%num2kill, flag:="ok"]
-		}
-	} # end kill.action
 	
-	
-	kill.badKey <- function(Z, index){
-		print(Z[index], nrow=Inf)
-		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag as 'bad' all rows for which val.src is m3\n [no]   no problem, flag everything as 'fine'\n [0-9]  Enter the numbers of the rows to flag as 'bad', with each integer row number sep by a space\n [SKIP] Do nothing; leave flag as-is")
-		
-		kill.action(Z, index, kill.code)
-		
-	}
 	if(!"flag"%in%names(spp.key)){
 		spp.key[,flag:=NA_character_]
 	}
@@ -192,7 +166,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		t.spp <- spp2loop[i]
 		t.index <- spp.key[,spp==t.spp & !is.na(spp)]
 		print(paste0(t.spp, "; ", i, " of ",length(spp2loop)))
-		kill.badKey(spp.key, t.index)
+		flag.spp(spp.key, t.index)
 	}
 	
 	

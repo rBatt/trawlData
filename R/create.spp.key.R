@@ -515,7 +515,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		':='(
 			spp="Achelous floridanus",
 			taxLvl="species",
-			species="Portunus floridanus",
+			species="Achelous floridanus",
 			genus="Achelous",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=557882",
 			flag="manual"

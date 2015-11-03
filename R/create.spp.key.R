@@ -8,15 +8,23 @@ load("data/getTaxData.RData")
 load("data/getCmmnData.RData")
 
 create.spp.key <- function(spp, taxInfo, spp.corr1){
+	
+	# X.match is from taxInfo
 	X.match <- match.tbl(ref=spp[-1], tbl.ref=taxInfo[,raw.spp], tbl.val=taxInfo[,spp])
 	X.match[,mtch.src:=1]
+	
+	# X.match2 is from the spp.corr1.RData (from taxize)
 	X.match2 <- match.tbl(ref=spp[-1], tbl.ref=spp.corr1[,spp], tbl.val=spp.corr1[,sppCorr])
 	X.match2[,mtch.src:=2]
+	
+	# X.match3 is from getSppData.RData (more recent taxize on more taxa)
 	X.match3 <- match.tbl(ref=spp[-1],tbl.ref=getSppData[,spp],tbl.val=getSppData[,sppCorr], exact=T)
 	X.match3[,mtch.src:=3]
 	
 
 	
+	# Combine the 3 sources for ref -> spp conversions
+	# Gives preference to non-na values in X.match > X.match2 > X.match3
 	spp.key00 <- rbind(X.match[!is.na(val)], X.match2[!is.na(val)], X.match3[!is.na(val)])
 	spp.noMatch <- X.match[!ref%in%spp.key00[,ref], ref]
 	X.noMatch <- data.table(
@@ -27,15 +35,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		mtch.src = NA_real_
 	)
 	spp.key0 <- rbind(spp.key00, X.noMatch)
-	
-	
-	sk.agree <- spp.key0[,list(matchesAgree=(length(unique(val[!is.na(val)]))<=1L)),by=ref] # all non-NA matches should be same
-	setkey(spp.key0, ref)
-	conflict.key <- spp.key0[sk.agree[!(matchesAgree)]]
 	setorder(spp.key0, ref, mtch.src, val, na.last=T)
 	
-	
-	spp.key <- unique(spp.key0)
+	spp.key <- unique(spp.key0) # unique drops out 
 	setnames(spp.key, "val", "spp")
 	setkey(spp.key, spp)
 	
@@ -80,18 +82,19 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	needs.cmmn <- spp.key[,is.na(common)]
 	has.cmmn <- match.cmmn[,!is.na(val)]
 	spp.key[needs.cmmn&has.cmmn,common:=match.cmmn[needs.cmmn&has.cmmn,val]]
-	
-	spp.key[!is.na(spp)&(!is.na(tax.src)|!is.na(tax.src2)|!is.na(common))]
-	spp.key[!is.na(spp)&!is.na(taxLvl)&taxLvl=="species"]
-	
+
+	# Define conflicts in spp.key
 	spp.key[!is.na(spp), conflict:=any(!sapply(.SD, function(x)lu(x[!is.na(x)])<=1)), by="spp"]
 	
 	
 	
-	
+	# Add flag column if it doesn't exist
 	if(!"flag"%in%names(spp.key)){
 		spp.key[,flag:=NA_character_]
 	}
+	
+	
+	# Loop through conflicts by species, and flag
 	spp2loop <- spp.key[!is.na(spp) & conflict & is.na(flag),unique(spp)]
 	for(i in 1:length(spp2loop)){
 		t.spp <- spp2loop[i]
@@ -107,9 +110,6 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	# ======================
 	# = Manual Corrections =
 	# ======================	
-	
-	
-	
 	check.and.set(wrong="Moira atropus", corrected="Moira atropos")
 	spp.key[spp=="Moira atropos",
 		':='(

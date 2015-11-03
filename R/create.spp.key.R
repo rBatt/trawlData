@@ -157,7 +157,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
-	kill.action <- function(code){
+	kill.action <- function(Z, index, code){
 		if(code=="SKIP"){
 			# truly skip; leave all flags as-is
 		}
@@ -181,7 +181,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		print(Z[index], nrow=Inf)
 		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag all rows for which val.src is m3\n [no]   do nothing, go on to next\n [0-9]  Enter the numbers of the rows to flag, with each integer row number sep by a space\n")
 		
-		kill.action(kill.code)
+		kill.action(Z, index, kill.code)
 		
 	}
 	if(!"flag"%in%names(spp.key)){
@@ -317,6 +317,58 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			# then simply switch the wrong name to the corrected name,
 			spp.key[spp==wrong, spp:=corrected]
 		}
+	}
+	
+	# Function that is useful when
+	# you see that you need to change the `spp` value for a certain `ref`,
+	# but the new `spp` value you are switching to is already in spp.key.
+	# In this case, you could enter everything to match what is already in spp.key,
+	# but this function just takes your row with ref==Ref,
+	# and sets its columns to the values already present in the spp==Spp rows.
+	# It also sets the spp column in the ref==Ref row to be Spp.
+	ref2spp <- function(Ref, Spp){
+		check <- spp.key[,Spp%in%spp]
+		if(check){
+			
+			noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website","website2","flag")
+			all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
+			stopifnot(all(sapply(spp.key[spp==Spp,eval(s2c(all.but.noSet))], function(x)length(unique(x))<=1)))
+			
+			new.vals <- spp.key[spp==Spp,eval(s2c(all.but.noSet))]	
+			setkey(new.vals, spp)
+			new.vals <- unique(new.vals)
+			
+			spp.key[ref==Ref, c(all.but.noSet):=new.vals]	
+		}else{
+			# if the corrected name doesn't already exist,
+			# then simply switch the wrong name to the corrected name,
+			spp.key[ref==Ref, spp:=Spp]
+		}
+	}
+	
+	# When a column of a data.frame has 2 unique values,
+	# an NA, and a non-NA, this function will set all NA values to the non-NA value.
+	# Z is the name of a full data.table, and index is a vector of TRUE/FALSE 
+	# indicating which rows of Z are supposed to be examined
+	# The use-case in mind is where Z is a full data.table,
+	# and index indicates a portion of the data.table that is supposed to be compared.
+	# It's done this way to avoid having to subset the data.table in advance,
+	# that way the replacements can easily be made "in place", thus not soaking up extra memory.
+	# Similarly, note that thus function changes the data.table passed to the Z argument ... 
+	# there is no output, but the original data.table will be affected.
+	set2nonNA <- function(Z, index){
+		tn <- names(Z)
+		to.set <- sapply(Z[index], function(x)any(is.na(x)) & lu(x[!is.na(x)])==1)
+		c.to.set <- tn[to.set]
+		if(length(c.to.set)>=1){
+			for(i in 1:length(c.to.set)){
+				set.vals <- Z[index, unique(eval(s2c(c.to.set[i]))[[1]])]
+				set.val <- set.vals[!is.na(set.vals)]
+				stopifnot(class(set.val)==Z[index,class(eval(s2c(c.to.set[i]))[[1]])])
+				Z[index, c(c.to.set[i]):=list(set.val)]
+			}
+		}
+		
 	}
 	
 	check.and.set(wrong="Moira atropus", corrected="Moira atropos")
@@ -719,7 +771,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			genus="Etmopterus",
 			species="Etmopterus virens",
 			common="green lantern shark",
-			trohpicLevel=4.2,
+			trophicLevel=4.2,
 			trophicLevel.se=0.73,
 			Picture="y",
 			website="http://www.fishbase.org/summary/690",
@@ -864,6 +916,356 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			flag="manual"
 		)
 	]
+	
+	spp.key[ref=="BUSYCO CARICA",
+		':='(
+			spp="Busycon carica",
+			genus="Busycon",
+			species="Busycon carica",
+			taxLvl="species",
+			Picture="y",
+			common="Knobbed whelk",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=160185",
+			website2="http://www.sealifebase.org/summary/Busycon-carica.html",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="CALAMUS PENNA" | ref=="CALAMUS PEA",
+		':='(
+			spp="Cabdio penna",
+			genus="Cabdio",
+			species="Cabdio penna",
+			taxLvl="species",
+			common="Sheepshead porgy",
+			Picture="y",
+			trophicLevel=4.4,
+			trophicLevel.se=0.2
+			website="http://www.fishbase.org/summary/1227",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=159245",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="CALLIECTES DAAE",
+		spp="Callinectes danae",
+		genus="Callinectes",
+		species="Callinectes danae",
+		taxLvl="species",
+		common="Dana swimming crab",
+		trophicLevel=3.63,
+		trophicLevel.se=0.43,
+		Picture="y",
+		website="http://www.sealifebase.org/summary/Callinectes-danae.html",
+		website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107378"
+	]
+	
+	
+	spp.key[ref=="Buccinum triplostephanum",
+		':='(
+			spp="Volutopsion castaneum"
+		)
+	]
+	spp.key[spp=="Volutopsion castaneum",
+		':='(
+			species="Volutopsion castaneum",
+			genus="Volutopsion",
+			taxLvl="species",
+			common="chestnut whelk",
+			website="http://arctos.database.museum/name/Buccinum%20castaneum%20triplostephanum",
+			website2="http://www.sealifebase.org/summary/Volutopsion-castaneum.html",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="BUSYCO CAALICULATUM",
+		spp="Busycotypus canaliculatus",
+		species="Busycotypus canaliculatus",
+		genus="Busycotypus",
+		taxLvl="species",
+		common="Channeled whelk",
+		Picture="y",
+		trophicLevel=3.23,
+		trophicLevel.se=0.17,
+		website="http://arctos.database.museum/name/Busycon%20canaliculatum",
+		website2="http://www.sealifebase.org/summary/Busycotypus-canaliculatus.html",
+		flag="manual"
+	]
+	
+	spp.key[ref=="BUSYCO SIISTRUM",
+		':='(
+			spp="Sinistrofulgur sinistrum",
+			species="Sinistrofulgur sinistrum",
+			genus="Sinistrofulgur",
+			taxLvl="species",
+			common="Lightning whelk",
+			Picture="y",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=160189",
+			website2="http://sealifebase.org/summary/Busycon-sinistrum.html",
+			
+		)
+	]
+	
+	
+	spp.key[ref=="CALAPPA AGUSTA", # the correct species name should already be in spp.key
+		':='(
+			spp="Hepatus pudibundus",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=452047",
+			website2="http://www.sealifebase.org/summary/Hepatus-pudibundus.html"
+		)
+	]
+	
+	
+	spp.key[ref=="GOOSTOMA ATLATICUM ",
+		':='(
+			spp="Gonostoma atlanticum",
+			species="Gonostoma atlanticum",
+			genus="Gonostoma",
+			common="Atlantic fangjaw",
+			taxLvl="species",
+			trophicLevel=3.0,
+			trophicLevel.se=0.13,
+			Picture="y",
+			website="http://www.fishbase.org/summary/5052",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="Careproctus sp. cf. rastrinus (Orr et al.)",
+		':='(
+			spp="Careproctus rastrinus",
+			flag="manual"
+		)
+	]
+	spp.key[spp=="Careproctus rastrinus".
+		Picture="y",
+		website="http://www.fishbase.org/summary/Careproctus-rastrinus.html",
+		
+	]
+	
+	spp.key[ref=="Careproctus sp. cf. gilberti",
+		':='(
+			spp="Careproctus gilberti",
+			species="Careproctus gilberti",
+			genus="Careproctus",
+			taxLvl="species",
+			flag="manual"
+		)
+	]
+	spp.key[spp=="Careproctus gilberti"
+		':='(
+			trophicLevel=3.2,
+			trophicLevel.se=0.5,
+			Picture="y",
+			website="http://www.fishbase.org/summary/25161"
+		)
+	]
+	
+	spp.key[ref=="Careproctus lycopersicus",
+		':='(
+			spp="Careproctus lycopersicus",
+			species="Careproctus lycopersicus",
+			genus="Careproctus",
+			common="tomato snailfish",
+			taxLvl="species",
+			trophicLevel=3.2,
+			trophicLevel.se=0.5,
+			website="http://www.fishbase.org/summary/67403",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="COUS DAUCUS",
+		':='(
+			spp="Conus daucus",
+			species="Conus daucus",
+			genus="Conus",
+			taxLvl="species",
+			common="carrot cone",
+			Picture="y",
+			website="http://www.sealifebase.org/summary/Conus-daucus.html",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="ICTALURUS FURCATUS", # freshwater/ brackish species!!
+		':='(
+			spp="Ictalurus furcatus",
+			species="Ictalurus furcatus",
+			genus="Ictalurus",
+			taxLvl="species",
+			common="blue catfish",
+			trophicLevel=3.4,
+			trophicLevel.se=0.44,
+			Picture="y",
+			website="http://www.fishbase.org/summary/3019",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="CYPSELURUS MELANURUS",
+		':='(
+			spp="Cheilopogon melanurus",
+			species="Cheilopogon melanurus",
+			genus="Cheilopogon",
+			taxLvl="species",
+			Picture="y",
+			trophicLevel=3.6,
+			trophicLevel.se=0.5,
+			website="http://www.fishbase.org/summary/cheilopogon-melanurus.html",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=312468",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="Chrysaora fuscens",
+		':='(
+			spp="Chrysaora fuscescens",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=287206",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="LIMA SCABRA",
+		':='(
+			spp="Ctenoides scaber",
+			genus="Ctenoides",
+			species="Ctenoides scaber",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=420747",
+			website2="http://www.sealifebase.org/summary/Ctenoides-scaber.html",
+			Picture="y",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="PIOTHERES MACULATUS",
+		':='(
+			spp="Tumidotheres maculatus",
+			genus="Tumidotheres",
+			species="Tumidotheres maculatus",
+			common="squatter pea crab",
+			taxLvl="species",
+			Picture="y",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=454715",
+			website2="http://sealifebase.org/summary/Tumidotheres-maculatus.html",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="DROMIDIA ATILLESIS",
+		spp="Moreiradromia antillensis",
+		species="Moreiradromia antillensis",
+		genus="Moreiradromia",
+		common="sponge crab",
+		taxLvl="species"
+		Picture="y",
+		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=241025",
+		flag="manual"
+	]
+	
+	spp.key[ref=="MICROPHRYS ANTILLENSIS",
+		':='(
+			spp="Microphrys antillensis",
+			species="Microphrys antillensis",
+			genus="Microphrys",
+			taxLvl="species",
+			common="lobed decorator crab",
+			website="http://www.sealifebase.org/summary/Microphrys-antillensis.html",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="Cyclocardia sp. cf. borealis (Clark 2006)",
+		':='(
+			spp="Cyclocardia borealis",
+			species="Cyclocardia borealis",
+			genus="Cyclocardia",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=156832",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="EPINEPHELUS MYSTACINUS",
+		':='(
+			spp="Hyporthodus mystacinus",
+			species="Hyporthodus mystacinus",
+			genus="Hyporthodus",
+			taxLvl="species",
+			common="misty grouper",
+			Picture="y",
+			trophicLevel=4.6,
+			trophicLevel.se=0,
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=273861",
+			website2="http://www.fishbase.org/summary/Hyporthodus-mystacinus.html",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="ETMOPTERUS BULLISI",
+		':='(
+			spp="Etmopterus bullisi",
+			species="Etmopterus bullisi",
+			genus="Etmopterus",
+			taxLvl="species",
+			common="lined lanternshark",
+			trophicLevel=4.2,
+			trophicLevel.se=0.4,
+			Picture="y",
+			website="http://www.fishbase.org/summary/676",
+			flag="manual"
+		)
+	]
+	
+	spp.key[ref=="GOBIOSOMA HORSTI",
+		':='(
+			spp="Elacatinus horsti",
+			species="Elacatinus horsti",
+			genus="Elacatinus",
+			taxLvl="species",
+			common="yellowline goby",
+			Picture="y",
+			trophicLevel=3.5,
+			trophicLevel.se=0.4,
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=309575"
+			website2="http://www.fishbase.org/summary/3873",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="Gorgonocephalus sp. cf. arcticus",
+		':='(
+			spp="Gorgonocephalus arcticus",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=124966",
+			flag="manual"
+		)
+	]
+	
+	
+	spp.key[ref=="GORGONOCEPHALUS LAMARCKI",
+		':='(
+			spp="Gorgonocephalus lamarckii",
+			species="Gorgonocephalus lamarckii",
+			genus="Gorgonocephalus",
+			taxLvl="species",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=416670",
+			flag="manual"
+		)
+	
+	]
+	
+	spp.key[ref=="MONACANTHUS CILIATUS",
+		spp="Monacanthus ciliatus",
+		website="http://www.fishbase.org/summary/4280",
+		flag="manual"
+	
+	]
+	ref2spp(Ref="MONACANTHUS CILIATUS",Spp="Monacanthus ciliatus")
 	
 	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	

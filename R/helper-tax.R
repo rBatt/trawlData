@@ -98,3 +98,97 @@ check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.con
 
 	}
 }
+
+
+
+# =================
+# = check.and.set =
+# =================
+# Function to see if the corrected version of a bad spp name
+# already exists in a data set; if it does,
+# then the wrong version is overwritten with the content 
+check.and.set <- function(wrong, corrected){
+	check <- spp.key[,corrected%in%spp]
+	if(check){
+		# if the corrected name already exists,
+		# make sure to have all the rows with the wrong name match up with the corrected rows,
+		# that way if we make any changes, both sets get updated
+		# For example, if a name XX is wrong, and Xx is the corrected name,
+		# say that we are going to set the trophic level of Xx to 42, 
+		# but the current entry is 40. If we were to say 'change all rows
+		# with name XX to have a TL to 42, and also switch the bad XX name to the good Xx name',
+		# then we would have some rows with TL of 42 (the ones that originally had the bad name), and 
+		# some rows with TL of 40 (the ones that originally had the corrected name).
+		# Thus, we have to get the names and other content to match before changing anything.
+		# Bottom line is that we need to be sure that all things are consistent, and that this requires
+		# more care when we are switching the 'spp' of an entry to a 'spp' that is already there.
+		stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x))<=1)))
+		noSet <- c("ref")
+		all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
+		spp.key[spp==wrong, c(all.but.noSet):=spp.key[spp==corrected,eval(s2c(all.but.noSet))]]			
+	}else{
+		# if the corrected name doesn't already exist,
+		# then simply switch the wrong name to the corrected name,
+		spp.key[spp==wrong, spp:=corrected]
+	}
+}
+
+
+# ===========
+# = ref2spp =
+# ===========
+# Function that is useful when
+# you see that you need to change the `spp` value for a certain `ref`,
+# but the new `spp` value you are switching to is already in spp.key.
+# In this case, you could enter everything to match what is already in spp.key,
+# but this function just takes your row with ref==Ref,
+# and sets its columns to the values already present in the spp==Spp rows.
+# It also sets the spp column in the ref==Ref row to be Spp.
+ref2spp <- function(Ref, Spp){
+	check <- spp.key[,Spp%in%spp]
+	if(check){
+		
+		noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website","website2","flag")
+		all.but.noSet <- names(spp.key)[!names(spp.key)%in%noSet]
+		stopifnot(all(sapply(spp.key[spp==Spp,eval(s2c(all.but.noSet))], function(x)length(unique(x))<=1)))
+		
+		new.vals <- spp.key[spp==Spp,eval(s2c(all.but.noSet))]	
+		setkey(new.vals, spp)
+		new.vals <- unique(new.vals)
+		
+		spp.key[ref==Ref, c(all.but.noSet):=new.vals]	
+	}else{
+		# if the corrected name doesn't already exist,
+		# then simply switch the wrong name to the corrected name,
+		spp.key[ref==Ref, spp:=Spp]
+	}
+}
+
+
+# =============
+# = set2nonNA =
+# =============
+# When a column of a data.frame has 2 unique values,
+# an NA, and a non-NA, this function will set all NA values to the non-NA value.
+# Z is the name of a full data.table, and index is a vector of TRUE/FALSE 
+# indicating which rows of Z are supposed to be examined
+# The use-case in mind is where Z is a full data.table,
+# and index indicates a portion of the data.table that is supposed to be compared.
+# It's done this way to avoid having to subset the data.table in advance,
+# that way the replacements can easily be made "in place", thus not soaking up extra memory.
+# Similarly, note that thus function changes the data.table passed to the Z argument ... 
+# there is no output, but the original data.table will be affected.
+set2nonNA <- function(Z, index){
+	tn <- names(Z)
+	to.set <- sapply(Z[index], function(x)any(is.na(x)) & lu(x[!is.na(x)])==1)
+	c.to.set <- tn[to.set]
+	if(length(c.to.set)>=1){
+		for(i in 1:length(c.to.set)){
+			set.vals <- Z[index, unique(eval(s2c(c.to.set[i]))[[1]])]
+			set.val <- set.vals[!is.na(set.vals)]
+			stopifnot(class(set.val)==Z[index,class(eval(s2c(c.to.set[i]))[[1]])])
+			Z[index, c(c.to.set[i]):=list(set.val)]
+		}
+	}
+	
+}

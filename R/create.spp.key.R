@@ -173,7 +173,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	# =========================================
 	# = Check for and Correct Inconsistencies =
 	# =========================================
-	check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag")){
+	check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","match.src","tax.src")){
 		replacementsMade <- 0
 		replacementsFailed <- 0
 		replacementUnneeded <- 0

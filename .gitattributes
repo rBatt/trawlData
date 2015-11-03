@@ -4,3 +4,4 @@
 *.DAT filter=lfs diff=lfs merge=lfs -text
 *.txt filter=lfs diff=lfs merge=lfs -text
 *.fwf filter=lfs diff=lfs merge=lfs -text
+inst/extdata/*.csv filter=lfs diff=lfs merge=lfs -text

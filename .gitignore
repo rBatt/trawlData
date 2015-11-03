@@ -15,3 +15,7 @@ git-lfs-1.0.0 2
 
 # RStudio files
 .Rproj.user/
+
+
+# Random files to ignore
+tempo-image-spp.key.RData

@@ -185,4 +185,5 @@ getTax <- function(sppCorr2, oldTax=NULL, class.names=c("species", "genus", "fam
 	
 	
 	} # end case 2
+	return(updated.taxLvl)
 } # end function

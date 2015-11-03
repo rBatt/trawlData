@@ -179,7 +179,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	kill.badKey <- function(Z, index){
 		print(Z[index], nrow=Inf)
-		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag all rows for which val.src is m3\n [no]   do nothing, go on to next\n [0-9]  Enter the numbers of the rows to flag, with each integer row number sep by a space\n")
+		kill.code <- readline("There's a conflict in the data entry. Enter one of the following to resolve:\n [m3]   flag as 'bad' all rows for which val.src is m3\n [no]   no problem, flag everything as 'fine'\n [0-9]  Enter the numbers of the rows to flag as 'bad', with each integer row number sep by a space\n [SKIP] Do nothing; leave flag as-is")
 		
 		kill.action(Z, index, kill.code)
 		
@@ -331,7 +331,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		if(check){
 			
 			noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website","website2","flag")
-			all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
+			all.but.noSet <- names(spp.key)[!names(spp.key)%in%noSet]
 			stopifnot(all(sapply(spp.key[spp==Spp,eval(s2c(all.but.noSet))], function(x)length(unique(x))<=1)))
 			
 			new.vals <- spp.key[spp==Spp,eval(s2c(all.but.noSet))]	
@@ -577,7 +577,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
-	spp.key[spp=="Brisaster townsendi",
+	spp.key[ref=="Brisaster townsendi",
 		':='(
 			spp="Brisaster townsendi",
 			taxLvl="species",
@@ -822,11 +822,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="ALUTERUS HEUDELOTTI" | ref == "ALUTERUS HEUDELOTI",
-		':='(
-			spp="Aluterus heudelotii"
-		)
-	]
+	
+	ref2spp(Ref="ALUTERUS HEUDELOTTI", Spp="Aluterus heudelotii")
+	ref2spp(Ref="ALUTERUS HEUDELOTI", Spp="Aluterus heudelotii")
 	spp.key[spp=="Aluterus heudelotii",
 		':='(
 			common="Dotterel filefish",
@@ -860,11 +858,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="COOKEOLUS JAPONICUS",
-		':='(
-			spp="Cookeolus japonicus",
-		)
-	]
+	
+	ref2spp(Ref="COOKEOLUS JAPONICUS", Spp="Cookeolus japonicus")
 	spp.key[spp=="Cookeolus japonicus",
 		':='(
 			species="Cookeolus japonicus",
@@ -961,11 +956,10 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="Buccinum triplostephanum",
-		':='(
-			spp="Volutopsion castaneum"
-		)
-	]
+	
+	# spp.key[ref=="Buccinum triplostephanum"]
+# 	spp.key[spp=="Volutopsion castaneum"]
+	ref2spp(Ref="Buccinum triplostephanum", Spp="Volutopsion castaneum")
 	spp.key[spp=="Volutopsion castaneum",
 		':='(
 			species="Volutopsion castaneum",
@@ -1008,16 +1002,16 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="CALAPPA AGUSTA", # the correct species name should already be in spp.key
+	ref2spp(Ref="CALAPPA AGUSTA", Spp="Hepatus pudibundus")
+	spp.key[spp=="Hepatus pudibundus", # the correct species name should already be in spp.key
 		':='(
-			spp="Hepatus pudibundus",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=452047",
 			website2="http://www.sealifebase.org/summary/Hepatus-pudibundus.html"
 		)
 	]
 	
 	
-	spp.key[ref=="GOOSTOMA ATLATICUM ",
+	spp.key[ref=="GOOSTOMA ATLATICUM",
 		':='(
 			spp="Gonostoma atlanticum",
 			species="Gonostoma atlanticum",
@@ -1032,24 +1026,21 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	ref2spp(Ref="Careproctus sp. cf. rastrinus (Orr et al.)", Spp="Careproctus rastrinus")
 	spp.key[ref=="Careproctus sp. cf. rastrinus (Orr et al.)",
 		':='(
-			spp="Careproctus rastrinus",
 			flag="manual"
 		)
 	]
 	spp.key[spp=="Careproctus rastrinus".
 		Picture="y",
 		website="http://www.fishbase.org/summary/Careproctus-rastrinus.html",
-		
 	]
 	
-	spp.key[ref=="Careproctus sp. cf. gilberti",
+	
+	ref2spp(Ref="Careproctus sp. cf. gilberti (Orr)", Spp="Careproctus gilberti")
+	spp.key[ref=="Careproctus sp. cf. gilberti (Orr)",
 		':='(
-			spp="Careproctus gilberti",
-			species="Careproctus gilberti",
-			genus="Careproctus",
-			taxLvl="species",
 			flag="manual"
 		)
 	]
@@ -1119,6 +1110,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	ref2spp(Ref="Chrysaora fuscens", Spp="Chrysaora fuscescens")
 	spp.key[ref=="Chrysaora fuscens",
 		':='(
 			spp="Chrysaora fuscescens",
@@ -1237,10 +1229,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	
+	ref2spp(Ref="Gorgonocephalus sp. cf. arcticus", Spp="Gorgonocephalus arcticus")
 	spp.key[ref=="Gorgonocephalus sp. cf. arcticus",
 		':='(
-			spp="Gorgonocephalus arcticus",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=124966",
 			flag="manual"
 		)
@@ -1259,13 +1250,12 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	]
 	
+	ref2spp(Ref="MONACANTHUS CILIATUS", Spp="Monacanthus ciliatus")
 	spp.key[ref=="MONACANTHUS CILIATUS",
-		spp="Monacanthus ciliatus",
 		website="http://www.fishbase.org/summary/4280",
 		flag="manual"
 	
 	]
-	ref2spp(Ref="MONACANTHUS CILIATUS",Spp="Monacanthus ciliatus")
 	
 	# spp.key[!is.na(spp) & !is.na(species) & taxLvl=="species"] # these are probably the good ones
 	

@@ -7,7 +7,7 @@
 # load("data/getTaxData.RData")
 # load("data/getCmmnData.RData")
 
-create.spp.key <- function(spp, taxInfo, spp.corr1){
+create.spp.key <- function(spp, taxInfo, spp.corr1, save.key=FALSE){
 	
 	# X.match is from taxInfo
 	X.match <- match.tbl(ref=spp[-1], tbl.ref=taxInfo[,raw.spp], tbl.val=taxInfo[,spp])
@@ -142,11 +142,14 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	# Save the species key
-	# spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
-	setkey(spp.key, spp, ref)
-	save(spp.key, file="data/spp.key.RData")
-	write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
+	if(save.key){
+		# spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
+		setkey(spp.key, spp, ref)
+		save(spp.key, file="data/spp.key.RData")
+		write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
+	}
 	
+	# Return spp.key as output
 	return(spp.key)
 }
 

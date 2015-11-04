@@ -167,7 +167,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	
+	check.and.set(wrong="Synagrops bellus", corrected="Synagrops bellus")
 	spp.key[spp=="Synagrops bellus",
 		':='(
 			taxLvl="species",
@@ -178,7 +178,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	
+	check.and.set(wrong="Synagrops microlepis", corrected="Synagrops microlepis")
 	spp.key[spp=="Synagrops microlepis",
 		':='(
 			taxLvl="species",
@@ -190,12 +190,12 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			trophicLevel.se=0.37,
 			website="http://www.fishbase.org/summary/5059",
 			flag="manual"
-
 		)
 	]
 	
 	
-	spp.key[ref=="EZUMIA BAIRDII",
+	ref2spp(Ref="EZUMIA BAIRDII", Spp="Nezumia bairdii")
+	spp.key[spp=="Nezumia bairdii",
 		':='(
 			spp="Nezumia bairdii",
 			taxLvl="species",
@@ -204,15 +204,15 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			trophicLevel=3.3,
 			trophicLevel.se=0.1,
 			Picture="y",
-			common="Marlin=spike",
+			common="Marlin-spike",
 			website="http://www.fishbase.org/summary/3104",
 			flag="manual"
 		)
-	
 	]
 	
 	
-	spp.key[ref=="PORTUNUS FLORIDANUS",
+	ref2spp(Ref="PORTUNUS FLORIDANUS", Spp="Achelous floridanus")
+	spp.key[spp=="Achelous floridanus",
 		':='(
 			spp="Achelous floridanus",
 			taxLvl="species",
@@ -222,24 +222,23 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			flag="manual"
 			
 		)
-	
 	]
 	
 	
-	spp.key[ref=="ASTROPECTE COMPTUS",
+	ref2spp(Ref="ASTROPECTE COMPTUS", Spp="Astropecten comptus")
+	spp.key[spp=="Astropecten comptus",
 		':='(
 			spp="Astropecten comptus",
 			taxLvl="species",
 			genus="Astropecten",
 			species="Astropecten comptus",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=178649",
-			flag="manual"
-			
+			flag="manual"	
 		)
-	
 	]
 	
-	spp.key[ref=="BATHYPTEROIS BIGELOWI",
+	ref2spp(Ref="BATHYPTEROIS BIGELOWI", Spp="Bathypterois bigelowi")
+	spp.key[spp=="Bathypterois bigelowi",
 		':='(
 			spp="Bathypterois bigelowi",
 			taxLvl="species",
@@ -248,11 +247,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			website="http://www.fishbase.org/summary/Bathypterois-bigelowi.html",
 			Picture="y",
 			flag="manual"
-			
 		)
 	]
 	
-	spp.key[ref=="PENNATULA BOREALIS",
+	ref2spp(Ref="PENNATULA BOREALIS", Spp="Pennatula grandis")
+	spp.key[spp=="Pennatula grandis",
 		':='(
 			spp="Pennatula grandis",
 			taxLvl="species",
@@ -260,11 +259,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			species="Pennatula grandis",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=128516",
 			flag="manual"
-			
 		)
 	]
 	
 	
+	check.and.set(wrong="Bollmannia communis", corrected="Bollmannia communis")
 	spp.key[spp=="Bollmannia communis",
 		':='(
 			spp="Bollmannia communis",
@@ -277,8 +276,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	
 	
 	
-	
-	spp.key[ref=="Brisaster townsendi",
+	ref2spp(Ref="Brisaster townsendi", Spp="Brisaster townsendi")
+	spp.key[spp=="Brisaster townsendi",
 		':='(
 			spp="Brisaster townsendi",
 			taxLvl="species",
@@ -290,7 +289,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="Buccinum transliratum",
+	ref2spp(Ref="Buccinum transliratum", Spp="Buccinum angulosum")
+	spp.key[spp=="Buccinum angulosum",
 		':='(
 			spp="Buccinum angulosum",
 			common="angular whelk",
@@ -308,7 +308,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="CHILOMYCTERUS ATINGA",
+	ref2spp(Ref="CHILOMYCTERUS ATINGA", Spp="Chilomycterus reticulatus")
+	spp.key[spp=="Chilomycterus reticulatus",
 		':='(
 			spp="Chilomycterus reticulatus",
 			common="spotfin burrfish",
@@ -325,7 +326,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="CHLAMYS SETIS",
+	ref2spp(Ref="CHLAMYS SETIS", Spp="Caribachlamys sentis")
+	spp.key[spp=="Caribachlamys sentis",
 		':='(
 			spp="Caribachlamys sentis",
 			taxLvl="species",
@@ -336,7 +338,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="Colus hypolispus",
+	
+	ref2spp(Ref="Colus hypolispus", Spp="Latisipho hypolispus")
+	spp.key[spp=="Latisipho hypolispus",
 		':='(
 			spp="Latisipho hypolispus",
 			taxLvl="species",
@@ -345,11 +349,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=491062",
 			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=254476",
 			flag="manual"
-			
 		)
 	]
 	
-	spp.key[ref=="CYCLOTHONE BRAUERI",
+	ref2spp(Ref="CYCLOTHONE BRAUERI", Spp="Cyclothone braueri")
+	spp.key[spp=="Cyclothone braueri",
 		':='(
 			spp="Cyclothone braueri",
 			taxLvl="species",
@@ -368,9 +372,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	
-	
-	spp.key[ref=="DIAPHUS SPLEDIDUS",
+	ref2spp(Ref="DIAPHUS SPLEDIDUS", Spp="Diaphus splendidus")
+	spp.key[spp=="Diaphus splendidus",
 		':='(
 			spp="Diaphus splendidus",
 			taxLvl="species",
@@ -389,7 +392,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="DISTORSIO MCGITYI",
+	ref2spp(Ref="DISTORSIO MCGITYI", Spp="Distorsio constricta mcgintyi")
+	spp.key[spp=="Distorsio constricta mcgintyi",
 		':='(
 			spp="Distorsio constricta mcgintyi",
 			taxLvl="species",
@@ -397,12 +401,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			species="Distorsio constricta",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=422768",
 			flag="manual"
-			
 		)
 	]
 	
-	
-	spp.key[ref=="LEPIDOPA BEEDICTI",
+	ref2spp(Ref="LEPIDOPA BEEDICTI", Spp="Lepidopa benedicti")
+	spp.key[spp=="Lepidopa benedicti",
 		':='(
 			spp="Lepidopa benedicti",
 			genus="Lepidopa",
@@ -411,11 +414,13 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=421881",
 			flag="manual"
 		)
-	
 	]
 	
 	
-	spp.key[ref=="EPINEPHELUS NIVEATUS",
+	spp.key[spp=="Hyporthodus niveatus",subphylum:="Vertebrata"]
+	setkey(spp.key, spp, ref)
+	ref2spp(Ref="EPINEPHELUS NIVEATUS", Spp="Hyporthodus niveatus")
+	spp.key[spp=="Hyporthodus niveatus",
 		':='(
 			spp="Hyporthodus niveatus",
 			genus="Hyporthodus",
@@ -436,11 +441,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			flag="manual"
 		)
-	
 	]
 	
 	
-	spp.key[ref=="EQUETUS ACUMINATUS",
+	ref2spp(Ref="EQUETUS ACUMINATUS", Spp="Pareques acuminatus")
+	spp.key[spp=="Pareques acuminatus",
 		':='(
 			spp="Pareques acuminatus",
 			genus="Pareques",
@@ -461,12 +466,11 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			trophicLevel.se=0.46,
 			flag="manual"
 		)
-	
 	]
 	
 	
-	
-	spp.key[ref=="ETMOPTERUS VIRES",
+	ref2spp(Ref="ETMOPTERUS VIRES", spp="Etmopterus virens")
+	spp.key[spp=="Etmopterus virens",
 		':='(
 			spp="Etmopterus virens",
 			genus="Etmopterus",
@@ -477,13 +481,12 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			website="http://www.fishbase.org/summary/690",
 			flag="manual"
-			
 		)
-	
 	]
 	
 	
-	spp.key[ref=="LUIDIA ELEGAS",
+	ref2spp(Ref="LUIDIA ELEGAS", Spp="Luidia sarsii elegans")
+	spp.key[spp=="Luidia sarsii elegans",
 		':='(
 			spp="Luidia sarsii elegans",
 			genus="Luidia",
@@ -496,7 +499,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="HALICHOERES RADIATUS",
+	ref2spp(Ref="HALICHOERES RADIATUS", Spp="Halichoeres radiatus")
+	spp.key[spp=="Halichoeres radiatus",
 		':='(
 			spp="Halichoeres radiatus",
 			genus="Halichoeres",
@@ -511,7 +515,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="Henricia aleutica",
+	
+	ref2spp(Ref="Henricia aleutica", Spp="Henricia longispina aleutica")
+	spp.key[spp=="Henricia longispina aleutica",
 		':='(
 			spp="Henricia longispina aleutica",
 			genus="Henricia",
@@ -548,7 +554,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="ALPHEUS ARMATUS",
+	ref2spp(Ref="ALPHEUS ARMATUS", Spp="Alpheus armatus")
+	spp.key[spp=="Alpheus armatus",
 		':='(
 			spp="Alpheus armatus",
 			taxLvl="species",
@@ -572,11 +579,12 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			trophicLevel.se=0.6,
 			website="http://www.fishbase.org/summary/3517",
 			flag="manual"
-			
-			)
+		)
 	]
 	
-	spp.key[ref=="APRISTURUS IDICUS",
+	
+	ref2spp(Ref="APRISTURUS IDICUS", Spp="Apristurus indicus")
+	spp.key[spp=="Apristurus indicus",
 		':='(
 			spp="Apristurus indicus",
 			species="Apristurus indicus",
@@ -591,6 +599,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	
+	ref2spp(Ref="Arctomelon sp. cf. stearnsii (Clark & McLean)", Spp="Arctomelon stearnsii")
 	spp.key[ref=="Arctomelon sp. cf. stearnsii (Clark & McLean)",
 		':='(
 			spp="Arctomelon stearnsii",
@@ -602,6 +612,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	
+	ref2spp(Ref="ASTARTE GLOBULA", Spp="Astarte globula")
 	spp.key[ref=="ASTARTE GLOBULA",
 		':='(
 			spp="Astarte globula",
@@ -613,7 +625,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="BUSYCO CARICA",
+	
+	ref2spp(Ref="BUSYCO CARICA", Spp="Busycon carica")
+	spp.key[spp=="Busycon carica",
 		':='(
 			spp="Busycon carica",
 			genus="Busycon",
@@ -627,7 +641,10 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="CALAMUS PENNA" | ref=="CALAMUS PEA",
+	
+	ref2spp(Ref="CALAMUS PENNA", Spp="Cabdio penna")
+	ref2spp(Ref="CALAMUS PEA", Spp="Cabdio penna")
+	spp.key[spp=="Cabdio penna",
 		':='(
 			spp="Cabdio penna",
 			genus="Cabdio",
@@ -636,30 +653,31 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			common="Sheepshead porgy",
 			Picture="y",
 			trophicLevel=4.4,
-			trophicLevel.se=0.2
+			trophicLevel.se=0.2,
 			website="http://www.fishbase.org/summary/1227",
 			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=159245",
 			flag="manual"
 		)
 	]
 	
-	spp.key[ref=="CALLIECTES DAAE",
-		spp="Callinectes danae",
-		genus="Callinectes",
-		species="Callinectes danae",
-		taxLvl="species",
-		common="Dana swimming crab",
-		trophicLevel=3.63,
-		trophicLevel.se=0.43,
-		Picture="y",
-		website="http://www.sealifebase.org/summary/Callinectes-danae.html",
-		website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107378"
+	
+	ref2spp(Ref="CALLIECTES DAAE", Spp="Callinectes danae")
+	spp.key[spp=="Callinectes danae",
+		':='(
+			spp="Callinectes danae",
+			genus="Callinectes",
+			species="Callinectes danae",
+			taxLvl="species",
+			common="Dana swimming crab",
+			trophicLevel=3.63,
+			trophicLevel.se=0.43,
+			Picture="y",
+			website="http://www.sealifebase.org/summary/Callinectes-danae.html",
+			website2="http://www.marinespecies.org/aphia.php?p=taxdetails&id=107378"
+		)
 	]
 	
 	
-	
-	# spp.key[ref=="Buccinum triplostephanum"]
-# 	spp.key[spp=="Volutopsion castaneum"]
 	ref2spp(Ref="Buccinum triplostephanum", Spp="Volutopsion castaneum")
 	spp.key[spp=="Volutopsion castaneum",
 		':='(
@@ -674,21 +692,26 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="BUSYCO CAALICULATUM",
-		spp="Busycotypus canaliculatus",
-		species="Busycotypus canaliculatus",
-		genus="Busycotypus",
-		taxLvl="species",
-		common="Channeled whelk",
-		Picture="y",
-		trophicLevel=3.23,
-		trophicLevel.se=0.17,
-		website="http://arctos.database.museum/name/Busycon%20canaliculatum",
-		website2="http://www.sealifebase.org/summary/Busycotypus-canaliculatus.html",
-		flag="manual"
+	ref2spp(Ref="BUSYCO CAALICULATUM", Spp="Busycotypus canaliculatus")
+	spp.key[spp=="Busycotypus canaliculatus",
+		':='(
+			spp="Busycotypus canaliculatus",
+			species="Busycotypus canaliculatus",
+			genus="Busycotypus",
+			taxLvl="species",
+			common="Channeled whelk",
+			Picture="y",
+			trophicLevel=3.23,
+			trophicLevel.se=0.17,
+			website="http://arctos.database.museum/name/Busycon%20canaliculatum",
+			website2="http://www.sealifebase.org/summary/Busycotypus-canaliculatus.html",
+			flag="manual"
+		)
 	]
 	
-	spp.key[ref=="BUSYCO SIISTRUM",
+	
+	ref2spp(Ref="BUSYCO SIISTRUM", Spp="Sinistrofulgur sinistrum")
+	spp.key[spp=="Sinistrofulgur sinistrum",
 		':='(
 			spp="Sinistrofulgur sinistrum",
 			species="Sinistrofulgur sinistrum",
@@ -698,7 +721,7 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=160189",
 			website2="http://sealifebase.org/summary/Busycon-sinistrum.html",
-			
+			flag="manual"
 		)
 	]
 	
@@ -712,7 +735,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="GOOSTOMA ATLATICUM",
+	
+	ref2spp(Ref="GOOSTOMA ATLATICUM", Spp="Gonostoma atlanticum")
+	spp.key[spp=="Gonostoma atlanticum",
 		':='(
 			spp="Gonostoma atlanticum",
 			species="Gonostoma atlanticum",
@@ -727,34 +752,32 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	
 	ref2spp(Ref="Careproctus sp. cf. rastrinus (Orr et al.)", Spp="Careproctus rastrinus")
-	spp.key[ref=="Careproctus sp. cf. rastrinus (Orr et al.)",
+	spp.key[spp=="Careproctus rastrinus",
 		':='(
+			Picture="y",
+			website="http://www.fishbase.org/summary/Careproctus-rastrinus.html",
 			flag="manual"
 		)
 	]
-	spp.key[spp=="Careproctus rastrinus".
-		Picture="y",
-		website="http://www.fishbase.org/summary/Careproctus-rastrinus.html",
-	]
+	
 	
 	
 	ref2spp(Ref="Careproctus sp. cf. gilberti (Orr)", Spp="Careproctus gilberti")
-	spp.key[ref=="Careproctus sp. cf. gilberti (Orr)",
-		':='(
-			flag="manual"
-		)
-	]
-	spp.key[spp=="Careproctus gilberti"
+	spp.key[spp=="Careproctus gilberti",
 		':='(
 			trophicLevel=3.2,
 			trophicLevel.se=0.5,
 			Picture="y",
-			website="http://www.fishbase.org/summary/25161"
+			website="http://www.fishbase.org/summary/25161",
+			flag="manual"
 		)
 	]
 	
-	spp.key[ref=="Careproctus lycopersicus",
+	
+	ref2spp(Ref="Careproctus lycopersicus", Spp="Careproctus lycopersicus")
+	spp.key[spp=="Careproctus lycopersicus",
 		':='(
 			spp="Careproctus lycopersicus",
 			species="Careproctus lycopersicus",
@@ -768,7 +791,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="COUS DAUCUS",
+	
+	ref2spp(Ref="COUS DAUCUS", Spp="Conus daucus")
+	spp.key[spp=="Conus daucus",
 		':='(
 			spp="Conus daucus",
 			species="Conus daucus",
@@ -781,7 +806,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="ICTALURUS FURCATUS", # freshwater/ brackish species!!
+	
+	ref2spp(Ref="ICTALURUS FURCATUS", Spp="Ictalurus furcatus")
+	spp.key[spp=="Ictalurus furcatus", # freshwater/ brackish species!!
 		':='(
 			spp="Ictalurus furcatus",
 			species="Ictalurus furcatus",
@@ -796,7 +823,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="CYPSELURUS MELANURUS",
+	
+	ref2spp(Ref="CYPSELURUS MELANURUS", Spp="Cheilopogon melanurus")
+	spp.key[spp=="Cheilopogon melanurus",
 		':='(
 			spp="Cheilopogon melanurus",
 			species="Cheilopogon melanurus",
@@ -811,8 +840,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
+	
 	ref2spp(Ref="Chrysaora fuscens", Spp="Chrysaora fuscescens")
-	spp.key[ref=="Chrysaora fuscens",
+	spp.key[spp=="Chrysaora fuscescens",
 		':='(
 			spp="Chrysaora fuscescens",
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=287206",
@@ -820,7 +850,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="LIMA SCABRA",
+	
+	ref2spp(Ref="LIMA SCABRA", Spp="Ctenoides scaber")
+	spp.key[spp=="Ctenoides scaber",
 		':='(
 			spp="Ctenoides scaber",
 			genus="Ctenoides",
@@ -833,7 +865,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="PIOTHERES MACULATUS",
+	
+	ref2spp(Ref="PIOTHERES MACULATUS", Spp="Tumidotheres maculatus")
+	spp.key[spp=="Tumidotheres maculatus",
 		':='(
 			spp="Tumidotheres maculatus",
 			genus="Tumidotheres",
@@ -848,18 +882,23 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="DROMIDIA ATILLESIS",
-		spp="Moreiradromia antillensis",
-		species="Moreiradromia antillensis",
-		genus="Moreiradromia",
-		common="sponge crab",
-		taxLvl="species"
-		Picture="y",
-		website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=241025",
-		flag="manual"
+	ref2spp(Ref="DROMIDIA ATILLESIS", Spp="Moreiradromia antillensis")
+	spp.key[spp=="Moreiradromia antillensis",
+		':='(
+			spp="Moreiradromia antillensis",
+			species="Moreiradromia antillensis",
+			genus="Moreiradromia",
+			common="sponge crab",
+			taxLvl="species",
+			Picture="y",
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=241025",
+			flag="manual"
+		)
 	]
 	
-	spp.key[ref=="MICROPHRYS ANTILLENSIS",
+	
+	ref2spp(Ref="MICROPHRYS ANTILLENSIS", Spp="Microphrys antillensis")
+	spp.key[spp=="Microphrys antillensis",
 		':='(
 			spp="Microphrys antillensis",
 			species="Microphrys antillensis",
@@ -872,7 +911,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="Cyclocardia sp. cf. borealis (Clark 2006)",
+	ref2spp(Ref="Cyclocardia sp. cf. borealis (Clark 2006)", Spp="Cyclocardia borealis")
+	spp.key[spp=="Cyclocardia borealis",
 		':='(
 			spp="Cyclocardia borealis",
 			species="Cyclocardia borealis",
@@ -883,7 +923,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="EPINEPHELUS MYSTACINUS",
+	
+	ref2spp(Ref="EPINEPHELUS MYSTACINUS", Spp="Hyporthodus mystacinus")
+	spp.key[spp=="Hyporthodus mystacinus",
 		':='(
 			spp="Hyporthodus mystacinus",
 			species="Hyporthodus mystacinus",
@@ -899,7 +941,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="ETMOPTERUS BULLISI",
+	
+	ref2spp(Ref="ETMOPTERUS BULLISI", Spp="Etmopterus bullisi")
+	spp.key[spp=="Etmopterus bullisi",
 		':='(
 			spp="Etmopterus bullisi",
 			species="Etmopterus bullisi",
@@ -914,7 +958,9 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 		)
 	]
 	
-	spp.key[ref=="GOBIOSOMA HORSTI",
+	
+	ref2spp(Ref="GOBIOSOMA HORSTI", Spp="Elacatinus horsti")
+	spp.key[spp=="Elacatinus horsti",
 		':='(
 			spp="Elacatinus horsti",
 			species="Elacatinus horsti",
@@ -924,14 +970,16 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			Picture="y",
 			trophicLevel=3.5,
 			trophicLevel.se=0.4,
-			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=309575"
+			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=309575",
 			website2="http://www.fishbase.org/summary/3873",
 			flag="manual"
 		)
 	]
 	
+	
+	spp.key[spp=="Gorgonocephalus arcticus", order:="Phrynophiurida"]
 	ref2spp(Ref="Gorgonocephalus sp. cf. arcticus", Spp="Gorgonocephalus arcticus")
-	spp.key[ref=="Gorgonocephalus sp. cf. arcticus",
+	spp.key[spp=="Gorgonocephalus arcticus",
 		':='(
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=124966",
 			flag="manual"
@@ -939,7 +987,8 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 	]
 	
 	
-	spp.key[ref=="GORGONOCEPHALUS LAMARCKI",
+	ref2spp(Ref="GORGONOCEPHALUS LAMARCKI", Spp="Gorgonocephalus lamarckii")
+	spp.key[spp=="Gorgonocephalus lamarckii",
 		':='(
 			spp="Gorgonocephalus lamarckii",
 			species="Gorgonocephalus lamarckii",
@@ -948,17 +997,19 @@ create.spp.key <- function(spp, taxInfo, spp.corr1){
 			website="http://www.marinespecies.org/aphia.php?p=taxdetails&id=416670",
 			flag="manual"
 		)
-	
 	]
+	
 	
 	ref2spp(Ref="MONACANTHUS CILIATUS", Spp="Monacanthus ciliatus")
-	spp.key[ref=="MONACANTHUS CILIATUS",
-		website="http://www.fishbase.org/summary/4280",
-		flag="manual"
-	
+	spp.key[spp=="Monacanthus ciliatus",
+		':='(
+			website="http://www.fishbase.org/summary/4280",
+			flag="manual"
+		)
 	]
 	
-	
+	# spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
+	setkey(spp.key, spp, ref)
 	save(spp.key, file="data/spp.key.RData")
 	write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
 	

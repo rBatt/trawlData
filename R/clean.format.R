@@ -102,6 +102,8 @@ clean.format.gmex <- function(X){
 	
 	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
 	
+	X[survey.name=='Summer SEAMAP Groundfish Suvey', survey.name:='Summer SEAMAP Groundfish Survey']
+	
 }
 
 

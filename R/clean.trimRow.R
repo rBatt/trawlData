@@ -81,40 +81,51 @@ clean.trimRow.ebs <- function(X){
 # ========
 clean.trimRow.gmex <- function(X){
 	
-	
-	gmex.bio00 <- gmex.bio000[BGSCODE!="T" & GENUS_BGS!="UNKNOWN"] 
-	
-	bad.gmex.CODE <- names(gmex.spp0[,table(CODE)][gmex.spp0[,table(CODE)] > 1])
-	good.gmex.CODE <- names(gmex.spp0[,table(CODE)][gmex.spp0[,table(CODE)] <= 1])
-	setkey(gmex.spp0, CODE)
-	gmex.spp <- gmex.spp0[good.gmex.CODE]
+	spp.i <- X[,BGSCODE!="T"]
+	# "T" is young of year records
 	
 	
-	gmex.tow <- gmex.tow[GEAR_TYPE=="ST"]
+	survey.i <- X[, survey.name %in% c('Summer SEAMAP Groundfish Survey')]
 	
 	
-	
-	gmex <- gmex0[TITLE %in% c('Summer SEAMAP Groundfish Survey', 'Summer SEAMAP Groundfish Suvey') & GEAR_SIZE==40 & MESH_SIZE == 1.63 & !is.na(MESH_SIZE) & OP %in% c(''),] # # Trim to high quality SEAMAP summer trawls, based off the subset used by Jeff Rester's GS_TRAWL_05232011.sas
-	
-	
-	gmex <- gmex[gmex$MIN_FISH<=60 & gmex$MIN_FISH > 0 & !is.na(gmex$MIN_FISH),]
-	gmex$VESSEL_SPD[gmex$VESSEL_SPD==30] <- 3 # fix typo according to Jeff Rester: 30 = 3
-	gmex <- gmex[gmex$VESSEL_SPD <= 5 & gmex$VESSEL_SPD > 0  & !is.na(gmex$VESSEL_SPD),] # trim out vessel speeds 0, unknown, or >5 (need vessel speed to calculate area trawled)
-	
-	
-	setkey(gmex, year, lat, lon)
-	dups <- duplicated(gmex, by=c("year", "lat", "lon")) & !duplicated(gmex, by="haulid")
-	dupped <- gmex[gmex[dups, list(year, lat, lon)],]
-	badhaul <- dupped[,unique(haulid[grep("PORT", COMSTAT)])] # malin line 255, after %in%
-	setkey(gmex, haulid)
-	gmex <- gmex[!.(badhaul)]
+	gear.i <- X[, 
+		gearsize==40 & 
+		meshsize == 1.63 & 
+		!is.na(meshsize) & 
+		OP %in% c('') & 
+		geartype=="ST"
+	]
+	# "ST" is shrimp trawl
+	# Other are in accordance with Jeff Rester's GS_TRAWL_05232011.sas
 	
 	
+	tow.i <- X[,
+		towduration<=60 & 
+		towduration>0 & 
+		!is.na(towduration) & 
+		towspeed<=5 & 
+		towspeed>0 & 
+		!is.na(towspeed)
+	]
+	# trim out vessel speeds 0, unknown, or >5 (need vessel speed to calculate area trawled)
 	
-	setkey(gmex, spp)
-	gmex <- gmex[!is.na(spp)]
-	gmex.spp.bad <- c("",'UNID CRUSTA', 'UNID OTHER', 'UNID.FISH', 'CRUSTACEA(INFRAORDER) BRACHYURA', 'MOLLUSCA AND UNID.OTHER #01', 'ALGAE', 'MISCELLANEOUS INVERTEBR', 'OTHER INVERTEBRATES')
-	gmex <- gmex[!.(gmex.spp.bad)]
+	
+	haul.i <- !X[
+		i=, # yes, having nothing after the i= is intentional; i= isn't need; there for clarity
+		j=list(nhid=lu(haulid)>1, station.comment, haulid),
+		by=c("year","lat","lon")
+	][
+		i=(nhid), 
+		j=X[,haulid]%in%haulid[grepl("PORT", station.comment)]
+	]
+	# In cases where there are multiple hauls in the same place on teh same date,
+	# if one of those hauls has the word "PORT" in the comments,
+	# drop those hauls. The "PORT" seem to be problematic,
+	# according to Malin's interpretation of the comments.
+	
+	
+	keep.row.i <- spp.i & survey.i & gear.i & tow.i & haul.i
+	X[,keep.row:=keep.row.i]
 	
 	
 }

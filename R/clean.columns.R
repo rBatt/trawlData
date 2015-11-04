@@ -125,10 +125,11 @@ clean.columns.gmex <- function(X){
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
+	X[,year:=as.integer(format.Date(datetime, format="%Y"))]
 	
 	# season
 	# just naming from the survey name
-	X[,season:=NA]
+	X[,season:=NA_character_]
 	X[grepl("spring", survey.name, ignore.case=T), season:="spring"]
 	X[grepl("summer", survey.name, ignore.case=T), season:="summer"]
 	X[grepl("fall", survey.name, ignore.case=T), season:="fall"]

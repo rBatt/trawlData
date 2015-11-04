@@ -14,6 +14,7 @@ source("./R/read.trawl.R")
 source("./R/clean.names.R")
 source("./R/clean.format.R")
 source("./R/clean.columns.R")
+source("./R/clean.tax.R")
 source("./R/helper-file.R")
 source("./R/helper-misc.R")
 source("./R/format-value.R")
@@ -125,6 +126,14 @@ pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
 	nm <- regions[i]
 	clean.columns(get(nm), nm)
+	setTxtProgressBar(pb, i)
+}
+
+# clean taxa names
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- regions[i]
+	clean.tax(get(nm), nm)
 	setTxtProgressBar(pb, i)
 }
 

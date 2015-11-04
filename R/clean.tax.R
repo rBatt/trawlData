@@ -29,24 +29,31 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	setkey(spp.key, "ref")
 	X <- merge(X, spp.key, by="ref", all.x=TRUE)
 	
-	drop.x <- function(x){
-		X[,c(paste0(x,".x")):=NULL]
-		setnames(X, paste0(x,".y"), x)
+	# alternatively, I could just drop the repeated 
+	# column names before the merge
+	# I think I have it this way in case in the future I'd like
+	# to keep both sets of names
+	if(length(rmX.names)>0){
+		drop.x <- function(x){
+			X[,c(paste0(x,".x")):=NULL]
+			setnames(X, paste0(x,".y"), x)
+		}
+		drop.x(rmX.names)
 	}
-	drop.x(rmX.names)
 	
+	#
 	# smry.tax0 <- X[,table(taxLvl[!duplicated(spp)])]
-# 	nst <- names(smry.tax0)
-# 	sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=T)]])}
-# 	smry.tax <- c(
-# 		kingdom = sum.tax("kingdom"),
-# 		phylum = sum.tax("phylum"),
-# 		class = sum.tax("class"),
-# 		order = sum.tax("order"),
-# 		family = sum.tax("family"),
-# 		genus = sum.tax("genus"),
-# 		species = sum.tax("species")
-# 	)
+	# nst <- names(smry.tax0)
+	# sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=T)]])}
+	# smry.tax <- c(
+	# 	kingdom = sum.tax("kingdom"),
+	# 	phylum = sum.tax("phylum"),
+	# 	class = sum.tax("class"),
+	# 	order = sum.tax("order"),
+	# 	family = sum.tax("family"),
+	# 	genus = sum.tax("genus"),
+	# 	species = sum.tax("species")
+	# )
 	
 	
 	

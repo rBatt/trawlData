@@ -87,55 +87,55 @@ regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf",
 #
 # cnames <- unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(wcann), names(wctri)))
 
-#
-# # read in raw
-# for(i in 1:length(regions)){
-# 	nm <- paste0("raw.", regions[i])
-# 	assign(nm, read.trawl(regions[i]))
-# 	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
-# }
-#
-# # load raw
-# pb <- txtProgressBar(min=1, max=length(regions), style=3)
-# for(i in 1:length(regions)){
-# 	nm <- paste0("raw.", regions[i])
-# 	load(file=paste0("data/",nm,".RData"))
-# 	setTxtProgressBar(pb, i)
-# }
-#
-# # clean up column names
-# pb <- txtProgressBar(min=1, max=length(regions), style=3)
-# for(i in 1:length(regions)){
-# 	nm <- paste0("raw.", regions[i])
-# 	assign(regions[i], copy(get(nm)))
-# 	clean.names(get(regions[i]), regions[i])
-# 	setTxtProgressBar(pb, i)
-# }
-#
-# # format column values
-# pb <- txtProgressBar(min=1, max=length(regions), style=3)
-# for(i in 1:length(regions)){
-# 	nm <- regions[i]
-# 	clean.format(get(nm), nm)
-# 	setTxtProgressBar(pb, i)
-# }
-#
-# # clean column content, add columns
-# pb <- txtProgressBar(min=1, max=length(regions), style=3)
-# for(i in 1:length(regions)){
-# 	nm <- regions[i]
-# 	clean.columns(get(nm), nm)
-# 	setTxtProgressBar(pb, i)
-# }
-#
-# # save clean
-# pb <- txtProgressBar(min=1, max=length(regions), style=3)
-# for(i in 1:length(regions)){
-# 	nm <- paste0("clean.", regions[i])
-# 	assign(nm, copy(get(regions[i])))
-# 	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
-# 	setTxtProgressBar(pb, i)
-# }
+
+# read in raw
+for(i in 1:length(regions)){
+	nm <- paste0("raw.", regions[i])
+	assign(nm, read.trawl(regions[i]))
+	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
+}
+
+# load raw
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- paste0("raw.", regions[i])
+	load(file=paste0("data/",nm,".RData"))
+	setTxtProgressBar(pb, i)
+}
+
+# clean up column names
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- paste0("raw.", regions[i])
+	assign(regions[i], copy(get(nm)))
+	clean.names(get(regions[i]), regions[i])
+	setTxtProgressBar(pb, i)
+}
+
+# format column values
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- regions[i]
+	clean.format(get(nm), nm)
+	setTxtProgressBar(pb, i)
+}
+
+# clean column content, add columns
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- regions[i]
+	clean.columns(get(nm), nm)
+	setTxtProgressBar(pb, i)
+}
+
+# save clean
+pb <- txtProgressBar(min=1, max=length(regions), style=3)
+for(i in 1:length(regions)){
+	nm <- paste0("clean.", regions[i])
+	assign(nm, copy(get(regions[i])))
+	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
+	setTxtProgressBar(pb, i)
+}
 
 # load clean
 pb <- txtProgressBar(min=1, max=length(regions), style=3)

@@ -107,8 +107,8 @@ check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.con
 # Function to see if the corrected version of a bad spp name
 # already exists in a data set; if it does,
 # then the wrong version is overwritten with the content 
-check.and.set <- function(wrong, corrected){
-	check <- spp.key[,corrected%in%spp]
+check.and.set <- function(wrong, corrected, Z=spp.key){
+	check <- spp.key[spp!=wrong,corrected%in%spp]
 	if(check){
 		# if the corrected name already exists,
 		# make sure to have all the rows with the wrong name match up with the corrected rows,
@@ -122,15 +122,34 @@ check.and.set <- function(wrong, corrected){
 		# Thus, we have to get the names and other content to match before changing anything.
 		# Bottom line is that we need to be sure that all things are consistent, and that this requires
 		# more care when we are switching the 'spp' of an entry to a 'spp' that is already there.
-		stopifnot(all(sapply(spp.key[spp==corrected], function(x)length(unique(x))<=1)))
-		noSet <- c("ref")
-		all.but.noSet <- names(spp.key)[names(spp.key)!=noSet]
-		spp.key[spp==wrong, c(all.but.noSet):=spp.key[spp==corrected,eval(s2c(all.but.noSet))]]			
+		noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website","website2","flag", "conflict", "tax.src2")
+		all.but.noSet <- names(Z)[!names(Z)%in%noSet]
+		stopifnot(
+			all(
+				sapply(
+					Z[spp==corrected,eval(s2c(all.but.noSet))], 
+					function(x)length(unique(x[!is.na(x)]))<=1
+				)
+			)
+		)
+		
+		# Replace NA's with non-NA's in the same column,
+		# where needed, and if possible
+		all.vals <- Z[spp==corrected & spp!=wrong,]
+		if(any(is.na(all.vals))){
+			set2nonNA(Z=Z, index=Z[,spp==corrected&spp!=wrong])
+		}
+		
+		Z[spp==wrong, c(all.but.noSet):=Z[spp==corrected,eval(s2c(all.but.noSet))]]			
 	}else{
 		# if the corrected name doesn't already exist,
 		# then simply switch the wrong name to the corrected name,
-		spp.key[spp==wrong, spp:=corrected]
+		Z[spp==wrong, spp:=corrected]
 	}
+	
+	
+	setkey(Z, ref, spp)
+	invisible(NULL)
 }
 
 
@@ -144,24 +163,44 @@ check.and.set <- function(wrong, corrected){
 # but this function just takes your row with ref==Ref,
 # and sets its columns to the values already present in the spp==Spp rows.
 # It also sets the spp column in the ref==Ref row to be Spp.
-ref2spp <- function(Ref, Spp){
-	check <- spp.key[,Spp%in%spp]
+ref2spp <- function(Ref, Spp, Z=spp.key){
+	check <- Z[ref!=Ref,Spp%in%spp]
 	if(check){
 		
-		noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website","website2","flag")
-		all.but.noSet <- names(spp.key)[!names(spp.key)%in%noSet]
-		stopifnot(all(sapply(spp.key[spp==Spp,eval(s2c(all.but.noSet))], function(x)length(unique(x))<=1)))
+		noSet <- c("ref", "val.src", "tbl.row", "mtch.src", "website", "website2", "flag", "conflict", "tax.src2")
+		all.but.noSet <- names(Z)[!names(Z)%in%noSet]
+		stopifnot(
+			all(
+				sapply(
+					Z[spp==Spp & ref!=Ref,eval(s2c(all.but.noSet))],
+					function(x)length(unique(x[!is.na(x)]))<=1
+				)
+			)
+		)
 		
-		new.vals <- spp.key[spp==Spp,eval(s2c(all.but.noSet))]	
+		# Replace NA's with non-NA's in the same column,
+		# where needed, and if possible
+		all.vals <- Z[spp==Spp & ref!=Ref,]
+		if(any(is.na(all.vals))){
+			set2nonNA(Z=Z, index=Z[,spp==Spp&ref!=Ref])
+		}
+		
+		# prepare to insert the Spp values in the Ref rows
+		new.vals <- Z[spp==Spp & ref!=Ref,eval(s2c(all.but.noSet))]
 		setkey(new.vals, spp)
 		new.vals <- unique(new.vals)
 		
-		spp.key[ref==Ref, c(all.but.noSet):=new.vals]	
+		# Insert
+		Z[ref==Ref, c(all.but.noSet):=new.vals]	
 	}else{
 		# if the corrected name doesn't already exist,
 		# then simply switch the wrong name to the corrected name,
-		spp.key[ref==Ref, spp:=Spp]
+		Z[ref==Ref, spp:=Spp]
 	}
+	
+	# Return
+	setkey(Z, ref, spp)
+	invisible(NULL)
 }
 
 

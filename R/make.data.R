@@ -15,6 +15,7 @@ source("./R/clean.names.R")
 source("./R/clean.format.R")
 source("./R/clean.columns.R")
 source("./R/clean.tax.R")
+source("./R/clean.trimRow.R")
 source("./R/helper-file.R")
 source("./R/helper-misc.R")
 source("./R/format-value.R")
@@ -89,12 +90,12 @@ regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf",
 # cnames <- unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(wcann), names(wctri)))
 
 
-# read in raw
-for(i in 1:length(regions)){
-	nm <- paste0("raw.", regions[i])
-	assign(nm, read.trawl(regions[i]))
-	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
-}
+# # read in raw
+# for(i in 1:length(regions)){
+# 	nm <- paste0("raw.", regions[i])
+# 	assign(nm, read.trawl(regions[i]))
+# 	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
+# }
 
 # load raw
 pb <- txtProgressBar(min=1, max=length(regions), style=3)

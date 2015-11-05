@@ -30,7 +30,9 @@ source("./R/tax-getTax.R")
 regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri") 
 
 
-#
+# ==============================================
+# = Read, Clean for Each Region (Individually) =
+# ==============================================
 # ai <- read.trawl("ai")
 # clean.names(ai, "ai")
 # clean.format(ai, "ai")
@@ -90,6 +92,9 @@ regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf",
 # cnames <- unique(c(names(ai), names(ebs), names(gmex), names(goa), names(neus), names(wcann), names(wctri)))
 
 
+# ==================
+# = Raw Read/ Save =
+# ==================
 # # read in raw
 # for(i in 1:length(regions)){
 # 	nm <- paste0("raw.", regions[i])
@@ -97,6 +102,10 @@ regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf",
 # 	save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
 # }
 
+
+# ============
+# = Load Raw =
+# ============
 # load raw
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
@@ -105,6 +114,10 @@ for(i in 1:length(regions)){
 	setTxtProgressBar(pb, i)
 }
 
+
+# ============
+# = Cleaning =
+# ============
 # clean up column names
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
@@ -146,6 +159,10 @@ for(i in 1:length(regions)){
 	setTxtProgressBar(pb, i)
 }
 
+
+# ==============
+# = Save Clean =
+# ==============
 # save clean
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
@@ -155,6 +172,10 @@ for(i in 1:length(regions)){
 	setTxtProgressBar(pb, i)
 }
 
+
+# ==============
+# = Load Clean =
+# ==============
 # load clean
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
@@ -163,6 +184,10 @@ for(i in 1:length(regions)){
 	setTxtProgressBar(pb, i)
 }
 
+
+# ======================================
+# = Rename clean.REGION as just REGION =
+# ======================================
 # rename clean, rm old
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){

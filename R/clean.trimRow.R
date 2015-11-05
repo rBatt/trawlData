@@ -54,7 +54,7 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	get.clean.trimRow(reg) # do the region-specific checks on which rows to trim out
 	X[,keep.row:=(keep.row&spp.i)]
 	
-	
+	invisible(NULL)
 }
 
 

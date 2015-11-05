@@ -222,3 +222,22 @@ match.tbl <- function(ref, tbl.ref, tbl.val, exact=FALSE){
 	
 	return(out)
 }
+
+
+# ============================
+# = Get a Season from a Date =
+# ============================
+getSeason <- function(DATES) {
+	# http://stackoverflow.com/a/9501225/2343633
+    WS <- as.Date("2012-12-15", format = "%Y-%m-%d", tz="GMT") # Winter Solstice
+    SE <- as.Date("2012-3-15",  format = "%Y-%m-%d", tz="GMT") # Spring Equinox
+    SS <- as.Date("2012-6-15",  format = "%Y-%m-%d", tz="GMT") # Summer Solstice
+    FE <- as.Date("2012-9-15",  format = "%Y-%m-%d", tz="GMT") # Fall Equinox
+
+    # Convert dates from any year to 2012 dates
+    d <- as.Date(strftime(DATES, format="2012-%m-%d", tz="GMT"))
+
+    ifelse (d >= WS | d < SE, "winter",
+      ifelse (d >= SE & d < SS, "spring",
+        ifelse (d >= SS & d < FE, "summer", "fall")))
+}

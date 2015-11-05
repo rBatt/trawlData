@@ -46,7 +46,7 @@ clean.columns.ai <- function(X){
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -87,7 +87,7 @@ clean.columns.ebs <- function(X){
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -125,14 +125,16 @@ clean.columns.gmex <- function(X){
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
+	X[,year:=as.integer(format.Date(datetime, format="%Y"))]
 	
 	# season
 	# just naming from the survey name
-	X[,season:=NA]
-	X[grepl("spring", survey.name, ignore.case=T), season:="spring"]
-	X[grepl("summer", survey.name, ignore.case=T), season:="summer"]
-	X[grepl("fall", survey.name, ignore.case=T), season:="fall"]
-	X[grepl("winter", survey.name, ignore.case=T), season:="winter"]
+	# X[grepl("spring", survey.name, ignore.case=T), season:="spring"]
+	# X[grepl("summer", survey.name, ignore.case=T), season:="summer"]
+	# X[grepl("fall", survey.name, ignore.case=T), season:="fall"]
+	# X[grepl("winter", survey.name, ignore.case=T), season:="winter"]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
+
 	
 	# lon/ lat
 	X[,lat:=rowMeans(cbind(lat.deg.start + lat.min.start/60, lat.deg.end + lat.min.end/60), na.rm=TRUE)] # mean of start and end positions, but allow one to be NA (missing)
@@ -174,7 +176,7 @@ clean.columns.goa <- function(X){
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -212,7 +214,8 @@ clean.columns.neus <- function(X){
 	X[,datetime:=as.POSIXct(paste(as.character(year),substr(cruise,5,6),"01",sep="-"), format="%Y-%m-%d", tz="GMT")]
 	
 	# season
-	# not needed
+	# neus already has its own season definition
+	# X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -353,10 +356,10 @@ clean.columns.sa <- function(X){
 	
 	# date, time, datetime
 	X[,year:=as.integer(substr(haulid, 1, 4))]
-	X[,datetime:=as.POSIXct(paste(date, time), format="%y/%m/%d %H:%M", tz="GMT")]
+	X[,datetime:=as.POSIXct(paste(date, time), format="%m/%d/%y %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	X[,lat:=(lat.start+lat.end)/2]
@@ -398,7 +401,7 @@ clean.columns.sgulf <- function(X){
 	X[,datetime:=as.POSIXct(paste(paste(year, month, day, sep="-"), time), format="%Y-%m-%d %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -438,7 +441,7 @@ clean.columns.shelf <- function(X){
 	X[,year:=as.numeric(format.Date(datetime, format="%Y"))]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	X[,lat:=lat.start]
@@ -479,7 +482,7 @@ clean.columns.wcann <- function(X){
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%y %H:%M", tz="GMT")]
 	
 	# season
-	X[,season:=NA]
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	# not needed
@@ -521,7 +524,7 @@ clean.columns.wctri <- function(X){
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M:%S", tz="GMT")]
 	
 	# season
-	# ...
+	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
 	
 	# lon/ lat
 	X[,lat:=rowMeans(cbind(lat.start,lat.end),na.rm=TRUE)]

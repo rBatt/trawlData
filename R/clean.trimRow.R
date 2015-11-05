@@ -2,7 +2,11 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	
 	reg <- match.arg(reg)
 	
+	# first, set the default action to keeping all rows
+	# such that if nothing else is done, all will be kept
+	X[,keep.row:=TRUE]
 	
+	# define region-specific function
 	get.clean.trimRow <- function(x){
 		switch(x,
 			ai = clean.trimRow.ai(X),
@@ -145,8 +149,10 @@ clean.trimRow.goa <- function(X){
 # ========
 clean.trimRow.neus <- function(X){
 	
-	setkey(neus000, SEASON)
-	neus00 <- neus000["SPRING"]
+	season.i <- X[,season=="spring"]
+	
+	keep.row.i <- season.i
+	X[,keep.row:=keep.row.i]
 	
 	
 	# some trimmings in original read file were related to bad spp
@@ -160,44 +166,18 @@ clean.trimRow.neus <- function(X){
 # ========
 clean.trimRow.newf <- function(X){
 	
+	record.i <- X[,recordtype==6] # 6 is biological data, 5 is set info
 	
-	ss1 <- newf.raw0$operation %in% c(1,2) & newf.raw0$recordtype == 6 # 6 is biological data, 5 is set information
-	newf.raw0 <- newf.raw0[ss1,]
-
-	ss2 <- newf.raw0$gear == 61 & !is.na(newf.raw0$gear) # CAMPELEN 1800 SHRIMP TRAWL--LINED
-	newf.raw0 <- newf.raw0[ss2,]
-
-	ss3 <- newf.raw0$settype == 1
-	newf.raw0 <- newf.raw0[ss3,]
+	haul.i <- X[,operation%in%c(1,2)]
 	
+	gear.i <- X[,gear==61 & !is.na(gear) & settype==1]
 	
+	tow.i <- X[,towduration<=60]
+		
+	season.i <- X[,season=="fall"]
 	
-	setkey(newf.raw, season)
-	newf00 <- newf.raw["fall"]
-	
-	
-	
-	newf0 <- newf00[duration<=60,]
-	
-	
-	
-	
-	dim(newf) # 378070, 50
-	newf[,sum(spp=="", na.rm=TRUE)] # 454
-	newf[,sum(is.na(spp))] # 120
-
-	newf <- newf["fall"] # trim to only fall
-	dim(newf) # 257486, 50
-	newf[,sum(spp=="", na.rm=TRUE)] # 234
-	newf[,sum(is.na(spp))] # 26
-
-	setkey(newf, spp)
-	newf <- newf[spp!=""&!is.na(spp),]
-	dim(newf) # 257226, 50
-	
-	
-	
-	
+	keep.row.i <- record.i & haul.i & gear.i & tow.i & season.i
+	X[,keep.row:=keep.row.i]
 	
 	
 }
@@ -206,7 +186,7 @@ clean.trimRow.newf <- function(X){
 # = NGULF =
 # =========
 clean.trimRow.ngulf <- function(X){
-
+	message("this function not ready yet")
 }
 
 
@@ -215,17 +195,16 @@ clean.trimRow.ngulf <- function(X){
 # ======
 clean.trimRow.sa <- function(X){
 	
-	sa.strata <- fread(paste(sa.start, "malinpinsky.CoastalEvent.csv", sep=""), select=c("COLLECTIONNUMBER","DEPTHSTART","DEPTHEND"))
-	sa.strata <- sa.strata[COLLECTIONNUMBER!="",]
-	setnames(sa.strata, "COLLECTIONNUMBER", "haulid")
+	haul.i <- X[,!is.na(haulid) & haulid!=""]
 	
+	strat.i <- X[, DEPTHZONE=="INNER"]
 	
-	sa.catch0 <- sa.catch00[PROJECTNAME!=""&DEPTHZONE=="INNER", list(datetime, spp, common, haulid, stratum, LATITUDESTART, LATITUDEEND, LONGITUDESTART, LONGITUDEEND, stemp, btemp, cnt, wt, effort)]
-
-	sa.catch0 <- sa.catch0[effort!=0 | is.na(effort)] # remove rows where the effort was reported as 0 (alternatively, these could be changed to NA, which might still be useful b/c you'd know that a species was observed, just not abundance or biomass)
+	survey.i <- X[, PROJECTNAME!=""]
 	
+	effort.i <- X[,effort!=0 | is.na(effort)] # just don't let it be 0 ...
 	
-	
+	keep.row.i <- haul.i & strat.i & survey.i & effort.i
+	X[,keep.row:=keep.row.i]
 	
 }
 
@@ -234,10 +213,11 @@ clean.trimRow.sa <- function(X){
 # = SGULF =
 # =========
 clean.trimRow.sgulf <- function(X){
+		
+	set.i <- X[,expt==1]
 	
-	sgulf.set <- sgulf.set0[expt==1,list(year, datetime, haulid, stratum, stemp, btemp)]
-	
-	
+	keep.row.i <- set.i
+	X[,keep.row:=keep.row.i]
 	
 }
 
@@ -246,21 +226,14 @@ clean.trimRow.sgulf <- function(X){
 # =========
 clean.trimRow.shelf <- function(X){
 	
-	cols2keep <- quote(list(year, month, datetime, haulid, stratum, stratumarea, SLAT, SLONG, depth, SPEC, stemp, btemp, wtcpue, cntcpue))
-	# shelf.raw00 <- shelf.raw000[TYPE==1 & month>=6 & month<= 8, list(year, month, datetime, haulid, stratum, SLAT, SLONG, depth, SPEC, stemp, btemp, wtcpue, cntcpue)] 
-	shelf.raw00 <- shelf.raw000[TYPE==1 & month>=6 & month<= 8, eval(cols2keep)] 
+	type.i <- X[, TYPE==1]
 	
+	date.i <- X[,month>=6 & month<=8]
 	
-	shelf.raw <- shelf.raw0[!grepl("UNIDENT| UNID|^UNID", spp) & !grepl("EGGS|PURSE", spp) & !grepl("EGGS", common) & !is.na(spp) & spp!="" & haulid!="NED2010027-201",]
+	haul.i <- X[,haulid!="NED2010027-201"]	
 	
-	
-	
-	bad.shelf.spp <- c("LOLIGINIDAE,OMMASTREPHIDAE F.", "PROTOBRANCHIA, HETERODONTA", "LITHODES/NEOLITHODES","POLYCHAETA C.,LARGE", "SEA CORALS (NS)")
-	vague.shelf.pat <- "\\sS\\.[OC]\\.|\\s[OCFP]\\." #"\\sS\\.O\\.|\\sO\\.|\\sC\\.|\\F\\.|"
-	shelf <- shelf.raw[!grepl(vague.shelf.pat, spp) & !spp%in%bad.shelf.spp, list(year, datetime, spp, haulid, stratum, stratumarea, lat, lon, depth, stemp, btemp, wtcpue, cntcpue)]
-	
-		
-	
+	keep.row.i <- type.i & date.i & haul.i
+	X[,keep.row:=keep.row.i]
 }
 
 # ==========
@@ -268,13 +241,7 @@ clean.trimRow.shelf <- function(X){
 # ==========
 clean.trimRow.wcann <- function(X){
 	
-	
-	setkey(wcann, spp)
-	wcann.spp.bad <- c("","Apristurus brunneus egg case", "gastropod eggs", "Selachimorpha egg case")
-	wcann <- wcann[!.(wcann.spp.bad)]
-	
-	
-
+	# only removed bad species
 
 }
 
@@ -283,11 +250,7 @@ clean.trimRow.wcann <- function(X){
 # ==========
 clean.trimRow.wctri <- function(X){
 	
-	setkey(wctri, spp)
-	wctri.spp.bad <- c("","Apristurus brunneus egg case", "fish eggs unident.", "Raja binoculata egg case", "Raja sp. egg case", "Rajiformes egg case", "Shark egg case unident.")
-	wctri <- wctri[!.(wctri.spp.bad)]
-	
-	
+	# only removed bad species
 	
 }
 

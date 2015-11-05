@@ -260,10 +260,41 @@ clean.format.sa <- function(X){
 	# = Fix lat/lon, add stratumarea =
 	# ================================
 	# this was weird, so I took a guess
+	# Morley made similar corrections to this, but more direct rather than inferential
+	# End result is same 
+	# But see Morley's corrections: 
+	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
 	X[lon.start > -782.000 & lon.start < -780.000, lon.start:=-79.0]
 	X[lon.end > -782.000 & lon.end < -780.000, lon.end:=-78.988]
 	X[lon.start > -802.000 & lon.start < -800.000, lon.start:= -81.006+0.01]
 	X[lat.end>40, lat.end:=lat.start+0.009]
+	
+	
+	# ==============
+	# = Fix Effort =
+	# ==============
+	# From Morley
+	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
+	X[haulid == 19910105, effort:=1.71273]
+	X[haulid == 19990065, effort:=0.53648]
+	X[haulid == 20070177, effort:=0.99936]
+	X[haulid == 19950335, effort:=0.9775]
+	X[haulid == 20110393, effort:=1.65726]
+	X[EVENTNAME == 2014325, effort:=1.755] # I get nothing for this EVENTNAME ...
+	X[EVENTNAME == 1992219, effort:=1.796247]
+	X[haulid == 19910423, effort:=0.50031]
+	X[haulid == 20010431, effort:=0.25099]
+	
+	
+	# ================================
+	# = Fix Weights for Some Species =
+	# ================================
+	# Corrections from Morley
+	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
+	X[haulid==20010106 & SPECIESCODE==8713050104, weight:=31.9] # roughtail stingray # NOTE! I Don't get any instances of this species on this haul ...
+	X[(is.na(weight) | weight==0) & SPECIESCODE==5802010101, weight:=(cnt*1.9)] # horseshoe crabs
+	X[haulid==19940236 & SPECIESCODE == 9002050101, weight:=204] # leatherback sea turtle
+	X[(weight==0 | is.na(weight)) & SPECIESCODE==9002040101, weight:=46] # loggerhead
 	
 	
 }

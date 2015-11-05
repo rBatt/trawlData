@@ -354,7 +354,7 @@ clean.columns.sa <- function(X){
 	
 	# date, time, datetime
 	X[,year:=as.integer(substr(haulid, 1, 4))]
-	X[,datetime:=as.POSIXct(paste(date, time), format="%y/%m/%d %H:%M", tz="GMT")]
+	X[,datetime:=as.POSIXct(paste(date, time), format="%m/%d/%y %H:%M", tz="GMT")]
 	
 	# season
 	X[,season:=NA]

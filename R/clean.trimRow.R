@@ -174,7 +174,7 @@ clean.trimRow.newf <- function(X){
 	
 	haul.i <- X[,operation%in%c(1,2)]
 	
-	gear.i <- X[,gear==61 & !is.na(gear) & settype==1]
+	gear.i <- X[,geartype==61 & !is.na(geartype) & settype==1]
 	
 	tow.i <- X[,towduration<=60]
 		

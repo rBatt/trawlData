@@ -66,6 +66,7 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 clean.trimRow.ai <- function(X){
 	
 	# only trimmings in original read file were related to bad spp
+	invisible(NULL)
 	
 }
 
@@ -76,7 +77,7 @@ clean.trimRow.ai <- function(X){
 clean.trimRow.ebs <- function(X){
 
 	# none!
-
+	invisible(NULL)
 }
 
 
@@ -131,7 +132,7 @@ clean.trimRow.gmex <- function(X){
 	keep.row.i <- spp.i & survey.i & gear.i & tow.i & haul.i
 	X[,keep.row:=keep.row.i]
 	
-	
+	invisible(NULL)
 }
 
 
@@ -143,7 +144,7 @@ clean.trimRow.goa <- function(X){
 	
 	# only trimmings in original read file were related to bad spp
 	
-	
+	invisible(NULL)
 }
 
 
@@ -160,7 +161,7 @@ clean.trimRow.neus <- function(X){
 	
 	# some trimmings in original read file were related to bad spp
 	
-	
+	invisible(NULL)
 }
 
 
@@ -182,7 +183,7 @@ clean.trimRow.newf <- function(X){
 	keep.row.i <- record.i & haul.i & gear.i & tow.i & season.i
 	X[,keep.row:=keep.row.i]
 	
-	
+	invisible(NULL)
 }
 
 # =========
@@ -190,6 +191,7 @@ clean.trimRow.newf <- function(X){
 # =========
 clean.trimRow.ngulf <- function(X){
 	message("this function not ready yet")
+	invisible(NULL)
 }
 
 
@@ -209,6 +211,8 @@ clean.trimRow.sa <- function(X){
 	keep.row.i <- haul.i & strat.i & survey.i & effort.i
 	X[,keep.row:=keep.row.i]
 	
+	invisible(NULL)
+	
 }
 
 
@@ -222,6 +226,7 @@ clean.trimRow.sgulf <- function(X){
 	keep.row.i <- set.i
 	X[,keep.row:=keep.row.i]
 	
+	invisible(NULL)
 }
 
 # =========
@@ -237,6 +242,8 @@ clean.trimRow.shelf <- function(X){
 	
 	keep.row.i <- type.i & date.i & haul.i
 	X[,keep.row:=keep.row.i]
+	
+	invisible(NULL)
 }
 
 # ==========
@@ -245,7 +252,7 @@ clean.trimRow.shelf <- function(X){
 clean.trimRow.wcann <- function(X){
 	
 	# only removed bad species
-
+	invisible(NULL)
 }
 
 # ==========
@@ -254,7 +261,7 @@ clean.trimRow.wcann <- function(X){
 clean.trimRow.wctri <- function(X){
 	
 	# only removed bad species
-	
+	invisible(NULL)
 }
 
 

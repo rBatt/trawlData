@@ -133,7 +133,7 @@ for(i in 1:length(regions)){
 pb <- txtProgressBar(min=1, max=length(regions), style=3)
 for(i in 1:length(regions)){
 	nm <- regions[i]
-	clean.tax(get(nm), nm)
+	assign(nm, clean.tax(get(nm), nm))
 	setTxtProgressBar(pb, i)
 }
 

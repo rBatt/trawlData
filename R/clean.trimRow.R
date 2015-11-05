@@ -236,7 +236,26 @@ clean.trimRow.shelf <- function(X){
 	
 	type.i <- X[, TYPE==1]
 	
-	date.i <- X[,month>=6 & month<=8]
+	if(exists("month", where="package:data.table")){
+		# the `month` function is listed as experimental
+		# So I'm testing to make sure it exists 
+		# rather than blindly relying on it
+		# This method is faster, hence the motivation:
+		# > system.time({months <- X[,format.Date(datetime, "%m")]
+# 		+ 		date.i <- months>=6 & months<=8})
+# 		   user  system elapsed
+# 		  0.201   0.005   0.214
+# 		> system.time({date.i <- X[,month(datetime)>=6 & month(datetime)<=8]})
+# 		   user  system elapsed
+# 		  0.042   0.004   0.057
+		
+		date.i <- X[,month(datetime)>=6 & month(datetime)<=8]
+	}else{
+		message("data.table:::month doesn't exist; using alternative method; see clean.trimRow.shelf()")
+		months <- X[,format.Date(datetime, "%m")]
+		date.i <- months>=6 & months<=8
+	}
+	
 	
 	haul.i <- X[,haulid!="NED2010027-201"]	
 	

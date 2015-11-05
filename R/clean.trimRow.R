@@ -30,10 +30,11 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 		ux <- unique(x)
 		badEgg <- grepl("[eE][gG]{2}", ux)
 		badFish <- grepl("(?<![a-z])fish(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
+		badPurse <- grepl("(?<![a-z])purse(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
 		badLarv <- grepl("(?<![a-z])larv(a[e])?(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
 		badYoy <- grepl("(?<![a-z])yoy(?![a-z])", ux, ignore.case=TRUE, perl=TRUE)
 		missSpp <- ux=="" | is.na(ux)
-		bad.x <- ux[(badEgg | badFish | badLarv | badYoy | missSpp)]
+		bad.x <- ux[(badEgg | badFish | badPurse | badLarv | badYoy | missSpp)]
 		bad.i <- (x%in%bad.x)
 		if(value){
 			return(x[bad.i])
@@ -45,11 +46,13 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	
 	badSpp <- X[,match.badSpp(ref)]
 	noID <- X[,spp=="" | is.na(spp)]
-	
-	
 	missSpecies <- X[,species=="" | is.na(species)]
 	missGenus <- X[,genus=="" | is.na(genus)]
 	
+	spp.i <- !(badSpp | noID | missSpecies | missGenus)
+	
+	get.clean.trimRow(reg) # do the region-specific checks on which rows to trim out
+	X[,keep.row:=(keep.row&spp.i)]
 	
 	
 }

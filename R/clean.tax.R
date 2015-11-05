@@ -22,7 +22,10 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	
 	
 	# X <- copy(gmex)
-	setnames(X, "spp", "ref")
+	if(!"ref"%in%names(X)){
+		setnames(X, "spp", "ref")
+	}
+	
 	names.x <- names(X)
 	rmX.names <- names.x[names.x%in%(names(spp.key)[names(spp.key)!="ref"])]
 	

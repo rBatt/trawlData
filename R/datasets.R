@@ -1,0 +1,39 @@
+#' Raw Aleutian Islands
+#' 
+#' Raw data set for the Aleutian Islands bottom trawl survey
+#' 
+#' 
+#' \itemize{
+#' 	\item STRATUM. the statistical stratum of the haul
+#' 	\item LATITUDE. latitude of the haul
+#' 	\item LONGITUDE. longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)
+#' 	\item STATION. the station ID for the haul
+#' 	\item YEAR. year of haul
+#' 	\item DATETIME. the day and time of the haul
+#' 	\item WTCPUE. weight (mass) of the catch
+#' 	\item NUMCPUE. number of individuals caught per hectare in the haul
+#' 	\item COMMON. the common name of the organism sampled
+#' 	\item SCIENTIFIC. species scientific name; Genus species
+#' 	\item SID. species identification number
+#' 	\item BOT_DEPTH. the maximum depth of the water at the location of the haul
+#' 	\item BOT_TEMP. water temperature at the bottom at the location of the haul
+#' 	\item SURF_TEMP. water temperature at the surface at the location of the haul
+#' 	\item VESSEL. vessel ID
+#' 	\item CRUISE. cruise ID
+#' 	\item HAUL. the integer haul number within a cruise
+#' 	\item Areakm2. the area of the statistical stratum (km2)
+#' }
+#' 
+#' @format A data.table
+"raw.ai"
+
+
+
+
+#' Raw Eastern Berring Sea
+#' 
+#' Raw data set for the Eastern Berring Sea bottom trawl survey
+#' 
+#' 
+#' 
+#' @format A data.table

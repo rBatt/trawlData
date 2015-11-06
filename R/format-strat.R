@@ -1,13 +1,20 @@
 # taken from leapfrog, was in another script first though
 
-# convert lon-lat to km
+#' Lon Lat to km
+#' 
+#' Convert longitude and latitude in degrees to the same in kilometers
+#' 
+#' @param x longitude
+#' @param y latitude
+#' 
+#' @details
+#' @return A named list with elements of Y (lat in km) and X (lon in km).
+#' 
+#' @export
 ll2km <- function(x,y){
-	stopifnot(require(PBSmapping))
-	# x should be longitude
-	# y should be latitude
 	blah <- data.frame(X=x, Y=y) 
 	attr(blah, "projection")="LL"
-	blah2 <- convUL(blah)
+	blah2 <- PBSmapping:::convUL(blah)
 	list(lat.km=blah2[,"Y"], lon.km=blah2[,"X"]) # returning a named list format is handy for use with data.table :=
 }
 
@@ -18,13 +25,38 @@ ll2km <- function(x,y){
 # roundFrac <- function(x, frac=0.5){
 # 	round(x/frac,0)*frac
 # }
-
+#' Round Grid
+#' 
+#' Round values to snap to a fraction of a grid
+#' 
+#' @param x numeric value to be rounded; can be a vector
+#' @param frac numeric value representing the size of the grid
+#' 
+#' @ details
+#' If \code{frac} is 1, then round to the nearest whole number. If \code{frac} is 0.5, then snap everything to the nearest half a degree grid. If 10, then snap to the nearest multiple of 10, plus 5 (6 goes to 5, 8 goes to 5, 10 goes to 15, 21 goes to 25, etc). Handy if you have lat-lon data that you want to redefine as being on a grid.
+#' 
+#' @export
 roundGrid <- function(x, frac=1){
 	# if frac is 1, then place in a 1º grid
 	# if frac is 0.5, then place in the 0.5º grid
 	floor(x/frac)*frac+frac/2
 }
 
+#' Lon lat to strat
+#' 
+#' Convert longitude and latitude vectors to strata
+#' 
+#' @param lon numeric vector of longitude 
+#' @param lat numeric vector of latitude
+#' @param gridSize numeric indicating fraction for rounding
+#' 
+#' @details
+#' \code{gridSize} is passed to \code{frac} in \link{\code{roundGrid}}. Defines a stratum based on rounding to the center of the nearest grid cell, of the specific size (\code{gridSize}).
+#' 
+#' @return
+#' Character vector indicating the center of the defined stratum as the gridded lon and lat.
+#' 
+#' @export
 ll2strat <- function(lon, lat, gridSize=1){
 	do.call("paste", list(roundGrid(lon, gridSize), roundGrid(lat, gridSize)))
 }
@@ -40,7 +72,16 @@ ll2strat <- function(lon, lat, gridSize=1){
 # Function can operate in 1 of 2 ways
  # 1) don't save .txt or figures, don't display figures, don't ask for the tolerance (just read in from .txt file), but change stratum in data.table
  # 2) Figures of tolerance are saved, figures are displayed, .txt of tolerance is saved, and stratum is change in data.table
- 
+#' Make Strata
+#' 
+#' Function to make strata for a region, examing missingness
+#' 
+#' @param x a data.table of trawl data
+#' @param regName the name of the region
+#' 
+#' @section Warning:  
+#' This function is not ready to be used. Saves figures, has hard-coded paths, looks for reference files outisde of package, etc.
+#' 
 makeStrat <- function(x, regName, doLots=NULL){
 	stopifnot(is.data.table(x))
 	
@@ -139,7 +180,13 @@ makeStrat <- function(x, regName, doLots=NULL){
 }
 
 
-
+#' Calculate Area
+#' 
+#' Calculate the area of a region defined by a vector of lon-lat coordinates
+#' 
+#' @param lonlat a data.frame with numeric longitude in first column, latitude in second
+#' 
+#' @export
 calcarea <- function(lonlat){
 	hullpts <- chull(x=lonlat[,1], y=lonlat[,2]) # find indices of vertices
 	hullpts <- c(hullpts,hullpts[1]) # close the loop

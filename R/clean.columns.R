@@ -1,3 +1,13 @@
+#' Clean Columns
+#' 
+#' Clean by ensuring the presence of standard columns.
+#' 
+#' @details
+#' Add missing columns if they don't exist. These are standard values like \code{wtcpue}, \code{spp}, \code{datetime}, and \{reg}. I will make a full list in future versions, when the decisions are finalized.
+#' 
+#' @template X_reg
+#' 
+#' @export
 clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)

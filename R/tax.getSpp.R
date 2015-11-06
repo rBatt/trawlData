@@ -28,8 +28,7 @@ getSpp <- function(uspp, oldSpp=NULL){
 	
 	# First case: no looked-up names provided, start from scratch
 	if(is.null(oldSpp)){
-		print("Old spp names not supplied, looking up all spp names")
-		flush.console()
+		message("Old spp names not supplied, looking up all spp names")
 		
 		# Break unique species names into chunks (currently trivial)
 		uspp.chunks <- as.character(cut(seq_along(uspp), length(uspp))) # right now breaking into chunks of length 1
@@ -62,9 +61,7 @@ getSpp <- function(uspp, oldSpp=NULL){
 		
 		setnames(spp.corr1, c("submitted_name", "matched_name"), c("spp", "sppCorr"))
 		
-		# setkey(spp.corr1, spp)
-		# save(spp.corr1, file="/Users/Battrd/Documents/School&Work/pinskyPost/trawl/Data/Taxonomy/spp.corr1.RData")
-	
+		
 	} # end first case
 	
 	
@@ -140,4 +137,34 @@ getSpp <- function(uspp, oldSpp=NULL){
 	# spp.corr1 <- spp.corr1[!is.na(sppCorr),]
 	
 	return(spp.corr1) # return checked names as a data.table
+}
+
+
+
+#' @describeIn getSpp Count the number of N's in a word
+countN <- function(x){ # count the number of times the letter "n" appears
+	sapply(strsplit(x,""), FUN=function(x)length(grep("n",x)))
+}
+
+#' @describeIn getSpp Grab Species (helper function)
+grb.spp1 <- function(x) {
+	tryCatch(
+		{
+			# x <- x$results
+			x <- x[!duplicated(x[,"matched_name"]),]
+			adjN <- pmax(countN(x$matched_name) - countN(x$submitted_name), 0)*0.01 # gets bonus match score if the matched name has more n's, because n's appear to be missing a lot
+			x$score <- x$score + adjN
+			x <- x[max(which.max(x[,"score"]),1),c("submitted_name","matched_name")]
+			if(x[,"matched_name"]==""){x[,"matched_name"] <- NA}
+			return(x)
+		}, 
+		error=function(cond){
+			tryCatch(
+				{
+					data.frame(submitted_name=x$results[1, "submitted_name"], matched_name=as.character(NA))
+				},
+				error=function(cond){data.frame(submitted_name=NA, matched_name=NA)}
+			)
+		}	
+	)
 }

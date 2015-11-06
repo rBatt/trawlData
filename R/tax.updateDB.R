@@ -53,7 +53,7 @@ updateDB <- function(path="data"){
 	# = Load The Species Names =
 	# ==========================
 	# load("data/tempo-image-spp.key.RData")
-	spp <- sort(unique(c(
+	ref <- sort(unique(c(
 		trawlData::clean.ai[,unique(ref)], 
 		trawlData::clean.ebs[,unique(ref)], 
 		trawlData::clean.gmex[,unique(ref)], 
@@ -66,13 +66,27 @@ updateDB <- function(path="data"){
 		trawlData::clean.wcann[,unique(ref)], 
 		trawlData::clean.wctri[,unique(ref)]
 	)))
+	
+	spp <- sort(unique(c(
+		trawlData::clean.ai[,unique(spp)], 
+		trawlData::clean.ebs[,unique(spp)], 
+		trawlData::clean.gmex[,unique(spp)], 
+		trawlData::clean.goa[,unique(spp)], 
+		trawlData::clean.neus[,unique(spp)], 
+		trawlData::clean.newf[,unique(spp)], 
+		trawlData::clean.sa[,unique(spp)], 
+		trawlData::clean.sgulf[,unique(spp)], 
+		trawlData::clean.shelf[,unique(spp)], 
+		trawlData::clean.wcann[,unique(spp)], 
+		trawlData::clean.wctri[,unique(spp)]
+	)))
 
 
 	# ======================
 	# = Find All Spp Names =
 	# ======================
 	# From raw names
-	getSppData <- getSpp(c.all(spp[!is.na(spp)]))
+	getSppData <- getSpp(c.all(ref[!is.na(ref)]))
 	save(getSppData, file=file.path(path,"getSppData.RData"))
 
 

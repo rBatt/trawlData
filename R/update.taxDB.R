@@ -1,4 +1,4 @@
-tax.searchDB <- function(){
+update.taxDB <- function(){
 	# Function to search all taxonomy data bases for values in the trawl data set
 	# It will take a very long time to run this script
 	# There are 3 main tasks:
@@ -11,30 +11,30 @@ tax.searchDB <- function(){
 	# = Prepare Necessary Materials =
 	# ===============================
 	# preparation to be deleted
-	library(data.table)
-	library(LaF)
-	library(stringr)
-	library(bit64)
-	library(PBSmapping) # for calculating stratum areas
-	library(maptools) # for calculating stratum areas
-	library(Hmisc)
-	library(taxize)
-
-	setwd("~/Documents/School&Work/pinskyPost/trawlData/")
-
-	source("./R/read.trawl.R")
-	source("./R/clean.names.R")
-	source("./R/clean.format.R")
-	source("./R/clean.columns.R")
-	source("./R/helper-file.R")
-	source("./R/helper-misc.R")
-	source("./R/format-value.R")
-	source("./R/format-strat.R")
-	source("./R/tax-getSpp.R")
-	source("./R/tax-grb.spp1.R")
-	source("./R/tax-getTL.R")
-	source("./R/tax-getCmmn.R")
-	source("./R/tax-getTax.R")
+	# library(data.table)
+	# library(LaF)
+	# library(stringr)
+	# library(bit64)
+	# library(PBSmapping) # for calculating stratum areas
+	# library(maptools) # for calculating stratum areas
+	# library(Hmisc)
+	# library(taxize)
+	#
+	# setwd("~/Documents/School&Work/pinskyPost/trawlData/")
+	#
+	# source("./R/read.trawl.R")
+	# source("./R/clean.names.R")
+	# source("./R/clean.format.R")
+	# source("./R/clean.columns.R")
+	# source("./R/helper-file.R")
+	# source("./R/helper-misc.R")
+	# source("./R/format-value.R")
+	# source("./R/format-strat.R")
+	# source("./R/tax-getSpp.R")
+	# source("./R/tax-grb.spp1.R")
+	# source("./R/tax-getTL.R")
+	# source("./R/tax-getCmmn.R")
+	# source("./R/tax-getTax.R")
 
 
 	# ==========================

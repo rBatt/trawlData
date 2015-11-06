@@ -2,34 +2,76 @@
 # ====================================
 # = Functions for cleaning spp names =
 # ====================================
+#' Cull Bad Species Characters
+#' 
+#' Remove/ fix characters that are unlikely to be part of a species name
+#' 
+#' @param x A character vector
+#' 
+#' @details
+#' \code{c.all} performs the following corrections, in this order:  
+#' 1. remove extra spaces
+#' 2. change to sentence case
+#' 3. remove generic species indicators (spp or Sp., e.g.)
+#' 4. Remove everything in parentheses
+#' 5. Remove words after the first 2
+#' 
+#' @return a character vector that has been altered by removing content unlikely to belong to a species name.
+#' 
+#' @export
+c.all <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
+
+#' @describeIn c.all Fix case to sentence case
 fixCase <- function(x){
 	s <- paste(toupper(substring(x, 1, 1)), substring(x, 2), sep="")
 	paste(substring(s, 1, 1), tolower(substring(s, 2)), sep="")
 }
 
+#' @describeIn c.all Remove extra spaces
 cullExSpace <- function(x){
 	gsub("\\s+", " ", x)
 }
 
+#' @describeIn c.all Remove generic species indicator
 cullSp <- function(x){
 	gsub("\\s(s[p]{1,2}|unid)\\..*", "", x)
 }
 
+#' @describeIn c.all Remove parentheses and contents
 cullParen <- function(x){
 	gsub("\\s?\\(.*\\)", "", x)
 }
 
+#' @describeIn c.all Remove words after the last two
 cullPost2 <- function(x){
 	gsub("^(\\b[A-Za-z]{1,}\\b\\s+)(\\b[A-Za-z]{1,}\\b).*", "\\1\\2", x)
 }
 
-c.all <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
-
+#' Is Species
+#' 
+#' Are there are least two words in this string?
+#' 
+#' @param x character vector
+#' 
+#' @return
+#' logical vector of same length as x
 is.species <- function(x){
 	sapply(strsplit(x, " "), length) >= 2
 }
 
-
+#' Remove White Space
+#' 
+#' Remove white space from a data.table
+#' 
+#' @param x a data.table
+#' 
+#' @details
+#' Removes white space from the columns of a data.table that are characters (tested by \code{is.character}). Affects the data.table passed to \code{x}.
+#' 
+#' @return
+#' Nothing, but has the side affect of impacting whatever object was passed as \code{x}.
+#' 
+#' @export
 rmWhite <- function(x){
 	stopifnot(is.data.table(x))
 	has.cc <- names(x)[sapply(x, is.character)]
@@ -37,17 +79,22 @@ rmWhite <- function(x){
 }
 
 
-
-
-
-
+#' Remove 9's
+#' 
+#' Remove 9's and switch them to NA
+#' 
+#' @param x A data.table
+#' 
+#' @details
+#' All instances of -9999 (numeric or integer) are replaced as NA's of the appropriate class. Checks also for class "integer64".
+#' 
+#' @return Nothing, but affects data.table passed as \code{x}.
+#' @export
 rm9s <- function(x){
 	stopifnot(is.data.table(x))
 	for(i in seq_along(x)){
 		t.x <- x[[i]]
 		t.class <- class(t.x)
-		# set(x, i=which(x[[i]]==-9999L), j=i, value=as.character(NA))
-		# set(x, i=which(x[[i]]==-9999.0), j=i, value=as.character(NA))
 		if(t.class=="integer64"){
 			set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as.integer64(NA))
 		}else{

@@ -2,6 +2,15 @@
 #' FWF Fread
 #' 
 #' Fast read for fixed width format files
+#' 
+#' @param \code{...} file names to open
+#' @param \code{cols} vector of integer column widths
+#' @param column_types character vector indicating classes of columns
+#' @param column_names column_names character vector of column headers
+#' 
+#' @details uses data.table and LaF packages. The read is performed entirely by \code{\link{laf_open_fwf}}, but the output is converted to a data.table.
+#' 
+#' @return a data.table
 fread.fwf <- function(..., cols, column_types, column_names){
 	if(missing(cols)){
 		cols <- c(3,4,4,3) # for newf data
@@ -28,6 +37,23 @@ fread.fwf <- function(..., cols, column_types, column_names){
 # ===================================
 # = Function to read files from zip =
 # ===================================
+#' Read Zip
+#' 
+#' Read in all files contained in a zip file
+#' 
+#' @param zipfile name and path of a zip file containing files to read in
+#' @param pattern regular expression indicating the file extensions to be read. Default is .csv files
+#' @param SIMPLIFY logical, compress the contents into 2 data.table on output? To be safe, set FALSE
+#' @param use.fwf logical, indicating whether or not to read in as fixed width file; is overridden if file extensions are .fwf
+#' @param \code{...} other arguments to be passed on; in particular, the \code{cols} argument of column width if a fixed width file
+#' 
+#' @details 
+#' The function works by unzipping a file into a temporary directory, reading in all the files in that temporarily unzipped folder, and then deleting the temporary folder and all of its contents. Thus, is a handy way of keep all of your files stored as compressed files, but being able to access them. Obviously comes at the performance cost of having to do all of the unzipping and deleting.
+#' Uses data.table's \code{\link{fread}} in most cases, except for .fwf formats, in which case \code{\link{fread.fwf}} is used.
+#' 
+#' @return a data.table, or list of data.tables. The name of each element of the list is the name of the file within the .zip file.
+#' 
+#' @export
 read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, ...){
 
 	# Create a name for the dir where we'll unzip

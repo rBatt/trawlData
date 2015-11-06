@@ -1,9 +1,8 @@
 
-
+#' FWF Fread
+#' 
+#' Fast read for fixed width format files
 fread.fwf <- function(..., cols, column_types, column_names){
-	# library(magrittr)
-	# library(laf)
-	# library(data.table)
 	if(missing(cols)){
 		cols <- c(3,4,4,3) # for newf data
 	}
@@ -16,20 +15,8 @@ fread.fwf <- function(..., cols, column_types, column_names){
 	}
 	
 	laf <- laf_open_fwf(..., column_widths=cols, column_types=column_types, column_names=column_names) #
-	laf_open_fwf("inst/extdata/newf.zip", column_widths=cols, column_types=column_types, column_names=column_names)
-	# print(str(laf))
+	# laf_open_fwf("inst/extdata/newf.zip", column_widths=cols, column_types=column_types, column_names=column_names)
 	laf <- as.data.table(laf[,])
-	
-	
-	
-	# data.initial <- fread(..., sep="\n", header=F)
-#
-# 	end_col <- cumsum(cols)
-# 	start_col <- end_col - cols + 1
-# 	start_end <- cbind(start_col, end_col) # matrix of start and end positions
-#
-# 	text <- data.initial[ , apply(start_end, 1, function(y) substr(V1, y[1], y[2]))] %>% data.table(.)
-	
 	return(laf)
 }
 

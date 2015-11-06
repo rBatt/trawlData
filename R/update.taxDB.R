@@ -1,4 +1,16 @@
-update.taxDB <- function(){
+#' Update Taxonomic Database
+#' 
+#' Update package database of species information
+#' 
+#' @param path default "data", path for location to save the .RData files
+#' 
+#' @return nothing, but saves .RData files
+#' 
+#' @details
+#' Somewhat of a work in progress. The underlying functions called from here are complicated and clunky. Heavily relies on rtaxize package. The functions I wrote were originally for personal use, and I tried to program around doing an exhaustive search, but this made the functions too complicated for their own good. On the upside, they do a lot of \code{\link{tryCatch}} to search the different rtaxize databases, making the whole process more robust.
+#' This full process is very slow, especially for large numbers of species. The species looked up are all of those in the raw data sets. The slowest step is by far the common names.
+#' Other functionality, such as trophic level, would be nice and is possible. Similarly, other ecological information and images. Some of this could be accomplished with rfishbase. 
+update.taxDB <- function(path="data"){
 	# Function to search all taxonomy data bases for values in the trawl data set
 	# It will take a very long time to run this script
 	# There are 3 main tasks:
@@ -40,7 +52,20 @@ update.taxDB <- function(){
 	# ==========================
 	# = Load The Species Names =
 	# ==========================
-	load("data/tempo-image-spp.key.RData")
+	# load("data/tempo-image-spp.key.RData")
+	spp <- sort(unique(c(
+		trawlData::clean.ai[,unique(ref)], 
+		trawlData::clean.ebs[,unique(ref)], 
+		trawlData::clean.gmex[,unique(ref)], 
+		trawlData::clean.goa[,unique(ref)], 
+		trawlData::clean.neus[,unique(ref)], 
+		trawlData::clean.newf[,unique(ref)], 
+		trawlData::clean.sa[,unique(ref)], 
+		trawlData::clean.sgulf[,unique(ref)], 
+		trawlData::clean.shelf[,unique(ref)], 
+		trawlData::clean.wcann[,unique(ref)], 
+		trawlData::clean.wctri[,unique(ref)]
+	)))
 
 
 	# ======================
@@ -48,19 +73,19 @@ update.taxDB <- function(){
 	# ======================
 	# From raw names
 	getSppData <- getSpp(c.all(spp[!is.na(spp)]))
-	save(getSppData, file="data/getSppData.RData")
+	save(getSppData, file=file.path(path,"getSppData.RData"))
 
 
 	# ============================
 	# = Taxonomic Classification =
 	# ============================
 	getTaxData <- getTax(spp.key[!is.na(spp),unique(spp)])
-	save(getTaxData, file="data/getTaxData.RData")
+	save(getTaxData, file=file.path(path,"getTaxData.RData"))
 
 
 	# ================
 	# = Common Names =
 	# ================
 	getCmmnData <- getCmmn(spp.key[!is.na(spp),unique(spp)])
-	save(getCmmnData, file="data/getCmmnData.RData")
+	save(getCmmnData, file=file.path(path,"getCmmnData.RData"))
 }

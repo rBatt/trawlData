@@ -559,14 +559,27 @@
 #' Water depth gridded from the ETOPO data source
 #' 
 #' @format raster brick
-"ETOPO"
+"depth"
 
 #' HadISST Surface Temperatures
 #' 
 #' Surface temperatures from the HadISST data source. Includes terrestrial and aquatic. Gridded.
 #' 
+#' The full data set is in \code{sst}; \code{sst.ann} has annual averages; \code{sst.mu} is the long-term temporal mean of the annual averages (so 1 value per grid cell).
+#' 
 #' @format raster brick
-"HadISST"
+#' @name HadISST
+NULL
+
+#' @rdname HadISST
+"sst"
+
+#' @rdname HadISST
+"sst.ann"
+
+#' @rdname HadISST
+"sst.mu"
+
 
 #' SODA
 #' Gridded SODA bottom temperatures  

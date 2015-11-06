@@ -10,7 +10,7 @@
 #' Somewhat of a work in progress. The underlying functions called from here are complicated and clunky. Heavily relies on rtaxize package. The functions I wrote were originally for personal use, and I tried to program around doing an exhaustive search, but this made the functions too complicated for their own good. On the upside, they do a lot of \code{\link{tryCatch}} to search the different rtaxize databases, making the whole process more robust.
 #' This full process is very slow, especially for large numbers of species. The species looked up are all of those in the raw data sets. The slowest step is by far the common names.
 #' Other functionality, such as trophic level, would be nice and is possible. Similarly, other ecological information and images. Some of this could be accomplished with rfishbase. 
-update.taxDB <- function(path="data"){
+updateDB <- function(path="data"){
 	# Function to search all taxonomy data bases for values in the trawl data set
 	# It will take a very long time to run this script
 	# There are 3 main tasks:

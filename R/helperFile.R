@@ -4,7 +4,7 @@
 #' Fast read for fixed width format files
 #' 
 #' @param ... file names to open
-#' @param \code{cols} vector of integer column widths
+#' @param cols vector of integer column widths
 #' @param column_types character vector indicating classes of columns
 #' @param column_names column_names character vector of column headers
 #' 
@@ -90,7 +90,7 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 	for(i in 1:n.pat){
 		
 		# Get a list of csv files in the dir
-		files <- list.files(zipdir, rec=TRUE, pattern=pattern[i])
+		files <- list.files(zipdir, recursive=TRUE, pattern=pattern[i])
 		
 		if(grepl("\\.fwf$", pattern[i]) | use.fwf[i]){
 			fread2 <- fread.fwf

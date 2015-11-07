@@ -33,7 +33,7 @@ s2c <- function(x, type="list"){
 #' Reorder the first dimension of array
 #' 
 #' @param x an array
-#' @param ord vector indicating the order of the elements; for format, see \link{\code{order}}
+#' @param ord vector indicating the order of the elements; for format, see \code{\link{order}}
 #' 
 #' @details
 #' This function is only useful if you don't know the total number of dimensions in the array; if the total number of dimensions are known, it is much faster to simply do \code{x[ord,,]} (for 3d array).

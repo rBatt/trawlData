@@ -18,7 +18,7 @@
 #' 
 #' @return a character vector that has been altered by removing content unlikely to belong to a species name.
 #' 
-#' @export
+#' @export c.all
 c.all <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
 
 #' @describeIn c.all Fix case to sentence case

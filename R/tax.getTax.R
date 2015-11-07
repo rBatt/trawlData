@@ -2,7 +2,7 @@
 #' 
 #' Get the taxonomic classification for a Latin name
 #' 
-#' @param sppCorr2 a scientific name; character vector
+#' @param sppCorr a scientific name; character vector
 #' @param class.names the taxonomic classification names to search for and return
 #' 
 #' @details
@@ -11,8 +11,13 @@
 #' @return
 #' A data.table with columns corresponding to the taxonomic level, the original species name, and \code{taxLvl} as the most specific (lowest) taxonomic level for which a match was found.
 #' 
+#' @seealso \code{\link{getCmmn}}, \code{\link{getTax}
+#' 
 #' @examples
-#' getTax(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
+#' getTax(c(
+#' 	"Pomatomus saltatrix",
+#' 	"Chionoecetes tanneri"
+#' ))
 #' 
 #' @export
 getTax <- function(sppCorr, class.names=c("species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom")){

@@ -3,7 +3,7 @@
 #' Clean by ensuring the presence of standard columns.
 #' 
 #' @details
-#' Add missing columns if they don't exist. These are standard values like \code{wtcpue}, \code{spp}, \code{datetime}, and \{reg}. I will make a full list in future versions, when the decisions are finalized.
+#' Add missing columns if they don't exist. These are standard values like \code{wtcpue}, \code{spp}, \code{datetime}, and \code{reg}. I will make a full list in future versions, when the decisions are finalized.
 #' 
 #' @template X_reg
 #' 

@@ -15,6 +15,7 @@
 #' ai.data <- read.trawl(reg="ai", zippath=file.path(system.file(package="trawlData"),"inst/extdata"))
 #' }
 #' 
+#' @import data.table
 #' @export read.trawl
 read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), zippath="./inst/extdata", ...){
 	reg <- match.arg(reg, several.ok=TRUE)

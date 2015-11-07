@@ -7,7 +7,7 @@
 #' @details
 #' Regions tend to have very different column names for what are essentiallythe same measurements, descriptors, etc. This function tries to give everything a standardized name when it's appropriate.  
 #' 
-#' @export
+#' @export clean.names
 clean.names <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)

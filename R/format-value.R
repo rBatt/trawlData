@@ -55,6 +55,7 @@ cullPost2 <- function(x){
 #' 
 #' @return
 #' logical vector of same length as x
+#' @export is.species
 is.species <- function(x){
 	sapply(strsplit(x, " "), length) >= 2
 }

@@ -7,7 +7,7 @@
 #' 
 #' @template X_reg
 #' 
-#' @export
+#' @export clean.columns
 clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)

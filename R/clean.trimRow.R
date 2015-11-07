@@ -7,7 +7,7 @@
 #' @details
 #' Recommended rows to drop according to Malin's original scripts and what's in the OceanAdapt repo. Rows are not actually dropped; rather, a column called \code{keep.row} is added to the data.table; when \code{keep.row} is \code{FALSE}, it is recommended that the row be dropped.
 #' 
-#' @export
+#' @export clean.trimRow
 clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)

@@ -152,7 +152,7 @@ lu <- function(x) length(unique(x))
 #' trim.autoColumn(dt.m)
 #' print(dt.m)
 #' 
-#' @export
+#' @export trim.autoColumn
 trim.autoColumn <- function(X){
 	strip.names <- gsub("\\.[xy]", "", names(X))
 	dup.names <- strip.names[duplicated(strip.names)]
@@ -241,6 +241,8 @@ trim.autoColumn <- function(X){
 #' tbl.ref <- tbl[,animal]
 #' match.tbl(ref, tbl.ref, tbl[,animal]) # return what was matched to
 #' match.tbl(ref, tbl.ref, tbl[,a]) # return another column
+#' 
+#' @export match.tbl
 match.tbl <- function(ref, tbl.ref, tbl.val, exact=FALSE){
 	# ref = gmex[,spp.orig]
 	# tbl.ref = taxInfo[,raw.spp]

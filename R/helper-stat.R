@@ -46,7 +46,7 @@ wtAvg <- function(x,y){
 #' 
 #' @param x numeric vector whose NA values to be replaced by the non-NA mean
 #' @template helperStatTemplate
-#' @export
+#' @export fill.mean
 fill.mean <- function(x){
 	nai <- is.na(x)
 	x[nai] <- meanna(x)

@@ -26,6 +26,9 @@
 #' 
 #' @param maxOut the maximum number of allowable elements in the output array or data.table. In place to prevent early detection of a huge number of combinations that might use up a larger-than-expected amount of memory.
 
+#' still testing!!
+
+#' @export expand.data
 
 expand.data <- function(comD, arr.dim, keyValue="value", fillID=NULL, fillValue=NA, Rule=NULL, keyID=NULL, gScope=NULL, fScope=NULL, vScope=NULL, redID=NULL, redValue=NULL, arrayOut=FALSE, aggFun=NULL, maxOut=Inf){
 

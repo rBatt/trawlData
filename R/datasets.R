@@ -606,3 +606,17 @@ NULL
 # =======================
 # = Taxonomic Data Sets =
 # =======================
+#' Common Names
+#' Species' common names matched to scientific names
+#' @seealso \code{\link{getCmmn}}
+"getCmmnData"
+
+#' Spp Names
+#' Scientific names matched to raw taxonomic name entries
+#' @seealso \code{\link{getSpp}}
+"getSppData"
+
+#' Taxonomic Classification
+#' Taxonomic classification matched to scientific names
+#' @seealso \code{\link{getTax}}
+"getTaxData"

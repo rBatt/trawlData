@@ -1,5 +1,4 @@
-
-flag.spp <- function(Z, index){
+flagSpp <- function(Z, index){
 	kill.action <- function(Z, index, code){
 		if(code=="SKIP"){
 			# truly skip; leave all flags as-is
@@ -36,7 +35,7 @@ flag.spp <- function(Z, index){
 # =========================================
 # = Check for and Correct Inconsistencies =
 # =========================================
-check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","match.src","tax.src")){
+checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","match.src","tax.src")){
 	replacementsMade <- 0
 	replacementsFailed <- 0
 	replacementUnneeded <- 0
@@ -107,7 +106,7 @@ check.consistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.con
 # Function to see if the corrected version of a bad spp name
 # already exists in a data set; if it does,
 # then the wrong version is overwritten with the content 
-check.and.set <- function(wrong, corrected, Z=spp.key){
+check_and_set <- function(wrong, corrected, Z=spp.key){
 	check <- spp.key[spp!=wrong,corrected%in%spp]
 	if(check){
 		# if the corrected name already exists,

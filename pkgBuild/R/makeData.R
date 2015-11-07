@@ -1,4 +1,4 @@
-make.data <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read, clean=F, clean.save=clean, clean.load=!clean, trimR=T, trimC=T){
+makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read, clean=F, clean.save=clean, clean.load=!clean, trimR=T, trimC=T){
 	
 	if(missing(regions)){
 		regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")

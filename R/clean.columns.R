@@ -35,7 +35,7 @@ clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 }
 
 
-make.haul <- function(X){
+makeHaul <- function(X){
 	haul.pt <- function(x){
 		formatC(x, width=3, flag=0)
 	}
@@ -50,7 +50,7 @@ make.haul <- function(X){
 clean.columns.ai <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
@@ -91,7 +91,7 @@ clean.columns.ai <- function(X){
 clean.columns.ebs <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
@@ -180,7 +180,7 @@ clean.columns.gmex <- function(X){
 clean.columns.goa <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]

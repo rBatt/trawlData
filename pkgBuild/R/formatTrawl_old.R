@@ -1,5 +1,5 @@
 
-format.trawl_old <- function(){
+formatTrawlOld <- function(){
 	# ==================
 	# = Load libraries =
 	# ==================

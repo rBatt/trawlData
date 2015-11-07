@@ -4,7 +4,7 @@
 #' 
 #' @param spp.key the spp.key data.table contained in this package
 
-create.spp.key_manual <- function(spp.key){
+createSppKey_manual <- function(spp.key){
 	# ======================
 	# = Manual Corrections =
 	# ======================	

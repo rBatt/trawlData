@@ -1,4 +1,4 @@
-format.msom.basic <- function(){
+formatMsomBasic <- function(){
 	# ==================
 	# = Load libraries =
 	# ==================

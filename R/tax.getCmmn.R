@@ -8,7 +8,7 @@
 #' 
 #' @return a data.table with two columns: the species name searched, and the common name
 #' 
-#' @example
+#' @examples
 #' getCmmn(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
 #' 
 #' @export

@@ -1,4 +1,4 @@
-read.ETOPO <- function(path="./trawl/Data/raw_data/depthData/ETOPO2v2c_f4.nc", Save=F){
+readETOPO <- function(path="./trawl/Data/raw_data/depthData/ETOPO2v2c_f4.nc", Save=F){
 	# NOAA depth data
 	# http://www.ngdc.noaa.gov/mgg/global/relief/ETOPO2/ETOPO2v2-2006/ETOPO2v2c/netCDF/
 	# in netCDF format

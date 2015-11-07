@@ -10,7 +10,7 @@
 #' Other data entry errors or necessary corrections are implemented here, too.
 #' Dates are not thoroughly formatted here, except in some cases where getting a \code{year}, e.g., requires parsing values out of other columns. POSIX class dates not created.
 #' 
-#' @export
+#' @export clean.format
 clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)

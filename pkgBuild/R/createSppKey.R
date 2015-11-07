@@ -7,7 +7,7 @@
 # load("data/getTaxData.RData")
 # load("data/getCmmnData.RData")
 
-create.spp.key <- function(spp, taxInfo, spp.corr1, save.key=FALSE){
+createSppKey <- function(spp, taxInfo, spp.corr1, save.key=FALSE){
 	
 	# X.match is from taxInfo
 	X.match <- match.tbl(ref=spp[-1], tbl.ref=taxInfo[,raw.spp], tbl.val=taxInfo[,spp])

@@ -1,4 +1,4 @@
-format.msom.cov <- function(){
+formatMsomCov <- function(){
 	# ==================
 	# = Load libraries =
 	# ==================

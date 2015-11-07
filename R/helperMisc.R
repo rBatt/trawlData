@@ -7,11 +7,12 @@
 #' 
 #' @details
 #' e.g., convert \code{c("column1","column2")} to \code{list(column1, column2)}
-#' intended for use in a data.table (see ?\code{\link{data.table}})
+#' intended for use in a data.table (see \code{\link{data.table}})
 #' 
 #' @return a list
 #' 
-#'  @example
+#'  @examples
+#' library(data.table)
 #' first <- data.table(cray=sample(letters,4),"one"=c(1,2,3,4), "two"=c(1,3,5,7))
 #' second <- data.table("cray"=sample(letters,35, TRUE))
 #' oc <- CJ(one=first[,(one)], cray=second[[1]])
@@ -44,7 +45,7 @@ s2c <- function(x, type="list"){
 #' 
 #' @source \url{http://stackoverflow.com/q/32000387/2343633}
 #' 
-#' @example
+#' @examples
 #' arr <- array(1:240, dim=c(40,3,2))
 #' orderD1(arr, 40:1)
 #' arr[40:1,,]
@@ -106,7 +107,7 @@ orderD1 <- function(x, ord){
 #' 
 #' @details Very convenient shorthand.
 #' @return an integer of the number of unique elements in \code{x}
-#' @example
+#' @examples
 #' lu(letters)
 #' @export
 lu <- function(x) length(unique(x))
@@ -145,7 +146,7 @@ lu <- function(x) length(unique(x))
 #' 
 #' @return NULL or nothing; however, has the side affect of change the content of \code{X}.
 #' 
-#' @example
+#' @examples
 #' dt1 <- data.table(a=1:10, b=c(10:2, NA))
 #' dt2 <- data.table(a=1:10, b=10:1)
 #' dt.m <- merge(dt1, dt2, by="a", all.x=T)
@@ -221,20 +222,20 @@ trim.autoColumn <- function(X){
 #'  [,4] \tab tbl.row \tab integer \tab Row of match in the table\cr
 #' }
 #' 
-#' @details When \code{exact=FALSE}, \code{match.tbl} performs a \code{\link{match}}, with the added utility of returning a value in the table (rather than simply the index of the matches). When \code{exact=TRUE}, functions in \code{\link{c.all}} are called to reformat \code{ref} and search for a match. If not match is found still, then fuzzy matching is performed via \code{\link{agrep}} on versions of ref that have and have not been formatted via \code{\link{c.all}}.
+#' @details When \code{exact=FALSE}, \code{match.tbl} performs a \code{\link{match}}, with the added utility of returning a value in the table (rather than simply the index of the matches). When \code{exact=TRUE}, functions in \code{\link{cull}} are called to reformat \code{ref} and search for a match. If not match is found still, then fuzzy matching is performed via \code{\link{agrep}} on versions of ref that have and have not been formatted via \code{\link{cull}}.
 #' 
 #' The values of \code{val.src} indicate the amount of fuzziness involved in the match:
 #' \tabular{ll}{
 #' m1 \tab an exact match\cr
-#' m2 \tab exact match after \code{\link{c.all}}\cr
+#' m2 \tab exact match after \code{\link{cull}}\cr
 #' m3 \tab fuzzy match performed on ref\cr
-#' m4 \tab fuzzy match performed on \code{c.all(ref)}
+#' m4 \tab fuzzy match performed on \code{cull(ref)}
 #' }
 #' Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.case=T, max.distance=0.25}.
 #' @section Warning:
 #' I am suspicous that the values returned in \code{tbl.ref} may be in accurate. However, this quality, and the function in general, has not been thoroughly tested. Although use-cases have given desirable results, albeit I think that the fuzzy matching can be a bit too fuzzy (finding matches where there shouldn't be any). Be aware.
 #' 
-#' @example
+#' @examples
 #' library(data.table)
 #' tbl <- data.table(animal=c("cats","dogs","elephant","giraffe","monkey","person","Gadus morhua", "Paralichthys dentatus", "Pomatomus saltatrix", "Amphiprioninae"), a=1:10, b=10:1)
 #' ref <- c("GADUS MORHUA", "Amphiprion (the computer)", "elehpant", "dogs", "squirrel", "gaus")

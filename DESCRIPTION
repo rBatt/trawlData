@@ -1,17 +1,11 @@
 Package: trawlData
 Title: What the Package Does (one line, title case)
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: 
-    R (>= 3.2.2)
+Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", role=c("aut","cre")),
+	person(given="James W.", family="Morley", email="jw.morley@rutgers.edu", role=c("aut")),
+	person(given="Rebecca L.", family="Selden", email="becca.selden@gmail.com", role=c("aut")),
+	person(given="Malin L.", family="Pinsky", email="malin.pinsky@rutgers.edu", role=c("aut")))
+Description: What the package does (one paragraph).
+Depends: R (>= 3.2.2)
 License: What license is it under?
 LazyData: true
-RoxygenNote: 5.0.0.9000
-Imports: data.table
-Suggests: LaF,
-    bit64,
-    PBSmapping,
-    taxize,
-    rfishbase,
-    raster

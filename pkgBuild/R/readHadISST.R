@@ -1,4 +1,4 @@
-read.HadISST <- function(path="./trawl/Data/raw_data/HadISST/HadISST_sst.nc", Save=F){
+readHadISST <- function(path="./trawl/Data/raw_data/HadISST/HadISST_sst.nc", Save=F){
 	# Read in and trim HadISST (sea surf temp)
 
 	# ==================

@@ -9,7 +9,7 @@
 #' @param x A character vector
 #' 
 #' @details
-#' \code{c.all} performs the following corrections, in this order:  
+#' \code{cull} performs the following corrections, in this order:  
 #' 1. remove extra spaces
 #' 2. change to sentence case
 #' 3. remove generic species indicators (spp or Sp., e.g.)
@@ -18,31 +18,31 @@
 #' 
 #' @return a character vector that has been altered by removing content unlikely to belong to a species name.
 #' 
-#' @export c.all
-c.all <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
+#' @export
+cull <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
 
-#' @describeIn c.all Fix case to sentence case
+#' @describeIn cull Fix case to sentence case
 fixCase <- function(x){
 	s <- paste(toupper(substring(x, 1, 1)), substring(x, 2), sep="")
 	paste(substring(s, 1, 1), tolower(substring(s, 2)), sep="")
 }
 
-#' @describeIn c.all Remove extra spaces
+#' @describeIn cull Remove extra spaces
 cullExSpace <- function(x){
 	gsub("\\s+", " ", x)
 }
 
-#' @describeIn c.all Remove generic species indicator
+#' @describeIn cull Remove generic species indicator
 cullSp <- function(x){
 	gsub("\\s(s[p]{1,2}|unid)\\..*", "", x)
 }
 
-#' @describeIn c.all Remove parentheses and contents
+#' @describeIn cull Remove parentheses and contents
 cullParen <- function(x){
 	gsub("\\s?\\(.*\\)", "", x)
 }
 
-#' @describeIn c.all Remove words after the last two
+#' @describeIn cull Remove words after the last two
 cullPost2 <- function(x){
 	gsub("^(\\b[A-Za-z]{1,}\\b\\s+)(\\b[A-Za-z]{1,}\\b).*", "\\1\\2", x)
 }

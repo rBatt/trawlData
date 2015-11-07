@@ -11,7 +11,7 @@
 #' @return
 #' A data.table with columns corresponding to the taxonomic level, the original species name, and \code{taxLvl} as the most specific (lowest) taxonomic level for which a match was found.
 #' 
-#' @example
+#' @examples
 #' getTax(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
 #' 
 #' @export

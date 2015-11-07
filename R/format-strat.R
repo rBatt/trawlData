@@ -12,6 +12,9 @@
 #' 
 #' @export
 ll2km <- function(x,y){
+	if (!requireNamespace("PBSmapping", quietly = TRUE)) {
+		stop("PBSmapping needed for this function to work. Please install it.", call. = FALSE)
+	}
 	blah <- data.frame(X=x, Y=y) 
 	attr(blah, "projection")="LL"
 	blah2 <- PBSmapping:::convUL(blah)
@@ -83,6 +86,7 @@ ll2strat <- function(lon, lat, gridSize=1){
 #' This function is not ready to be used. Saves figures, has hard-coded paths, looks for reference files outisde of package, etc.
 #' 
 makeStrat <- function(x, regName, doLots=NULL){
+	
 	stopifnot(is.data.table(x))
 	
 	tolLoc <- "/Users/Battrd/Documents/School&Work/pinskyPost/trawl/Results/stratTol/"
@@ -188,11 +192,14 @@ makeStrat <- function(x, regName, doLots=NULL){
 #' 
 #' @export
 calcarea <- function(lonlat){
+	if (!requireNamespace("PBSmapping", quietly = TRUE)) {
+		stop("PBSmapping needed for this function to work. Please install it.", call. = FALSE)
+	}
 	hullpts <- chull(x=lonlat[,1], y=lonlat[,2]) # find indices of vertices
 	hullpts <- c(hullpts,hullpts[1]) # close the loop
-	ps <- appendPolys(NULL,mat=as.matrix(lonlat[hullpts,]),1,1,FALSE) # create a Polyset object
+	ps <- PBSmapping::appendPolys(NULL,mat=as.matrix(lonlat[hullpts,]),1,1,FALSE) # create a Polyset object
 	attr(ps,"projection") <- "LL" # set projection to lat/lon
-	psUTM <- convUL(ps, km=TRUE) # convert to UTM in km
+	psUTM <- PBSmapping::convUL(ps, km=TRUE) # convert to UTM in km
 	polygonArea <- calcArea(psUTM,rollup=1)
 	return(polygonArea$area)
 }

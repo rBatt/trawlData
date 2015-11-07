@@ -27,7 +27,7 @@ getSpp <- function(uspp){
 		t.uspp <- uspp[uspp.chunks==t.chunk] # turn the chunk name into species names
 		
 		# Look up current spcies
-		t.spp.corr1.names <- gnr_resolve(t.uspp, stripauthority=TRUE, http="get", resolve_once=TRUE) # check w/ taxize
+		t.spp.corr1.names <- taxize::gnr_resolve(t.uspp, stripauthority=TRUE, http="get", resolve_once=TRUE) # check w/ taxize
 		t.spp.corr1 <- data.table(grb.spp1(t.spp.corr1.names)) # store checked name in data.table
 		
 		# Accumulate lookup results

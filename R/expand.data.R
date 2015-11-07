@@ -1,29 +1,29 @@
 #' Expand Data
-
+#' 
 #' Expand data set to include 0's, and reformat to array to save memory
-
+#' 
 #' @param comD the "compact" data set, supplied as a data.table
-
+#' 
 #' @param keyID columns in keyID will either define the arr.dim, the elements of the output array, or, for those elements not in either of those, will be aggreated over
-
+#' 
 #' @param keyValue the name of the column whose values, along with those in fillValue, will form the elements of the output array
-
+#' 
 #' @param arr.dim character vector specifying the names of columns that would specify the dimensions of the output array
-
+#' 
 #' @param scope character vector specifying columns. The number of unique combinations of factors among those columns will specify the number of output arrays. If left NULL, there will be 1 output array with dimension sizes equal to the number of factor levels in the respective elements of comD.
-
+#' 
 #' @param redID a list of the categories to uniquely define redValue; can only include values in arr.dim, but must not include all of them
-
+#' 
 #' @param redValue a list of character vectors whose elements correspond to column names whose levels are redundant with some subset of keyID; e.g., if a keyID is "species", then redValue would include columns like Genus and Family, specified as list(c("Genus","Family")), and the corresponding redID would be list(c("species")).
-
+#' 
 #' @param fillID a list of character vectors, each of which is a subset of scope, and when missing levels of these factor/s are added for existing combinations of setdiff(arr.dim, fillID[[i]]), should be filled in with the corresponding value of fillValue. Note that the last element of fillID will always contain the full set in arr.dim, because the resulting array cannot be ragged.
-
+#' 
 #' @param fillValue a vector of values that should be used to fill in missing combinations of arr.dim. The class of fillValue should match the class of keyValue.
-
+#' 
 #' @param arrayOut logical; Defaults to FALSE, in which case the output is a data.table, with number of rows corresponding to the product of the number of unique values in each of arr.dim (in the case where scope=NULL), or the sum of that product for each of the unique combinations of the levels in scope. If TRUE, the output is an array (if scope=NULL), or list of arrays.
-
+#' 
 #' @param aggFun Function used to aggregate among levels of columns specified in keyID, but not present in arr.dim.
-
+#' 
 #' @param maxOut the maximum number of allowable elements in the output array or data.table. In place to prevent early detection of a huge number of combinations that might use up a larger-than-expected amount of memory.
 
 
@@ -44,7 +44,9 @@ expand.data <- function(comD, arr.dim, keyValue="value", fillID=NULL, fillValue=
 	# ==========
 	# = Checks =
 	# ==========
-	stopifnot(require(data.table))
+	if (!requireNamespace("data.table", quietly = TRUE)) {
+		stop("data.table needed for this function to work. Please install it.", call. = FALSE)
+	}
 	stopifnot(is.data.table(comD))
 	stopifnot(class(fillValue)==class(comD[,value]))
 	stopifnot(length(redID)==length(redValue))

@@ -29,20 +29,20 @@ getTax <- function(sppCorr, class.names=c("species", "genus", "family", "order",
 		# run tryCatch to be able to use same subsetting regardless of match find
 		t.classification <- tryCatch( # begin NCBI
 		{
-			t.id <- get_uid(sppCorr[i], ask=FALSE, verbose=FALSE) # get taxonomic serial number (NCBI)
+			t.id <- taxize::get_uid(sppCorr[i], ask=FALSE, verbose=FALSE) # get taxonomic serial number (NCBI)
 			classification(t.id, verbose=FALSE)[[1]] # search for classification
 		},
 			error=function(cond){ # NCBI error function
 				tryCatch( # begin ITIS
 				{
-					t.id <- get_tsn(sppCorr[i], ask=FALSE, verbose=FALSE) # get taxonomic serial number (ITIS)
-					classification(t.id, verbose=FALSE)[[1]] # search for classification
+					t.id <- taxize::get_tsn(sppCorr[i], ask=FALSE, verbose=FALSE) # get taxonomic serial number (ITIS)
+					taxize::classification(t.id, verbose=FALSE)[[1]] # search for classification
 				},
 				error=function(cond){ # ITIS error function
 					tryCatch( # begin EOL
 					{
-						t.id <- get_eolid(sppCorr[i], ask=FALSE, verbose=FALSE) # get serial number (EOL)
-						classification(t.id, verbose=FALSE)[[1]] # search for classification
+						t.id <- taxize::get_eolid(sppCorr[i], ask=FALSE, verbose=FALSE) # get serial number (EOL)
+						taxize::classification(t.id, verbose=FALSE)[[1]] # search for classification
 					}, 
 					error=function(cond){ # EOL error function
 						as.character(NA)

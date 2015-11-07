@@ -13,8 +13,6 @@
 #' 
 #' @export
 getCmmn <- function(u.sppCorr){
-	library(rfishbase)
-	library(taxize)
 	
 	use.pb <- length(u.sppCorr)>1
 		
@@ -28,21 +26,21 @@ getCmmn <- function(u.sppCorr){
 		# Look up common names
 		t.spp.cmmn00 <- tryCatch(
 			{
-				rfb.check <- sci_to_common(u.sppCorr[i])[[1]]
+				rfb.check <- rfishbase::sci_to_common(u.sppCorr[i])[[1]]
 				stopifnot(length(rfb.check)>0)
 				rfb.check
 			}, error=function(cond){
 				tryCatch( # first try looking in ncbi b/c gives english
-					{ncbi.check <- sci2comm(u.sppCorr[i], db="ncbi", ask=FALSE, verbose=FALSE)[[1]][1][[1]]
+					{ncbi.check <- taxize::sci2comm(u.sppCorr[i], db="ncbi", ask=FALSE, verbose=FALSE)[[1]][1][[1]]
 						stopifnot(!is.null(ncbi.check))
 						ncbi.check
 					}, 
 					error=function(cond){ # if ncbi fails, ...
 						tryCatch( # next try finding the common name in itis
-							{sci2comm(u.sppCorr[i], db="itis", ask=FALSE, verbose=FALSE)[[1]]},
+							{taxize::sci2comm(u.sppCorr[i], db="itis", ask=FALSE, verbose=FALSE)[[1]]},
 							error=function(cond){ # if ncbi and itis fail, ...
 								tryCatch( # next look in eol
-									{sci2comm(u.sppCorr[i], db="eol", ask=FALSE, verbose=FALSE)[[1]]},
+									{taxize::sci2comm(u.sppCorr[i], db="eol", ask=FALSE, verbose=FALSE)[[1]]},
 									error=function(cond){NA} # if all of ncbi and itis and eol fail, return NA
 								)
 							} # end 3rd error function

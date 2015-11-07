@@ -12,6 +12,9 @@
 #' 
 #' @return a data.table
 fread.fwf <- function(..., cols, column_types, column_names){
+	if (!requireNamespace("LaF", quietly = TRUE)) {
+		stop("LaF needed for this function to work. Please install it.", call. = FALSE)
+	}
 	if(missing(cols)){
 		cols <- c(3,4,4,3) # for newf data
 	}
@@ -23,7 +26,7 @@ fread.fwf <- function(..., cols, column_types, column_names){
 		column_names <- paste0("V", seq_len(length(cols)))
 	}
 	
-	laf <- laf_open_fwf(..., column_widths=cols, column_types=column_types, column_names=column_names) #
+	laf <- LaF::laf_open_fwf(..., column_widths=cols, column_types=column_types, column_names=column_names) #
 	# laf_open_fwf("inst/extdata/newf.zip", column_widths=cols, column_types=column_types, column_names=column_names)
 	laf <- as.data.table(laf[,])
 	return(laf)

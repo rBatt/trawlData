@@ -76,7 +76,7 @@ is.species <- function(x){
 rmWhite <- function(x){
 	stopifnot(is.data.table(x))
 	has.cc <- names(x)[sapply(x, is.character)]
-	x[,c(has.cc):=lapply(eval(s2c(has.cc)), str_trim)]
+	x[,c(has.cc):=lapply(eval(s2c(has.cc)), stringr::str_trim)]
 }
 
 

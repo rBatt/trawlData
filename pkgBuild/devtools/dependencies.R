@@ -12,3 +12,4 @@ devtools::use_package("taxize", "Suggests") # for updating taxonomy databases
 devtools::use_package("rfishbase", "Suggests") # for updating taxonomy databases
 
 devtools::use_package("raster", "Suggests") # for gridded environmental data sets
+devtools::use_package("stringr", "Suggests") # for rmWhite

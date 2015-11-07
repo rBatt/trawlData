@@ -9,8 +9,7 @@
 #' @return a data.table with two columns: the species name searched, and the common name
 #' 
 #' @example
-#' # sometimes it works well, sometimes not
-#' getCmmn(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua"))
+#' getCmmn(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
 #' 
 #' @export
 getCmmn <- function(u.sppCorr){

@@ -10,7 +10,7 @@
 #' @return
 #' A data.table with 2 columns; "spp" column contains unchecked species names, "sppCorr" contains corrected (checked) species names
 #' 
-#' @seealso \code{\link{getCmmn}}, \code{\link{getTax}
+#' @seealso \code{\link{getCmmn}}, \code{\link{getTax}}
 #' 
 #' @export
 getSpp <- function(uspp){

@@ -1,5 +1,3 @@
-# taken from leapfrog, was in another script first though
-
 #' Lon Lat to km
 #' 
 #' Convert longitude and latitude in degrees to the same in kilometers
@@ -8,6 +6,8 @@
 #' @param y latitude
 #' 
 #' @details
+#' Simple function to turn lon-lat distances (in degrees) into the kilometer equivalent. Given kilometers, easy to get areas, etc.
+#' 
 #' @return A named list with elements of Y (lat in km) and X (lon in km).
 #' 
 #' @export

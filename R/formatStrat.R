@@ -201,7 +201,7 @@ calcarea <- function(lonlat){
 	ps <- PBSmapping::appendPolys(NULL,mat=as.matrix(lonlat[hullpts,]),1,1,FALSE) # create a Polyset object
 	attr(ps,"projection") <- "LL" # set projection to lat/lon
 	psUTM <- PBSmapping::convUL(ps, km=TRUE) # convert to UTM in km
-	polygonArea <- calcArea(psUTM,rollup=1)
+	polygonArea <- PBSmapping::calcArea(psUTM,rollup=1)
 	return(polygonArea$area)
 }
 

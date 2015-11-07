@@ -1,7 +1,8 @@
 #' Get Species
 #' Lookup, and correct, species names
 #' 
-#' @param uspp: character vector of unique species names to be checked
+#' @param uspp character vector of unique species names to be checked
+#' @param x a character
 #' 
 #' @details
 #' Lookup species names using taxize, with option to only lookup names not in a reference data.table of previously-checked names. Currently looks up 1 species name at a time, but function could be modified to look up chunks. Relies heavily on taxize.
@@ -9,7 +10,7 @@
 #' @return
 #' A data.table with 2 columns; "spp" column contains unchecked species names, "sppCorr" contains corrected (checked) species names
 #' 
-#' @seealso \code{\link{getCmmn}}, \code{\link{getTax}}, \code{\link{getTL}}, \code{\link{updateDB}}
+#' @seealso \code{\link{getCmmn}}, \code{\link{getTax}
 #' 
 #' @export
 getSpp <- function(uspp){

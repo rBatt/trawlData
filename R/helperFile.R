@@ -8,7 +8,7 @@
 #' @param column_types character vector indicating classes of columns
 #' @param column_names column_names character vector of column headers
 #' 
-#' @details uses data.table and LaF packages. The read is performed entirely by \code{\link{laf_open_fwf}}, but the output is converted to a data.table.
+#' @details uses data.table and LaF packages. The read is performed entirely by \code{\link{LaF:laf_open_fwf}}, but the output is converted to a data.table.
 #' 
 #' @return a data.table
 #' @export fread.fwf

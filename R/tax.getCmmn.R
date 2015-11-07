@@ -11,6 +11,8 @@
 #' @example
 #' # sometimes it works well, sometimes not
 #' getCmmn(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua"))
+#' 
+#' @export
 getCmmn <- function(u.sppCorr){
 	library(rfishbase)
 	library(taxize)

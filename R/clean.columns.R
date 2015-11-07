@@ -136,7 +136,7 @@ clean.columns.gmex <- function(X){
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
-	X[,year:=as.integer(format.Date(datetime, format="%Y"))]
+	X[,year:=as.character(format.Date(datetime, format="%Y"))]
 	
 	# season
 	# just naming from the survey name

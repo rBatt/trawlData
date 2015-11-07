@@ -1,7 +1,12 @@
 
+# needs to be re-done
+
+# core example:
+# ecology("Gadus morhua", fields=c("DietTroph","DietSeTroph","DietTLu","DietseTLu","FoodTroph","FoodSeTroph"))
+
 getTL <- function(spp, found=NULL, found.data=NULL){
 	data(fishbase)
-	fb.names <- fish_names(fish.data)
+	fb.names <- paste(fishbase[,"Genus"], fishbase[,"Species"])
 	findable <- fb.names %in% spp
 	
 	if(!is.null(findable)){
@@ -10,7 +15,7 @@ getTL <- function(spp, found=NULL, found.data=NULL){
 		needed <- findable
 	}
 	
-	print(paste0(lu(spp), " names supplied, ", sum(findable), " findable, of which ", sum(needed), " are needed"))
+	# print(paste0(lu(spp), " names supplied, ", sum(findable), " findable, of which ", sum(needed), " are needed"))
 	
 	if(is.null(found.data)){
 		out.table <- data.table(spp=spp, trophicLevel=NA_real_, trophicLevel.se=NA_real_)

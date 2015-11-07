@@ -1,6 +1,8 @@
 #' Manual entries to species key
 
 #' Manually add or correct species names, taxonomic, ecological, or reference information for spp.key
+#' 
+#' @param spp.key the spp.key data.table contained in this package
 
 create.spp.key_manual <- function(spp.key){
 	# ======================

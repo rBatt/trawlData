@@ -17,22 +17,22 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	reg <- match.arg(reg)
 	
 	
-	clean.tax0 <- function(x){
-		switch(x,
-			ai = clean.tax.ai(X),
-			ebs = clean.tax.ebs(X),
-			gmex = clean.tax.gmex(X),
-			goa = clean.tax.goa(X),
-			neus = clean.tax.neus(X),
-			newf = clean.tax.newf(X),
-			ngulf = clean.tax.ngulf(X),
-			sa = clean.tax.sa(X),
-			sgulf = clean.tax.sgulf(X),
-			shelf = clean.tax.shelf(X),
-			wcann = clean.tax.wcann(X),
-			wctri = clean.tax.wctri(X)
-		)
-	}
+	# clean.tax0 <- function(x){
+	# 	switch(x,
+	# 		ai = clean.tax.ai(X),
+	# 		ebs = clean.tax.ebs(X),
+	# 		gmex = clean.tax.gmex(X),
+	# 		goa = clean.tax.goa(X),
+	# 		neus = clean.tax.neus(X),
+	# 		newf = clean.tax.newf(X),
+	# 		ngulf = clean.tax.ngulf(X),
+	# 		sa = clean.tax.sa(X),
+	# 		sgulf = clean.tax.sgulf(X),
+	# 		shelf = clean.tax.shelf(X),
+	# 		wcann = clean.tax.wcann(X),
+	# 		wctri = clean.tax.wctri(X)
+	# 	)
+	# }
 	
 	
 	# X <- copy(gmex)
@@ -41,10 +41,10 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	}
 	
 	names.x <- names(X)
-	rmX.names <- names.x[names.x%in%(names(spp.key)[names(spp.key)!="ref"])]
+	rmX.names <- names.x[names.x%in%(names(trawlData::spp.key)[names(trawlData::spp.key)!="ref"])]
 	
-	setkey(spp.key, "ref")
-	X <- merge(X, spp.key, by="ref", all.x=TRUE)
+	setkey(trawlData::spp.key, "ref")
+	X <- merge(X, trawlData::spp.key, by="ref", all.x=TRUE)
 	
 	# alternatively, I could just drop the repeated 
 	# column names before the merge

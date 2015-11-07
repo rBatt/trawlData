@@ -4,12 +4,17 @@
 #' 
 #' @param u.sppCorr character vector of Latin names to lookup
 #' 
-#' Uses rfishbase (this is new from original implementation), and only uses taxize if rfishbase fails to find a match (but taxize is very slow sometimes). Furture versions should use the sealifebase implementation of rfishbase, which I haven't figured out/ tested yet.
+#' Uses rfishbase (this is new from original implementation), and only uses taxize if rfishbase fails to find a match (but taxize is very slow sometimes). Furture versions should use the sealifebase implementation of rfishbase, which I haven't figured out or tested yet.
 #' 
 #' @return a data.table with two columns: the species name searched, and the common name
 #' 
 #' @examples
-#' getCmmn(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
+#' getCmmn(c(
+#' 	"Paralichthys dentatus",
+#' 	"Pomatomus saltatrix",
+#' 	"Gadus morhua",
+#' 	"Chionoecetes tanneri"
+#'  ))
 #' 
 #' @export
 getCmmn <- function(u.sppCorr){

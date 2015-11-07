@@ -192,7 +192,7 @@ makeStrat <- function(x, regName, doLots=NULL){
 #' 
 #' @export
 calcarea <- function(lonlat){
-	if (!requireNamespace("PBSmapping", quietly = TRUE)) {
+	if(!requireNamespace("PBSmapping", quietly = TRUE)){
 		stop("PBSmapping needed for this function to work. Please install it.", call. = FALSE)
 	}
 	hullpts <- chull(x=lonlat[,1], y=lonlat[,2]) # find indices of vertices

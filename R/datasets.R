@@ -299,7 +299,7 @@ NULL
 #' 
 #' From 1958 to 2008. Longitude: 200W to 20E. Latitude: 0N to 90N.  
 #' 
-#' Can be the full data set (\code{soda}), or the annual maximum or mean (\code{soda.annMax} and \code{soda.annMean}, respectively).
+#' Can be the full data set (\code{soda}), or the annual maximum or mean (\code{soda.annMax} and \code{soda.annMean}, respectively). Furthermore, \code{soda.annMax.mu} and \code{soda.annMean.mu} represent the long-term averages of their variables, such that "Max.mu" indicates the among-year average of within-year maxima, and "Mean.mu" similarly indicates the among-year average of the within-year average. Note that in the typical case where each year is comprised of the same number of observations, the long-term average could be taken all at once, rather than first being average within a year.
 #' 
 #' @format raster brick
 #' @name SODA
@@ -312,6 +312,9 @@ NULL
 "soda.annMax"
 
 #' @rdname SODA
+"soda.annMaxmu"
+
+#' @rdname SODA
 "soda.annMean"
 
 
@@ -321,15 +324,35 @@ NULL
 # =======================
 #' Common Names
 #' Species' common names matched to scientific names
-#' @seealso \code{\link{getCmmn}}
+#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
 "getCmmnData"
 
 #' Spp Names
 #' Scientific names matched to raw taxonomic name entries
-#' @seealso \code{\link{getSpp}}
+#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
 "getSppData"
 
 #' Taxonomic Classification
 #' Taxonomic classification matched to scientific names
-#' @seealso \code{\link{getTax}}
+#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
 "getTaxData"
+
+#' Corrected Species Names (legacy)
+#' Species names that had been corrected in older version of code
+#' Used to construct spp.key initially, but should no longer be needed. Provided for reproducibility of older results regarding taxonomy.
+#' Now superceded by \code{\link{getSppData}}. It is recommended that \code{\link{spp.key}} be used for taxonomic reference.
+#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}} \code{\link{spp.key}}
+"spp.corr1"
+
+#' Taxonomic Information (legacy)
+#' Taxonomic classification and ecological information
+#' This is the data set manually checked by Rachel Berman.
+#' Superceded by \code{\link{spp.key}}.
+"taxInfo"
+
+#' Species Key
+#' Key to taxonomic and ecological information for all species surveyed
+#' This data.table is the desirable key to use for species names. Relates survey-entered taxonomic identifiers to true scientific names and other related information.
+#' This key was partially derived from the \code{\link{taxInfo}} data set checked by Rachel Berman. However, taxonomy for this data set seems to be an ongoing process, and is always improving. Thus, \code{spp.key} should represent an improvement, and will continue to improve. Check for updates.
+#' To match the values in this key to taxonomic data, one can use \code{merge} using \code{by="ref"}; alternatively, \code{trawlData::match.tbl} may also be convenient for grabbing specific values.
+"spp.key"

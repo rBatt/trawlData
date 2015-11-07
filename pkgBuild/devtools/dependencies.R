@@ -1,4 +1,4 @@
-devtools::use_package("data.table") # Basis for handling all data sets
+devtools::use_package("data.table", type="Depends") # Basis for handling all data sets
 
 
 devtools::use_package("LaF", "Suggests") # For reading in fwf files

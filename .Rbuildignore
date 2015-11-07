@@ -16,17 +16,18 @@ soda.zip
 depthData.zip
 
 # Scripts to Ignore
-create.spp.key_manual.R
-create.spp.key.R
-expand.data.R
-format.msom.basic.R
-format.msom.cov.R
-format.trawl_old.R
-read.HadISST.R
-read.ETOPO.R
+# create.spp.key_manual.R
+# create.spp.key.R
+# expand.data.R
+# format.msom.basic.R
+# format.msom.cov.R
+# format.trawl_old.R
+# read.HadISST.R
+# read.ETOPO.R
 tax.getTL
-tax.updateDB.R
-authors.R
-dependencies.R
+# tax.updateDB.R
+# authors.R
+# dependencies.R
+^pkgBuild$ # package building folder
 
 

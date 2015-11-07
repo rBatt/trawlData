@@ -8,14 +8,14 @@
 #' @param column_types character vector indicating classes of columns
 #' @param column_names column_names character vector of column headers
 #' 
-#' @details uses data.table and LaF packages. The read is performed entirely by \code{\link{LaF:laf_open_fwf}}, but the output is converted to a data.table.
+#' @details uses data.table and LaF packages. The read is performed entirely by \code{LaF:laf_open_fwf}, but the output is converted to a data.table.
 #' 
 #' @return a data.table
 #' @export fread.fwf
 fread.fwf <- function(..., cols, column_types, column_names){
-	if (!requireNamespace("LaF", quietly = TRUE)) {
-		stop("LaF needed for this function to work. Please install it.", call. = FALSE)
-	}
+	# if(!requireNamespace("LaF", quietly = TRUE)){
+	# 	stop("LaF needed for this function to work. Please install it.", call. = FALSE)
+	# }
 	if(missing(cols)){
 		cols <- c(3,4,4,3) # for newf data
 	}

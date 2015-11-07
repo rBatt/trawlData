@@ -3,13 +3,13 @@
 \docType{data}
 \name{raw.ebs}
 \alias{raw.ebs}
-\title{\itemize{\item STRATUM the statistical stratum of the haul}}
+\title{Raw Eastern Berring Sea}
 \format{A data.table}
 \usage{
 raw.ebs
 }
 \description{
-\itemize{\item STRATUM the statistical stratum of the haul}
+Raw data set for the Eastern Berring Sea bottom trawl survey
 }
 \keyword{datasets}
 

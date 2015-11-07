@@ -25,8 +25,8 @@
 #'   
 #' @examples
 #' # use a subset of Aleutian Islands
-#' subset.index <- sort(sample(1:nrow(ai),nrow(ai)*0.05))
-#' ai.eg <- ai[subset.index] # small subset (5%)
+#' subset.index <- sort(sample(1:nrow(clean.ai),nrow(clean.ai)*0.05))
+#' ai.eg <- clean.ai[subset.index] # small subset (5%)
 #'  
 #' # use defaults
 #' ai.trim <- copy(ai.eg) # copy so not affect original

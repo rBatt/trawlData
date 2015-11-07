@@ -3,13 +3,13 @@
 \docType{data}
 \name{raw.ai}
 \alias{raw.ai}
-\title{\itemize{\item STRATUM the statistical stratum of the haul}}
+\title{Raw Aleutian Islands}
 \format{A data.table}
 \usage{
 raw.ai
 }
 \description{
-\itemize{\item STRATUM the statistical stratum of the haul}
+Raw data set for the Aleutian Islands bottom trawl survey
 }
 \keyword{datasets}
 

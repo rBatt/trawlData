@@ -32,7 +32,7 @@ arr <- array(1:240, dim=c(40,3,2))
 orderD1(arr, 40:1)
 arr[40:1,,]
 
-#' \donttest{
+\donttest{
 
 # first alternative
 # can be even faster if ls0 is allowed to be moved outside

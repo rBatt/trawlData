@@ -14,9 +14,9 @@
 #' 
 #' @param redID a list of the categories to uniquely define redValue; can only include values in arr.dim, but must not include all of them
 #' 
-#' @param redValue a list of character vectors whose elements correspond to column names whose levels are redundant with some subset of keyID; e.g., if a keyID is "species", then redValue would include columns like Genus and Family, specified as list(c("Genus","Family")), and the corresponding redID would be list(c("species")).
+#' @param redValue a list of character vectors whose elements correspond to column names whose levels are redundant with some subset of keyID; e.g., if a keyID is "species", then redValue would include columns like Genus and Family, specified as \code{list(c("Genus","Family"))}, and the corresponding redID would be \code{list(c("species"))}.
 #' 
-#' @param fillID a list of character vectors, each of which is a subset of scope, and when missing levels of these factor/s are added for existing combinations of setdiff(arr.dim, fillID[[i]]), should be filled in with the corresponding value of fillValue. Note that the last element of fillID will always contain the full set in arr.dim, because the resulting array cannot be ragged.
+#' @param fillID a list of character vectors, each of which is a subset of scope, and when missing levels of these factor/s are added for existing combinations of \code{setdiff(arr.dim, fillID[[i]])}, should be filled in with the corresponding value of fillValue. Note that the last element of fillID will always contain the full set in arr.dim, because the resulting array cannot be ragged.
 #' 
 #' @param fillValue a vector of values that should be used to fill in missing combinations of arr.dim. The class of fillValue should match the class of keyValue.
 #' 

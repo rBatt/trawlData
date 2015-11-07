@@ -17,7 +17,7 @@ ll2km <- function(x,y){
 	}
 	blah <- data.frame(X=x, Y=y) 
 	attr(blah, "projection")="LL"
-	blah2 <- PBSmapping:::convUL(blah)
+	blah2 <- PBSmapping::convUL(blah)
 	list(lat.km=blah2[,"Y"], lon.km=blah2[,"X"]) # returning a named list format is handy for use with data.table :=
 }
 
@@ -81,6 +81,7 @@ ll2strat <- function(lon, lat, gridSize=1){
 #' 
 #' @param x a data.table of trawl data
 #' @param regName the name of the region
+#' @param doLots option to specify tolerance for missingness; otherwise reads in file for it
 #' 
 #' @section Warning:  
 #' This function is not ready to be used. Saves figures, has hard-coded paths, looks for reference files outisde of package, etc.

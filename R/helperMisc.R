@@ -50,7 +50,7 @@ s2c <- function(x, type="list"){
 #' orderD1(arr, 40:1)
 #' arr[40:1,,]
 #' 
-#' #' \donttest{
+#' \donttest{
 #' 
 #' # first alternative
 #' # can be even faster if ls0 is allowed to be moved outside
@@ -149,7 +149,7 @@ lu <- function(x) length(unique(x))
 #' @examples
 #' dt1 <- data.table(a=1:10, b=c(10:2, NA))
 #' dt2 <- data.table(a=1:10, b=10:1)
-#' dt.m <- merge(dt1, dt2, by="a", all.x=T)
+#' dt.m <- merge(dt1, dt2, by="a", all.x=TRUE)
 #' trim.autoColumn(dt.m)
 #' print(dt.m)
 #' 
@@ -231,14 +231,32 @@ trim.autoColumn <- function(X){
 #' m3 \tab fuzzy match performed on ref\cr
 #' m4 \tab fuzzy match performed on \code{cull(ref)}
 #' }
-#' Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.case=T, max.distance=0.25}.
+#' Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.case=TRUE, max.distance=0.25}.
 #' @section Warning:
 #' I am suspicous that the values returned in \code{tbl.ref} may be in accurate. However, this quality, and the function in general, has not been thoroughly tested. Although use-cases have given desirable results, albeit I think that the fuzzy matching can be a bit too fuzzy (finding matches where there shouldn't be any). Be aware.
 #' 
 #' @examples
 #' library(data.table)
-#' tbl <- data.table(animal=c("cats","dogs","elephant","giraffe","monkey","person","Gadus morhua", "Paralichthys dentatus", "Pomatomus saltatrix", "Amphiprioninae"), a=1:10, b=10:1)
-#' ref <- c("GADUS MORHUA", "Amphiprion (the computer)", "elehpant", "dogs", "squirrel", "gaus")
+#' tbl <- data.table(animal=c(
+#' 	"cats",
+#' 	"dogs",
+#' 	"elephant",
+#' 	"giraffe",
+#' 	"monkey",
+#' 	"person",
+#' 	"Gadus morhua",
+#' 	"Paralichthys dentatus",
+#' 	"Pomatomus saltatrix",
+#' 	"Amphiprioninae"
+#' ), a=1:10, b=10:1)
+#' ref <- c(
+#' 	"GADUS MORHUA",
+#' 	"Amphiprion (the computer)",
+#' 	"elehpant",
+#' 	"dogs",
+#' 	"squirrel",
+#' 	"gaus"
+#' )
 #' tbl.ref <- tbl[,animal]
 #' match.tbl(ref, tbl.ref, tbl[,animal]) # return what was matched to
 #' match.tbl(ref, tbl.ref, tbl[,a]) # return another column
@@ -280,7 +298,7 @@ match.tbl <- function(ref, tbl.ref, tbl.val, exact=FALSE){
 	if(!exact){
 		if(any(is.na(val))){
 			qa <- function(x,y){
-				agrep(pattern=x, x=y, ignore.case=T, value=F, max.distance=0.25)[1]
+				agrep(pattern=x, x=y, ignore.case=TRUE, value=F, max.distance=0.25)[1]
 			}
 			m3 <- na.vec
 			nav <- is.na(val)
@@ -342,7 +360,7 @@ match.tbl <- function(ref, tbl.ref, tbl.val, exact=FALSE){
 #' 
 #' Get the season from the date
 #' 
-#' @param DATES dates formatted as "%Y-%m-%d"
+#' @param DATES dates formatted as Ymd
 #' 
 #' @details
 #' Get the season of the year, based on solstices and equinoxes.

@@ -45,8 +45,26 @@ I am suspicous that the values returned in \code{tbl.ref} may be in accurate. Ho
 }
 \examples{
 library(data.table)
-tbl <- data.table(animal=c("cats","dogs","elephant","giraffe","monkey","person","Gadus morhua", "Paralichthys dentatus", "Pomatomus saltatrix", "Amphiprioninae"), a=1:10, b=10:1)
-ref <- c("GADUS MORHUA", "Amphiprion (the computer)", "elehpant", "dogs", "squirrel", "gaus")
+tbl <- data.table(animal=c(
+	"cats",
+	"dogs",
+	"elephant",
+	"giraffe",
+	"monkey",
+	"person",
+	"Gadus morhua",
+	"Paralichthys dentatus",
+	"Pomatomus saltatrix",
+	"Amphiprioninae"
+), a=1:10, b=10:1)
+ref <- c(
+	"GADUS MORHUA",
+	"Amphiprion (the computer)",
+	"elehpant",
+	"dogs",
+	"squirrel",
+	"gaus"
+)
 tbl.ref <- tbl[,animal]
 match.tbl(ref, tbl.ref, tbl[,animal]) # return what was matched to
 match.tbl(ref, tbl.ref, tbl[,a]) # return another column

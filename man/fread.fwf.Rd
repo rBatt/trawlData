@@ -7,11 +7,11 @@
 fread.fwf(..., cols, column_types, column_names)
 }
 \arguments{
+\item{...}{file names to open}
+
 \item{column_types}{character vector indicating classes of columns}
 
 \item{column_names}{column_names character vector of column headers}
-
-\item{\code{...}}{file names to open}
 
 \item{\code{cols}}{vector of integer column widths}
 }

@@ -96,8 +96,8 @@ clean.trimRow.ebs <- function(X){
 # ========
 clean.trimRow.gmex <- function(X){
 	
-	spp.i <- X[,BGSCODE!="T"]
-	# "T" is young of year records
+	spp.i <- X[,BGSCODE!="TRUE"]
+	# "TRUE" is young of year records
 	
 	
 	survey.i <- X[, survey.name %in% c('Summer SEAMAP Groundfish Survey')]

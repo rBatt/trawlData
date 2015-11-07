@@ -5,7 +5,7 @@
 #' @template X_reg
 #' 
 #' @details
-#' relies on spp.key data file that comes with this package. In "\inst\extdata" there is also a .csv version of this file that is being used. Taxonomy corrections are an ongoing process.  
+#' relies on spp.key data file that comes with this package. In "/inst/extdata" there is also a .csv version of this file that is being used. Taxonomy corrections are an ongoing process.  
 #' Also adds taxonomic classification, some ecological information (trophic level), common names, whether or not a picture is available with this package, and other miscellanious information about how the taxonomic correction was made.
 #' 
 #' The \code{ref} column in the output is the name of the original species name/ taxonomic identifier.
@@ -60,7 +60,7 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	#
 	# smry.tax0 <- X[,table(taxLvl[!duplicated(spp)])]
 	# nst <- names(smry.tax0)
-	# sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=T)]])}
+	# sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=TRUE)]])}
 	# smry.tax <- c(
 	# 	kingdom = sum.tax("kingdom"),
 	# 	phylum = sum.tax("phylum"),

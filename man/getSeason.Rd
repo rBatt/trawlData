@@ -10,7 +10,7 @@
 getSeason(DATES)
 }
 \arguments{
-\item{DATES}{dates formatted as "%Y-%m-%d"}
+\item{DATES}{dates formatted as Ymd}
 }
 \value{
 a character vector of seasons

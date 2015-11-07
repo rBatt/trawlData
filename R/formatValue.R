@@ -94,12 +94,12 @@ rmWhite <- function(x){
 rm9s <- function(x){
 	stopifnot(is.data.table(x))
 	for(i in seq_along(x)){
-		t.x <- x[[i]]
-		t.class <- class(t.x)
-		if(t.class=="integer64"){
-			set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as.integer64(NA))
+		TRUE.x <- x[[i]]
+		TRUE.class <- class(TRUE.x)
+		if(TRUE.class=="integer64"){
+			set(x, i=which(TRUE.x==-9999L | TRUE.x==-9999.0), j=i, value=as.integer64(NA))
 		}else{
-			set(x, i=which(t.x==-9999L | t.x==-9999.0), j=i, value=as(NA,Class=t.class))
+			set(x, i=which(TRUE.x==-9999L | TRUE.x==-9999.0), j=i, value=as(NA,Class=TRUE.class))
 		}
 		
 	}

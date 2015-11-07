@@ -2,7 +2,7 @@
 #' 
 #' Clean by standardizing the column names
 #' 
-#' template X_reg
+#' @template X_reg
 #' 
 #' @details
 #' Regions tend to have very different column names for what are essentiallythe same measurements, descriptors, etc. This function tries to give everything a standardized name when it's appropriate.  

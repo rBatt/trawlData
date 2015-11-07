@@ -339,7 +339,7 @@ read.newf <- function(zippath){
 	# so for now I'm commenting-out this code
 	# but this code does work
 	# strat.widths <- c(3,4,4,3)
-# 	strat <- read.zip("inst/extdata/newf.zip", pattern="stratum_areas", cols=strat.widths, use.fwf=T, SIMPLIFY=F)
+# 	strat <- read.zip("inst/extdata/newf.zip", pattern="stratum_areas", cols=strat.widths, use.fwf=TRUE, SIMPLIFY=F)
 # 	strat <- lapply(strat, function(x)setnames(x, names(x), c('stratum', 'area', 'maxdepth', 'nafo')))
 	
 	# read species information
@@ -350,13 +350,13 @@ read.newf <- function(zippath){
 	col.types <- c(recordtype="integer", vessel="integer", trip="integer", set="integer", yearl="integer", monthl="integer", dayl="integer", settype="integer", stratum="character", nafo="character", unitarea="character", light="double", winddir="double", windforce="double", sea="double", bottom="double", timel="character", duration="double", distance="double", operation="double", depth="character", depthmin="character", depthmax="character", depthbottom="character", surftemp="double", bottemp="double", latstart="character", lonstart="character", posmethod="double", gear="double", sppcode="double", num="double", wgt="double", latend="character", lonend="character", bottempmeth="double", geardevice="double")
 	data.pattern <- "(199[23456789]|200[0123456789]|201[012])\\.DAT$" # pattern for main data files
 	newf.names <- names(col.types) # column names
-	newf <- read.zip(file.path(zippath, "newf.zip"), pattern=data.pattern, SIMPLIFY=F, use.fwf=T, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
+	newf <- read.zip(file.path(zippath, "newf.zip"), pattern=data.pattern, SIMPLIFY=F, use.fwf=TRUE, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
 	newf <- do.call(rbind, newf) # combine into 1 data.table
 	setnames(newf, names(newf), newf.names) # set names
 	
 	# merge main data set w/ species names
 	newf[,sppcode:=as.integer(sppcode)]
-	newf <- merge(newf, newf.spp, all.x=T, by="sppcode")
+	newf <- merge(newf, newf.spp, all.x=TRUE, by="sppcode")
 
 
 	# Use the "surv" files to add
@@ -426,7 +426,7 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 	sa.strat <- sa.strat[!duplicated(COLLECTIONNUMBER)] # not needed for catch 1
 
 	# merge 
-	sa <- merge(sa.mass, sa.strat, all.x=T, by=c("COLLECTIONNUMBER"))
+	sa <- merge(sa.mass, sa.strat, all.x=TRUE, by=c("COLLECTIONNUMBER"))
 	
 	# trim columns duplicated from merge
 	trim.autoColumn(sa)

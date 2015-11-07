@@ -7,7 +7,7 @@
 #' @template helperStatTemplate
 #' @export
 sumna <- function(x){
-	if(!all(is.na(x))) return(sum(x, na.rm=T))
+	if(!all(is.na(x))) return(sum(x, na.rm=TRUE))
 	if(all(is.na(x))) return(as.numeric(NA))
 }
 
@@ -19,7 +19,7 @@ sumna <- function(x){
 #' @template helperStatTemplate
 #' @export
 meanna <- function(x){
-	if(!all(is.na(x))) return(mean(x, na.rm=T))
+	if(!all(is.na(x))) return(mean(x, na.rm=TRUE))
 	if(all(is.na(x))) return(as.numeric(NA))
 }
 

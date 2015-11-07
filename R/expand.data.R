@@ -10,7 +10,10 @@
 #' 
 #' @param arr.dim character vector specifying the names of columns that would specify the dimensions of the output array
 #' 
-#' @param scope character vector specifying columns. The number of unique combinations of factors among those columns will specify the number of output arrays. If left NULL, there will be 1 output array with dimension sizes equal to the number of factor levels in the respective elements of comD.
+# #' @param scope character vector specifying columns. The number of unique combinations of factors among those columns will specify the number of output arrays. If left NULL, there will be 1 output array with dimension sizes equal to the number of factor levels in the respective elements of comD.
+#' @param gScope character vector indicating columns whose values' combinations define the maximum scope of expansion. For all combinations of variables indicated here, expansion effectively occurs separately. E.g., setting \code{gScope="reg"} would prevent this function from adding combinations of variables between regions (e.g., combinations of spp from 'ai' and strata from 'gmex').
+#' @param fScope fill scope
+#' @param vScope value scope
 #' 
 #' @param redID a list of the categories to uniquely define redValue; can only include values in arr.dim, but must not include all of them
 #' 
@@ -25,6 +28,8 @@
 #' @param aggFun Function used to aggregate among levels of columns specified in keyID, but not present in arr.dim.
 #' 
 #' @param maxOut the maximum number of allowable elements in the output array or data.table. In place to prevent early detection of a huge number of combinations that might use up a larger-than-expected amount of memory.
+
+#' The main purpose of this function is to do something very similar to \code{merge(data, data[,do.call(expand.grid, list(id1, id2))], all=TRUE)}, and then follow that by trimming out of combinations you didn't need due to scoping. I.e., to look for all possible combinations of some variables (id1 id2), and then merge all of those combinations back into your original data set to create NA's but to ensure combinations are available. However, the process of finding all combinations might ideally occur for a subset of the data at a time, such that all combinations are only found among those variables per unique value of some other column. To make things more complicated, different combinations might need to occur for different subsets. Creating many extra combinations and trimming them out, or doing things more directly, is fine when the data set is small enough to manage all of those combinations in memory; however, this can be slow or prohibitive for large data sets. This function seeks to waste as little memory as possible. As a result, it is a very targeted and specific function, that requires specifying many arguments.
 
 #' still testing!!
 

@@ -10,7 +10,6 @@
 #' 
 #' @param arr.dim character vector specifying the names of columns that would specify the dimensions of the output array
 #' 
-# #' @param scope character vector specifying columns. The number of unique combinations of factors among those columns will specify the number of output arrays. If left NULL, there will be 1 output array with dimension sizes equal to the number of factor levels in the respective elements of comD.
 #' @param gScope character vector indicating columns whose values' combinations define the maximum scope of expansion. For all combinations of variables indicated here, expansion effectively occurs separately. E.g., setting \code{gScope="reg"} would prevent this function from adding combinations of variables between regions (e.g., combinations of spp from 'ai' and strata from 'gmex').
 #' @param fScope fill scope
 #' @param vScope value scope
@@ -22,6 +21,8 @@
 #' @param fillID a list of character vectors, each of which is a subset of scope, and when missing levels of these factor/s are added for existing combinations of \code{setdiff(arr.dim, fillID[[i]])}, should be filled in with the corresponding value of fillValue. Note that the last element of fillID will always contain the full set in arr.dim, because the resulting array cannot be ragged.
 #' 
 #' @param fillValue a vector of values that should be used to fill in missing combinations of arr.dim. The class of fillValue should match the class of keyValue.
+#' 
+#' @param Rule rule for filling (key or value)
 #' 
 #' @param arrayOut logical; Defaults to FALSE, in which case the output is a data.table, with number of rows corresponding to the product of the number of unique values in each of arr.dim (in the case where scope=NULL), or the sum of that product for each of the unique combinations of the levels in scope. If TRUE, the output is an array (if scope=NULL), or list of arrays.
 #' 

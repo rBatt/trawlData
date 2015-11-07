@@ -6,45 +6,8 @@
 #' Raw data set for the Aleutian Islands bottom trawl survey
 #' 
 #' 
-#' @templateVar stratum.name STRATUM
-#' @template stratum
-#' @templateVar lat.name LATITUDE
-#' @template lat
-#' @templateVar lon.name LONGITUDE
-#' @template lon
-#' @templateVar station.name STATION
-#' @template station
-#' @templateVar year.name YEAR
-#' @template year
-#' @templateVar datetime.name DATETIME
-#' @template datetime
-#' @templateVar wtcpue.name WTCPUE
-#' @template wtcpue
-#' @templateVar cntcpue.name NUMCPUE
-#' @template cntcpue
-#' @templateVar common.name COMMON
-#' @template common
-#' @templateVar spp.name SCIENTIFIC
-#' @template spp
-#' @templateVar SID.name SID
-#' @template SID
-#' @templateVar depth.name BOT_DEPTH
-#' @template depth
-#' @templateVar btemp.name BOT_TEMP
-#' @template btemp
-#' @templateVar stemp.name SURF_TEMP
-#' @template stemp
-#' @templateVar vessel.name VESSEL
-#' @template vessel
-#' @templateVar cruise.name CRUISE
-#' @template cruise
-#' @templateVar haul.name HAUL
-#' @template haul
-#' @templateVar stratumarea.name Areakm2
-#' @template stratumarea
 #' 
 #' @format A data.table
-#' 
 "raw.ai"
 
 
@@ -54,42 +17,7 @@
 #' 
 #' Raw data set for the Eastern Berring Sea bottom trawl survey
 #' 
-#' @templateVar stratum.name STRATUM
-#' @template stratum
-#' @templateVar lat.name LATITUDE
-#' @template lat
-#' @templateVar lon.name LONGITUDE
-#' @template lon
-#' @templateVar station.name STATION
-#' @template station
-#' @templateVar year.name YEAR
-#' @template year
-#' @templateVar datetime.name DATETIME
-#' @template datetime
-#' @templateVar wtcpue.name WTCPUE
-#' @template wtcpue
-#' @templateVar cntcpue.name NUMCPUE
-#' @template cntcpue
-#' @templateVar common.name COMMON
-#' @template common
-#' @templateVar spp.name SCIENTIFIC
-#' @template spp
-#' @templateVar SID.name SID
-#' @template SID
-#' @templateVar depth.name BOT_DEPTH
-#' @template depth
-#' @templateVar btemp.name BOT_TEMP
-#' @template btemp
-#' @templateVar stemp.name SURF_TEMP
-#' @template stemp
-#' @templateVar vessel.name VESSEL
-#' @template vessel
-#' @templateVar cruise.name CRUISE
-#' @template cruise
-#' @templateVar haul.name HAUL
-#' @template haul
-#' @templateVar stratumarea.name Areakm2
-#' @template stratumarea
+#' 
 #' 
 #' @format A data.table
 "raw.ebs"

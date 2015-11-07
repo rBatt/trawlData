@@ -312,10 +312,13 @@ NULL
 "soda.annMax"
 
 #' @rdname SODA
-"soda.annMaxmu"
+"soda.annMax.mu"
 
 #' @rdname SODA
 "soda.annMean"
+
+#' @rdname SODA
+"soda.annMean.mu"
 
 
 

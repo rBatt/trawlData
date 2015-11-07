@@ -10,6 +10,7 @@
 #' 
 #' The \code{ref} column in the output is the name of the original species name/ taxonomic identifier.
 #' 
+#' @import data.table
 #' @export clean.tax
 clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	# load("data/spp.key.RData")

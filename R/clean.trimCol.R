@@ -36,6 +36,7 @@
 #' ai.trim2 <- copy(ai.eg) # copy
 #' clean.trimCol(ai.trim2)
 #'  
+#' @import data.table
 #' @export clean.trimCol
 clean.trimCol <- function(X, cols, c.add=NULL, c.drop=NULL){
 	

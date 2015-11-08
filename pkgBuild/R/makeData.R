@@ -1,5 +1,19 @@
 makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read, clean=F, clean.save=clean, clean.load=!clean, trimR=T, trimC=T){
 	
+	# this function regenerates the R Data files 
+	# that contain the trawl data for each region
+	# In order to do this, the package cannot be loaded
+	# (or, it is safer it is not, because those objects are in the NAMESPACE)
+	
+	# Thus, there are 3 important things to remember when using this function:
+	# 1) set directory to the top of the package
+	# 2) unload()
+	# 3) This script sources the R scripts in "./R", and uses the spp.key in load("data/spp.key.RData")
+	
+	# source package scripts
+	invisible(sapply(list.files("R", full.names=T), source, .GlobalEnv))
+
+	
 	if(missing(regions)){
 		regions <- c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")
 	}
@@ -38,23 +52,25 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 	if(raw.read){
 		# read in raw
 		message("\nReading raw trawl data (as received by trawlData package creators from data providers)\n")
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
 			nm <- paste0("raw.", regions[i])
 			assign(nm, read.trawl(regions[i]))
 			
-			# ensure encoding is UTF-8
-			nm.char.names <- names(get(nm))[sapply(get(nm), is.character)]
-			if(length(nm.char.names)>0){
-				get(nm)[,(nm.char.names):=lapply(eval(s2c(nm.char.names)), function(x)enc2utf8(x))]
-				
-			}
+			# ensure encoding is ASCII
+			makeAsciiChar(get(nm))
+			
 			
 			# If desired, save, and do so with optimal compression
 			if(raw.save){
 				compressSave(paste0("data/",nm,".RData"))
 			}
 			
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
+			
 		}
+		
+		if(length(regions)>1){close(pb)}
 	}
 	
 	
@@ -65,12 +81,14 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 	if(raw.load){
 		# load raw
 		message("Loading raw (.RData) region data")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
 			nm <- paste0("raw.", regions[i])
 			load(file=paste0("data/",nm,".RData"))
-			setTxtProgressBar(pb, i)
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		
+		if(length(regions)>1){close(pb)}
 	}
 	
 	
@@ -79,51 +97,61 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 	# = Cleaning =
 	# ============
 	if(clean){
+		stopifnot(all(paste0("raw.",regions)%in%ls()))
+		
+		# create clean region objects
+		cnms <- c()
+		for(i in 1:length(regions)){
+			cnms[i] <- paste0("clean.",regions[i])
+			assign(cnms[i], copy(get(nm)))
+		}
+		
 		# clean up column names
 		message("\nCleaning column names\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- paste0("raw.", regions[i])
-			assign(regions[i], copy(get(nm)))
-			clean.names(get(regions[i]), regions[i])
-			setTxtProgressBar(pb, i)
+			clean.names(get(cnms[i]), regions[i])
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		if(length(regions)>1){close(pb)}
 
 		# format column values
 		message("\nFormatting column values (typos, basic formatting)\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- regions[i]
-			clean.format(get(nm), nm)
-			setTxtProgressBar(pb, i)
+			clean.format(get(cnms[i]), regions[i])
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		if(length(regions)>1){close(pb)}
 
 		# clean column content, add columns
 		message("\nAdd and polish column content (class, units, add columns)\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- regions[i]
-			clean.columns(get(nm), nm)
-			setTxtProgressBar(pb, i)
+			clean.columns(get(cnms[i]), regions[i])
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		if(length(regions)>1){close(pb)}
 		
 		# clean taxa names
 		message("\nCleaning taxonomy and adding ecology\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
+		# load("data/spp.key.RData")
 		for(i in 1:length(regions)){
-			nm <- regions[i]
-			assign(nm, clean.tax(get(nm), nm))
-			setTxtProgressBar(pb, i)
+			assign(cnms[i], clean.tax(get(cnms[i]), regions[i]))
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		if(length(regions)>1){close(pb)}
 
 		# add column for row trimming
 		message("\nAdd a column to suggest which rows to drop\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- regions[i]
-			clean.trimRow(get(nm), nm)
-			setTxtProgressBar(pb, i)
+			clean.trimRow(get(cnms[i]), regions[i])
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
+		if(length(regions)>1){close(pb)}
+		
 	}
 	
 	
@@ -133,56 +161,52 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 	# = Save Clean =
 	# ==============
 	if(clean.save){
+		stopifnot(clean)
 		# save clean
 		message("\nSaving cleaned region data\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- paste0("clean.", regions[i])
-			assign(nm, copy(get(regions[i])))
 			
-			# ensure encoding is UTF-8
-			nm.char.names <- names(get(nm))[sapply(get(nm), is.character)]
-			if(length(nm.char.names)>0){
-				get(nm)[,(nm.char.names):=lapply(eval(s2c(nm.char.names)), function(x)enc2utf8(x))]
-				
-			}
+			# ensure encoding is ASCII
+			makeAsciiChar(get(cnms[i]))
 			
+			# save
 			compressSave(paste0("data/",nm,".RData"))
-			# save(list=nm, file=paste0("data/",nm,".RData"), compress="xz")
-			setTxtProgressBar(pb, i)
+			
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
 	}
 	
-
-
+	
+	
 	# ==============
 	# = Load Clean =
 	# ==============
 	if(clean.load){
 		# load clean
 		message("\nLoading clean region data\n")
-		pb <- txtProgressBar(min=1, max=length(regions), style=3)
+		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
-			nm <- paste0("clean.", regions[i])
-			load(file=paste0("data/",nm,".RData"))
-			setTxtProgressBar(pb, i)
+			cnm <- paste0("clean.", regions[i])
+			load(file=paste0("data/",cnm,".RData"))
+			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}
 	}
 	
-
-
+	
+	
 	# ======================================
 	# = Rename clean.REGION as just REGION =
 	# ======================================
 	# rename clean, rm old
-	message("\nRenaming region objects in workspace (dropping 'clean.' prefix)\n")
-	pb <- txtProgressBar(min=1, max=length(regions), style=3)
-	for(i in 1:length(regions)){
-		nm <- paste0("clean.", regions[i])
-		assign(regions[i], copy(get(nm)))
-		rm(list=nm)
-		setTxtProgressBar(pb, i)
-	}
+	# message("\nRenaming region objects in workspace (dropping 'clean.' prefix)\n")
+	# if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
+	# for(i in 1:length(regions)){
+	# 	nm <- paste0("clean.", regions[i])
+	# 	assign(regions[i], copy(get(nm)))
+	# 	rm(list=nm)
+	# 	if(length(regions)>1){setTxtProgressBar(pb, i)}
+	# }
 
 
 
@@ -204,9 +228,9 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 	
 	# spp <- sort(unique(c(ai[,unique(spp)], ebs[,unique(spp)], gmex[,unique(spp)], goa[,unique(spp)], neus[,unique(spp)], newf[,unique(spp)], sa[,unique(spp)], sgulf[,unique(spp)], shelf[,unique(spp)], wcann[,unique(spp)], wctri[,unique(spp)]))) # use this in creat.spp.key.R
 
-	reg.list <- list(ai, ebs, gmex, goa, neus, newf, sa, sgulf, shelf, wcann, wctri)
+	# reg.list <- list(ai, ebs, gmex, goa, neus, newf, sa, sgulf, shelf, wcann, wctri)
 	
 	
-	return(reg.list)
+	# return(reg.list)
 
 }

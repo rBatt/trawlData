@@ -8,9 +8,9 @@ getTax(sppCorr, class.names = c("species", "genus", "family", "order",
   "class", "superclass", "subphylum", "phylum", "kingdom"))
 }
 \arguments{
-\item{class.names}{the taxonomic classification names to search for and return}
+\item{sppCorr}{a scientific name; character vector}
 
-\item{sppCorr2}{a scientific name; character vector}
+\item{class.names}{the taxonomic classification names to search for and return}
 }
 \value{
 A data.table with columns corresponding to the taxonomic level, the original species name, and \code{taxLvl} as the most specific (lowest) taxonomic level for which a match was found.
@@ -22,6 +22,11 @@ Get the taxonomic classification for a Latin name
 Uses taxize. Tries several data bases
 }
 \examples{
-getTax(c("Paralichthys dentatus", "Pomatomus saltatrix","Gadus morhua","Chionoecetes tanneri"))
+getTax(c(
+	"Chionoecetes tanneri"
+))
+}
+\seealso{
+\code{\link{getCmmn}}, \code{\link{getTax}}
 }
 

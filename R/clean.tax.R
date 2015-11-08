@@ -41,10 +41,12 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	}
 	
 	names.x <- names(X)
-	rmX.names <- names.x[names.x%in%(names(trawlData::spp.key)[names(trawlData::spp.key)!="ref"])]
+	# rmX.names <- names.x[names.x%in%(names(trawlData::spp.key)[names(trawlData::spp.key)!="ref"])]
+	rmX.names <- names.x[names.x%in%(names(spp.key)[names(spp.key)!="ref"])]
 	
-	setkey(trawlData::spp.key, "ref")
-	X <- merge(X, trawlData::spp.key, by="ref", all.x=TRUE)
+	# setkey(trawlData::spp.key, "ref")
+	setkey(spp.key, "ref")
+	X <- merge(X, spp.key, by="ref", all.x=TRUE)
 	
 	# alternatively, I could just drop the repeated 
 	# column names before the merge

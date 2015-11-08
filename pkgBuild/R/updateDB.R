@@ -56,7 +56,7 @@ updateDB <- function(path="data"){
 	# ======================
 	# From raw names
 	getSppData <- getSpp(c.all(ref[!is.na(ref)]))
-	getSppData[,names(getSppData):=lapply(eval(s2c(names(getSppData))), function(x)enc2utf8(x))]
+	makeAsciiChar(getSppData)
 	save(getSppData, file=file.path(path,"getSppData.RData"))
 
 
@@ -64,7 +64,7 @@ updateDB <- function(path="data"){
 	# = Taxonomic Classification =
 	# ============================
 	getTaxData <- getTax(spp.key[!is.na(spp),unique(spp)])
-	getTaxData[,names(getTaxData):=lapply(eval(s2c(names(getTaxData))), function(x)enc2utf8(x))]
+	makeAsciiChar(getTaxData)
 	save(getTaxData, file=file.path(path,"getTaxData.RData"))
 
 
@@ -72,6 +72,6 @@ updateDB <- function(path="data"){
 	# = Common Names =
 	# ================
 	getCmmnData <- getCmmn(spp.key[!is.na(spp),unique(spp)])
-	getCmmnData[,names(getCmmnData):=lapply(eval(s2c(names(getCmmnData))), function(x)enc2utf8(x))]
+	makeAsciiChar(getCmmnData)
 	save(getCmmnData, file=file.path(path,"getCmmnData.RData"))
 }

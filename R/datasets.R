@@ -327,24 +327,24 @@ NULL
 # =======================
 #' Common Names
 #' Species' common names matched to scientific names
-#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
+#' @seealso \code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 "getCmmnData"
 
 #' Spp Names
 #' Scientific names matched to raw taxonomic name entries
-#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
+#' @seealso \code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 "getSppData"
 
 #' Taxonomic Classification
 #' Taxonomic classification matched to scientific names
-#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}}
+#' @seealso \code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 "getTaxData"
 
 #' Corrected Species Names (legacy)
 #' Species names that had been corrected in older version of code
 #' Used to construct spp.key initially, but should no longer be needed. Provided for reproducibility of older results regarding taxonomy.
 #' Now superceded by \code{\link{getSppData}}. It is recommended that \code{\link{spp.key}} be used for taxonomic reference.
-#' @seealso \code{\link{getCmmn}}\code{\link{getSpp}}\code{\link{getTax}} \code{\link{spp.key}}
+#' @seealso \code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}} \code{\link{spp.key}}
 "spp.corr1"
 
 #' Taxonomic Information (legacy)

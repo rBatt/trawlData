@@ -106,4 +106,43 @@ rm9s <- function(x){
 }
 
 
+#' Make it an ASCII 'Character'
+#' 
+#' Turn factor or character columns of a data.table into ASCII characters
+#' 
+#' @param X a data.table containing columns to be converted
+#' 
+#' Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).
+#' 
+#' @return NULL (invisibly), but affects the contents of the data.table whose name was passed to this function
+#' 
+#' @export
+makeAsciiChar <- function(X){
+	stopifnot(is.data.table(X))
+	
+	# Check if there are factors to be converted
+	isfactor <- sapply(X, is.factor)
+	
+	# If there are factors, convert them to characters
+	if(any(isfactor)){
+		has.fc <- names(X)[isfactor]
+		invisible(X[,c(has.fc):=lapply(eval(s2c(has.fc)), as.character)])
+	}
+	
+	# Check to see if there are any character columns
+	# whose encodings need to be checked
+	nm.char.names <- names(X)[sapply(X, is.character)]
+	if(length(nm.char.names)>0){
+		
+		# If there are character columns, check encodings
+		encs <- sapply(X[,eval(s2c(nm.char.names))], function(x)any(stringi::stri_enc_mark(x[!is.na(x)])!="ASCII"))
+		if(any(encs)){
+			cols2conv <- names(encs)[encs] # which columns have non-ASCII?
+			X[,(cols2conv):=lapply(eval(s2c(cols2conv)), stringi::stri_enc_toascii)] # convert to ASCII where needed
+		}
+		
+	}
+	
+	invisible(NULL)
+}
 

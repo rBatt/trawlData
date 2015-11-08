@@ -63,6 +63,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 			
 			# If desired, save, and do so with optimal compression
 			if(raw.save){
+				message("\nSaving raw .RData file\n")
 				compressSave(paste0("data/",nm,".RData"))
 			}
 			

@@ -6,6 +6,6 @@ update_rawData <- function(reg){
 	reg.p <- gsub("\\.zip", "", basename(reg), perl=T)
 	
 	
-	makeData.R(regions=reg.p, raw.read=T)
+	makeData(regions=reg.p, raw.read=T)
 	
 }

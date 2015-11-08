@@ -25,8 +25,9 @@ sources:
   ## - R/tax.getTax.R
   - R/
   - man-roxygen/
+  - pkgBuild/R/makeData.R
   - pkgBuild/R/update_spp.key.R
-  - pkgBuild/R/update_raw.R
+  - pkgBuild/R/update_rawData.R
   # - pkgBuild/R/update_clean.R
   # - pkgBuild/R/update_trim.R
   

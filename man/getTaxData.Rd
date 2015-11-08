@@ -18,7 +18,6 @@ Taxonomic classification matched to scientific names}
  $ phylum    : chr  "Cnidaria" NA NA "Chordata" ...
  $ kingdom   : chr  "Metazoa" NA NA "Metazoa" ...
  - attr(*, ".internal.selfref")=<externalptr> 
- - attr(*, "sorted")= chr "sppCorr"
 }}
 \usage{
 getTaxData
@@ -28,7 +27,7 @@ Taxonomic Classification
 Taxonomic classification matched to scientific names
 }
 \seealso{
-\code{\link{getTax}}
+\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

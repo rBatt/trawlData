@@ -26,7 +26,8 @@ tax.getTL
 # tax.updateDB.R
 # authors.R
 # dependencies.R
-^pkgBuild$ # package building folder
+pkgBuild # package building folder
+man-roxygen
 
 
 ^.git$

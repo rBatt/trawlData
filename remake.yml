@@ -1,0 +1,97 @@
+## All R files that are used must be listed here:
+packages:
+  - data.table
+  - LaF
+  - bit64
+  - stringr
+  - stringi
+  - PBSmapping
+
+sources:
+  ## - R/clean.columns.R
+  ## - R/clean.format.R
+  ## - R/clean.names.R
+  ## - R/clean.tax.R
+  ## - R/clean.trimCol.R
+  ## - R/clean.trimRow.R
+  ## - R/formatStrat.R
+  ## - R/formatValue.R
+  ## - R/helperFile.R
+  ## - R/helperMisc.R
+  ## - R/helperStat.R
+  ## - R/read.trawl.R
+  ## - R/tax.getCmmn.R
+  ## - R/tax.getSpp.R
+  ## - R/tax.getTax.R
+  - R/
+  - man-roxygen/
+  - pkgBuild/R/update_spp.key.R
+  - pkgBuild/R/update_raw.R
+  # - pkgBuild/R/update_clean.R
+  # - pkgBuild/R/update_trim.R
+  
+
+## Most of a remakefile will be targets.  They can be listed in any
+## order; whatever makes most sense.  Files can be split up and
+## included into the main file if you need to impose more structure.
+targets:
+  ## 'all' is a special target that will be used as the default
+  ## target by 'remake'.  It doesn't actually make anything but
+  ## "depends" on other targets.
+  all:
+    depends:
+      - spp
+      ## - source_data
+      - raw_data
+      ## - clean_data
+      ## - trim_data
+
+  ## Update Species Key
+  spp:
+    depends:
+      - data/spp.key.RData
+      # - inst/extdata/taxonomy/spp.key.csv
+
+  data/spp.key.RData:
+    command: update_spp.key("inst/extdata/taxonomy/spp.key.csv")
+
+  # inst/extdata/taxonomy/spp.key.csv:
+  #   command: update_spp.key("data/spp.key.RData")
+  
+  ## Update Raw .RData Files
+  raw_data:
+    depends:
+      - data/raw.ai.RData
+      - data/raw.ebs.RData
+      - data/raw.gmex.RData
+      - data/raw.goa.RData
+      - data/raw.neus.RData
+      - data/raw.newf.RData
+      - data/raw.sa.RData
+      - data/raw.sgulf.RData
+      - data/raw.shelf.RData
+      - data/raw.wcann.RData
+      - data/raw.wctri.RData
+  data/raw.ai.RData:
+    command: update_rawData("inst/extdata/ai.zip")
+  data/raw.ebs.RData:
+    command: update_rawData("inst/extdata/ebs.zip")
+  data/raw.gmex.RData:
+    command: update_rawData("inst/extdata/gmex.zip")
+  data/raw.goa.RData:
+    command: update_rawData("inst/extdata/goa.zip")
+  data/raw.neus.RData:
+    command: update_rawData("inst/extdata/neus/")
+  data/raw.newf.RData:
+    command: update_rawData("inst/extdata/newf.zip")
+  data/raw.sa.RData:
+    command: update_rawData("inst/extdata/sa.zip")
+  data/raw.sgulf.RData:
+    command: update_rawData("inst/extdata/sgulf.zip")
+  data/raw.shelf.RData:
+    command: update_rawData("inst/extdata/shelf.zip")
+  data/raw.wcann.RData:
+    command: update_rawData("inst/extdata/wcann.zip")
+  data/raw.wctri.RData:
+    command: update_rawData("inst/extdata/wctri.zip")
+    

@@ -9,11 +9,11 @@ fread.fwf(..., cols, column_types, column_names)
 \arguments{
 \item{...}{file names to open}
 
+\item{cols}{vector of integer column widths}
+
 \item{column_types}{character vector indicating classes of columns}
 
 \item{column_names}{column_names character vector of column headers}
-
-\item{\code{cols}}{vector of integer column widths}
 }
 \value{
 a data.table
@@ -22,6 +22,6 @@ a data.table
 Fast read for fixed width format files
 }
 \details{
-uses data.table and LaF packages. The read is performed entirely by \code{\link{laf_open_fwf}}, but the output is converted to a data.table.
+uses data.table and LaF packages. The read is performed entirely by \code{LaF:laf_open_fwf}, but the output is converted to a data.table.
 }
 

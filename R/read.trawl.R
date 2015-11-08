@@ -410,7 +410,7 @@ read.ngulf <- function(zippath){
 # ======
 # = SA =
 # ======
-read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
+read.sa <- function(zippath, catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
 	catch <- match.arg(catch)
 	
 	

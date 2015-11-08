@@ -15,7 +15,6 @@
 #' 
 #' @examples
 #' getTax(c(
-#' 	"Pomatomus saltatrix",
 #' 	"Chionoecetes tanneri"
 #' ))
 #' 

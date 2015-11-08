@@ -11,8 +11,6 @@
 #' @examples
 #' getCmmn(c(
 #' 	"Paralichthys dentatus",
-#' 	"Pomatomus saltatrix",
-#' 	"Gadus morhua",
 #' 	"Chionoecetes tanneri"
 #'  ))
 #' 

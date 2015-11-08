@@ -14,7 +14,9 @@ countN(x)
 grb.spp1(x)
 }
 \arguments{
-\item{uspp:}{character vector of unique species names to be checked}
+\item{uspp}{character vector of unique species names to be checked}
+
+\item{x}{a character}
 }
 \value{
 A data.table with 2 columns; "spp" column contains unchecked species names, "sppCorr" contains corrected (checked) species names
@@ -33,6 +35,6 @@ Lookup species names using taxize, with option to only lookup names not in a ref
 \item \code{grb.spp1}: Grab Species (helper function)
 }}
 \seealso{
-\code{\link{getCmmn}}, \code{\link{getTax}}, \code{\link{getTL}}, \code{\link{updateDB}}
+\code{\link{getCmmn}}, \code{\link{getTax}}
 }
 

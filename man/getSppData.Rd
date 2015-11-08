@@ -20,7 +20,7 @@ Spp Names
 Scientific names matched to raw taxonomic name entries
 }
 \seealso{
-\code{\link{getSpp}}
+\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

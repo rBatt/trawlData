@@ -5,7 +5,9 @@
 \alias{SODA}
 \alias{soda}
 \alias{soda.annMax}
+\alias{soda.annMax.mu}
 \alias{soda.annMean}
+\alias{soda.annMean.mu}
 \title{SODA
 Gridded SODA bottom temperatures}
 \format{raster brick}
@@ -14,13 +16,17 @@ soda
 
 soda.annMax
 
+soda.annMax.mu
+
 soda.annMean
+
+soda.annMean.mu
 }
 \description{
 From 1958 to 2008. Longitude: 200W to 20E. Latitude: 0N to 90N.
 }
 \details{
-Can be the full data set (\code{soda}), or the annual maximum or mean (\code{soda.annMax} and \code{soda.annMean}, respectively).
+Can be the full data set (\code{soda}), or the annual maximum or mean (\code{soda.annMax} and \code{soda.annMean}, respectively). Furthermore, \code{soda.annMax.mu} and \code{soda.annMean.mu} represent the long-term averages of their variables, such that "Max.mu" indicates the among-year average of within-year maxima, and "Mean.mu" similarly indicates the among-year average of the within-year average. Note that in the typical case where each year is comprised of the same number of observations, the long-term average could be taken all at once, rather than first being average within a year.
 }
 \keyword{datasets}
 

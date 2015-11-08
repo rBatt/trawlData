@@ -10,6 +10,8 @@ makeStrat(x, regName, doLots = NULL)
 \item{x}{a data.table of trawl data}
 
 \item{regName}{the name of the region}
+
+\item{doLots}{option to specify tolerance for missingness; otherwise reads in file for it}
 }
 \description{
 Function to make strata for a region, examing missingness

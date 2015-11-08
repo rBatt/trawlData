@@ -37,7 +37,7 @@ m2 \tab exact match after \code{\link{cull}}\cr
 m3 \tab fuzzy match performed on ref\cr
 m4 \tab fuzzy match performed on \code{cull(ref)}
 }
-Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.case=T, max.distance=0.25}.
+Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.case=TRUE, max.distance=0.25}.
 }
 \section{Warning}{
 

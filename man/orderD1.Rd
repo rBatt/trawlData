@@ -12,7 +12,7 @@ orderD1(x, ord)
 \arguments{
 \item{x}{an array}
 
-\item{ord}{vector indicating the order of the elements; for format, see \link{\code{order}}}
+\item{ord}{vector indicating the order of the elements; for format, see \code{\link{order}}}
 }
 \value{
 a reordered array

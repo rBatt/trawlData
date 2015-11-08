@@ -16,7 +16,7 @@ read.zip(zipfile, pattern = "\\\\.csv$", SIMPLIFY = TRUE, use.fwf = FALSE,
 
 \item{use.fwf}{logical, indicating whether or not to read in as fixed width file; is overridden if file extensions are .fwf}
 
-\item{\code{...}}{other arguments to be passed on; in particular, the \code{cols} argument of column width if a fixed width file}
+\item{...}{other arguments to be passed on; in particular, the \code{cols} argument of column width if a fixed width file}
 }
 \value{
 a data.table, or list of data.tables. The name of each element of the list is the name of the file within the .zip file.

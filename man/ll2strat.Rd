@@ -20,6 +20,6 @@ Character vector indicating the center of the defined stratum as the gridded lon
 Convert longitude and latitude vectors to strata
 }
 \details{
-\code{gridSize} is passed to \code{frac} in \link{\code{roundGrid}}. Defines a stratum based on rounding to the center of the nearest grid cell, of the specific size (\code{gridSize}).
+\code{gridSize} is passed to \code{frac} in \code{\link{roundGrid}}. Defines a stratum based on rounding to the center of the nearest grid cell, of the specific size (\code{gridSize}).
 }
 

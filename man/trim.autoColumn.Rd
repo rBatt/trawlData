@@ -23,7 +23,7 @@ A message is also printed if this function does not find any columns to trim.
 \examples{
 dt1 <- data.table(a=1:10, b=c(10:2, NA))
 dt2 <- data.table(a=1:10, b=10:1)
-dt.m <- merge(dt1, dt2, by="a", all.x=T)
+dt.m <- merge(dt1, dt2, by="a", all.x=TRUE)
 trim.autoColumn(dt.m)
 print(dt.m)
 }

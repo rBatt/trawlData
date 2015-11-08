@@ -7,9 +7,8 @@
 Species' common names matched to scientific names}
 \format{\preformatted{Classes ‘data.table’ and 'data.frame':	3548 obs. of  2 variables:
  $ sppCorr: chr  "Abietinaria" "Abietinaria greenei" "Abisa" "Ablennes hians" ...
- $ common : chr  NA NA NA "agujón sable" ...
+ $ common : chr  NA NA NA "aguj\\032n sable" ...
  - attr(*, ".internal.selfref")=<externalptr> 
- - attr(*, "sorted")= chr "sppCorr"
 }}
 \usage{
 getCmmnData
@@ -19,7 +18,7 @@ Common Names
 Species' common names matched to scientific names
 }
 \seealso{
-\code{\link{getCmmn}}
+\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

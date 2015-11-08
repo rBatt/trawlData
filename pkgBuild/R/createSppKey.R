@@ -147,8 +147,7 @@ createSppKey <- function(spp, taxInfo, spp.corr1, save.key=FALSE){
 		# spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
 		
 		# make sure encoding is UTF-8
-		sk.char.names <- names(spp.key)[sapply(spp.key, is.character)]
-		spp.key[,(sk.char.names):=lapply(eval(s2c(sk.char.names)), function(x)enc2utf8(x))]
+		makeAsciiChar(spp.key)
 		
 		# Save
 		setkey(spp.key, spp, ref)

@@ -7,12 +7,15 @@
 clean.names(X, reg = c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf",
   "sa", "sgulf", "shelf", "wcann", "wctri"))
 }
+\arguments{
+\item{X}{a \code{data.table} containing trawl data}
+
+\item{reg}{a region; should be one of the following: \code{c("ai","ebs","gmex","goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")}}
+}
 \description{
 Clean by standardizing the column names
 }
 \details{
-template X_reg
-
 Regions tend to have very different column names for what are essentiallythe same measurements, descriptors, etc. This function tries to give everything a standardized name when it's appropriate.
 }
 

@@ -1,3 +1,14 @@
+#' Clean Columns
+#' 
+#' Clean by ensuring the presence of standard columns.
+#' 
+#' @details
+#' Add missing columns if they don't exist. These are standard values like \code{wtcpue}, \code{spp}, \code{datetime}, and \code{reg}. I will make a full list in future versions, when the decisions are finalized.
+#' 
+#' @template X_reg
+#' 
+#' @import data.table
+#' @export clean.columns
 clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	
 	reg <- match.arg(reg)
@@ -25,7 +36,7 @@ clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 }
 
 
-make.haul <- function(X){
+makeHaul <- function(X){
 	haul.pt <- function(x){
 		formatC(x, width=3, flag=0)
 	}
@@ -40,7 +51,7 @@ make.haul <- function(X){
 clean.columns.ai <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
@@ -81,7 +92,7 @@ clean.columns.ai <- function(X){
 clean.columns.ebs <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
@@ -125,7 +136,7 @@ clean.columns.gmex <- function(X){
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
-	X[,year:=as.integer(format.Date(datetime, format="%Y"))]
+	X[,year:=as.character(format.Date(datetime, format="%Y"))]
 	
 	# season
 	# just naming from the survey name
@@ -170,7 +181,7 @@ clean.columns.gmex <- function(X){
 clean.columns.goa <- function(X){
 	
 	# haulid
-	make.haul(X)
+	makeHaul(X)
 	
 	# date, time, datetime
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]

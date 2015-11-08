@@ -1,24 +1,42 @@
-
-read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), ...){
+#' Read Trawl
+#' 
+#' Read in the raw trawl data sets for each region
+#' 
+#' @param reg the region name;  should be one of the following: \code{c("ai","ebs","gmex","goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")}
+#' @param zippath path to the zip file (or, for neus, to the folder containing a folder named 'neus')
+#' @param ... nothing
+#' 
+#' @details
+#' These functions read in raw data sets that, with the exception of \code{neus}, are in .zip files. An easy way to use these functions on the raw files included with the package is to do \code{setwd(system.file(package="trawlData"))}, then run the script as-is. However, you are equally able to run the function as you would any other read function (like \code{read.csv}, e.g.). Just remember that the function operates on a folder or zip file, not on a single data file.
+#' There is some use of regular expression to find appropriate file names. However, it is best to be sure that the files are named correctly (data files that come with this package are correctly named).
+#' 
+#' @examples
+#' \dontrun{
+#' ai.data <- read.trawl(reg="ai", zippath=file.path(system.file(package="trawlData"),"inst/extdata"))
+#' }
+#' 
+#' @import data.table
+#' @export read.trawl
+read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), zippath="./inst/extdata", ...){
 	reg <- match.arg(reg, several.ok=TRUE)
 	
 	# dots <- list(...)
 	
 	get.raw <- function(x){
 		switch(x,
-			ai = read.ai(),
-			ebs = read.ebs(),
-			gmex = read.gmex(),
-			goa = read.goa(),
-			neus = read.neus(),
-			newf = read.newf(),
-			ngulf = read.ngulf(),
+			ai = read.ai(zippath),
+			ebs = read.ebs(zippath),
+			gmex = read.gmex(zippath),
+			goa = read.goa(zippath),
+			neus = read.neus(file.path(zippath,"neus")),
+			newf = read.newf(zippath),
+			ngulf = read.ngulf(zippath),
 			# sa = read.sa(dots[[x]]),
-			sa = read.sa(),
-			sgulf = read.sgulf(),
-			shelf = read.shelf(),
-			wcann = read.wcann(),
-			wctri = read.wctri()
+			sa = read.sa(zippath),
+			sgulf = read.sgulf(zippath),
+			shelf = read.shelf(zippath),
+			wcann = read.wcann(zippath),
+			wctri = read.wctri(zippath)
 		)
 	}
 	
@@ -38,12 +56,12 @@ read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf"
 # ======
 # = AI =
 # ======
-read.ai <- function(){
+read.ai <- function(zippath){
 	
 	
 	# Read in all files from ai zip file
 	# default pattern is a .csv, and ai is all .csv
-	ai.all <- read.zip(zipfile="./inst/extdata/ai.zip", SIMPLIFY=F)
+	ai.all <- read.zip(zipfile=file.path(zippath,"ai.zip"), SIMPLIFY=F)
 	
 	
 	# Concat raw ai data files
@@ -92,11 +110,11 @@ read.ai <- function(){
 # =======
 # = EBS =
 # =======
-read.ebs <- function(){
+read.ebs <- function(zippath){
 
 	# Read in all files from X zip file
 	# default pattern is a .csv, and X is all .csv
-	X.all <- read.zip(zipfile="./inst/extdata/ebs.zip", SIMPLIFY=F)
+	X.all <- read.zip(zipfile=file.path(zippath, "ebs.zip"), SIMPLIFY=F)
 	
 	
 	# Fix whitespace in column names
@@ -142,7 +160,7 @@ read.ebs <- function(){
 # ========
 # = GMEX =
 # ========
-read.gmex <- function(){
+read.gmex <- function(zippath){
 	
 	# gmex files need to be read in separately
 	# because need to do more work passing args to fread()
@@ -161,30 +179,30 @@ read.gmex <- function(){
 	
 	# read in each file type 1 at a time
 	X.bio <- read.zip(
-		zipfile="./inst/extdata/gmex.zip", colClasses=colClasses1, pattern=patterns[1], 
+		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses1, pattern=patterns[1], 
 		drop=c("SAMPLE_BGS", "NODC_BGS", "IS_SAMPLE", "TAXONID", "CNT"), 
 		SIMPLIFY=F
 	)[[1]]
 	
 	X.sta <- read.zip(
-		zipfile="./inst/extdata/gmex.zip", colClasses=colClasses2, pattern=patterns[2], 
+		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses2, pattern=patterns[2], 
 		select=c('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', "TEMP_SSURF", "TEMP_BOT", 'VESSEL_SPD', 'COMSTAT'),
 		SIMPLIFY=F
 	)[[1]]
 	
 	X.tow <- read.zip(
-		zipfile="./inst/extdata/gmex.zip", colClasses=colClasses3, pattern=patterns[3], 
+		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses3, pattern=patterns[3], 
 		select=c('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP'), 
 		SIMPLIFY=F
 	)[[1]]
 	
 	X.spp <- read.zip(
-		zipfile="./inst/extdata/gmex.zip", colClasses=colClasses4, pattern=patterns[4], 
+		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses4, pattern=patterns[4], 
 		SIMPLIFY=F
 	)[[1]]
 	
 	X.cruises <- read.zip(
-		zipfile="./inst/extdata/gmex.zip", colClasses=colClasses5, pattern=patterns[5], 
+		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses5, pattern=patterns[5], 
 		select=c("CRUISEID", "VESSEL", "TITLE"),
 		SIMPLIFY=F
 	)[[1]]
@@ -219,12 +237,12 @@ read.gmex <- function(){
 # =======
 # = GOA =
 # =======
-read.goa <- function(){
+read.goa <- function(zippath){
 	
 
 	# Read in all files from X zip file
 	# default pattern is a .csv, and X is all .csv
-	X.all <- read.zip(zipfile="./inst/extdata/goa.zip", SIMPLIFY=F)
+	X.all <- read.zip(zipfile=file.path(zippath, "goa.zip"), SIMPLIFY=F)
 	
 	
 	# Fix whitespace in column names
@@ -269,16 +287,16 @@ read.goa <- function(){
 # ========
 # = NEUS =
 # ========
-read.neus <- function(){
+read.neus <- function(zippath){
 	
 	
 	
-	neus.strata <- fread("inst/extdata/neus/neus-neusStrata.csv", select=c('StratumCode', 'Areanmi2')) # Need neusStrata.csv file from Malin (18-Aug-2014)
+	neus.strata <- fread(file.path(zippath, "neus-neusStrata.csv"), select=c('StratumCode', 'Areanmi2')) # Need neusStrata.csv file from Malin (18-Aug-2014)
 	local({ # create a local environment to read in .RData, to ensure that other objects aren't overwritten
 
-		load("inst/extdata/neus/neus-station.RData") # station
-		load("inst/extdata/neus/neus-Survdat.RData") # survdat
-		load("inst/extdata/neus/neus-SVSPP.RData") # spp
+		load(file.path(zippath, "neus-station.RData")) # station
+		load(file.path(zippath, "neus-Survdat.RData")) # survdat
+		load(file.path(zippath, "neus-SVSPP.RData")) # spp
 
 		# assign variables in global environment
 		assign("neus.station", station, envir=environment(read.neus))
@@ -311,35 +329,35 @@ read.neus <- function(){
 # ========
 # = NEWF =
 # ========
-read.newf <- function(){
+read.newf <- function(zippath){
 	
 	# read survey info
-	newf.surv1 <- read.zip("inst/extdata/newf.zip", pattern="surveys_table\\.csv", colClasses=rep("character", 16), drop=c("Comment"), SIMPLIFY=F)[[1]] #
-	newf.surv2 <- read.zip("inst/extdata/newf.zip", pattern="surveys_table2009-2011\\.csv", colClasses=rep("character", 7), SIMPLIFY=F)[[1]] #
+	newf.surv1 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table\\.csv", colClasses=rep("character", 16), drop=c("Comment"), SIMPLIFY=F)[[1]] #
+	newf.surv2 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table2009-2011\\.csv", colClasses=rep("character", 7), SIMPLIFY=F)[[1]] #
 
 	# read strata
 	# I can't figure out what I needed these for,
 	# so for now I'm commenting-out this code
 	# but this code does work
 	# strat.widths <- c(3,4,4,3)
-# 	strat <- read.zip("inst/extdata/newf.zip", pattern="stratum_areas", cols=strat.widths, use.fwf=T, SIMPLIFY=F)
+# 	strat <- read.zip("inst/extdata/newf.zip", pattern="stratum_areas", cols=strat.widths, use.fwf=TRUE, SIMPLIFY=F)
 # 	strat <- lapply(strat, function(x)setnames(x, names(x), c('stratum', 'area', 'maxdepth', 'nafo')))
 	
 	# read species information
-	newf.spp <- read.zip("inst/extdata/newf.zip", pattern="GFSPCY\\.CODE", SIMPLIFY=F, drop="V1", , colClasses=c("character","integer", rep("character",2)))[[1]]
+	newf.spp <- read.zip(file.path(zippath, "newf.zip"), pattern="GFSPCY\\.CODE", SIMPLIFY=F, drop="V1", , colClasses=c("character","integer", rep("character",2)))[[1]]
 		
 	# read main data files
 	data.widths <- c(1, 2, 3, 3, 2, 2, 2, 2, 3, 2, 3, 3, 1, 1, 1, 1, 4, 3, 3, 1, 4, 4, 4, 4, 3, 3, 5, 5, 1, 4, 4, 6, 7, 5, 5, 2, 2) # column widths
 	col.types <- c(recordtype="integer", vessel="integer", trip="integer", set="integer", yearl="integer", monthl="integer", dayl="integer", settype="integer", stratum="character", nafo="character", unitarea="character", light="double", winddir="double", windforce="double", sea="double", bottom="double", timel="character", duration="double", distance="double", operation="double", depth="character", depthmin="character", depthmax="character", depthbottom="character", surftemp="double", bottemp="double", latstart="character", lonstart="character", posmethod="double", gear="double", sppcode="double", num="double", wgt="double", latend="character", lonend="character", bottempmeth="double", geardevice="double")
 	data.pattern <- "(199[23456789]|200[0123456789]|201[012])\\.DAT$" # pattern for main data files
 	newf.names <- names(col.types) # column names
-	newf <- read.zip("inst/extdata/newf.zip", pattern=data.pattern, SIMPLIFY=F, use.fwf=T, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
+	newf <- read.zip(file.path(zippath, "newf.zip"), pattern=data.pattern, SIMPLIFY=F, use.fwf=TRUE, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
 	newf <- do.call(rbind, newf) # combine into 1 data.table
 	setnames(newf, names(newf), newf.names) # set names
 	
 	# merge main data set w/ species names
 	newf[,sppcode:=as.integer(sppcode)]
-	newf <- merge(newf, newf.spp, all.x=T, by="sppcode")
+	newf <- merge(newf, newf.spp, all.x=TRUE, by="sppcode")
 
 
 	# Use the "surv" files to add
@@ -384,7 +402,7 @@ read.newf <- function(){
 # =========
 # = NGULF =
 # =========
-read.ngulf <- function(){
+read.ngulf <- function(zippath){
 	message("Function not ready yet")
 }
 
@@ -392,11 +410,11 @@ read.ngulf <- function(){
 # ======
 # = SA =
 # ======
-read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
+read.sa <- function(zippath, catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
 	catch <- match.arg(catch)
 	
 	
-	sa.all <- read.zip("inst/extdata/sa.zip", SIMPLIFY=F)
+	sa.all <- read.zip(file.path(zippath, "sa.zip"), SIMPLIFY=F)
 	sa.all.names1 <- names(sa.all[[catch]])
 	sa.all.keep1 <- sa.all.names1[!grepl("^V[0-9]*$", sa.all.names1)]
 	sa.all[[catch]] <- sa.all[[catch]][,eval(s2c(sa.all.keep1))]
@@ -409,7 +427,7 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 	sa.strat <- sa.strat[!duplicated(COLLECTIONNUMBER)] # not needed for catch 1
 
 	# merge 
-	sa <- merge(sa.mass, sa.strat, all.x=T, by=c("COLLECTIONNUMBER"))
+	sa <- merge(sa.mass, sa.strat, all.x=TRUE, by=c("COLLECTIONNUMBER"))
 	
 	# trim columns duplicated from merge
 	trim.autoColumn(sa)
@@ -420,10 +438,10 @@ read.sa <- function(catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","
 # =========
 # = SGULF =
 # =========
-read.sgulf <- function(){
+read.sgulf <- function(zippath){
 	
 	# read
-	X.all <- read.zip("inst/extdata/sgulf.zip", SIMPLIFY=F)
+	X.all <- read.zip(file.path(zippath, "sgulf.zip"), SIMPLIFY=F)
 	X.catch <- X.all[["sgulf-southern Gulf survey data.csv"]]
 	X.set <- X.all[[names(X.all)[grepl("sgulf-sGSL_RV Survey sets.*", names(X.all))]]]
 	X.strata <- X.all[["sgulf-4T_RV_strata.csv"]]
@@ -442,10 +460,10 @@ read.sgulf <- function(){
 # =========
 # = SHELF =
 # =========
-read.shelf <- function(){
+read.shelf <- function(zippath){
 	
 	# read in
-	X.all <- read.zip("inst/extdata/shelf.zip", SIMPLIFY=F)
+	X.all <- read.zip(file.path(zippath, "shelf.zip"), SIMPLIFY=F)
 	X.catch <- X.all[[names(X.all)[grepl("shelf-gscat.*",names(X.all))]]]
 	X.set <- X.all[[names(X.all)[grepl("shelf-gsinf.*",names(X.all))]]]
 	X.spp <- X.all[[names(X.all)[grepl("shelf-species list.*",names(X.all))]]]
@@ -472,10 +490,10 @@ read.shelf <- function(){
 # ==========
 # = WC ANN =
 # ==========
-read.wcann <- function(){
+read.wcann <- function(zippath){
 	
 	# read
-	X.all <- read.zip("inst/extdata/wcann.zip", SIMPLIFY=F)
+	X.all <- read.zip(file.path(zippath, "wcann.zip"), SIMPLIFY=F)
 	X.fish <- X.all[[names(X.all)[grepl("wcann.+fish\\.csv",names(X.all))]]]
 	X.haul <- X.all[[names(X.all)[grepl("wcann.+haul\\.csv",names(X.all))]]]
 	X.invert <- X.all[[names(X.all)[grepl("wcann.+invert\\.csv",names(X.all))]]]
@@ -493,10 +511,10 @@ read.wcann <- function(){
 # ==========
 # = WC TRI =
 # ==========
-read.wctri <- function(){
+read.wctri <- function(zippath){
 	
 	# read
-	X.all <- read.zip("inst/extdata/wctri.zip", SIMPLIFY=F)
+	X.all <- read.zip(file.path(zippath, "wctri.zip"), SIMPLIFY=F)
 	X.catch <- X.all[["wctri-CATCHWCTRIALLCOAST.csv"]]
 	X.haul <- X.all[["wctri-HAULWCTRIALLCOAST.csv"]]
 	X.spp <- X.all[["wctri-RACEBASE_SPECIES.csv"]]

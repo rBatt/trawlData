@@ -1,18 +1,34 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 .DS_Store
-ETOPO.RData
-HadISST.RData
-soda_200W-20E_0N-90N_1958-2008.RData
-soda.annMax_200W-20E_0N-90N_1958-2008.RData
-soda.annMean_200W-20E_0N-90N_1958-2008.RData
+
+# .RData Files to Ignore
+# ETOPO.RData
+# HadISST.RData
+# soda_200W-20E_0N-90N_1958-2008.RData
+# soda.annMax_200W-20E_0N-90N_1958-2008.RData
+# soda.annMean_200W-20E_0N-90N_1958-2008.RData
+tempo-image-spp.key.RData
+# Zip Files to Ignore
 HadISST.zip
 soda.zip
-# inst/extdata/soda/
-# inst/extdata/taxPictures/
-# inst/extdata/depthData/
-# inst/extdata/gmex/
-# inst/extdata/newf/
-# inst/extdata/sa/
-# inst/extdata/wctri/
-create.spp.key_manual.R
+depthData.zip
+# Scripts to Ignore
+# create.spp.key_manual.R
+# create.spp.key.R
+# expand.data.R
+# format.msom.basic.R
+# format.msom.cov.R
+# format.trawl_old.R
+# read.HadISST.R
+# read.ETOPO.R
+tax.getTL
+# tax.updateDB.R
+# authors.R
+# dependencies.R
+pkgBuild # package building folder
+man-roxygen
+
+
+^.git$
+testRepo.R

@@ -1,8 +1,20 @@
 Package: trawlData
-Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph)
-Depends: R (>= 3.2.2)
-License: What license is it under?
+Title: Read and Clean Data from Bottom Trawl Surveys
+Version: 0.0.9
+Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", role=c("aut","cre")),
+	person(given="James W.", family="Morley", email="jw.morley@rutgers.edu", role=c("aut")),
+	person(given="Rebecca L.", family="Selden", email="becca.selden@gmail.com", role=c("aut")),
+	person(given="Malin L.", family="Pinsky", email="malin.pinsky@rutgers.edu", role=c("aut")))
+Description: Collates and cleans data from North American bottom trawl surveys.
+Depends: R (>= 3.2.2),
+    data.table (>= 1.9.4)
+License: CC0
 LazyData: true
+Imports: LaF,
+    bit64,
+    stringr,
+    stringi,
+    PBSmapping
+Suggests: raster,
+    taxize,
+    rfishbase

@@ -1,24 +1,38 @@
+#' Clean Taxonomy
+#' 
+#' Clean by fixing/ standardizing taxonomic names
+#' 
+#' @template X_reg
+#' 
+#' @details
+#' relies on spp.key data file that comes with this package. In "/inst/extdata" there is also a .csv version of this file that is being used. Taxonomy corrections are an ongoing process.  
+#' Also adds taxonomic classification, some ecological information (trophic level), common names, whether or not a picture is available with this package, and other miscellanious information about how the taxonomic correction was made.
+#' 
+#' The \code{ref} column in the output is the name of the original species name/ taxonomic identifier.
+#' 
+#' @import data.table
+#' @export clean.tax
 clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
-	load("data/spp.key.RData")
+	# load("data/spp.key.RData")
 	reg <- match.arg(reg)
 	
 	
-	clean.tax0 <- function(x){
-		switch(x,
-			ai = clean.tax.ai(X),
-			ebs = clean.tax.ebs(X),
-			gmex = clean.tax.gmex(X),
-			goa = clean.tax.goa(X),
-			neus = clean.tax.neus(X),
-			newf = clean.tax.newf(X),
-			ngulf = clean.tax.ngulf(X),
-			sa = clean.tax.sa(X),
-			sgulf = clean.tax.sgulf(X),
-			shelf = clean.tax.shelf(X),
-			wcann = clean.tax.wcann(X),
-			wctri = clean.tax.wctri(X)
-		)
-	}
+	# clean.tax0 <- function(x){
+	# 	switch(x,
+	# 		ai = clean.tax.ai(X),
+	# 		ebs = clean.tax.ebs(X),
+	# 		gmex = clean.tax.gmex(X),
+	# 		goa = clean.tax.goa(X),
+	# 		neus = clean.tax.neus(X),
+	# 		newf = clean.tax.newf(X),
+	# 		ngulf = clean.tax.ngulf(X),
+	# 		sa = clean.tax.sa(X),
+	# 		sgulf = clean.tax.sgulf(X),
+	# 		shelf = clean.tax.shelf(X),
+	# 		wcann = clean.tax.wcann(X),
+	# 		wctri = clean.tax.wctri(X)
+	# 	)
+	# }
 	
 	
 	# X <- copy(gmex)
@@ -27,8 +41,10 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	}
 	
 	names.x <- names(X)
+	# rmX.names <- names.x[names.x%in%(names(trawlData::spp.key)[names(trawlData::spp.key)!="ref"])]
 	rmX.names <- names.x[names.x%in%(names(spp.key)[names(spp.key)!="ref"])]
 	
+	# setkey(trawlData::spp.key, "ref")
 	setkey(spp.key, "ref")
 	X <- merge(X, spp.key, by="ref", all.x=TRUE)
 	
@@ -47,7 +63,7 @@ clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngul
 	#
 	# smry.tax0 <- X[,table(taxLvl[!duplicated(spp)])]
 	# nst <- names(smry.tax0)
-	# sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=T)]])}
+	# sum.tax <- function(x){sum(smry.tax0[nst[grepl(x,nst,ignore.case=TRUE)]])}
 	# smry.tax <- c(
 	# 	kingdom = sum.tax("kingdom"),
 	# 	phylum = sum.tax("phylum"),

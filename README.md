@@ -6,7 +6,7 @@
  :shell: :tropical_fish: :octopus: :fish: :fishing_pole_and_fish: 
 </p>
 
-<!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus acanthias.jpg?raw=TRUE)-->
+<!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE)-->
 <p align="center">
 <img src="./inst/extdata/taxPictures/Squalus acanthias.jpg?raw=TRUE", width="500">
 </p>

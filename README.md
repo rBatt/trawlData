@@ -2,10 +2,14 @@
 
 
 # trawlData
+<p align="center">
+ :shell: :tropical_fish: :octopus: :fish: :fishing_pole_and_fish: 
+</p>
 
-<!-- :shell: :octopus: :fish: :tropical_fish: :fishing_pole_and_fish: -->
-
-![Random Trawl Species](../inst/extdata/Squalus acanthias.jpg?raw=TRUE)
+<!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus acanthias.jpg?raw=TRUE)-->
+<p align="center">
+<img src="./inst/extdata/taxPictures/Squalus acanthias.jpg?raw=TRUE", width="500">
+</p>
 
 
 R package for maintaining and manipulating data from bottom trawl survey and associated data sets
@@ -22,18 +26,18 @@ R package for maintaining and manipulating data from bottom trawl survey and ass
 ~~Because this is a private repo, you need to generate a Personal Access Token [HERE](https://github.com/settings/tokens). After you sign in to GitHub, click "Generate new token". The default settings for the token are fine. When the token is generated, set copy and paste it in place of `pat` in the code above.~~ *Note:* [`install_github` currently doesn't work with Git LFS](https://github.com/hadley/devtools/issues/889).  
 
 To install this repo, the easiest thing to do is to clone it, then then use `devtools:install()`:  
- 1. In terminal, type:  
+ - In terminal, type:  
  ```
 cd path/to/folder/to/hold/repo
 git clone https://github.com/rBatt/trawlData
  ```  
- 2. In R, type:  
+ - In R, type:  
 ```{r}
 library(devtools)
 setwd("path/to/folder/to/hold/repo/trawlData")
 devtools::install()
 ```
- 3. There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:
+ - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:
  ```{r}
  library(devtools)
  install_version("data.table", version="1.9.4")

@@ -4,7 +4,57 @@
 \name{clean.wcann}
 \alias{clean.wcann}
 \title{Clean West Coast Annual}
-\format{A data.table}
+\format{A dim = 183971 x 48 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab ref \tab character \tab insert_description_here\cr
+[,2] \tab haulid \tab character \tab insert_description_here\cr
+[,3] \tab weight \tab numeric \tab insert_description_here\cr
+[,4] \tab Individual.Average.Weight..kg. \tab numeric \tab insert_description_here\cr
+[,5] \tab Survey \tab character \tab insert_description_here\cr
+[,6] \tab year \tab character \tab insert_description_here\cr
+[,7] \tab vessel \tab character \tab insert_description_here\cr
+[,8] \tab Cruise.Leg \tab integer \tab insert_description_here\cr
+[,9] \tab Trawl.Performance \tab character \tab insert_description_here\cr
+[,10] \tab date \tab character \tab insert_description_here\cr
+[,11] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+[,12] \tab lat \tab numeric \tab insert_description_here\cr
+[,13] \tab lon \tab numeric \tab insert_description_here\cr
+[,14] \tab Best.Position.Type \tab character \tab insert_description_here\cr
+[,15] \tab depth \tab numeric \tab insert_description_here\cr
+[,16] \tab Best.Depth.Type \tab character \tab insert_description_here\cr
+[,17] \tab towduration \tab numeric \tab insert_description_here\cr
+[,18] \tab towarea \tab numeric \tab insert_description_here\cr
+[,19] \tab btemp \tab numeric \tab insert_description_here\cr
+[,20] \tab season \tab character \tab insert_description_here\cr
+[,21] \tab stratum \tab character \tab insert_description_here\cr
+[,22] \tab stratumarea \tab numeric \tab insert_description_here\cr
+[,23] \tab effort \tab numeric \tab insert_description_here\cr
+[,24] \tab wtcpue \tab numeric \tab insert_description_here\cr
+[,25] \tab cnt \tab numeric \tab insert_description_here\cr
+[,26] \tab cntcpue \tab numeric \tab insert_description_here\cr
+[,27] \tab reg \tab character \tab insert_description_here\cr
+[,28] \tab val.src \tab character \tab insert_description_here\cr
+[,29] \tab tbl.row \tab numeric \tab insert_description_here\cr
+[,30] \tab mtch.src \tab numeric \tab insert_description_here\cr
+[,31] \tab spp \tab character \tab insert_description_here\cr
+[,32] \tab common \tab character \tab insert_description_here\cr
+[,33] \tab taxLvl \tab character \tab insert_description_here\cr
+[,34] \tab species \tab character \tab insert_description_here\cr
+[,35] \tab genus \tab character \tab insert_description_here\cr
+[,36] \tab family \tab character \tab insert_description_here\cr
+[,37] \tab order \tab character \tab insert_description_here\cr
+[,38] \tab class \tab character \tab insert_description_here\cr
+[,39] \tab superclass \tab character \tab insert_description_here\cr
+[,40] \tab subphylum \tab character \tab insert_description_here\cr
+[,41] \tab phylum \tab character \tab insert_description_here\cr
+[,42] \tab kingdom \tab character \tab insert_description_here\cr
+[,43] \tab trophicDiet \tab character \tab insert_description_here\cr
+[,44] \tab trophicOrig \tab character \tab insert_description_here\cr
+[,45] \tab Picture \tab character \tab insert_description_here\cr
+[,46] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+[,47] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,48] \tab keep.row \tab logical \tab insert_description_here\cr
+}}
 \usage{
 clean.wcann
 }

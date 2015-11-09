@@ -4,7 +4,33 @@
 \name{raw.neus}
 \alias{raw.neus}
 \title{Raw Northeast US}
-\format{A data.table}
+\format{A dim = 2402096 x 24 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab CRUISE6 \tab integer \tab insert_description_here\cr
+[,2] \tab STATION \tab integer \tab insert_description_here\cr
+[,3] \tab STRATUM \tab integer \tab insert_description_here\cr
+[,4] \tab SVSPP \tab integer \tab insert_description_here\cr
+[,5] \tab CATCHSEX \tab integer \tab insert_description_here\cr
+[,6] \tab SVVESSEL \tab character \tab insert_description_here\cr
+[,7] \tab YEAR \tab integer \tab insert_description_here\cr
+[,8] \tab SEASON \tab character \tab insert_description_here\cr
+[,9] \tab LAT \tab numeric \tab insert_description_here\cr
+[,10] \tab LON \tab numeric \tab insert_description_here\cr
+[,11] \tab DEPTH \tab integer \tab insert_description_here\cr
+[,12] \tab SURFTEMP \tab numeric \tab insert_description_here\cr
+[,13] \tab SURFSALIN \tab numeric \tab insert_description_here\cr
+[,14] \tab BOTTEMP \tab numeric \tab insert_description_here\cr
+[,15] \tab BOTSALIN \tab numeric \tab insert_description_here\cr
+[,16] \tab ABUNDANCE \tab numeric \tab insert_description_here\cr
+[,17] \tab BIOMASS \tab numeric \tab insert_description_here\cr
+[,18] \tab LENGTH \tab numeric \tab insert_description_here\cr
+[,19] \tab NUMLEN \tab integer \tab insert_description_here\cr
+[,20] \tab SCINAME \tab character \tab insert_description_here\cr
+[,21] \tab ITISSPP \tab integer \tab insert_description_here\cr
+[,22] \tab COMNAME \tab character \tab insert_description_here\cr
+[,23] \tab AUTHOR \tab character \tab insert_description_here\cr
+[,24] \tab Areanmi2 \tab integer \tab insert_description_here\cr
+}}
 \usage{
 raw.neus
 }

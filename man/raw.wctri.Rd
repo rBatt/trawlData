@@ -4,7 +4,51 @@
 \name{raw.wctri}
 \alias{raw.wctri}
 \title{Raw West Coast Triennial}
-\format{A data.table}
+\format{A dim = 108138 x 42 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab SPECIES_CODE \tab integer \tab insert_description_here\cr
+[,2] \tab CRUISEJOIN \tab integer \tab insert_description_here\cr
+[,3] \tab HAULJOIN \tab integer \tab insert_description_here\cr
+[,4] \tab REGION \tab character \tab insert_description_here\cr
+[,5] \tab VESSEL \tab integer \tab insert_description_here\cr
+[,6] \tab CRUISE \tab integer \tab insert_description_here\cr
+[,7] \tab HAUL \tab integer \tab insert_description_here\cr
+[,8] \tab CATCHJOIN \tab integer \tab insert_description_here\cr
+[,9] \tab WEIGHT \tab numeric \tab insert_description_here\cr
+[,10] \tab NUMBER_FISH \tab integer \tab insert_description_here\cr
+[,11] \tab SUBSAMPLE_CODE \tab logical \tab insert_description_here\cr
+[,12] \tab VOUCHER \tab integer \tab insert_description_here\cr
+[,13] \tab AUDITJOIN \tab integer \tab insert_description_here\cr
+[,14] \tab HAUL_TYPE \tab integer \tab insert_description_here\cr
+[,15] \tab PERFORMANCE \tab numeric \tab insert_description_here\cr
+[,16] \tab START_TIME \tab character \tab insert_description_here\cr
+[,17] \tab DURATION \tab numeric \tab insert_description_here\cr
+[,18] \tab DISTANCE_FISHED \tab numeric \tab insert_description_here\cr
+[,19] \tab NET_WIDTH \tab numeric \tab insert_description_here\cr
+[,20] \tab NET_MEASURED \tab character \tab insert_description_here\cr
+[,21] \tab NET_HEIGHT \tab numeric \tab insert_description_here\cr
+[,22] \tab STRATUM \tab integer \tab insert_description_here\cr
+[,23] \tab START_LATITUDE \tab numeric \tab insert_description_here\cr
+[,24] \tab END_LATITUDE \tab numeric \tab insert_description_here\cr
+[,25] \tab START_LONGITUDE \tab numeric \tab insert_description_here\cr
+[,26] \tab END_LONGITUDE \tab numeric \tab insert_description_here\cr
+[,27] \tab STATIONID \tab character \tab insert_description_here\cr
+[,28] \tab GEAR_DEPTH \tab integer \tab insert_description_here\cr
+[,29] \tab BOTTOM_DEPTH \tab integer \tab insert_description_here\cr
+[,30] \tab BOTTOM_TYPE \tab character \tab insert_description_here\cr
+[,31] \tab SURFACE_TEMPERATURE \tab numeric \tab insert_description_here\cr
+[,32] \tab GEAR_TEMPERATURE \tab numeric \tab insert_description_here\cr
+[,33] \tab WIRE_LENGTH \tab integer \tab insert_description_here\cr
+[,34] \tab GEAR \tab character \tab insert_description_here\cr
+[,35] \tab ACCESSORIES \tab character \tab insert_description_here\cr
+[,36] \tab SUBSAMPLE \tab character \tab insert_description_here\cr
+[,37] \tab SPECIES_NAME \tab character \tab insert_description_here\cr
+[,38] \tab COMMON_NAME \tab character \tab insert_description_here\cr
+[,39] \tab REVISION \tab character \tab insert_description_here\cr
+[,40] \tab BS \tab character \tab insert_description_here\cr
+[,41] \tab GOA \tab character \tab insert_description_here\cr
+[,42] \tab WC \tab character \tab insert_description_here\cr
+}}
 \usage{
 raw.wctri
 }

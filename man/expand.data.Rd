@@ -38,11 +38,17 @@ expand.data(comD, arr.dim, keyValue = "value", fillID = NULL,
 
 \item{aggFun}{Function used to aggregate among levels of columns specified in keyID, but not present in arr.dim.}
 
-\item{maxOut}{the maximum number of allowable elements in the output array or data.table. In place to prevent early detection of a huge number of combinations that might use up a larger-than-expected amount of memory.
-The main purpose of this function is to do something very similar to \code{merge(data, data[,do.call(expand.grid, list(id1, id2))], all=TRUE)}, and then follow that by trimming out of combinations you didn't need due to scoping. I.e., to look for all possible combinations of some variables (id1 id2), and then merge all of those combinations back into your original data set to create NA's but to ensure combinations are available. However, the process of finding all combinations might ideally occur for a subset of the data at a time, such that all combinations are only found among those variables per unique value of some other column. To make things more complicated, different combinations might need to occur for different subsets. Creating many extra combinations and trimming them out, or doing things more directly, is fine when the data set is small enough to manage all of those combinations in memory; however, this can be slow or prohibitive for large data sets. This function seeks to
-still testing!!}
+\item{maxOut}{the maximum number of allowable elements in the output array or data.table. In place to prevent early detection of a huge number of combinations that might use up a larger-than-expected amount of memory.}
 }
 \description{
 Expand data set to include 0's, and reformat to array to save memory
+}
+\details{
+This function seeks to waste as little memory as possible.
+
+The main purpose of this function is to do something very similar to \code{merge(data, data[,do.call(expand.grid, list(id1, id2))], all=TRUE)}, and then follow that by trimming out of combinations you didn't need due to scoping.
+I.e., to look for all possible combinations of some variables (id1 id2), and then merge all of those combinations back into your original data set to create NA's but to ensure combinations are available. However, the process of finding all combinations might ideally occur for a subset of the data at a time, such that all combinations are only found among those variables per unique value of some other column. To make things more complicated, different combinations might need to occur for different subsets. Creating many extra combinations and trimming them out, or doing things more directly, is fine when the data set is small enough to manage all of those combinations in memory; however, this can be slow or prohibitive for large data sets.  As a result, it is a very targeted and specific function, that requires specifying many arguments.
+
+still testing!!
 }
 

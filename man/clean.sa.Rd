@@ -4,7 +4,101 @@
 \name{clean.sa}
 \alias{clean.sa}
 \title{Clean South Atlantic}
-\format{A data.table}
+\format{A dim = 319395 x 92 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab ref \tab character \tab insert_description_here\cr
+[,2] \tab haulid \tab character \tab insert_description_here\cr
+[,3] \tab PROJECTNAME \tab character \tab insert_description_here\cr
+[,4] \tab PROJECTAGENCY \tab character \tab insert_description_here\cr
+[,5] \tab date \tab character \tab insert_description_here\cr
+[,6] \tab EVENTNAME \tab integer \tab insert_description_here\cr
+[,7] \tab vessel \tab character \tab insert_description_here\cr
+[,8] \tab GEARNAME \tab character \tab insert_description_here\cr
+[,9] \tab GEARCODE \tab character \tab insert_description_here\cr
+[,10] \tab SPECIESCODE \tab integer64 \tab insert_description_here\cr
+[,11] \tab MRRI_CODE \tab character \tab insert_description_here\cr
+[,12] \tab cnt \tab numeric \tab insert_description_here\cr
+[,13] \tab weight \tab numeric \tab insert_description_here\cr
+[,14] \tab SPECIESSUBWEIGHT \tab logical \tab insert_description_here\cr
+[,15] \tab SPECIESWGTPROCESSED \tab numeric \tab insert_description_here\cr
+[,16] \tab WEIGHTMETHODDESC \tab character \tab insert_description_here\cr
+[,17] \tab ORGWTUNITS \tab character \tab insert_description_here\cr
+[,18] \tab effort \tab numeric \tab insert_description_here\cr
+[,19] \tab CATCHSUBSAMPLED \tab logical \tab insert_description_here\cr
+[,20] \tab CATCHWEIGHT \tab numeric \tab insert_description_here\cr
+[,21] \tab CATCHSUBWEIGHT \tab numeric \tab insert_description_here\cr
+[,22] \tab time \tab character \tab insert_description_here\cr
+[,23] \tab towduration \tab numeric \tab insert_description_here\cr
+[,24] \tab TOWTYPETEXT \tab character \tab insert_description_here\cr
+[,25] \tab LOCATION \tab character \tab insert_description_here\cr
+[,26] \tab REGION \tab character \tab insert_description_here\cr
+[,27] \tab DEPTHZONE \tab character \tab insert_description_here\cr
+[,28] \tab ACCSPGRIDCODE \tab character \tab insert_description_here\cr
+[,29] \tab stratum \tab character \tab insert_description_here\cr
+[,30] \tab EVENTTYPEDESCRIPTION \tab logical \tab insert_description_here\cr
+[,31] \tab stemp \tab numeric \tab insert_description_here\cr
+[,32] \tab btemp \tab numeric \tab insert_description_here\cr
+[,33] \tab ssalin \tab numeric \tab insert_description_here\cr
+[,34] \tab bsalin \tab numeric \tab insert_description_here\cr
+[,35] \tab sdo \tab logical \tab insert_description_here\cr
+[,36] \tab bdo \tab numeric \tab insert_description_here\cr
+[,37] \tab airtemp \tab numeric \tab insert_description_here\cr
+[,38] \tab lat.start \tab numeric \tab insert_description_here\cr
+[,39] \tab lat.end \tab numeric \tab insert_description_here\cr
+[,40] \tab lon.start \tab numeric \tab insert_description_here\cr
+[,41] \tab lon.end \tab numeric \tab insert_description_here\cr
+[,42] \tab SPECSTATUSDESCRIPTION \tab character \tab insert_description_here\cr
+[,43] \tab LASTUPDATED \tab character \tab insert_description_here\cr
+[,44] \tab LIGHTPHASE \tab character \tab insert_description_here\cr
+[,45] \tab timezone \tab character \tab insert_description_here\cr
+[,46] \tab depth.start \tab numeric \tab insert_description_here\cr
+[,47] \tab depth.end \tab numeric \tab insert_description_here\cr
+[,48] \tab PRESSURE \tab numeric \tab insert_description_here\cr
+[,49] \tab WINDSPEED \tab integer \tab insert_description_here\cr
+[,50] \tab WINDDIRECTION \tab integer \tab insert_description_here\cr
+[,51] \tab WAVEHEIGHT \tab integer \tab insert_description_here\cr
+[,52] \tab PRECIPITATION \tab character \tab insert_description_here\cr
+[,53] \tab ESTIMATEDLOC \tab logical \tab insert_description_here\cr
+[,54] \tab SEDSIZEDESC \tab logical \tab insert_description_here\cr
+[,55] \tab BTMCOMPDESC \tab logical \tab insert_description_here\cr
+[,56] \tab WEATHERDESC \tab logical \tab insert_description_here\cr
+[,57] \tab WATERLVLDESC \tab logical \tab insert_description_here\cr
+[,58] \tab ALTERATIONDESC \tab logical \tab insert_description_here\cr
+[,59] \tab ACTIVITYDESC \tab logical \tab insert_description_here\cr
+[,60] \tab NBRREP \tab logical \tab insert_description_here\cr
+[,61] \tab comment \tab character \tab insert_description_here\cr
+[,62] \tab year \tab integer \tab insert_description_here\cr
+[,63] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+[,64] \tab season \tab character \tab insert_description_here\cr
+[,65] \tab lat \tab numeric \tab insert_description_here\cr
+[,66] \tab lon \tab numeric \tab insert_description_here\cr
+[,67] \tab depth \tab numeric \tab insert_description_here\cr
+[,68] \tab stratumarea \tab numeric \tab insert_description_here\cr
+[,69] \tab cntcpue \tab numeric \tab insert_description_here\cr
+[,70] \tab wtcpue \tab numeric \tab insert_description_here\cr
+[,71] \tab reg \tab character \tab insert_description_here\cr
+[,72] \tab val.src \tab character \tab insert_description_here\cr
+[,73] \tab tbl.row \tab numeric \tab insert_description_here\cr
+[,74] \tab mtch.src \tab numeric \tab insert_description_here\cr
+[,75] \tab spp \tab character \tab insert_description_here\cr
+[,76] \tab common \tab character \tab insert_description_here\cr
+[,77] \tab taxLvl \tab character \tab insert_description_here\cr
+[,78] \tab species \tab character \tab insert_description_here\cr
+[,79] \tab genus \tab character \tab insert_description_here\cr
+[,80] \tab family \tab character \tab insert_description_here\cr
+[,81] \tab order \tab character \tab insert_description_here\cr
+[,82] \tab class \tab character \tab insert_description_here\cr
+[,83] \tab superclass \tab character \tab insert_description_here\cr
+[,84] \tab subphylum \tab character \tab insert_description_here\cr
+[,85] \tab phylum \tab character \tab insert_description_here\cr
+[,86] \tab kingdom \tab character \tab insert_description_here\cr
+[,87] \tab trophicDiet \tab character \tab insert_description_here\cr
+[,88] \tab trophicOrig \tab character \tab insert_description_here\cr
+[,89] \tab Picture \tab character \tab insert_description_here\cr
+[,90] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+[,91] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,92] \tab keep.row \tab logical \tab insert_description_here\cr
+}}
 \usage{
 clean.sa
 }

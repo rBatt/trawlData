@@ -7,15 +7,16 @@
 getCmmn(u.sppCorr)
 }
 \arguments{
-\item{u.sppCorr}{character vector of Latin names to lookup
-
-Uses rfishbase (this is new from original implementation), and only uses taxize if rfishbase fails to find a match (but taxize is very slow sometimes). Furture versions should use the sealifebase implementation of rfishbase, which I haven't figured out or tested yet.}
+\item{u.sppCorr}{character vector of Latin names to lookup}
 }
 \value{
 a data.table with two columns: the species name searched, and the common name
 }
 \description{
 Get species' common names
+}
+\details{
+Uses rfishbase (this is new from original implementation), and only uses taxize if rfishbase fails to find a match (but taxize is very slow sometimes). Furture versions should use the sealifebase implementation of rfishbase, which I haven't figured out or tested yet.
 }
 \examples{
 getCmmn(c(

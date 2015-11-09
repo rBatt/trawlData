@@ -1,9 +1,88 @@
+[![Travis-CI Build Status](https://travis-ci.org/rBatt/trawlData.svg?branch=master)](https://travis-ci.org/rBatt/trawlData)
+
+
 # trawlData
+
+<!-- :shell: :octopus: :fish: :tropical_fish: :fishing_pole_and_fish: -->
+
+![Random Trawl Species](../inst/extdata/Squalus acanthias.jpg?raw=TRUE)
+
+
 R package for maintaining and manipulating data from bottom trawl survey and associated data sets
 
 ---
 
-__Note:__ This repository uses `git-lfs`. Git Large File Storage is a way to manage large binary files into a git workflow without taking up a ton of disk space (and it lets you put large files up to GitHub!).
+
+## Install this R package
+~~To install this repo as an R package:~~  
+```{r}
+# library(devtools)
+# install_github("rBatt/trawlData", auth_token=pat) # see note below for pat token
+```
+~~Because this is a private repo, you need to generate a Personal Access Token [HERE](https://github.com/settings/tokens). After you sign in to GitHub, click "Generate new token". The default settings for the token are fine. When the token is generated, set copy and paste it in place of `pat` in the code above.~~ *Note:* [`install_github` currently doesn't work with Git LFS](https://github.com/hadley/devtools/issues/889).  
+
+To install this repo, the easiest thing to do is to clone it, then then use `devtools:install()`:  
+ 1. In terminal, type:  
+ ```
+cd path/to/folder/to/hold/repo
+git clone https://github.com/rBatt/trawlData
+ ```  
+ 2. In R, type:  
+```{r}
+library(devtools)
+setwd("path/to/folder/to/hold/repo/trawlData")
+devtools::install()
+```
+ 3. There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:
+ ```{r}
+ library(devtools)
+ install_version("data.table", version="1.9.4")
+ ```
+ 
+## Use this R package
+```{r}
+# load package
+library(trawlData)
+
+# both raw & clean data + taxonomy already in workspace
+data(raw.newf) # raw Newfoundland
+data(clean.ebs) # clean Eastern Berring Sea
+data(spp.key) # the species key
+
+# check documentation
+?raw.sa
+?clean.wctri
+
+# easy function to read in from source data
+my.goa <- read.trawl(reg="goa") # same as raw.goa
+
+# functions for cleaning raw data
+# a specific order for calling these functions!
+clean.names(my.goa) # note it affects my.goa directly!
+clean.format(my.goa)
+clean.columns(my.goa)
+my.goa <- clean.tax(my.goa) # only clean.__ function that doesn't change data.table in place!
+clean.trimRow(my.goa) # doesn't drop rows, just adds suggestive keep.row column
+
+# somewhat confusingly, clean.trimCol actually
+# reduces information in your data set!
+# (it drops columns)
+skinny.goa <- copy(clean.goa)
+clean.trimCol(clean.goa)
+
+# these functions are documented
+?clean.trimCol # you will see the options for which columns to keep (or not)!
+```
+
+## Contribute to this repo
+ 1. Be sure to have Git and Git LFS  
+ 2. `inst/extdata/taxonomy/spp.key.csv` has the taxonomic key, which needs help  
+ 3. Documentation and (particularly data set metadata) needs improvement  
+   - edit `R/datasets.R`
+   - use `devtools::document()`
+ 4. If you see something that is missing or needs improvement, [create an issue](https://github.com/rBatt/trawlData/issues)
+
+This repository uses `git-lfs`. Git Large File Storage is a way to manage large binary files into a git workflow without taking up a ton of disk space (and it lets you put large files up to GitHub!).
 
 [Installing `git-lfs` is easy; see this link for instructions](https://git-lfs.github.com/). 
 

@@ -42,7 +42,7 @@ targets:
   all:
     depends:
       - spp
-      - docs
+      # - docs
       - raw_data
       - clean_data
       ## - trim_data

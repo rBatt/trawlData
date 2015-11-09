@@ -3,7 +3,7 @@
 \docType{data}
 \name{clean.ai}
 \alias{clean.ai}
-\title{Raw Aleutian Islands}
+\title{Clean Aleutian Islands}
 \format{A dim = 106585 x 41 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab insert_description_here\cr
@@ -50,12 +50,8 @@
 }}
 \usage{
 clean.ai
-
-clean.ai
 }
 \description{
-Raw data set for the Aleutian Islands bottom trawl survey
-
 Clean data set for the Aleutian Islands bottom trawl survey
 }
 \keyword{datasets}

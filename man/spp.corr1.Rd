@@ -5,10 +5,10 @@
 \alias{spp.corr1}
 \title{Corrected Species Names (legacy)
 Species names that had been corrected in older version of code}
-\format{\preformatted{Classes ‘data.table’ and 'data.frame':	3990 obs. of  2 variables:
- $ spp    : chr  "Antipatharian" "Gorgonian" "Gymothorax igromargiatus" "Micropaope uttigii" ...
- $ sppCorr: chr  "Antipatharia" "Gorgonacea" "Gymnothorax nigromargiatus" "Micropanope nuttingi" ...
- - attr(*, ".internal.selfref")=<externalptr> 
+\format{A dim = 3990 x 2 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab spp \tab character \tab insert_description_here\cr
+[,2] \tab sppCorr \tab character \tab insert_description_here\cr
 }}
 \usage{
 spp.corr1

@@ -6,51 +6,28 @@
 #' Raw data set for the Aleutian Islands bottom trawl survey
 #' 
 #' @format
-#' A dim = 106585 x 41 data.table data.frame:
+#' A dim = 106585 x 18 data.table data.frame:
 #' \tabular{rlll}{
-#' [,1] \tab ref \tab character \tab insert_description_here\cr
-#' [,2] \tab stratum \tab character \tab insert_description_here\cr
-#' [,3] \tab lat \tab numeric \tab insert_description_here\cr
-#' [,4] \tab lon \tab numeric \tab insert_description_here\cr
-#' [,5] \tab station \tab character \tab insert_description_here\cr
-#' [,6] \tab year \tab character \tab insert_description_here\cr
-#' [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
-#' [,8] \tab wtcpue \tab numeric \tab insert_description_here\cr
-#' [,9] \tab cntcpue \tab numeric \tab insert_description_here\cr
-#' [,10] \tab SID \tab integer \tab insert_description_here\cr
-#' [,11] \tab depth \tab numeric \tab insert_description_here\cr
-#' [,12] \tab btemp \tab numeric \tab insert_description_here\cr
-#' [,13] \tab stemp \tab numeric \tab insert_description_here\cr
-#' [,14] \tab vessel \tab character \tab insert_description_here\cr
-#' [,15] \tab cruise \tab character \tab insert_description_here\cr
-#' [,16] \tab haul \tab character \tab insert_description_here\cr
-#' [,17] \tab stratumarea \tab numeric \tab insert_description_here\cr
-#' [,18] \tab haulid \tab character \tab insert_description_here\cr
-#' [,19] \tab season \tab character \tab insert_description_here\cr
-#' [,20] \tab reg \tab character \tab insert_description_here\cr
-#' [,21] \tab val.src \tab character \tab insert_description_here\cr
-#' [,22] \tab tbl.row \tab numeric \tab insert_description_here\cr
-#' [,23] \tab mtch.src \tab numeric \tab insert_description_here\cr
-#' [,24] \tab spp \tab character \tab insert_description_here\cr
-#' [,25] \tab common \tab character \tab insert_description_here\cr
-#' [,26] \tab taxLvl \tab character \tab insert_description_here\cr
-#' [,27] \tab species \tab character \tab insert_description_here\cr
-#' [,28] \tab genus \tab character \tab insert_description_here\cr
-#' [,29] \tab family \tab character \tab insert_description_here\cr
-#' [,30] \tab order \tab character \tab insert_description_here\cr
-#' [,31] \tab class \tab character \tab insert_description_here\cr
-#' [,32] \tab superclass \tab character \tab insert_description_here\cr
-#' [,33] \tab subphylum \tab character \tab insert_description_here\cr
-#' [,34] \tab phylum \tab character \tab insert_description_here\cr
-#' [,35] \tab kingdom \tab character \tab insert_description_here\cr
-#' [,36] \tab trophicDiet \tab character \tab insert_description_here\cr
-#' [,37] \tab trophicOrig \tab character \tab insert_description_here\cr
-#' [,38] \tab Picture \tab character \tab insert_description_here\cr
-#' [,39] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-#' [,40] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-#' [,41] \tab keep.row \tab logical \tab insert_description_here\cr
+#' [,1] \tab STRATUM \tab integer \tab insert_description_here\cr
+#' [,2] \tab LATITUDE \tab numeric \tab insert_description_here\cr
+#' [,3] \tab LONGITUDE \tab numeric \tab insert_description_here\cr
+#' [,4] \tab STATION \tab character \tab insert_description_here\cr
+#' [,5] \tab YEAR \tab integer \tab insert_description_here\cr
+#' [,6] \tab DATETIME \tab character \tab insert_description_here\cr
+#' [,7] \tab WTCPUE \tab numeric \tab insert_description_here\cr
+#' [,8] \tab NUMCPUE \tab numeric \tab insert_description_here\cr
+#' [,9] \tab COMMON \tab character \tab insert_description_here\cr
+#' [,10] \tab SCIENTIFIC \tab character \tab insert_description_here\cr
+#' [,11] \tab SID \tab integer \tab insert_description_here\cr
+#' [,12] \tab BOT_DEPTH \tab integer \tab insert_description_here\cr
+#' [,13] \tab BOT_TEMP \tab numeric \tab insert_description_here\cr
+#' [,14] \tab SURF_TEMP \tab numeric \tab insert_description_here\cr
+#' [,15] \tab VESSEL \tab integer \tab insert_description_here\cr
+#' [,16] \tab CRUISE \tab integer \tab insert_description_here\cr
+#' [,17] \tab HAUL        \tab character \tab insert_description_here\cr
+#' [,18] \tab Areakm2 \tab integer \tab insert_description_here\cr
 #' }
-"clean.ai"
+"raw.ai"
 
 
 
@@ -737,7 +714,51 @@
 #' 
 #' 
 #' 
-
+#' @format
+#' A dim = 197067 x 41 data.table data.frame:
+#' \tabular{rlll}{
+#' [,1] \tab ref \tab character \tab insert_description_here\cr
+#' [,2] \tab stratum \tab character \tab insert_description_here\cr
+#' [,3] \tab lat \tab numeric \tab insert_description_here\cr
+#' [,4] \tab lon \tab numeric \tab insert_description_here\cr
+#' [,5] \tab station \tab character \tab insert_description_here\cr
+#' [,6] \tab year \tab character \tab insert_description_here\cr
+#' [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+#' [,8] \tab wtcpue \tab numeric \tab insert_description_here\cr
+#' [,9] \tab cntcpue \tab numeric \tab insert_description_here\cr
+#' [,10] \tab SID \tab integer \tab insert_description_here\cr
+#' [,11] \tab depth \tab numeric \tab insert_description_here\cr
+#' [,12] \tab btemp \tab numeric \tab insert_description_here\cr
+#' [,13] \tab stemp \tab numeric \tab insert_description_here\cr
+#' [,14] \tab vessel \tab character \tab insert_description_here\cr
+#' [,15] \tab cruise \tab character \tab insert_description_here\cr
+#' [,16] \tab haul \tab character \tab insert_description_here\cr
+#' [,17] \tab stratumarea \tab numeric \tab insert_description_here\cr
+#' [,18] \tab haulid \tab character \tab insert_description_here\cr
+#' [,19] \tab season \tab character \tab insert_description_here\cr
+#' [,20] \tab reg \tab character \tab insert_description_here\cr
+#' [,21] \tab val.src \tab character \tab insert_description_here\cr
+#' [,22] \tab tbl.row \tab numeric \tab insert_description_here\cr
+#' [,23] \tab mtch.src \tab numeric \tab insert_description_here\cr
+#' [,24] \tab spp \tab character \tab insert_description_here\cr
+#' [,25] \tab common \tab character \tab insert_description_here\cr
+#' [,26] \tab taxLvl \tab character \tab insert_description_here\cr
+#' [,27] \tab species \tab character \tab insert_description_here\cr
+#' [,28] \tab genus \tab character \tab insert_description_here\cr
+#' [,29] \tab family \tab character \tab insert_description_here\cr
+#' [,30] \tab order \tab character \tab insert_description_here\cr
+#' [,31] \tab class \tab character \tab insert_description_here\cr
+#' [,32] \tab superclass \tab character \tab insert_description_here\cr
+#' [,33] \tab subphylum \tab character \tab insert_description_here\cr
+#' [,34] \tab phylum \tab character \tab insert_description_here\cr
+#' [,35] \tab kingdom \tab character \tab insert_description_here\cr
+#' [,36] \tab trophicDiet \tab character \tab insert_description_here\cr
+#' [,37] \tab trophicOrig \tab character \tab insert_description_here\cr
+#' [,38] \tab Picture \tab character \tab insert_description_here\cr
+#' [,39] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+#' [,40] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+#' [,41] \tab keep.row \tab logical \tab insert_description_here\cr
+#' }
 "clean.goa"
 
 
@@ -1400,6 +1421,12 @@ NULL
 #' Used to construct spp.key initially, but should no longer be needed. Provided for reproducibility of older results regarding taxonomy.
 #' Now superceded by \code{\link{getSppData}}. It is recommended that \code{\link{spp.key}} be used for taxonomic reference.
 #' @seealso \code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}} \code{\link{spp.key}}
+#' @format
+#' A dim = 3990 x 2 data.table data.frame:
+#' \tabular{rlll}{
+#' [,1] \tab spp \tab character \tab insert_description_here\cr
+#' [,2] \tab sppCorr \tab character \tab insert_description_here\cr
+#' }
 "spp.corr1"
 
 #' Taxonomic Information (legacy)

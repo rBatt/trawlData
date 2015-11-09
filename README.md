@@ -1,4 +1,4 @@
-[![Travis-CI Build Status](https://magnum.travis-ci.com/rBatt/trawlData.svg?token=ZmFLF6sygbxo9Je63ydg&branch=master)
+![Travis-CI Build Status](https://magnum.travis-ci.com/rBatt/trawlData.svg?token=ZmFLF6sygbxo9Je63ydg&branch=master)
 
 
 # trawlData

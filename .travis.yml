@@ -18,11 +18,6 @@ script: ./travis-tool.sh run_tests
 
 after_failure:
   - ./travis-tool.sh dump_logs
-
-notifications:
-  email:
-    on_success: battrd@gmail.com
-    on_failure: battrd@gmail.com
   
 r_binary_packages:
   - stringr
@@ -30,3 +25,8 @@ r_binary_packages:
   - PBSmapping
   - LaF
   - bit64
+  
+r_github_packages:
+  - data.table
+  
+warnings_are_errors: false

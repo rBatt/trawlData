@@ -1,0 +1,143 @@
+## All R files that are used must be listed here:
+packages:
+  - data.table
+  - LaF
+  - bit64
+  - stringr
+  - stringi
+  - PBSmapping
+
+sources:
+  ## - R/clean.columns.R
+  ## - R/clean.format.R
+  ## - R/clean.names.R
+  ## - R/clean.tax.R
+  ## - R/clean.trimCol.R
+  ## - R/clean.trimRow.R
+  ## - R/formatStrat.R
+  ## - R/formatValue.R
+  ## - R/helperFile.R
+  ## - R/helperMisc.R
+  ## - R/helperStat.R
+  ## - R/read.trawl.R
+  ## - R/tax.getCmmn.R
+  ## - R/tax.getSpp.R
+  ## - R/tax.getTax.R
+  - R/
+  - man-roxygen/
+  - pkgBuild/R/makeData.R
+  - pkgBuild/R/update_spp.key.R
+  - pkgBuild/R/update_rawData.R
+  - pkgBuild/R/update_cleanData.R
+  # - pkgBuild/R/update_trimData.R
+  
+
+## Most of a remakefile will be targets.  They can be listed in any
+## order; whatever makes most sense.  Files can be split up and
+## included into the main file if you need to impose more structure.
+targets:
+  ## 'all' is a special target that will be used as the default
+  ## target by 'remake'.  It doesn't actually make anything but
+  ## "depends" on other targets.
+  all:
+    depends:
+      - spp
+      # - docs
+      - raw_data
+      - clean_data
+      ## - trim_data
+
+  # ======================
+  # = Update Species Key =
+  # ======================
+  spp:
+    depends:
+      - data/spp.key.RData
+      # - inst/extdata/taxonomy/spp.key.csv
+
+  data/spp.key.RData:
+    command: update_spp.key("inst/extdata/taxonomy/spp.key.csv")
+
+  # inst/extdata/taxonomy/spp.key.csv:
+  #   command: update_spp.key("data/spp.key.RData")
+  
+  # ===========================
+  # = Update Raw .RData Files =
+  # ===========================
+  raw_data:
+    depends:
+      - data/raw.ai.RData
+      - data/raw.ebs.RData
+      - data/raw.gmex.RData
+      - data/raw.goa.RData
+      - data/raw.neus.RData
+      - data/raw.newf.RData
+      - data/raw.sa.RData
+      - data/raw.sgulf.RData
+      - data/raw.shelf.RData
+      - data/raw.wcann.RData
+      - data/raw.wctri.RData
+  data/raw.ai.RData:
+    command: update_rawData("inst/extdata/ai.zip")
+  data/raw.ebs.RData:
+    command: update_rawData("inst/extdata/ebs.zip")
+  data/raw.gmex.RData:
+    command: update_rawData("inst/extdata/gmex.zip")
+  data/raw.goa.RData:
+    command: update_rawData("inst/extdata/goa.zip")
+  data/raw.neus.RData:
+    command: update_rawData("inst/extdata/neus/neus-bigelow_fall_calibration.csv", "inst/extdata/neus/neus-bigelow_spring_calibration.csv", "inst/extdata/neus/neus-neusStrata.csv", "inst/extdata/neus/neus-station.RData", "inst/extdata/neus/neus-SurvDat.RData", "inst/extdata/neus/neus-SVSPP.RData")
+  data/raw.newf.RData:
+    command: update_rawData("inst/extdata/newf.zip")
+  data/raw.sa.RData:
+    command: update_rawData("inst/extdata/sa.zip")
+  data/raw.sgulf.RData:
+    command: update_rawData("inst/extdata/sgulf.zip")
+  data/raw.shelf.RData:
+    command: update_rawData("inst/extdata/shelf.zip")
+  data/raw.wcann.RData:
+    command: update_rawData("inst/extdata/wcann.zip")
+  data/raw.wctri.RData:
+    command: update_rawData("inst/extdata/wctri.zip")
+  
+  
+  # =============================
+  # = Update Clean .RData Files =
+  # =============================
+  clean_data:
+    depends:
+      - data/clean.ai.RData
+      - data/clean.ebs.RData
+      - data/clean.gmex.RData
+      - data/clean.goa.RData
+      - data/clean.neus.RData
+      - data/clean.newf.RData
+      - data/clean.sa.RData
+      - data/clean.sgulf.RData
+      - data/clean.shelf.RData
+      - data/clean.wcann.RData
+      - data/clean.wctri.RData
+      - spp
+  data/clean.ai.RData:
+    command: update_cleanData("data/raw.ai.RData")
+  data/clean.ebs.RData:
+    command: update_cleanData("data/raw.ebs.RData")
+  data/clean.gmex.RData:
+    command: update_cleanData("data/raw.gmex.RData")
+  data/clean.goa.RData:
+    command: update_cleanData("data/raw.goa.RData")
+  data/clean.neus.RData:
+    command: update_cleanData("data/raw.neus.RData")
+  data/clean.newf.RData:
+    command: update_cleanData("data/raw.newf.RData")
+  data/clean.sa.RData:
+    command: update_cleanData("data/raw.sa.RData")
+  data/clean.sgulf.RData:
+    command: update_cleanData("data/raw.sgulf.RData")
+  data/clean.shelf.RData:
+    command: update_cleanData("data/raw.shelf.RData")
+  data/clean.wcann.RData:
+    command: update_cleanData("data/raw.wcann.RData")
+  data/clean.wctri.RData:
+    command: update_cleanData("data/raw.wctri.RData")
+    

@@ -28,7 +28,6 @@ tax.getTL
 # dependencies.R
 pkgBuild # package building folder
 man-roxygen
-
-
 ^.git$
 testRepo.R
+^\.travis\.yml$

@@ -14,6 +14,9 @@
 #' @export clean.tax
 clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
 	# load("data/spp.key.RData")
+	if(!exists("spp.key")){
+		data("spp.key", package="trawlData")
+	}
 	reg <- match.arg(reg)
 	
 	

@@ -1,4 +1,4 @@
-makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read, clean=F, clean.save=clean, clean.load=!clean, trimR=T, trimC=T){
+makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F, clean.save=clean, clean.load=F, trimR=clean, trimC=clean){
 	
 	# this function regenerates the R Data files 
 	# that contain the trawl data for each region
@@ -63,6 +63,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=!raw.read,
 			
 			# If desired, save, and do so with optimal compression
 			if(raw.save){
+				message("\nSaving raw .RData file\n")
 				compressSave(paste0("data/",nm,".RData"))
 			}
 			

@@ -143,16 +143,16 @@ createSppKey <- function(spp, taxInfo, spp.corr1, save.key=FALSE){
 	
 	# Save the species key
 	if(save.key){
-		# Read in CSV
-		# spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
-		
-		# make sure encoding is UTF-8
-		makeAsciiChar(spp.key)
-		
-		# Save
-		setkey(spp.key, spp, ref)
-		save(spp.key, file="data/spp.key.RData")
-		write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
+		# # Read in CSV
+		# # spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
+		#
+		# # make sure encoding is UTF-8
+		# makeAsciiChar(spp.key)
+		#
+		# # Save
+		# setkey(spp.key, spp, ref)
+		# save(spp.key, file="data/spp.key.RData")
+		# write.csv(spp.key, file="inst/extdata/taxonomy/spp.key.csv", row.names=F)
 	}
 	
 	# Return spp.key as output

@@ -7,7 +7,7 @@ Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", ro
 	person(given="Malin L.", family="Pinsky", email="malin.pinsky@rutgers.edu", role=c("aut")))
 Description: Collates and cleans data from North American bottom trawl surveys.
 Depends: R (>= 3.2.2),
-    data.table (== 1.9.4)
+    data.table (>= 1.9.4)
 License: CC0
 LazyData: true
 Imports: LaF,

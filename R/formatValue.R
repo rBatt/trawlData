@@ -112,6 +112,7 @@ rm9s <- function(x){
 #' 
 #' @param X a data.table containing columns to be converted
 #' 
+#' @details
 #' Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).
 #' 
 #' @return NULL (invisibly), but affects the contents of the data.table whose name was passed to this function

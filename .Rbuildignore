@@ -31,3 +31,4 @@ man-roxygen
 ^.git$
 testRepo.R
 ^\.travis\.yml$
+^.remake$

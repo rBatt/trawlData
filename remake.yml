@@ -28,8 +28,8 @@ sources:
   - pkgBuild/R/makeData.R
   - pkgBuild/R/update_spp.key.R
   - pkgBuild/R/update_rawData.R
-  # - pkgBuild/R/update_clean.R
-  # - pkgBuild/R/update_trim.R
+  - pkgBuild/R/update_cleanData.R
+  # - pkgBuild/R/update_trimData.R
   
 
 ## Most of a remakefile will be targets.  They can be listed in any
@@ -42,12 +42,14 @@ targets:
   all:
     depends:
       - spp
-      ## - source_data
+      - docs
       - raw_data
-      ## - clean_data
+      - clean_data
       ## - trim_data
 
-  ## Update Species Key
+  # ======================
+  # = Update Species Key =
+  # ======================
   spp:
     depends:
       - data/spp.key.RData
@@ -59,7 +61,9 @@ targets:
   # inst/extdata/taxonomy/spp.key.csv:
   #   command: update_spp.key("data/spp.key.RData")
   
-  ## Update Raw .RData Files
+  # ===========================
+  # = Update Raw .RData Files =
+  # ===========================
   raw_data:
     depends:
       - data/raw.ai.RData
@@ -82,7 +86,7 @@ targets:
   data/raw.goa.RData:
     command: update_rawData("inst/extdata/goa.zip")
   data/raw.neus.RData:
-    command: update_rawData("inst/extdata/neus/")
+    command: update_rawData("inst/extdata/neus/neus-bigelow_fall_calibration.csv", "inst/extdata/neus/neus-bigelow_spring_calibration.csv", "inst/extdata/neus/neus-neusStrata.csv", "inst/extdata/neus/neus-station.RData", "inst/extdata/neus/neus-SurvDat.RData", "inst/extdata/neus/neus-SVSPP.RData")
   data/raw.newf.RData:
     command: update_rawData("inst/extdata/newf.zip")
   data/raw.sa.RData:
@@ -95,4 +99,45 @@ targets:
     command: update_rawData("inst/extdata/wcann.zip")
   data/raw.wctri.RData:
     command: update_rawData("inst/extdata/wctri.zip")
+  
+  
+  # =============================
+  # = Update Clean .RData Files =
+  # =============================
+  clean_data:
+    depends:
+      - data/clean.ai.RData
+      - data/clean.ebs.RData
+      - data/clean.gmex.RData
+      - data/clean.goa.RData
+      - data/clean.neus.RData
+      - data/clean.newf.RData
+      - data/clean.sa.RData
+      - data/clean.sgulf.RData
+      - data/clean.shelf.RData
+      - data/clean.wcann.RData
+      - data/clean.wctri.RData
+      - spp
+  data/clean.ai.RData:
+    command: update_cleanData("data/raw.ai.RData")
+  data/clean.ebs.RData:
+    command: update_cleanData("data/raw.ebs.RData")
+  data/clean.gmex.RData:
+    command: update_cleanData("data/raw.gmex.RData")
+  data/clean.goa.RData:
+    command: update_cleanData("data/raw.goa.RData")
+  data/clean.neus.RData:
+    command: update_cleanData("data/raw.neus.RData")
+  data/clean.newf.RData:
+    command: update_cleanData("data/raw.newf.RData")
+  data/clean.sa.RData:
+    command: update_cleanData("data/raw.sa.RData")
+  data/clean.sgulf.RData:
+    command: update_cleanData("data/raw.sgulf.RData")
+  data/clean.shelf.RData:
+    command: update_cleanData("data/raw.shelf.RData")
+  data/clean.wcann.RData:
+    command: update_cleanData("data/raw.wcann.RData")
+  data/clean.wctri.RData:
+    command: update_cleanData("data/raw.wctri.RData")
     

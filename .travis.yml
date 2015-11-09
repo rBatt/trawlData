@@ -1,10 +1,12 @@
 
 before_install:
-  - curl https://packagecloud.io/gpg.key | sudo apt-key add -
-  - sudo apt-get update -q
-  - sudo apt-get install -y apt-transport-https
-  - sudo echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ precise main\ndeb-src https://packagecloud.io/github/git-lfs/ubuntu/ precise main' > sudo /etc/apt/sources.list.d/github_git-lfs.list
-  - sudo apt-get update
+  # - curl https://packagecloud.io/gpg.key | sudo apt-key add -
+  # - sudo apt-get update -q
+  # - sudo apt-get install -y apt-transport-https
+  # - echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ precise main\ndeb-src https://packagecloud.io/github/git-lfs/ubuntu/ precise main' > sudo /etc/apt/sources.list.d/github_git-lfs.list
+  # - sudo apt-get update
+  - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  - sudo apt-get install git-lfs=1.0.2
   - git lfs init
 
 language: r

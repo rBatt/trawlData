@@ -1,34 +1,28 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.Rapp.history
 .DS_Store
+.gitignore
+.gitattributes
 
 # .RData Files to Ignore
-# ETOPO.RData
-# HadISST.RData
-# soda_200W-20E_0N-90N_1958-2008.RData
-# soda.annMax_200W-20E_0N-90N_1958-2008.RData
-# soda.annMean_200W-20E_0N-90N_1958-2008.RData
-tempo-image-spp.key.RData
+
 # Zip Files to Ignore
 HadISST.zip
 soda.zip
 depthData.zip
+
 # Scripts to Ignore
-# create.spp.key_manual.R
-# create.spp.key.R
-# expand.data.R
-# format.msom.basic.R
-# format.msom.cov.R
-# format.trawl_old.R
-# read.HadISST.R
-# read.ETOPO.R
-tax.getTL
-# tax.updateDB.R
-# authors.R
-# dependencies.R
-pkgBuild # package building folder
-man-roxygen
-^.git$
+tax.getTL.R
 testRepo.R
+
+# yaml ignore
 ^\.travis\.yml$
+^.remake.yml$
+
+# Ignore Directories
+^pkgBuild$
+^man-roxygen$
+^.git$
 ^.remake$
+

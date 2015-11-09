@@ -3,7 +3,7 @@ update_spp.key <- function(...){
 	# Read in CSV
 	spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
 
-	# make sure encoding is UTF-8
+	# make sure encoding is ASCII
 	makeAsciiChar(spp.key)
 
 	# set data.table key (sorts)

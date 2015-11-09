@@ -76,6 +76,9 @@ clean.trimCol(clean.goa)
 
 # these functions are documented
 ?clean.trimCol # you will see the options for which columns to keep (or not)!
+
+# check which data sets are available
+data(package="trawlData")
 ```
 
 ## Contribute to this repo

@@ -8,7 +8,7 @@ before_install:
   - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
   - sudo apt-get update -qq
   - sudo apt-get install -f
-  - sudo apt-get install -y git-lfs=1.0.2
+  - sudo apt-get install git-lfs=1.0.2 -y
   - git lfs init
 
 language: r

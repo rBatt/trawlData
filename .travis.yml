@@ -35,8 +35,9 @@ before_install:
   - git lfs init
   - git lfs env
   - git lfs ls-files
-  - sudo echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> sudo ~/.ssh/config
-  - sudo git lfs fetch
+  # - sudo echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> sudo ~/.ssh/config
+  # - sudo ssh -o "StrictHostKeyChecking no" -o PasswordAuthentication=no 10.x.x.x
+  - echo yes | sudo git lfs fetch
   # - pwd
   # - ls
   # - curl -o git-lfs-linux-amd64-1.0.2.tar.gz "https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz"

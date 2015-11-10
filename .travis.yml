@@ -1,15 +1,35 @@
 
 before_install:
-  - curl https://packagecloud.io/gpg.key | sudo apt-key add -
-  - sudo apt-get update -q
-  - sudo apt-get install -y apt-transport-https
-  - echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ precise main\ndeb-src https://packagecloud.io/github/git-lfs/ubuntu/ precise main' > sudo /etc/apt/sources.list.d/github_git-lfs.list
-  - sudo apt-get update
+  # - curl https://packagecloud.io/gpg.key | sudo apt-key add -
+  # - sudo apt-get update -q
+  # - sudo apt-get install -y apt-transport-https
+  # - echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ precise main\ndeb-src https://packagecloud.io/github/git-lfs/ubuntu/ precise main' > sudo /etc/apt/sources.list.d/github_git-lfs.list
+  # - sudo apt-get update
   # - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-  - sudo apt-get update -qq
-  - sudo apt-get install -f
-  - sudo apt-get install git-lfs=1.0.2 -y
-  - git lfs init
+  # - sudo apt-get update -qq
+  # - sudo apt-get install -f
+  # - sudo apt-get install git-lfs=1.0.2 -y
+  # - git lfs init
+  - echo "ls"
+  - ls
+  - echo "pwd"
+  - pwd
+  - echo "cloning"
+  - git clone git@github.com:github/git-lfs.git
+  - echo "cd into git-lfs"
+  - cd git-lfs
+  - echo "checkout commit 05666983c2e19664b8fc47c30b767ec160e3fea5"
+  - git checkout 05666983c2e19664b8fc47c30b767ec160e3fea5
+  - echo "scripts/bootstrap"
+  - script/bootstrap
+  - echo "ls bin"
+  - ls bin
+  - echo "cd back down"
+  - cd ..
+  - echo "init"
+  - git-lfs/bin/git-lfs init
+  - echo "fetch"
+  - git-lfs/bin/git-lfs fetch
 
 language: r
 sudo: required

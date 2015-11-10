@@ -26,3 +26,4 @@ testRepo.R
 ^.git$
 ^.remake$
 
+^git-lfs$

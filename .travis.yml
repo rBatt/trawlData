@@ -23,6 +23,9 @@ before_install:
   - git-lfs/bin/git-lfs init
   - git-lfs/bin/git-lfs env
   - git-lfs/bin/git-lfs pull
+  - git pull
+  - git status
+  - git-lfs/bin/git-lfs ls-files
   # - pwd
   # - ls
   # - curl -o git-lfs-linux-amd64-1.0.2.tar.gz "https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz"

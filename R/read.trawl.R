@@ -7,7 +7,7 @@
 #' @param ... nothing
 #' 
 #' @details
-#' These functions read in raw data sets that, with the exception of \code{neus}, are in .zip files. An easy way to use these functions on the raw files included with the package is to do \code{setwd(system.file(package="trawlData"))}, then run the script as-is. However, you are equally able to run the function as you would any other read function (like \code{read.csv}, e.g.). Just remember that the function operates on a folder or zip file, not on a single data file.
+#' These functions read in raw data sets that, with the exception of \code{neus}, are in .zip files. An easy way to use these functions on the raw files included with the package is to do \code{setwd(system.file(package="trawlData"))}, then run the script as-is. However, you are equally able to run the function as you would any other read function (like \code{read.csv}, e.g.). Just remember that the function operates on a folder or zip file, not on a single data file.  
 #' There is some use of regular expression to find appropriate file names. However, it is best to be sure that the files are named correctly (data files that come with this package are correctly named).
 #' 
 #' @examples

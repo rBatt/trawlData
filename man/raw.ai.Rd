@@ -4,7 +4,27 @@
 \name{raw.ai}
 \alias{raw.ai}
 \title{Raw Aleutian Islands}
-\format{A data.table}
+\format{A dim = 106585 x 18 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab STRATUM \tab integer \tab insert_description_here\cr
+[,2] \tab LATITUDE \tab numeric \tab insert_description_here\cr
+[,3] \tab LONGITUDE \tab numeric \tab insert_description_here\cr
+[,4] \tab STATION \tab character \tab insert_description_here\cr
+[,5] \tab YEAR \tab integer \tab insert_description_here\cr
+[,6] \tab DATETIME \tab character \tab insert_description_here\cr
+[,7] \tab WTCPUE \tab numeric \tab insert_description_here\cr
+[,8] \tab NUMCPUE \tab numeric \tab insert_description_here\cr
+[,9] \tab COMMON \tab character \tab insert_description_here\cr
+[,10] \tab SCIENTIFIC \tab character \tab insert_description_here\cr
+[,11] \tab SID \tab integer \tab insert_description_here\cr
+[,12] \tab BOT_DEPTH \tab integer \tab insert_description_here\cr
+[,13] \tab BOT_TEMP \tab numeric \tab insert_description_here\cr
+[,14] \tab SURF_TEMP \tab numeric \tab insert_description_here\cr
+[,15] \tab VESSEL \tab integer \tab insert_description_here\cr
+[,16] \tab CRUISE \tab integer \tab insert_description_here\cr
+[,17] \tab HAUL        \tab character \tab insert_description_here\cr
+[,18] \tab Areakm2 \tab integer \tab insert_description_here\cr
+}}
 \usage{
 raw.ai
 }

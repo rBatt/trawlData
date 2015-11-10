@@ -1,6 +1,5 @@
 soda.zip
 .DS_Store
-git-lfs-1.0.0 2
 
 
 # History files
@@ -15,6 +14,7 @@ git-lfs-1.0.0 2
 
 # RStudio files
 .Rproj.user/
+^.*\.Rproj$
 
 
 # Random files to ignore

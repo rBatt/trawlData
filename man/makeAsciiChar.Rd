@@ -7,14 +7,15 @@
 makeAsciiChar(X)
 }
 \arguments{
-\item{X}{a data.table containing columns to be converted
-
-Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).}
+\item{X}{a data.table containing columns to be converted}
 }
 \value{
 NULL (invisibly), but affects the contents of the data.table whose name was passed to this function
 }
 \description{
 Turn factor or character columns of a data.table into ASCII characters
+}
+\details{
+Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).
 }
 

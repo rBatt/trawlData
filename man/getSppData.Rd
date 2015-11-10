@@ -5,12 +5,10 @@
 \alias{getSppData}
 \title{Spp Names
 Scientific names matched to raw taxonomic name entries}
-\format{\preformatted{Classes ‘data.table’ and 'data.frame':	6016 obs. of  2 variables:
- $ spp    : chr  NA "Aacathobatidae" "Aacathobatis logirostris" "Aachis avara" ...
- $ sppCorr: chr  NA "Anacanthobatidae von Bonde and Swart, 1924" "Anacanthobatis longirostris Bigelow and Schroeder, 1962" "Anachis (Costoanachis) avara (Say 1822)" ...
- - attr(*, ".internal.selfref")=<externalptr> 
- - attr(*, "index")= atomic  
-  ..- attr(*, "__spp")= int  1 54 337 347 427 429 453 454 523 524 ...
+\format{A dim = 6016 x 2 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab spp \tab character \tab insert_description_here\cr
+[,2] \tab sppCorr \tab character \tab insert_description_here\cr
 }}
 \usage{
 getSppData

@@ -4,7 +4,49 @@
 \name{raw.newf}
 \alias{raw.newf}
 \title{Raw Newfoundland}
-\format{A data.table}
+\format{A dim = 547790 x 40 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab sppcode \tab integer \tab insert_description_here\cr
+[,2] \tab recordtype \tab integer \tab insert_description_here\cr
+[,3] \tab vessel \tab integer \tab insert_description_here\cr
+[,4] \tab trip \tab integer \tab insert_description_here\cr
+[,5] \tab set \tab integer \tab insert_description_here\cr
+[,6] \tab yearl \tab integer \tab insert_description_here\cr
+[,7] \tab monthl \tab integer \tab insert_description_here\cr
+[,8] \tab dayl \tab integer \tab insert_description_here\cr
+[,9] \tab settype \tab integer \tab insert_description_here\cr
+[,10] \tab stratum \tab character \tab insert_description_here\cr
+[,11] \tab nafo \tab character \tab insert_description_here\cr
+[,12] \tab unitarea \tab character \tab insert_description_here\cr
+[,13] \tab light \tab numeric \tab insert_description_here\cr
+[,14] \tab winddir \tab numeric \tab insert_description_here\cr
+[,15] \tab windforce \tab numeric \tab insert_description_here\cr
+[,16] \tab sea \tab numeric \tab insert_description_here\cr
+[,17] \tab bottom \tab numeric \tab insert_description_here\cr
+[,18] \tab timel \tab character \tab insert_description_here\cr
+[,19] \tab duration \tab numeric \tab insert_description_here\cr
+[,20] \tab distance \tab numeric \tab insert_description_here\cr
+[,21] \tab operation \tab numeric \tab insert_description_here\cr
+[,22] \tab depth \tab character \tab insert_description_here\cr
+[,23] \tab depthmin \tab character \tab insert_description_here\cr
+[,24] \tab depthmax \tab character \tab insert_description_here\cr
+[,25] \tab depthbottom \tab character \tab insert_description_here\cr
+[,26] \tab surftemp \tab numeric \tab insert_description_here\cr
+[,27] \tab bottemp \tab numeric \tab insert_description_here\cr
+[,28] \tab latstart \tab character \tab insert_description_here\cr
+[,29] \tab lonstart \tab character \tab insert_description_here\cr
+[,30] \tab posmethod \tab numeric \tab insert_description_here\cr
+[,31] \tab gear \tab numeric \tab insert_description_here\cr
+[,32] \tab num \tab numeric \tab insert_description_here\cr
+[,33] \tab wgt \tab numeric \tab insert_description_here\cr
+[,34] \tab latend \tab character \tab insert_description_here\cr
+[,35] \tab lonend \tab character \tab insert_description_here\cr
+[,36] \tab bottempmeth \tab numeric \tab insert_description_here\cr
+[,37] \tab geardevice \tab numeric \tab insert_description_here\cr
+[,38] \tab common \tab character \tab insert_description_here\cr
+[,39] \tab spp \tab character \tab insert_description_here\cr
+[,40] \tab season \tab character \tab insert_description_here\cr
+}}
 \usage{
 raw.newf
 }

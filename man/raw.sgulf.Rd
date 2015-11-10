@@ -4,7 +4,37 @@
 \name{raw.sgulf}
 \alias{raw.sgulf}
 \title{Raw Southern Gulf of St. Lawrence}
-\format{A data.table}
+\format{A dim = 180583 x 28 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab stratum \tab integer \tab insert_description_here\cr
+[,2] \tab vessel \tab character \tab insert_description_here\cr
+[,3] \tab cruise \tab integer \tab insert_description_here\cr
+[,4] \tab set \tab integer \tab insert_description_here\cr
+[,5] \tab year \tab integer \tab insert_description_here\cr
+[,6] \tab species \tab integer \tab insert_description_here\cr
+[,7] \tab catch \tab numeric \tab insert_description_here\cr
+[,8] \tab biomass \tab numeric \tab insert_description_here\cr
+[,9] \tab month \tab integer \tab insert_description_here\cr
+[,10] \tab day \tab integer \tab insert_description_here\cr
+[,11] \tab expt \tab integer \tab insert_description_here\cr
+[,12] \tab time \tab integer \tab insert_description_here\cr
+[,13] \tab temperature \tab numeric \tab insert_description_here\cr
+[,14] \tab depthst \tab integer \tab insert_description_here\cr
+[,15] \tab depthend \tab integer \tab insert_description_here\cr
+[,16] \tab dtow \tab numeric \tab insert_description_here\cr
+[,17] \tab depth \tab numeric \tab insert_description_here\cr
+[,18] \tab latitude \tab numeric \tab insert_description_here\cr
+[,19] \tab longitude \tab numeric \tab insert_description_here\cr
+[,20] \tab latin_name \tab character \tab insert_description_here\cr
+[,21] \tab name \tab character \tab insert_description_here\cr
+[,22] \tab N \tab integer \tab insert_description_here\cr
+[,23] \tab kg \tab numeric \tab insert_description_here\cr
+[,24] \tab t_surface \tab numeric \tab insert_description_here\cr
+[,25] \tab salin_bottom \tab numeric \tab insert_description_here\cr
+[,26] \tab t_bottom \tab numeric \tab insert_description_here\cr
+[,27] \tab trawlableunits \tab integer \tab insert_description_here\cr
+[,28] \tab stratarea \tab numeric \tab insert_description_here\cr
+}}
 \usage{
 raw.sgulf
 }

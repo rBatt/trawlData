@@ -4,7 +4,78 @@
 \name{clean.newf}
 \alias{clean.newf}
 \title{Clean Newfoundland}
-\format{A data.table}
+\format{A dim = 547790 x 69 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab ref \tab character \tab insert_description_here\cr
+[,2] \tab sppcode \tab integer \tab insert_description_here\cr
+[,3] \tab recordtype \tab integer \tab insert_description_here\cr
+[,4] \tab vessel \tab character \tab insert_description_here\cr
+[,5] \tab trip \tab integer \tab insert_description_here\cr
+[,6] \tab set \tab character \tab insert_description_here\cr
+[,7] \tab year \tab numeric \tab insert_description_here\cr
+[,8] \tab month \tab character \tab insert_description_here\cr
+[,9] \tab day \tab character \tab insert_description_here\cr
+[,10] \tab settype \tab integer \tab insert_description_here\cr
+[,11] \tab stratum \tab character \tab insert_description_here\cr
+[,12] \tab nafo \tab character \tab insert_description_here\cr
+[,13] \tab unitarea \tab character \tab insert_description_here\cr
+[,14] \tab light \tab numeric \tab insert_description_here\cr
+[,15] \tab winddir \tab numeric \tab insert_description_here\cr
+[,16] \tab windforce \tab numeric \tab insert_description_here\cr
+[,17] \tab sea \tab numeric \tab insert_description_here\cr
+[,18] \tab bottom \tab numeric \tab insert_description_here\cr
+[,19] \tab time \tab character \tab insert_description_here\cr
+[,20] \tab towduration \tab numeric \tab insert_description_here\cr
+[,21] \tab towdistance \tab numeric \tab insert_description_here\cr
+[,22] \tab operation \tab numeric \tab insert_description_here\cr
+[,23] \tab depth \tab numeric \tab insert_description_here\cr
+[,24] \tab depth.min \tab numeric \tab insert_description_here\cr
+[,25] \tab depth.max \tab numeric \tab insert_description_here\cr
+[,26] \tab depthbottom \tab character \tab insert_description_here\cr
+[,27] \tab stemp \tab numeric \tab insert_description_here\cr
+[,28] \tab btemp \tab numeric \tab insert_description_here\cr
+[,29] \tab lat.start \tab numeric \tab insert_description_here\cr
+[,30] \tab lon.start \tab numeric \tab insert_description_here\cr
+[,31] \tab posmethod \tab numeric \tab insert_description_here\cr
+[,32] \tab geartype \tab character \tab insert_description_here\cr
+[,33] \tab cnt \tab numeric \tab insert_description_here\cr
+[,34] \tab weight \tab numeric \tab insert_description_here\cr
+[,35] \tab lat.end \tab numeric \tab insert_description_here\cr
+[,36] \tab lon.end \tab numeric \tab insert_description_here\cr
+[,37] \tab bottempmeth \tab numeric \tab insert_description_here\cr
+[,38] \tab geardevice \tab numeric \tab insert_description_here\cr
+[,39] \tab season \tab character \tab insert_description_here\cr
+[,40] \tab haulid \tab character \tab insert_description_here\cr
+[,41] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+[,42] \tab lat \tab numeric \tab insert_description_here\cr
+[,43] \tab lon \tab numeric \tab insert_description_here\cr
+[,44] \tab towarea \tab numeric \tab insert_description_here\cr
+[,45] \tab effort \tab numeric \tab insert_description_here\cr
+[,46] \tab wtcpue \tab numeric \tab insert_description_here\cr
+[,47] \tab cntcpue \tab numeric \tab insert_description_here\cr
+[,48] \tab reg \tab character \tab insert_description_here\cr
+[,49] \tab val.src \tab character \tab insert_description_here\cr
+[,50] \tab tbl.row \tab numeric \tab insert_description_here\cr
+[,51] \tab mtch.src \tab numeric \tab insert_description_here\cr
+[,52] \tab spp \tab character \tab insert_description_here\cr
+[,53] \tab common \tab character \tab insert_description_here\cr
+[,54] \tab taxLvl \tab character \tab insert_description_here\cr
+[,55] \tab species \tab character \tab insert_description_here\cr
+[,56] \tab genus \tab character \tab insert_description_here\cr
+[,57] \tab family \tab character \tab insert_description_here\cr
+[,58] \tab order \tab character \tab insert_description_here\cr
+[,59] \tab class \tab character \tab insert_description_here\cr
+[,60] \tab superclass \tab character \tab insert_description_here\cr
+[,61] \tab subphylum \tab character \tab insert_description_here\cr
+[,62] \tab phylum \tab character \tab insert_description_here\cr
+[,63] \tab kingdom \tab character \tab insert_description_here\cr
+[,64] \tab trophicDiet \tab character \tab insert_description_here\cr
+[,65] \tab trophicOrig \tab character \tab insert_description_here\cr
+[,66] \tab Picture \tab character \tab insert_description_here\cr
+[,67] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+[,68] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,69] \tab keep.row \tab logical \tab insert_description_here\cr
+}}
 \usage{
 clean.newf
 }

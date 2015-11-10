@@ -4,7 +4,71 @@
 \name{raw.sa}
 \alias{raw.sa}
 \title{Raw South Atlantic}
-\format{A data.table}
+\format{A dim = 319395 x 62 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab COLLECTIONNUMBER \tab character \tab insert_description_here\cr
+[,2] \tab PROJECTNAME \tab character \tab insert_description_here\cr
+[,3] \tab PROJECTAGENCY \tab character \tab insert_description_here\cr
+[,4] \tab DATE \tab character \tab insert_description_here\cr
+[,5] \tab EVENTNAME \tab integer \tab insert_description_here\cr
+[,6] \tab VESSELNAME \tab character \tab insert_description_here\cr
+[,7] \tab GEARNAME \tab character \tab insert_description_here\cr
+[,8] \tab GEARCODE \tab integer \tab insert_description_here\cr
+[,9] \tab SPECIESCODE \tab integer64 \tab insert_description_here\cr
+[,10] \tab MRRI_CODE \tab character \tab insert_description_here\cr
+[,11] \tab SPECIESSCIENTIFICNAME \tab character \tab insert_description_here\cr
+[,12] \tab SPECIESCOMMONNAME \tab character \tab insert_description_here\cr
+[,13] \tab NUMBERTOTAL \tab integer \tab insert_description_here\cr
+[,14] \tab SPECIESTOTALWEIGHT \tab numeric \tab insert_description_here\cr
+[,15] \tab SPECIESSUBWEIGHT \tab logical \tab insert_description_here\cr
+[,16] \tab SPECIESWGTPROCESSED \tab numeric \tab insert_description_here\cr
+[,17] \tab WEIGHTMETHODDESC \tab character \tab insert_description_here\cr
+[,18] \tab ORGWTUNITS \tab character \tab insert_description_here\cr
+[,19] \tab EFFORT \tab numeric \tab insert_description_here\cr
+[,20] \tab CATCHSUBSAMPLED \tab logical \tab insert_description_here\cr
+[,21] \tab CATCHWEIGHT \tab numeric \tab insert_description_here\cr
+[,22] \tab CATCHSUBWEIGHT \tab numeric \tab insert_description_here\cr
+[,23] \tab TIMESTART \tab character \tab insert_description_here\cr
+[,24] \tab DURATION \tab integer \tab insert_description_here\cr
+[,25] \tab TOWTYPETEXT \tab character \tab insert_description_here\cr
+[,26] \tab LOCATION \tab character \tab insert_description_here\cr
+[,27] \tab REGION \tab character \tab insert_description_here\cr
+[,28] \tab DEPTHZONE \tab character \tab insert_description_here\cr
+[,29] \tab ACCSPGRIDCODE \tab character \tab insert_description_here\cr
+[,30] \tab STATIONCODE \tab character \tab insert_description_here\cr
+[,31] \tab EVENTTYPEDESCRIPTION \tab logical \tab insert_description_here\cr
+[,32] \tab TEMPSURFACE \tab numeric \tab insert_description_here\cr
+[,33] \tab TEMPBOTTOM \tab numeric \tab insert_description_here\cr
+[,34] \tab SALINITYSURFACE \tab numeric \tab insert_description_here\cr
+[,35] \tab SALINITYBOTTOM \tab numeric \tab insert_description_here\cr
+[,36] \tab SDO \tab logical \tab insert_description_here\cr
+[,37] \tab BDO \tab logical \tab insert_description_here\cr
+[,38] \tab TEMPAIR \tab numeric \tab insert_description_here\cr
+[,39] \tab LATITUDESTART \tab numeric \tab insert_description_here\cr
+[,40] \tab LATITUDEEND \tab numeric \tab insert_description_here\cr
+[,41] \tab LONGITUDESTART \tab numeric \tab insert_description_here\cr
+[,42] \tab LONGITUDEEND \tab numeric \tab insert_description_here\cr
+[,43] \tab SPECSTATUSDESCRIPTION \tab character \tab insert_description_here\cr
+[,44] \tab LASTUPDATED \tab character \tab insert_description_here\cr
+[,45] \tab LIGHTPHASE \tab character \tab insert_description_here\cr
+[,46] \tab TIMEZONE \tab character \tab insert_description_here\cr
+[,47] \tab DEPTHSTART \tab integer \tab insert_description_here\cr
+[,48] \tab DEPTHEND \tab integer \tab insert_description_here\cr
+[,49] \tab PRESSURE \tab numeric \tab insert_description_here\cr
+[,50] \tab WINDSPEED \tab integer \tab insert_description_here\cr
+[,51] \tab WINDDIRECTION \tab integer \tab insert_description_here\cr
+[,52] \tab WAVEHEIGHT \tab integer \tab insert_description_here\cr
+[,53] \tab PRECIPITATION \tab character \tab insert_description_here\cr
+[,54] \tab ESTIMATEDLOC \tab logical \tab insert_description_here\cr
+[,55] \tab SEDSIZEDESC \tab logical \tab insert_description_here\cr
+[,56] \tab BTMCOMPDESC \tab logical \tab insert_description_here\cr
+[,57] \tab WEATHERDESC \tab logical \tab insert_description_here\cr
+[,58] \tab WATERLVLDESC \tab logical \tab insert_description_here\cr
+[,59] \tab ALTERATIONDESC \tab logical \tab insert_description_here\cr
+[,60] \tab ACTIVITYDESC \tab logical \tab insert_description_here\cr
+[,61] \tab NBRREP \tab logical \tab insert_description_here\cr
+[,62] \tab COMMENTS \tab character \tab insert_description_here\cr
+}}
 \usage{
 raw.sa
 }

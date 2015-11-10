@@ -1,35 +1,50 @@
-# # Sample .travis.yml for R projects.
-# #
-# # See README.md for instructions, or for more configuration options,
-# # see the wiki:
-# #   https://github.com/craigcitro/r-travis/wiki
-#
-# language: c
-#
-# sudo: required
-#
-# before_install:
-#   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
-#   - chmod 755 ./travis-tool.sh
-#   - ./travis-tool.sh bootstrap
-# install:
-#   - ./travis-tool.sh install_deps
-# script: ./travis-tool.sh run_tests
-#
-# after_failure:
-#   - ./travis-tool.sh dump_logs
-#
-# r_binary_packages:
-#   - stringr
-#   - stringi
-#   - PBSmapping
-#   - LaF
-#   - bit64
-#
-# r_github_packages:
-#   - data.table
-#
-# warnings_are_errors: false
+
+before_install:
+  # - curl https://packagecloud.io/gpg.key | sudo apt-key add -
+  # - sudo apt-get update -q
+  # - sudo apt-get install -y apt-transport-https
+  # - echo 'deb https://packagecloud.io/github/git-lfs/ubuntu/ precise main\ndeb-src https://packagecloud.io/github/git-lfs/ubuntu/ precise main' > sudo /etc/apt/sources.list.d/github_git-lfs.list
+  # - sudo apt-get update
+  # - curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+  # - sudo apt-get update -qq
+  # - sudo apt-get install -f
+  # - sudo apt-get install git-lfs=1.0.2 -y
+  # - git lfs init
+  # - echo "ls"
+  - ls -a
+  - pwd
+  # - git clone git@github.com:github/git-lfs.git
+  # - cd git-lfs
+  # - git checkout 05666983c2e19664b8fc47c30b767ec160e3fea5
+  # - script/bootstrap
+  # - cd ..
+  # - ls -a
+  # - pwd
+  # - git-lfs/bin/git-lfs init
+  # - git-lfs/bin/git-lfs env
+  # - git-lfs/bin/git-lfs pull
+  # - git pull
+  # - git status
+  # - git-lfs/bin/git-lfs ls-files
+  - cd ..
+  - wget https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz
+  - tar xzf git-lfs-linux-amd64-1.0.2.tar.gz
+  - cd git-lfs-1.0.2
+  - sudo ./install.sh
+  - cd ../trawlData
+  - git lfs init
+  - git lfs env
+  - git lfs ls-files
+  # - sudo echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> sudo ~/.ssh/config
+  # - sudo ssh -o "StrictHostKeyChecking no" -o PasswordAuthentication=no 10.x.x.x
+  - echo yes | sudo git lfs fetch
+  # - pwd
+  # - ls
+  # - curl -o git-lfs-linux-amd64-1.0.2.tar.gz "https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz"
+  # - tar -zxvf git-lfs-linux-amd64-1.0.2.tar.gz
+  # - ./configure
+  # - make
+  # - sudo make install
 
 language: r
 sudo: required

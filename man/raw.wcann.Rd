@@ -4,7 +4,28 @@
 \name{raw.wcann}
 \alias{raw.wcann}
 \title{Raw West Coast Annual}
-\format{A data.table}
+\format{A dim = 183971 x 19 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab Trawl Id \tab integer64 \tab insert_description_here\cr
+[,2] \tab Species \tab character \tab insert_description_here\cr
+[,3] \tab Haul Weight (kg) \tab numeric \tab insert_description_here\cr
+[,4] \tab Individual Average Weight (kg) \tab numeric \tab insert_description_here\cr
+[,5] \tab Survey \tab character \tab insert_description_here\cr
+[,6] \tab Survey Cycle \tab character \tab insert_description_here\cr
+[,7] \tab Vessel \tab character \tab insert_description_here\cr
+[,8] \tab Cruise Leg \tab integer \tab insert_description_here\cr
+[,9] \tab Trawl Performance \tab character \tab insert_description_here\cr
+[,10] \tab Trawl Date \tab character \tab insert_description_here\cr
+[,11] \tab Trawl Start Time \tab character \tab insert_description_here\cr
+[,12] \tab Best Latitude (dd) \tab numeric \tab insert_description_here\cr
+[,13] \tab Best Longitude (dd) \tab numeric \tab insert_description_here\cr
+[,14] \tab Best Position Type \tab character \tab insert_description_here\cr
+[,15] \tab Best Depth (m) \tab numeric \tab insert_description_here\cr
+[,16] \tab Best Depth Type \tab character \tab insert_description_here\cr
+[,17] \tab Trawl Duration (min) \tab numeric \tab insert_description_here\cr
+[,18] \tab Area Swept by the Net (hectares) \tab numeric \tab insert_description_here\cr
+[,19] \tab Temperature At the Gear (degs C) \tab numeric \tab insert_description_here\cr
+}}
 \usage{
 raw.wcann
 }

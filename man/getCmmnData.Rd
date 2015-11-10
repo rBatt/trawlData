@@ -5,10 +5,10 @@
 \alias{getCmmnData}
 \title{Common Names
 Species' common names matched to scientific names}
-\format{\preformatted{Classes ‘data.table’ and 'data.frame':	3548 obs. of  2 variables:
- $ sppCorr: chr  "Abietinaria" "Abietinaria greenei" "Abisa" "Ablennes hians" ...
- $ common : chr  NA NA NA "aguj\\032n sable" ...
- - attr(*, ".internal.selfref")=<externalptr> 
+\format{A dim = 3548 x 2 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab sppCorr \tab character \tab insert_description_here\cr
+[,2] \tab common \tab character \tab insert_description_here\cr
 }}
 \usage{
 getCmmnData

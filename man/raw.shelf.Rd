@@ -4,7 +4,51 @@
 \name{raw.shelf}
 \alias{raw.shelf}
 \title{Raw Scotian Shelf}
-\format{A data.table}
+\format{A dim = 184631 x 42 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab CODE \tab integer \tab insert_description_here\cr
+[,2] \tab stratum \tab character \tab insert_description_here\cr
+[,3] \tab MISSION \tab character \tab insert_description_here\cr
+[,4] \tab SETNO \tab integer \tab insert_description_here\cr
+[,5] \tab MARKET \tab logical \tab insert_description_here\cr
+[,6] \tab SAMPWGT \tab numeric \tab insert_description_here\cr
+[,7] \tab ADJ_TOTWGT \tab numeric \tab insert_description_here\cr
+[,8] \tab ADJ_TOTNO \tab numeric \tab insert_description_here\cr
+[,9] \tab CALWT \tab integer \tab insert_description_here\cr
+[,10] \tab REMARKS \tab character \tab insert_description_here\cr
+[,11] \tab SIZE_CLASS \tab integer \tab insert_description_here\cr
+[,12] \tab SDATE \tab character \tab insert_description_here\cr
+[,13] \tab TIME \tab integer \tab insert_description_here\cr
+[,14] \tab SLAT \tab numeric \tab insert_description_here\cr
+[,15] \tab SLONG \tab numeric \tab insert_description_here\cr
+[,16] \tab ELAT \tab numeric \tab insert_description_here\cr
+[,17] \tab ELONG \tab numeric \tab insert_description_here\cr
+[,18] \tab AREA \tab integer \tab insert_description_here\cr
+[,19] \tab DUR \tab integer \tab insert_description_here\cr
+[,20] \tab DIST \tab numeric \tab insert_description_here\cr
+[,21] \tab HOWD \tab integer \tab insert_description_here\cr
+[,22] \tab SPEED \tab numeric \tab insert_description_here\cr
+[,23] \tab HOWS \tab integer \tab insert_description_here\cr
+[,24] \tab DMIN \tab integer \tab insert_description_here\cr
+[,25] \tab DMAX \tab integer \tab insert_description_here\cr
+[,26] \tab WIND \tab integer \tab insert_description_here\cr
+[,27] \tab FORCE \tab integer \tab insert_description_here\cr
+[,28] \tab CURNT \tab integer \tab insert_description_here\cr
+[,29] \tab TYPE \tab integer \tab insert_description_here\cr
+[,30] \tab GEAR \tab integer \tab insert_description_here\cr
+[,31] \tab AUX \tab integer \tab insert_description_here\cr
+[,32] \tab DEPTH \tab integer \tab insert_description_here\cr
+[,33] \tab ETIME \tab character \tab insert_description_here\cr
+[,34] \tab START_DEPTH \tab integer \tab insert_description_here\cr
+[,35] \tab END_DEPTH \tab integer \tab insert_description_here\cr
+[,36] \tab SURFACE_TEMPERATURE \tab numeric \tab insert_description_here\cr
+[,37] \tab BOTTOM_TEMPERATURE \tab numeric \tab insert_description_here\cr
+[,38] \tab BOTTOM_SALINITY \tab numeric \tab insert_description_here\cr
+[,39] \tab depthzone_fathoms \tab character \tab insert_description_here\cr
+[,40] \tab stratarea_nmi2 \tab integer \tab insert_description_here\cr
+[,41] \tab spp \tab character \tab insert_description_here\cr
+[,42] \tab common \tab character \tab insert_description_here\cr
+}}
 \usage{
 raw.shelf
 }

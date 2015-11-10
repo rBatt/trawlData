@@ -4,7 +4,46 @@
 \name{raw.gmex}
 \alias{raw.gmex}
 \title{Raw Gulf of Mexico}
-\format{A data.table}
+\format{A dim = 688107 x 37 data.table data.frame:
+\tabular{rlll}{
+[,1] \tab CRUISEID \tab integer \tab insert_description_here\cr
+[,2] \tab VESSEL \tab integer \tab insert_description_here\cr
+[,3] \tab BIO_BGS \tab character \tab insert_description_here\cr
+[,4] \tab STATIONID \tab integer \tab insert_description_here\cr
+[,5] \tab CRUISE_NO \tab integer \tab insert_description_here\cr
+[,6] \tab P_STA_NO \tab integer \tab insert_description_here\cr
+[,7] \tab BGSID \tab integer \tab insert_description_here\cr
+[,8] \tab CATEGORY \tab integer \tab insert_description_here\cr
+[,9] \tab GENUS_BGS \tab character \tab insert_description_here\cr
+[,10] \tab SPEC_BGS \tab character \tab insert_description_here\cr
+[,11] \tab BGSCODE \tab character \tab insert_description_here\cr
+[,12] \tab CNTEXP \tab integer \tab insert_description_here\cr
+[,13] \tab SELECT_BGS \tab numeric \tab insert_description_here\cr
+[,14] \tab INVRECID \tab integer \tab insert_description_here\cr
+[,15] \tab GEAR_SIZE \tab integer \tab insert_description_here\cr
+[,16] \tab GEAR_TYPE \tab character \tab insert_description_here\cr
+[,17] \tab MESH_SIZE \tab numeric \tab insert_description_here\cr
+[,18] \tab OP \tab character \tab insert_description_here\cr
+[,19] \tab MIN_FISH \tab integer \tab insert_description_here\cr
+[,20] \tab TIME_ZN \tab integer \tab insert_description_here\cr
+[,21] \tab TIME_MIL \tab integer \tab insert_description_here\cr
+[,22] \tab S_LATD \tab integer \tab insert_description_here\cr
+[,23] \tab S_LATM \tab numeric \tab insert_description_here\cr
+[,24] \tab S_LOND \tab integer \tab insert_description_here\cr
+[,25] \tab S_LONM \tab numeric \tab insert_description_here\cr
+[,26] \tab DEPTH_SSTA \tab numeric \tab insert_description_here\cr
+[,27] \tab MO_DAY_YR \tab character \tab insert_description_here\cr
+[,28] \tab E_LATD \tab integer \tab insert_description_here\cr
+[,29] \tab E_LATM \tab numeric \tab insert_description_here\cr
+[,30] \tab E_LOND \tab integer \tab insert_description_here\cr
+[,31] \tab E_LONM \tab numeric \tab insert_description_here\cr
+[,32] \tab TEMP_SSURF \tab numeric \tab insert_description_here\cr
+[,33] \tab TEMP_BOT \tab numeric \tab insert_description_here\cr
+[,34] \tab VESSEL_SPD \tab numeric \tab insert_description_here\cr
+[,35] \tab COMSTAT \tab character \tab insert_description_here\cr
+[,36] \tab TAXONOMIC \tab character \tab insert_description_here\cr
+[,37] \tab TITLE \tab character \tab insert_description_here\cr
+}}
 \usage{
 raw.gmex
 }

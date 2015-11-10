@@ -3,7 +3,7 @@
 
 # trawlData
 <p align="center">
- :shell: :tropical_fish: :octopus: :fish: :fishing_pole_and_fish: 
+ <!--:shell: :tropical_fish: :octopus: :fish: :fishing_pole_and_fish: -->
 </p>
 
 <!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE)-->

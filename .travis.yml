@@ -11,32 +11,25 @@ before_install:
   # - sudo apt-get install git-lfs=1.0.2 -y
   # - git lfs init
   # - echo "ls"
-#   - ls
-#   - echo "pwd"
-#   - pwd
-#   - echo "cloning"
-#   - git clone git@github.com:github/git-lfs.git
-#   - echo "cd into git-lfs"
-#   - cd git-lfs
-#   - echo "checkout commit 05666983c2e19664b8fc47c30b767ec160e3fea5"
-#   - git checkout 05666983c2e19664b8fc47c30b767ec160e3fea5
-#   - echo "scripts/bootstrap"
-#   - script/bootstrap
-#   - echo "ls bin"
-#   - ls bin
-#   - echo "cd back down"
-#   - cd ..
-#   - echo "init"
-#   - git-lfs/bin/git-lfs init
-#   - echo "fetch"
-#   - git-lfs/bin/git-lfs fetch
+  - ls -a
   - pwd
-  - ls
-  - curl -o git-lfs-linux-amd64-1.0.2.tar.gz "https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz"
-  - tar -zxvf git-lfs-linux-amd64-1.0.2.tar.gz
-  - ./configure
-  - make
-  - sudo make install
+  - git clone git@github.com:github/git-lfs.git
+  - cd git-lfs
+  - git checkout 05666983c2e19664b8fc47c30b767ec160e3fea5
+  - script/bootstrap
+  - cd ..
+  - ls -a
+  - pwd
+  - git-lfs/bin/git-lfs init
+  - git-lfs/bin/git-lfs env
+  - git-lfs/bin/git-lfs pull
+  # - pwd
+  # - ls
+  # - curl -o git-lfs-linux-amd64-1.0.2.tar.gz "https://github.com/github/git-lfs/releases/download/v1.0.2/git-lfs-linux-amd64-1.0.2.tar.gz"
+  # - tar -zxvf git-lfs-linux-amd64-1.0.2.tar.gz
+  # - ./configure
+  # - make
+  # - sudo make install
 
 language: r
 sudo: required

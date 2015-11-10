@@ -1,4 +1,4 @@
-![Travis-CI Build Status](https://magnum.travis-ci.com/rBatt/trawlData.svg?token=ZmFLF6sygbxo9Je63ydg&branch=master)
+<!--!![Travis-CI Build Status](https://magnum.travis-ci.com/rBatt/trawlData.svg?token=ZmFLF6sygbxo9Je63ydg&branch=master)-->
 
 
 # trawlData
@@ -8,7 +8,7 @@
 
 <!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE)-->
 <p align="center">
-<img src="./inst/extdata/taxPictures/Squalus acanthias.jpg?raw=TRUE", width="500">
+<img src="./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE", width="500">
 </p>
 
 

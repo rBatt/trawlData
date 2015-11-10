@@ -35,6 +35,7 @@ before_install:
   - git lfs init
   - git lfs env
   - git lfs ls-files
+  - sudo echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> sudo ~/.ssh/config
   - sudo git lfs fetch
   # - pwd
   # - ls

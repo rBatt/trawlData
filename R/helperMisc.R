@@ -99,19 +99,48 @@ orderD1 <- function(x, ord){
 	do.call("[",c(list(x=x),dimList))
 }
 
+
+#' Unique non-NA
+#' 
+#' Unique elements, excluding NA's
+#' 
+#' @param x a vector from which to take unique values
+#' @param na.rm Default FALSE; remove NA's?
+#' @param ... other arguments to be passed to \code{\link(unique)}
+#' 
+#' @examples
+#' una(NA)
+#' una(NA, na.rm=TRUE)
+#' una(1:3)
+#' una(c(1:3,NA))
+#' una(c(1:3,NA), na.rm=TRUE)
+#' 
+#' @export
+una <- function(x, na.rm=FALSE, ...){
+	if(!na.rm) return(unique(x, ...))
+	if(!all(is.na(x))) return(unique(x[!is.na(x)], ...))
+	if(all(is.na(x))){
+		if(class(x)=="integer64"){
+			return(bit64::as.integer64(NA))
+		}else{
+			return(as(NA,class(x)))
+		}
+	} 
+}
+
 #' Length Unique
 #' 
 #' The length of the vector of unique elements
 #' 
 #' @param x a vector
-#' @param ... arguments to be passed to \code{\link{unique}}
+#' @param ... arguments to be passed to \code{\link{una}}
 #' 
 #' @details Very convenient shorthand.
 #' @return an integer of the number of unique elements in \code{x}
 #' @examples
 #' lu(letters)
 #' @export
-lu <- function(x, ...) length(unique(x, ...))
+lu <- function(x, ...) length(una(x, ...))
 
 
 

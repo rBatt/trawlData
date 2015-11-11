@@ -117,9 +117,14 @@ orderD1 <- function(x, ord){
 #' 
 #' @export
 una <- function(x, na.rm=FALSE, ...){
-	if(!na.rm) return(unique(x, ...))
-	if(!all(is.na(x))) return(unique(x[!is.na(x)], ...))
-	if(all(is.na(x))){
+	nax <- is.na(x)
+	if(!na.rm | all(nax)){
+		return(unique(x, ...))
+	}else{
+		return(unique(x[!nax], ...))
+	}
+	# if(!all(is.na(x))) return(unique(x[!is.na(x)], ...))
+	# if(all(is.na(x))){
 		# switch(class(x)[1],
 # 			integer64 = bit64::as.integer64(NA),
 # 			integer = NA_integer_,
@@ -129,8 +134,8 @@ una <- function(x, na.rm=FALSE, ...){
 # 			character = NA_character_,
 # 			NA
 # 		)
-		NaN
-	} 
+		# NaN
+	# }
 }
 
 #' Length Unique

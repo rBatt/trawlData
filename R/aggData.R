@@ -59,7 +59,7 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	# ==========
 	stopifnot(is.data.table(X))
 	stopifnot(!is.null(bioFun) & !is.null(envFun))
-	stopifnot(is.logical(nAgg))
+	stopifnot(is.logical(use_nAgg))
 	stopifnot(is.logical(na.rm))
 	
 	

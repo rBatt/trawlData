@@ -33,10 +33,11 @@ trimData <- function(reg, ...){
 	# }
 	# print(str(reg))
 	
-	stopifnot(is.list(reg))
-	if(!is.data.table(reg)){
-		stopifnot(all(sapply(reg, is.data.table)))
+	if(is.data.table(reg)){
+		reg <- list(reg)
 	}
+	stopifnot(is.list(reg) & !is.data.table(reg))
+	stopifnot(all(sapply(reg, is.data.table)))
 	
 	# trim columns
 	# if(length(reg)>1){

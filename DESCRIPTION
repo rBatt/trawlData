@@ -18,4 +18,5 @@ Imports: LaF,
 Suggests: raster,
     taxize,
     rfishbase,
-    testthat
+    testthat,
+    rgdal

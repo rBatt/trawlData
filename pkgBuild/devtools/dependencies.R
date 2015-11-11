@@ -14,6 +14,7 @@ update_dependencies <- function(){
 	# devtools::use_package("Hmisc", "Suggests") # for calculating stratum areas
 	devtools::use_package("taxize", "Suggests") # for updating taxonomy databases
 	devtools::use_package("rfishbase", "Suggests") # for updating taxonomy databases
+	devtools::use_package("rgdal", "Suggests") # for plotting species
 }
 
 

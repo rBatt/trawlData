@@ -104,13 +104,14 @@ orderD1 <- function(x, ord){
 #' The length of the vector of unique elements
 #' 
 #' @param x a vector
+#' @param ... arguments to be passed to \code{\link{unique}}
 #' 
 #' @details Very convenient shorthand.
 #' @return an integer of the number of unique elements in \code{x}
 #' @examples
 #' lu(letters)
 #' @export
-lu <- function(x) length(unique(x))
+lu <- function(x, ...) length(unique(x, ...))
 
 
 

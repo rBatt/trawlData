@@ -106,7 +106,7 @@ orderD1 <- function(x, ord){
 #' 
 #' @param x a vector from which to take unique values
 #' @param na.rm Default FALSE; remove NA's?
-#' @param ... other arguments to be passed to \code{\link(unique)}
+#' @param ... other arguments to be passed to \code{\link{unique}}
 #' 
 #' @examples
 #' una(NA)

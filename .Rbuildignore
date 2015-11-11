@@ -18,7 +18,7 @@ testRepo.R
 
 # yaml ignore
 ^\.travis\.yml$
-^.remake.yml$
+^remake.yml$
 
 # Ignore Directories
 ^pkgBuild$

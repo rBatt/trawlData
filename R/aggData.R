@@ -12,12 +12,11 @@
 #' @param metaFun If \code{meta.action} is "FUN", a function or list of functions to be applied to each column in \code{metaCols} during aggregation. The default, NULL, will return an error if \code{meta.action} is "FUN". If a single function is to be applied to all column, it will be recycled and does not need to be in a list.
 #' @param use_nAgg Add a column to output indicating the number of elements aggregated. The name of this column is "nAgg".
 #' @param na.rm Logical (default TRUE)
-
-
+#' 
 #' @details
 #' In each of \code{bio_lvl}, \code{space_lvl}, and \code{time_lvl}, the default arguments are listed in order of decreasing specificity. Some of these levels are crossed, others nested. Default behavior and side-effects of the organization of these factors are described below, but in general they are not limiting to the user. The default behaviors are meant to be intuitive for common analyses.
 #' 
-#' The \code{bio_lvl} columns are "crossed", and thus referring to "sex" also refers to "spp", "species", and "genus". Avoiding the behavior of implied references can be avoided by, for example, creating a new column called "sex2" and setting \code{bio_lvl="sex2"}. Note that these references are not included in the default of \code{metaCols}, and thus when using \code{bio_lvl="sex"}, "spp" will not be included in \code{metaCols} and will not be affected by \code{meta.action}.
+#' The \code{bio_lvl} columns are "crossed" below the "spp" level, thus referring to "sex" also refers to "spp". Avoiding the behavior of implied references can be avoided by, for example, creating a new column called "sex2" and setting \code{bio_lvl="sex2"}. Note in this special case (of "sex"), "spp" is not included in the default of \code{metaCols}, and thus when using \code{bio_lvl="sex"}, "spp" will not be included in \code{metaCols} and will not be affected by \code{meta.action}. However, if \code{bio_lvl="individual"}, internally \code{bio_lvl} is just NULL, referring to no columns, so it may be advisable to include columns like "sex" and "spp" in \code{metaCols} (which would be done anyway in the default of metaCols), and to retain those columns by using a non-default for \code{meta.action}. See Examples.
 #' 
 #' In \code{time_lvl} all levels above "datetime" are assumed to be crossed, thus referring to "season" will aggregate with a temporal grain of seasons within a year. Specifying \code{time_lvl="season"} does not imply a reference to "year" in the sense that "year" will still be included in \code{metaCols} by default, and thus affected by \code{meta.action} (whose default is "drop"). However, temporal factors are created by adding a new "time_lvl" column in the output data.table. When possible, this new column will be of class POSIXct; otherwise, a character. Note that "day" refers to "day of year".
 #' 
@@ -25,33 +24,80 @@
 #' 
 #' The value "haulid" is special because this column refers to both space and time. In general, space and time are correlated within a region, because different places tend to be sampled at different times.
 #' 
-# #' If a column specified for aggregation is not found, the next most general level of aggregation is used, with a warning. If no such columns are found, an error is returned. In the case of \code{time_lvl}, most levels can be inferred from "datetime", and if not found as a column, a transformation from "datetime" is attempted before moving on to standard behavior.
-#' 
 #' When \code{meta.action="FUN"}, \code{metaFun} can be a named list to refer to each of \code{metaCols} (or it can just be used as \code{metaFun=length}, e.g., where the same function is applied to all columns). When \code{metaFun} is a list, functions are matched to columns by name, not by order of listing. For example, if \code{metaCols=c("reg","trophicLevel", "lon")}, it might be useful to take the unique values of the regions, the means of the trophic levels, and the first unique value of longitude after rounding to 1 decimal place. In that case, one could do \code{metaFun=list(reg=unique, trophicLevel=mean, lon=function(x)unique(round(x,1)))}.
 #' 
 #' The argument \code{na.rm} affects any of the functions passed as arguments, even custom functions (so long as they accept "na.rm" as arguments). All functions must accept na.rm as an argument; if a function does not, re-rewrite so it does (e.g., function(x, ...){length(x)}). \code{na.rm} also affects "unique1", "collapse", and "lu" in \code{meta.action}. In intances where the functions \code{\link{mean}} or \code{\link{sum}} are used and \code{na.rm=TRUE}, consider instead using \code{\link{meanna}} and \code{\link{sumna}}, respectively.
 #' 
 #' @section Note:
-#' The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. Furthermore, 
+#' The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. So right now, \code{use_nAgg} does not adhere to na.rm=TRUE, and includes NA values in its count. 
+#' 
+#' @return Returns an aggregated data.table. See 'Details' for columns returned.
+#' 
+#' @examples
+#' # updated versions will have "CATCHSEX" as "sex"
+#' trim.neus <- trimData("neus", c.add=c("length","CATCHSEX"))
+#' pick <- function(x, n){
+#' 	(x)%in%unique(sample(x,n))
+#' }
+#' mini_data <- trim.neus[pick(spp, 4) & pick(stratum, 3)]
+#' 
+#' # aggregate species within a haul (among individuals)
+#' # this means taking the sum of many bio metrics
+#' neus1 <- aggData(
+#' 	X=mini_data,
+#' 	bioFun=sumna,
+#' 	envFun=meanna,
+#' 	bio_lvl="spp", space_lvl="haulid", time_lvl="season",
+#' 	bioCols=c("wtcpue","cntcpue"),
+#' 	envCols=c("btemp"),
+#' 	metaCols=c("reg","common","datetime","stratum"),
+#' 	meta.action=c("unique1")
+#' )
+#' 
+#' # aggregate within a species within stratum
+#' # refer to the time_lvl column from previous aggData()
+#' # can use mean for both bio and env
+#' neus2 <- aggData(
+#' 	X=neus1,
+#' 	FUN=meanna,
+#' 	bio_lvl="spp", space_lvl="stratum", time_lvl="time_lvl",
+#' 	bioCols=c("wtcpue","cntcpue"),
+#' 	envCols=c("btemp"),
+#' 	metaCols=c("reg","common","datetime"),
+#' 	meta.action=c("unique1")
+#' )
+#' 
+#' # A more complex example
+#' # Say we want the weight, count, and length
+#' # Within a stratum, of a given sex of a given species, during a season
+#' # To illustrate a complex situation, let's take the
+#' # mean of the weight and length, and sum of count
+#' # Because only 1 type of function can be applied to bio_Cols,
+#' # we can just exercise the extreme flexibility of
+#' # metaCols and metaFunwe to achieve goals.
+#' # Also, notice how we transform the "datetime" column to year
+#' aggData(
+#' 	X=mini_data,
+#' 	FUN=meanna,
+#' 	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
+#' 	bioCols=c("weight","length"),
+#' 	envCols=c("stemp","btemp", "depth"),
+#' 	metaCols=c("datetime","reg", "cnt", "spp", "common", "CATCHSEX"),
+#' 	meta.action=c("FUN"),
+#' 	metaFun=list(
+#' 	 # note that these are named, and don't need
+#' 	# to be in the same order as metaCols
+#' 		reg = function(x, ...)una(x, ...)[1], # this is unique1
+#' 		datetime = function(x, ...)una(data.table::year(x), ...)[1],
+#' 		common = function(x, ...)una(x, ...)[1],
+#' 		spp = function(x, ...)una(x, ...)[1],
+#' 		CATCHSEX = function(x, ...)una(x, ...)[1],
+#' 		cnt = sumna
+#' 	)
+#' ) # not surprisingly, there wasn't any aggregation at the level of individuals
 #' 
 #' @export
-# mini_data <- trimData("ai")[!is.na(datetime)][sample(1:nrow(clean.ai),size=5E2)]
-# aggData(X=mini_data, FUN=mean, bio_lvl="spp",space_lvl="stratum",time_lvl="year", bioCols="wtcpue",envCols=c("stemp","btemp"), metaCols=c("datetime","reg"), meta.action=c("unique1"))
-
-# X = copy(mini_data) #copy(clean.ai)
-# FUN = mean
-# bio_lvl="spp"
-# space_lvl="stratum"
-# time_lvl="year"
-# bioCols="wtcpue"
-# envCols=c("stemp","btemp")
-# metaCols=c("datetime","reg")
-# meta.action="unique1"
-# metaFun=NULL
-# use_nAgg=TRUE
-# na.rm=T
-
-aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue","weight","count","length"), envCols=c("stemp","btemp","sdo","bdo","depth","wind","ssalin","bsalin"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
+aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue"), envCols=c("stemp","btemp","depth"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
 	
 	
 	# ==========
@@ -95,13 +141,17 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	# =================
 	# set up Bio levels
 	if(bio_lvl=="individual"){
-		bio_lvl <- NULL # individual is by doing no bio agg
-	}else if(bio_lvl%in%bio_def){
+		bio_lvl <- "bio_lvl" # individual is by doing no bio agg
+		X[,bio_lvl:=paste(spp,haulid, (1:(.N)), sep="."),by=c("spp","haulid")]
+	# }else if(bio_lvl%in%bio_def){
+	}else if(bio_lvl=="sex"){
 		# need to implement hierarchy
 		# wherein referring to "sex" also refers to
 		# "spp", "species", "genus"
-		bio_lvl <- bio_def[which(bio_def==bio_lvl):length(bio_def)]
-	}
+		# bio_lvl <- bio_def[which(bio_def==bio_lvl):length(bio_def)]
+		bio_lvl <- c("sex", "spp")
+		
+	} # if not individual or sex, just leave bio_lvl as-is
 	stopifnot(all(bio_lvl%in%x.names))
 	
 	# set up Space levels
@@ -111,7 +161,8 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	stopifnot(all(space_lvl%in%x.names))
 	
 	# set up Time levels
-	if(time_lvl%in%time_def & !time_lvl%in%x.names){
+	# if(time_lvl%in%time_def & !time_lvl%in%x.names){
+	if(time_lvl%in%time_def){
 		switch(time_lvl,
 			day = X[,time_lvl:=format.Date(datetime, format="%Y-%m-%d")],
 			month = X[,time_lvl:=format.Date(datetime, format="%Y-%m")],
@@ -138,19 +189,6 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	# =============================
 	# = Match and Check Functions =
 	# =============================
-	# Check for needing to replace mean or sum with meanna/ sumna
-	# if(na.rm & deparse(substitute(bioFun))=="mean"){
-	# 	message("bioFun matched to mean. Consider using trawlData::meanna instead. See ?meanna")
-	# }
-	# if(na.rm & deparse(substitute(bioFun))=="sum"){
-	# 	message("bioFun matched to sum Consider using trawlData::sumna instead. See ?sumna")
-	# }
-	# if(na.rm & deparse(substitute(envFun))=="mean"){
-	# 	message("envFun matched to mean. Consider using trawlData::meanna instead. See ?meanna")
-	# }
-	# if(na.rm & deparse(substitute(envFun))=="sum"){
-	# 	message("envFun matched to sum Consider using trawlData::sumna instead. See ?sumna")
-	# }
 	
 	# Match Bio and Env Funs
 	bioFun <- match.fun(bioFun)
@@ -186,12 +224,11 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	dc <- function(x,y){do.call(x, list(y))}
 	out <- X[,j={
 			# I'm still amazed that this works.
-			# print(dput(.SD))
 			c(
 				structure(lapply(eval(s2c(bioCols)), bioFun, na.rm=na.rm), .Names=bioCols),
 				structure(lapply(eval(s2c(envCols)), envFun, na.rm=na.rm), .Names=envCols),
 				structure(mapply(dc, metaFun, eval(s2c(metaCols)), SIMPLIFY=FALSE), .Names=metaCols),
-				"nAgg"=if(add_nAgg){(.N)}
+				"nAgg"=if(use_nAgg){(.N)}
 			)
 	
 		},by=c(byCols)
@@ -204,29 +241,4 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 	return(out)
 	
 }
-
-# test <- structure(list(b = c(10L, 9L, 8L, 7L, 6L, 5L, 4L, 3L, 2L, 1L),
-#     datetime = structure(c(828316800, 696902400, 891388800, 638928000,
-#     933465600, 804556800, 13046400, 291772800, -205286400, 1359676800
-#     ), class = c("POSIXct", "POSIXt"), tzone = "GMT"), a = 1:10), .Names = c("b",
-# "datetime", "a"), row.names = c(NA, -10L), class = c("data.table",
-# "data.frame"))
-# test[,byC:=c(rep("one",5),rep("two",5))]
-# X <- copy(test)
-# datC <- c("datetime")
-# numC <- c("a","b")
-# numFun <- list("b"=mean, "a"=function(x)(x+1)^2)
-# dc <- function(x,y){do.call(x, list(y))}
-# test[,j={
-# 		print(.SD)
-# 		print(structure(lapply(eval(s2c(datC)), unique), .Names=datC))
-# 		print(structure(mapply(dc, numFun[1], eval(s2c(numC)), SIMPLIFY=FALSE), .Names=numC))
-# 		c(
-# 			structure(lapply(eval(s2c(datC)), unique), .Names=datC),
-# 			structure(mapply(dc, numFun[numC], eval(s2c(numC)), SIMPLIFY=FALSE), .Names=numC),
-# 			structure(mapply(dc, numFun[1], eval(s2c(numC)), SIMPLIFY=FALSE), .Names=numC)
-# 		)
-#
-# 	},by=c("byC")
-# ] # I can't believe this thing works ........
 

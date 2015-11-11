@@ -54,6 +54,8 @@ clean.columns.ai <- function(X){
 	makeHaul(X)
 	
 	# date, time, datetime
+	pat2y <- "^(\\d{1,2})(?:[\\/-])(\\d{1,2})(?:[\\/-])(\\d{2})(?=\\s|$)"
+	X[,datetime:=gsub(pat2y, "\\1\\/\\2\\/20\\3", datetime, perl=TRUE)]
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season
@@ -95,6 +97,8 @@ clean.columns.ebs <- function(X){
 	makeHaul(X)
 	
 	# date, time, datetime
+	pat2y <- "^(\\d{1,2})(?:[\\/-])(\\d{1,2})(?:[\\/-])(\\d{2})(?=\\s|$)"
+	X[,datetime:=gsub(pat2y, "\\1\\/\\2\\/20\\3", datetime, perl=TRUE)]
 	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%Y %H:%M", tz="GMT")]
 	
 	# season

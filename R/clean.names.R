@@ -218,6 +218,7 @@ clean.names.neus <- function(X){
 	neus.cols <- c(
 		"STRATUM" = "stratum",
 		"SVSPP" = "SID",
+		"CATCHSEX" = "sex",
 		"YEAR" = "year",
 		"SEASON" = "season",
 		"LAT" = "lat",

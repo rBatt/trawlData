@@ -1,4 +1,5 @@
 #' Aggregate Data
+#' 
 #' Aggregate trawl Data to specified levels of biological, spatial, and temporal dimensions
 #' 
 #' @param X A data.table containing trawl data
@@ -33,22 +34,22 @@
 #' @section Note:
 #' The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. Furthermore, 
 #' 
+#' @export
+# mini_data <- trimData("ai")[!is.na(datetime)][sample(1:nrow(clean.ai),size=5E2)]
+# aggData(X=mini_data, FUN=mean, bio_lvl="spp",space_lvl="stratum",time_lvl="year", bioCols="wtcpue",envCols=c("stemp","btemp"), metaCols=c("datetime","reg"), meta.action=c("unique1"))
 
-mini_data <- trimData("ai")[!is.na(datetime)][sample(1:nrow(clean.ai),size=5E2)]
-aggData(X=mini_data, FUN=mean, bio_lvl="spp",space_lvl="stratum",time_lvl="year", bioCols="wtcpue",envCols=c("stemp","btemp"), metaCols=c("datetime","reg"), meta.action=c("unique1"))
-
-X = copy(mini_data) #copy(clean.ai)
-FUN = mean
-bio_lvl="spp"
-space_lvl="stratum"
-time_lvl="year"
-bioCols="wtcpue"
-envCols=c("stemp","btemp")
-metaCols=c("datetime","reg")
-meta.action="unique1"
-metaFun=NULL
-use_nAgg=TRUE
-na.rm=T
+# X = copy(mini_data) #copy(clean.ai)
+# FUN = mean
+# bio_lvl="spp"
+# space_lvl="stratum"
+# time_lvl="year"
+# bioCols="wtcpue"
+# envCols=c("stemp","btemp")
+# metaCols=c("datetime","reg")
+# meta.action="unique1"
+# metaFun=NULL
+# use_nAgg=TRUE
+# na.rm=T
 
 aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue","weight","count","length"), envCols=c("stemp","btemp","sdo","bdo","depth","wind","ssalin","bsalin"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
 	

@@ -10,13 +10,12 @@
 #' If multiple regions are supplied to \code{reg}, those regions will be collated via \code{\link{rbindlist}}. This is possible because trimming columns standardizes content. Additionally, although \code{\link{clean.trimRow}} adds the \code{keep.row} column, this function will actually drop those rows for which \code{keep.row} is FALSE.
 #' 
 #' @examples
-# default usage
-trimData(c("ebs","goa"))
-
-# usage to get an extra column
-trimData(c("ebs","shelf"), c.add="WIND")
-
-
+#' # default usage
+#' trimData(c("ebs","goa"))
+#' # usage to get an extra column
+#' trimData(c("ebs","shelf"), c.add="WIND")
+#' 
+#' @export
 trimData <- function(reg, ...){
 	reg.opts <- c("ai","ebs","gmex","goa","neus","newf","sa","sgulf","shelf","wcann","wctri")
 	

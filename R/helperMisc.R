@@ -120,11 +120,16 @@ una <- function(x, na.rm=FALSE, ...){
 	if(!na.rm) return(unique(x, ...))
 	if(!all(is.na(x))) return(unique(x[!is.na(x)], ...))
 	if(all(is.na(x))){
-		if(class(x)=="integer64"){
-			return(bit64::as.integer64(NA))
-		}else{
-			return(as(NA,class(x)))
-		}
+		# switch(class(x)[1],
+# 			integer64 = bit64::as.integer64(NA),
+# 			integer = NA_integer_,
+# 			numeric = NA_real_,
+# 			double = NA_real_,
+# 			complex = NA_complex_,
+# 			character = NA_character_,
+# 			NA
+# 		)
+		NaN
 	} 
 }
 

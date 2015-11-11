@@ -1,8 +1,8 @@
 #' Trim Trawl Data
 #' Get a trimmed data set for one or more regions
 #' 
-#' @params reg a list of data.tables or a character vector of regions to be in data set. If a list of data.tables, trimming and combining is performed on those data.tables. If a charcter vector of region names, package data sets by the name of \code{paste0("clean.", reg)} are used. If nothing is supplied, \code{reg} is a character vector of all region names.
-#' @params ... arguments to be passed to \link{\code{clean.trimCol}}
+#' @param reg a list of data.tables or a character vector of regions to be in data set. If a list of data.tables, trimming and combining is performed on those data.tables. If a charcter vector of region names, package data sets by the name of \code{paste0("clean.", reg)} are used. If nothing is supplied, \code{reg} is a character vector of all region names.
+#' @param ... arguments to be passed to \code{\link{clean.trimCol}}
 #' 
 #' @details 
 #' This function drops columns and deletes rows. Column dropping is performed by \code{\link{clean.trimCol}}, rows to drop determined by flagging performed by \code{\link{clean.trimRow}}.  
@@ -15,7 +15,7 @@
 #' # usage to get an extra column
 #' trimData(c("ebs","shelf"), c.add="WIND")
 #' 
-#' @export
+#' @export trimData
 trimData <- function(reg, ...){
 	reg.opts <- c("ai","ebs","gmex","goa","neus","newf","sa","sgulf","shelf","wcann","wctri")
 	

@@ -139,7 +139,8 @@ clean.columns.gmex <- function(X){
 	X[,haulid:=paste(formatC(vessel, width=3, flag=0), formatC(cruise, width=3, flag=0), formatC(P_STA_NO, width=5, flag=0, format='d'), sep='-')]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
+	X[grepl(":",time),datetime:=as.POSIXct(paste(date, time), format="%Y-%m-%d %H:%M", tz="GMT")]
+	X[!grepl(":",time), datetime:=as.POSIXct(date, format="%Y-%m-%d", tz="GMT")]
 	X[,year:=as.character(format.Date(datetime, format="%Y"))]
 	
 	# season

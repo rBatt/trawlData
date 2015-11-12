@@ -7,9 +7,8 @@
 aggData(X, FUN = NULL, bio_lvl = c("individual", "sex", "spp", "species",
   "genus"), space_lvl = c("haulid", "lon-lat", "lat", "lon", "stratum",
   "reg"), time_lvl = c("haulid", "datetime", "day", "month", "season",
-  "year"), bioFun = FUN, envFun = FUN, bioCols = c("wtcpue", "cntcpue",
-  "weight", "count", "length"), envCols = c("stemp", "btemp", "sdo", "bdo",
-  "depth", "wind", "ssalin", "bsalin"), metaCols = NULL,
+  "year"), bioFun = FUN, envFun = FUN, bioCols = c("wtcpue", "cntcpue"),
+  envCols = c("stemp", "btemp", "depth"), metaCols = NULL,
   meta.action = c("drop", "unique1", "collapse", "lu", "FUN"),
   metaFun = NULL, use_nAgg = TRUE, na.rm = TRUE)
 }
@@ -34,13 +33,16 @@ aggData(X, FUN = NULL, bio_lvl = c("individual", "sex", "spp", "species",
 
 \item{na.rm}{Logical (default TRUE)}
 }
+\value{
+Returns an aggregated data.table. See 'Details' for columns returned.
+}
 \description{
 Aggregate trawl Data to specified levels of biological, spatial, and temporal dimensions
 }
 \details{
 In each of \code{bio_lvl}, \code{space_lvl}, and \code{time_lvl}, the default arguments are listed in order of decreasing specificity. Some of these levels are crossed, others nested. Default behavior and side-effects of the organization of these factors are described below, but in general they are not limiting to the user. The default behaviors are meant to be intuitive for common analyses.
 
-The \code{bio_lvl} columns are "crossed", and thus referring to "sex" also refers to "spp", "species", and "genus". Avoiding the behavior of implied references can be avoided by, for example, creating a new column called "sex2" and setting \code{bio_lvl="sex2"}. Note that these references are not included in the default of \code{metaCols}, and thus when using \code{bio_lvl="sex"}, "spp" will not be included in \code{metaCols} and will not be affected by \code{meta.action}.
+The \code{bio_lvl} columns are "crossed" below the "spp" level, thus referring to "sex" also refers to "spp". Avoiding the behavior of implied references can be avoided by, for example, creating a new column called "sex2" and setting \code{bio_lvl="sex2"}. Note in this special case (of "sex"), "spp" is not included in the default of \code{metaCols}, and thus when using \code{bio_lvl="sex"}, "spp" will not be included in \code{metaCols} and will not be affected by \code{meta.action}. However, if \code{bio_lvl="individual"}, internally \code{bio_lvl} is just NULL, referring to no columns, so it may be advisable to include columns like "sex" and "spp" in \code{metaCols} (which would be done anyway in the default of metaCols), and to retain those columns by using a non-default for \code{meta.action}. See Examples.
 
 In \code{time_lvl} all levels above "datetime" are assumed to be crossed, thus referring to "season" will aggregate with a temporal grain of seasons within a year. Specifying \code{time_lvl="season"} does not imply a reference to "year" in the sense that "year" will still be included in \code{metaCols} by default, and thus affected by \code{meta.action} (whose default is "drop"). However, temporal factors are created by adding a new "time_lvl" column in the output data.table. When possible, this new column will be of class POSIXct; otherwise, a character. Note that "day" refers to "day of year".
 
@@ -48,14 +50,75 @@ The levels of \code{space_lvl} are nested, not crossed, and thus their handling 
 
 The value "haulid" is special because this column refers to both space and time. In general, space and time are correlated within a region, because different places tend to be sampled at different times.
 
-#If a column specified for aggregation is not found, the next most general level of aggregation is used, with a warning. If no such columns are found, an error is returned. In the case of \code{time_lvl}, most levels can be inferred from "datetime", and if not found as a column, a transformation from "datetime" is attempted before moving on to standard behavior.
-
 When \code{meta.action="FUN"}, \code{metaFun} can be a named list to refer to each of \code{metaCols} (or it can just be used as \code{metaFun=length}, e.g., where the same function is applied to all columns). When \code{metaFun} is a list, functions are matched to columns by name, not by order of listing. For example, if \code{metaCols=c("reg","trophicLevel", "lon")}, it might be useful to take the unique values of the regions, the means of the trophic levels, and the first unique value of longitude after rounding to 1 decimal place. In that case, one could do \code{metaFun=list(reg=unique, trophicLevel=mean, lon=function(x)unique(round(x,1)))}.
 
 The argument \code{na.rm} affects any of the functions passed as arguments, even custom functions (so long as they accept "na.rm" as arguments). All functions must accept na.rm as an argument; if a function does not, re-rewrite so it does (e.g., function(x, ...){length(x)}). \code{na.rm} also affects "unique1", "collapse", and "lu" in \code{meta.action}. In intances where the functions \code{\link{mean}} or \code{\link{sum}} are used and \code{na.rm=TRUE}, consider instead using \code{\link{meanna}} and \code{\link{sumna}}, respectively.
 }
 \section{Note}{
 
-The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. Furthermore,
+The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. So right now, \code{use_nAgg} does not adhere to na.rm=TRUE, and includes NA values in its count.
+}
+\examples{
+# updated versions will have "CATCHSEX" as "sex"
+trim.neus <- trimData("neus", c.add=c("length","CATCHSEX"))
+pick <- function(x, n){
+	(x)\%in\%unique(sample(x,n))
+}
+mini_data <- trim.neus[pick(spp, 4) & pick(stratum, 3)]
+
+# aggregate species within a haul (among individuals)
+# this means taking the sum of many bio metrics
+neus1 <- aggData(
+	X=mini_data,
+	bioFun=sumna,
+	envFun=meanna,
+	bio_lvl="spp", space_lvl="haulid", time_lvl="season",
+	bioCols=c("wtcpue","cntcpue"),
+	envCols=c("btemp"),
+	metaCols=c("reg","common","datetime","stratum"),
+	meta.action=c("unique1")
+)
+
+# aggregate within a species within stratum
+# refer to the time_lvl column from previous aggData()
+# can use mean for both bio and env
+neus2 <- aggData(
+	X=neus1,
+	FUN=meanna,
+	bio_lvl="spp", space_lvl="stratum", time_lvl="time_lvl",
+	bioCols=c("wtcpue","cntcpue"),
+	envCols=c("btemp"),
+	metaCols=c("reg","common","datetime"),
+	meta.action=c("unique1")
+)
+
+# A more complex example
+# Say we want the weight, count, and length
+# Within a stratum, of a given sex of a given species, during a season
+# To illustrate a complex situation, let's take the
+# mean of the weight and length, and sum of count
+# Because only 1 type of function can be applied to bio_Cols,
+# we can just exercise the extreme flexibility of
+# metaCols and metaFunwe to achieve goals.
+# Also, notice how we transform the "datetime" column to year
+aggData(
+	X=mini_data,
+	FUN=meanna,
+	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
+	bioCols=c("weight","length"),
+	envCols=c("stemp","btemp", "depth"),
+	metaCols=c("datetime","reg", "cnt", "spp", "common", "CATCHSEX"),
+	meta.action=c("FUN"),
+	metaFun=list(
+	 # note that these are named, and don't need
+	# to be in the same order as metaCols
+		reg = function(x, ...)una(x, ...)[1], # this is unique1
+		datetime = function(x, ...)una(data.table::year(x), ...)[1],
+		common = function(x, ...)una(x, ...)[1],
+		spp = function(x, ...)una(x, ...)[1],
+		CATCHSEX = function(x, ...)una(x, ...)[1],
+		cnt = sumna
+	)
+) # not surprisingly, there wasn't any aggregation at the level of individuals
 }
 

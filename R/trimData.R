@@ -26,12 +26,10 @@ trimData <- function(reg, ...){
 	}else if(!is.list(reg)){ # data.tables are lists; so are lists of data.tables
 		reg <- match.arg(reg, choices=reg.opts, several.ok=TRUE)
 		reg <- paste0("clean.",reg)
+	}
+	if(is.character(reg)){
 		reg <- lapply(reg, function(x)copy(get(x)))
 	}
-	# if(!is.list(reg)){
-	# 	reg <- lapply(reg, function(x)copy(get(x)))
-	# }
-	# print(str(reg))
 	
 	if(is.data.table(reg)){
 		reg <- list(reg)

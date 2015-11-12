@@ -53,7 +53,10 @@ clean.trimCol <- function(X, cols, c.add=NULL, c.drop=NULL){
 	
 	cols.use <- cols[!cols%in%c.drop]
 	cols.drop <- x.n[!x.n%in%cols.use]
-	X[,(cols.drop):=NULL]
+	if(length(cols.drop)){
+		X[,(cols.drop):=NULL]
+		
+	}
 	
 	cols4order <- cols.use[cols.use%in%names(X)]
 	setcolorder(X, cols4order)

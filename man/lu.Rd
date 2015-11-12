@@ -4,10 +4,12 @@
 \alias{lu}
 \title{Length Unique}
 \usage{
-lu(x)
+lu(x, ...)
 }
 \arguments{
 \item{x}{a vector}
+
+\item{...}{arguments to be passed to \code{\link{una}}}
 }
 \value{
 an integer of the number of unique elements in \code{x}

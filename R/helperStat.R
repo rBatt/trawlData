@@ -4,24 +4,42 @@
 #' Sum where NA's are removed, but if all are NA, return NA (not 0)
 #' 
 #' @param x numbers to be summed
+#' @param na.rm logical, default TRUE, remove NA's?
+#' @param ... unused
+#' 
 #' @template helperStatTemplate
 #' @export
-sumna <- function(x){
-	if(!all(is.na(x))) return(sum(x, na.rm=TRUE))
-	if(all(is.na(x))) return(as.numeric(NA))
+sumna <- function(x, na.rm=TRUE, ...){
+	if(!all(is.na(x))) return(sum(x, na.rm=na.rm))
+	if(all(is.na(x))) return(NA_real_)
 }
+
 
 #' Mean NA
 #' 
 #' Mean where NA's are removed, but if all are NA, return NA (not 0)
 #' 
 #' @param x take the mean of these numbers
+#' @param na.rm logical, default TRUE, remove NA's?
+#' @param ... unused
+#' 
 #' @template helperStatTemplate
 #' @export
-meanna <- function(x){
-	if(!all(is.na(x))) return(mean(x, na.rm=TRUE))
-	if(all(is.na(x))) return(as.numeric(NA))
+meanna <- function(x, na.rm=TRUE, ...){
+	if(!anyNA(x) | !na.rm){
+		return(sum(x)/length(x))
+	}else{
+		nax <- is.na(x)
+		if(!all(nax)){
+			n <- sum(!nax)
+			return(sum(x,na.rm=na.rm)/n)
+		}else{
+			return(NA_real_)
+		}
+	}
 }
+
+
 
 #' Weighted Average, NA
 #' 

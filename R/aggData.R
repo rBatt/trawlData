@@ -167,9 +167,11 @@ aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","g
 			day = X[,time_lvl:=format.Date(datetime, format="%Y-%m-%d")],
 			month = X[,time_lvl:=format.Date(datetime, format="%Y-%m")],
 			season = X[,time_lvl:=paste(format.Date(datetime, format="%Y"),getSeason(datetime),sep="-")],
-			year = X[,time_lvl:=format.Date(datetime, format="%Y")]
+			year = X[,time_lvl:=format.Date(datetime, format="%Y")],
+			haulid = X[,time_lvl:=haulid]
 		)
 	}else{
+		stopifnot(all(time_lvl%in%x.names))
 		invisible(X[,time_lvl:=eval(s2c(time_lvl))])
 	}
 	

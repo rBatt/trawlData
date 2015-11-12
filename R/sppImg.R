@@ -17,7 +17,17 @@
 #' library(rgdal)
 #' dev.new(width=8, height=7)
 #' par(mar=c(0.5,0.5,1,0.5), oma=c(0,0,0,0), ps=8, cex=1, mfrow=c(5,5))
-#' clean.ebs[Picture=="y"][pick(spp,25),sppImg(unique(spp),unique(common),side=3, adj=0.1, line=-0.85, xpd=T),by="spp"]
+#' clean.ebs[Picture=="y"][pick(spp,25),
+#' 	sppImg(
+#' 		unique(spp),
+#' 		unique(common),
+#' 		side=3,
+#' 		adj=0.1,
+#' 		line=-0.85,
+#' 		xpd=TRUE
+#' 	),
+#' 	by="spp"
+#' ]
 #' 
 #' @export
 sppImg <- function(x, common=NULL, ...){

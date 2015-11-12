@@ -13,9 +13,13 @@
 #' @import data.table
 #' @export clean.tax
 clean.tax <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
-	# load("data/spp.key.RData")
 	if(!exists("spp.key")){
-		data("spp.key", package="trawlData")
+		if(requireNamespace("trawlData", quietly=TRUE)){
+			data("spp.key", package="trawlData")
+		}else{
+			load("data/spp.key.RData")
+		}
+		
 	}
 	reg <- match.arg(reg)
 	

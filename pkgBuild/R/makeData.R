@@ -137,7 +137,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 		# clean taxa names
 		message("\nCleaning taxonomy and adding ecology\n")
 		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
-		# load("data/spp.key.RData")
+		load("data/spp.key.RData")
 		for(i in 1:length(regions)){
 			assign(cnms[i], clean.tax(get(cnms[i]), regions[i]))
 			if(length(regions)>1){setTxtProgressBar(pb, i)}

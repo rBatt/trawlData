@@ -37,7 +37,7 @@ library(devtools)
 setwd("path/to/folder/to/hold/repo/trawlData")
 devtools::install()
 ```
- - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:
+ - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:  
  ```{r}
  library(devtools)
  install_version("data.table", version="1.9.4")

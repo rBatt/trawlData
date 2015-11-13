@@ -25,5 +25,6 @@ testRepo.R
 ^man-roxygen$
 ^.git$
 ^.remake$
+^testFormat$
 
 ^git-lfs$

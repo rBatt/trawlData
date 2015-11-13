@@ -1,4 +1,4 @@
-#' Aggregate Data
+#' Aggregate Trawl Data
 #' 
 #' Aggregate trawl Data to specified levels of biological, spatial, and temporal dimensions
 #' 
@@ -97,7 +97,7 @@
 #' ) # not surprisingly, there wasn't any aggregation at the level of individuals
 #' 
 #' @export
-aggData <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue"), envCols=c("stemp","btemp","depth"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
+trawlAgg <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue"), envCols=c("stemp","btemp","depth"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
 	
 	
 	# ==========

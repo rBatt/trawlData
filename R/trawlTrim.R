@@ -16,7 +16,7 @@
 #' trimData(c("ebs","shelf"), c.add="WIND")
 #' 
 #' @export trimData
-trimData <- function(reg, ...){
+trawlTrim <- function(reg, ...){
 	reg.opts <- c("ai","ebs","gmex","goa","neus","newf","sa","sgulf","shelf","wcann","wctri")
 	
 	

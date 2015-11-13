@@ -13,7 +13,7 @@
 #' @param ... Other arguments to be passed to \code{\link{acast}}.
 #' 
 #' @details
-#' Many columns in bottom trawl data can be described as summarizing 3 aspects of metadata things: when, where, and what. This same logic is expressed in the function \code{\link{aggData}}, which prompts users to conceptualize aggregating trawl data as aggregating at different specificities for time, space, and biological dimensions. In this function's default for \code{formula}, the "where" is described by "stratum" (a sampling site), "when" by "year", and "what" by "spp" (species). The "K" value is a replicate, which could mean either "when" or "what" (and is similar to "haulid" in \code{\link{aggData}}, which describes it as being indicative of both time and space). Given those identifying dimensions, we can then appropriately contextualize a measured value, e.g. "weight". Not all cases need these same dimensions to be in \code{formula} (e.g., if the measured value is bottom temperature ("btemp") the "what" dimension is not needed), which is why this function doesn't impose as much structure on what categories of columns should comprise \code{formula}.
+#' Many columns in bottom trawl data can be described as summarizing 3 aspects of metadata: when, where, and what. This same logic is expressed in the function \code{\link{aggData}}, which prompts users to conceptualize aggregating trawl data as aggregating at different specificities for time, space, and biological dimensions. In this function's default for \code{formula}, the "where" is described by "stratum" (a sampling site), "when" by "year", and "what" by "spp" (species). The "K" value is a replicate, which could mean either "when" or "what" (and is similar to "haulid" in \code{\link{aggData}}, which describes it as being indicative of both time and space). Given those identifying dimensions, we can then appropriately contextualize a measured value, e.g. "weight". Not all cases need these same dimensions to be in \code{formula} (e.g., if the measured value is bottom temperature ("btemp") the "what" dimension is not needed), which is why this function doesn't impose as much structure on what categories of columns should comprise \code{formula}.
 #' 
 #' However, it can be useful to think of that structure for \code{formula} when trying to understand the distinction and between elements to be filled with \code{valFill} vs. \code{valAbsent}.
 #' 
@@ -25,12 +25,12 @@
 #' 
 #' @return An array with dimensions equal to the number of unique values in each column in \code{formula}.
 #' @export
-castTrawl <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill=NA, fixAbsent=TRUE, allNA_noSamp="spp", valAbsent=0, grandNamesOut=c("j","k","i","t"), ...){
+trawlCast <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill=NA, fixAbsent=TRUE, allNA_noSamp="spp", valAbsent=0, grandNamesOut=c("j","k","i","t"), ...){
 	
 	xa <- reshape2::acast(x, formula=formula, value.var=valueName, fill=valFill, drop=FALSE, ...)
 		
 		
-	if(detectSampling){
+	if(fixAbsent){
 		formulaNames <- unlist(strsplit(deparse(formula), "\\s*~\\s*"))
 		apermDimLogic <- !formulaNames%in%allNA_noSamp
 		apermDim <- which(apermDimLogic)

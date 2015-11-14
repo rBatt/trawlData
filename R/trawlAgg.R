@@ -35,7 +35,7 @@
 #' 
 #' @examples
 #' # updated versions will have "CATCHSEX" as "sex"
-#' trim.neus <- trimData("neus", c.add=c("length","CATCHSEX"))
+#' trim.neus <- trawlAgg("neus", c.add=c("length","CATCHSEX"))
 #' pick <- function(x, n){
 #' 	(x)%in%unique(sample(x,n))
 #' }
@@ -43,7 +43,7 @@
 #' 
 #' # aggregate species within a haul (among individuals)
 #' # this means taking the sum of many bio metrics
-#' neus1 <- aggData(
+#' neus1 <- trawlAgg(
 #' 	X=mini_data,
 #' 	bioFun=sumna,
 #' 	envFun=meanna,
@@ -55,9 +55,9 @@
 #' )
 #' 
 #' # aggregate within a species within stratum
-#' # refer to the time_lvl column from previous aggData()
+#' # refer to the time_lvl column from previous trawlAgg()
 #' # can use mean for both bio and env
-#' neus2 <- aggData(
+#' neus2 <- trawlAgg(
 #' 	X=neus1,
 #' 	FUN=meanna,
 #' 	bio_lvl="spp", space_lvl="stratum", time_lvl="time_lvl",
@@ -76,7 +76,7 @@
 #' # we can just exercise the extreme flexibility of
 #' # metaCols and metaFunwe to achieve goals.
 #' # Also, notice how we transform the "datetime" column to year
-#' aggData(
+#' trawlAgg(
 #' 	X=mini_data,
 #' 	FUN=meanna,
 #' 	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
@@ -113,7 +113,7 @@ trawlAgg <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","
 	# = Collect Names and Formal Arguments =
 	# ======================================
 	X <- copy(X)
-	ad.form <- formals(aggData)
+	ad.form <- formals(trawlAgg)
 	x.names <- names(X)
 	
 	bio_def <- eval(ad.form$bio_lvl)

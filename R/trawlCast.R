@@ -24,6 +24,41 @@
 #' As implied the previous Details, casting data expands the number of explicit \code{valueName} elements in the data set. This function casts to an array because casting to a data.frame or data.table will take up far more RAM. The the difference in RAM increases with the number of identifying variables and how many unique levels they have (but also depends on whether those identifying variables are encoded as characters, factors, integers, doubles, etc).
 #' 
 #' @return An array with dimensions equal to the number of unique values in each column in \code{formula}.
+#' 
+#' @examples
+#' mini.t <- trawlTrim(copy(clean.ebs), c.add="Picture")[Picture=="y"][pick(spp, 9)]
+#' mini.a <- trawlAgg(
+#' 	mini.t,
+#' 	FUN=meanna,
+#' 	bio_lvl="spp",
+#' 	space_lvl="stratum",
+#' 	time_lvl="year",
+#' 	metaCols="common",
+#' 	meta.action="unique1"
+#' )
+#' 
+#' mini.c <- trawlCast(mini.a, time_lvl~stratum~spp, grandNamesOut=c("t","j","i"))
+#' (smry <- t(apply(mini.c, 3,
+#' 	function(x){
+#' 		c(
+#' 			"NA"=sum(is.na(x)),
+#' 			"0"=sum(!is.na(x)&x==0),
+#' 			">0"=sum(!is.na(x)&x>0)
+#' 		)
+#' 	}
+#' )))
+#' 
+#' \dontrun{
+#' par(mfrow=c(3,3), mar=c(0.15,0.15,0.15,0), ps=8)
+#' for(i in 1:nrow(smry)){
+#' 	tspp <- rownames(smry)[i]
+#' 	sppImg(tspp,
+#' 		mini.a[spp==tspp,unique(common)],
+#' 		side=3, line=-2, xpd=T
+#' 
+#' 	)
+#' }
+#' }
 #' @export
 trawlCast <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill=NA, fixAbsent=TRUE, allNA_noSamp="spp", valAbsent=0, grandNamesOut=c("j","k","i","t"), ...){
 	

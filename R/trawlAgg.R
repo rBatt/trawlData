@@ -35,11 +35,12 @@
 #' 
 #' @examples
 #' # updated versions will have "CATCHSEX" as "sex"
-#' trim.neus <- trawlAgg("neus", c.add=c("length","CATCHSEX"))
-#' pick <- function(x, n){
-#' 	(x)%in%unique(sample(x,n))
-#' }
-#' mini_data <- trim.neus[pick(spp, 4) & pick(stratum, 3)]
+#' trim.neus <- trawlTrim("neus", c.add=c("length","CATCHSEX"))
+#' mini_data <- trim.neus[
+#' 	pick(spp, 2, w=TRUE)
+#' 	& pick(stratum, 5, w=TRUE)
+#' 	& pick(year,5, w=TRUE)
+#' ]
 #' 
 #' # aggregate species within a haul (among individuals)
 #' # this means taking the sum of many bio metrics

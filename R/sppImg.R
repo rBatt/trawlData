@@ -10,14 +10,10 @@
 #' Numeric vector of length two indicating the number of pixes horizontally and vertically; or if no match, returns NULL and prints a message.
 #' 
 #' @examples
-#' pick <- function(x, n){
-#' 	(x)%in%sample(unique(x),n)
-#' }
-#' 
 #' library(rgdal)
 #' dev.new(width=8, height=7)
-#' par(mar=c(0.5,0.5,1,0.5), oma=c(0,0,0,0), ps=8, cex=1, mfrow=c(5,5))
-#' clean.ebs[Picture=="y"][pick(spp,25),
+#' par(mar=c(0.5,0.5,1,0.5), oma=c(0,0,0,0), ps=8, cex=1, mfrow=c(3,3))
+#' clean.ebs[Picture=="y"][pick(spp,9),
 #' 	sppImg(
 #' 		unique(spp),
 #' 		unique(common),

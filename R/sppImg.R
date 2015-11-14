@@ -35,7 +35,7 @@ sppImg <- function(x, common=NULL, ...){
 		message("Please install package 'rgdal' via install.packages('rgdal')")
 	}
 	# library(rgdal)
-	imgs <- list.files(file.path(system.file(package="trawlData"),"extdata/taxPictures"), full=T)
+	imgs <- list.files(file.path(system.file(package="trawlData"),"extdata/taxPictures"), full.names=TRUE)
 	imgs_spp <- gsub("copy|\\.[a-z]*$", "", basename(imgs), ignore.case=TRUE)
 	imgs_spp <- gsub("_", " ", imgs_spp)
 	mtch <- match(x, imgs_spp)

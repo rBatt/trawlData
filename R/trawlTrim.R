@@ -11,11 +11,11 @@
 #' 
 #' @examples
 #' # default usage
-#' trimData(c("ebs","goa"))
+#' trawlTrim(c("ebs","goa"))
 #' # usage to get an extra column
-#' trimData(c("ebs","shelf"), c.add="WIND")
+#' trawlTrim(c("ebs","shelf"), c.add="WIND")
 #' 
-#' @export trimData
+#' @export
 trawlTrim <- function(reg, ...){
 	reg.opts <- c("ai","ebs","gmex","goa","neus","newf","sa","sgulf","shelf","wcann","wctri")
 	

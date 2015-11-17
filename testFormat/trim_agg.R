@@ -27,11 +27,20 @@ setnames(ebs.agg1, "nAgg", "nAgg1")
 ebs.agg1[,stratum:=ll2strat(lon, lat, gridSize=1)]
 ebs.agg1[,aggStrat:=ll2strat(lon, lat, gridSize=0.1)]
 
+# ========================
+# = Give Abundance Value =
+# ========================
+ebs.agg1[,abund:=as.integer(wtcpue>0)]
 
-# aggregate at a 1/10 degree grid
-# this aggregation uses the biosum, too
-# NOTE: sum b/c I was targeting "paired" tows
-# should probably be mean after I close some Issues
+
+# ==========================================================
+# = Aggregate to level where detection process is constant =
+# ==========================================================
+# Aggregate at a 1/10 degree grid and
+# the same month (for each species)
+# This aggregation uses the biosum, too
+# Note, consideration needs to be given here, 
+# I keep flipping around on how I use this
 ebs.agg2 <- trawlAgg(
 	X = ebs.agg1,
 	bioFun = sumna,
@@ -39,7 +48,7 @@ ebs.agg2 <- trawlAgg(
 	bio_lvl = "spp",
 	space_lvl = "aggStrat",
 	time_lvl = "month",
-	bioCols= c("wtcpue","cntcpue"),
+	bioCols= c("wtcpue","abund"),
 	envCols = c("stemp","btemp","depth","lon","lat"),
 	metaCols = c("reg","datetime","season","year","lon","lat","stratum","common","species"),
 	meta.action="FUN",
@@ -107,12 +116,27 @@ for(i in 1:ncol(nKmax.reg)){
 }
 
 
+# ========================================
+# = Convert to Mini Data Set for Testing =
+# ========================================
+set.seed(1337)
+ind <- mpick(ebs.agg2, p=c(spp=5, stratum=3, year=1), weight=TRUE, limit=60)
+logic <- expression(
+	spp%in%spp[ind]
+	& stratum%in%stratum[ind]
+	& as.integer(year)%in%(as.integer(unique(year[ind])) + (-1:1))
+)
+ebs.a <- ebs.agg2[eval(logic)]
+
+
+
+
 # ========
 # = Cast =
 # ========
-ebs.c <- trawlCast(ebs.agg2, stratum~K~spp~year, valueName="wtcpue")
+ebs.c <- trawlCast(ebs.a, stratum~K~spp~year, valueName="abund")
 
-ebs.btemp.c <- trawlCast(ebs.agg2, 
+ebs.btemp.c <- trawlCast(ebs.a, 
 	stratum~K~year, 
 	valueName="btemp", 
 	fixAbsent=FALSE, 
@@ -121,7 +145,7 @@ ebs.btemp.c <- trawlCast(ebs.agg2,
 	grandNamesOut=c("stratum","K","year")
 )
 
-ebs.stemp.c <- trawlCast(ebs.agg2, 
+ebs.stemp.c <- trawlCast(ebs.a, 
 	stratum~K~year, 
 	valueName="stemp", 
 	fixAbsent=FALSE, 
@@ -130,9 +154,19 @@ ebs.stemp.c <- trawlCast(ebs.agg2,
 	grandNamesOut=c("stratum","K","year")
 )
 
-ebs.depth.c <- trawlCast(ebs.agg2, 
+ebs.depth.c <- trawlCast(ebs.a, 
 	stratum~K~year, 
 	valueName="depth", 
+	fixAbsent=FALSE, 
+	fun.aggregate=meanna, 
+	valFill=NA_real_, 
+	grandNamesOut=c("stratum","K","year")
+)
+
+
+ebs.effort.c <- trawlCast(ebs.a, 
+	stratum~K~year, 
+	valueName="nAgg2", 
 	fixAbsent=FALSE, 
 	fun.aggregate=meanna, 
 	valFill=NA_real_, 

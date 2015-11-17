@@ -32,7 +32,7 @@ ebs.agg1[,aggStrat:=ll2strat(lon, lat, gridSize=0.1)]
 # this aggregation uses the biosum, too
 # NOTE: sum b/c I was targeting "paired" tows
 # should probably be mean after I close some Issues
-ebs.agg2 <- aggData(
+ebs.agg2 <- trawlAgg(
 	X = ebs.agg1,
 	bioFun = sumna,
 	envFun = meanna,
@@ -79,6 +79,12 @@ ebs.agg2[,j={
 # Using "reg" is probably redundant with stratum in this case
 ebs.agg2[,K:=as.integer(as.factor(haulid)), by=c("reg","year","stratum")]
 ebs.agg2[,Kmax:=max(K), by=c("reg","year","stratum")]
+
+
+# =============================================
+# = Make Temperature Constant within a haulid =
+# =============================================
+# ebs.agg2[,lu(btemp),by=c("haulid")][,(V1)]
 
 
 # ===================

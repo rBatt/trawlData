@@ -68,7 +68,7 @@ trawlCast <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill
 	if(fixAbsent){
 		if(class(formula)=="formula"){
 			formulaNames <- unlist(strsplit(deparse(formula), "\\s*~\\s*"))
-		}else if(class(formula=="character")){
+		}else if(class(formula)=="character"){
 			formulaNames <- unlist(strsplit(formula, "\\s*~\\s*"))
 		}
 		
@@ -77,9 +77,12 @@ trawlCast <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill
 		apermDimNot <- which(!apermDimLogic)
 		apermDimNames <- formulaNames[apermDimLogic]
 		
+		do_aperm <- c(apermDim,apermDimNot)
+		undo_aperm <- order((1:length(dim(xa)))[do_aperm])
+		
 		unsamp.JK0 <- apply(xa, apermDim, function(x)all(is.na(x)))
-		unsamp.JK <- array(unsamp.JK0, dim=dim(xa)[c(apermDim,apermDimNot)])
-		unsamp.JK <- aperm(unsamp.JK, c(apermDim,apermDimNot))
+		unsamp.JK <- array(unsamp.JK0, dim=dim(xa)[do_aperm])
+		unsamp.JK <- aperm(unsamp.JK, perm=undo_aperm)
 		# apply(unsamp.JK, 2, sum) # how often each K had an NA
 		xa.fix <- xa
 		fix0 <- (is.na(xa) & !unsamp.JK) # had an NA, but actually sampled (some species non-NA)

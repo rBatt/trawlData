@@ -66,7 +66,12 @@ trawlCast <- function(x, formula=stratum~K~spp~year, valueName="wtcpue", valFill
 		
 		
 	if(fixAbsent){
-		formulaNames <- unlist(strsplit(deparse(formula), "\\s*~\\s*"))
+		if(class(formula)=="formula"){
+			formulaNames <- unlist(strsplit(deparse(formula), "\\s*~\\s*"))
+		}else if(class(formula=="character")){
+			formulaNames <- unlist(strsplit(formula, "\\s*~\\s*"))
+		}
+		
 		apermDimLogic <- !formulaNames%in%allNA_noSamp
 		apermDim <- which(apermDimLogic)
 		apermDimNot <- which(!apermDimLogic)

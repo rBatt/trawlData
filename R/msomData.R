@@ -19,8 +19,12 @@
 #' @return
 #' A named list appropriate for use with msomStatic.stan
 #' 
+#' @imports data.table
+#' 
 #' @export
 msomData <- function(Data, n0=10, formula=year~stratum~K~spp, cov.vars=c(bt="btemp",doy="doy",yr="year"), u.form=~bt+I(bt^2), v.form=~doy+I(doy^2)+yr, valueName="abund", cov.by=c("year","stratum","K")){
+	
+	cov.vars <<- cov.vars # stupid bug
 	
 	if(class(formula)=="formula"){
 		gno <- unlist(strsplit(deparse(formula), "\\s*~\\s*"))

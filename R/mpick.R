@@ -2,12 +2,12 @@
 #' 
 #' Like \code{\link{pick}}, but allows specifying multiple factors (columns) at the same time, trying hard to return the desired result. You want 2 species from the same 3 strata during the same 4 years? Use \code{mpick}. Want just one of those? Use \code{pick}.
 #' 
-#' @param X A data.table 
-#' @param A named vector of integers. Names are columns in \code{X}, the integers are the number of levels to select
-#' @param weight Logical, default FALSE. Same as \code{w} in \code{\link{pick}}; weight selection of factor level by its relevative frequency of occurrence in \code{X}. Could have performance implications, see 'Details'.
-#' @param limit Time limit for searching, in seconds
-#' @param screen Logical If TRUE (default) then before random searching, will screen out factor levels that definitely cannot satisfy the full sweet of conditions in \code{p}. Can be a little slow, but is extremely effect when most combinations of factors in \code{p} do not exist. See 'Details'.
-#' @param dt Logical, if TRUE, returns a data.table; if FALSE (default), returns an index of that data.table?
+#' @param X A data.table  
+#' @param p A named vector of integers. Names are columns in \code{X}, the integers are the number of levels to select  
+#' @param weight Logical, default FALSE. Same as \code{w} in \code{\link{pick}}; weight selection of factor level by its relevative frequency of occurrence in \code{X}. Could have performance implications, see 'Details'.  
+#' @param limit Time limit for searching, in seconds  
+#' @param screen Logical If TRUE (default) then before random searching, will screen out factor levels that definitely cannot satisfy the full sweet of conditions in \code{p}. Can be a little slow, but is extremely effect when most combinations of factors in \code{p} do not exist. See 'Details'.  
+#' @param dt Logical, if TRUE, returns a data.table; if FALSE (default), returns an index of that data.table?  
 #' 
 #' @details
 #' This problem may ultimately be better suited for a real optimization algorithm. Right now, relies and arbitrary guess-and-check. Does not "forget" failed guesses (only specific combinations are worth forgetting, and for large data sets there's a very low probability of happening upon same combination). Thus, this is a very brute-force approach, with the exception of the checking done when \code{screen=TRUE}.

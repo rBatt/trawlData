@@ -3,7 +3,7 @@
 #' Cast a data.table of trawl data to an array
 #' 
 #' @param x A data.table with column names to be used in \code{formula}, \code{valueName}, and potentially \code{allNA_noSamp}
-#'  @param formula Formula describing array dimensions, in order as would be given by \code{\link{dim}}. Passed to \code{formula} in \code{\link{acast}}.
+#' @param formula Formula describing array dimensions, in order as would be given by \code{\link{dim}}. Passed to \code{formula} in \code{\link{acast}}.
 #' @param valueName Column name whose elements will fill the array. Passed to \code{value.var} in \code{\link{acast}}.
 #' @param valFill Value to use for filling in missing combinations; defaults to NA.  Passed to \code{fill} in \code{\link{acast}}.
 #' @param fixAbsent Logical (default TRUE) to indicate the need to fill one value for no sampling (\code{valFill}), and another for a true absence (\code{valAbsent}). See 'Details'.

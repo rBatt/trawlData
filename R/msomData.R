@@ -19,7 +19,7 @@
 #' @return
 #' A named list appropriate for use with msomStatic.stan
 #' 
-#' @imports data.table
+#' @import data.table
 #' 
 #' @export
 msomData <- function(Data, n0=10, formula=year~stratum~K~spp, cov.vars=c(bt="btemp",doy="doy",yr="year"), u.form=~bt+I(bt^2), v.form=~doy+I(doy^2)+yr, valueName="abund", cov.by=c("year","stratum","K")){
@@ -179,6 +179,7 @@ msomData <- function(Data, n0=10, formula=year~stratum~K~spp, cov.vars=c(bt="bte
 	# Reminder: nK tells us how many reps, 
 	# or if 0, that a J-T combo doesn't exist
 	X[is.na(X)] <- 0
+	isUnobs <- apply(X, which(gno!=tail(gno,2)[1]), function(x)c(1L,0L)[max(x)+1L])
 
 	U[is.na(U)] <- 0
 	V[is.na(V)] <- 0
@@ -194,7 +195,8 @@ msomData <- function(Data, n0=10, formula=year~stratum~K~spp, cov.vars=c(bt="bte
 		Jmax=Jmax,
 		Kmax=Kmax,
 		N=N,
-		nS=nS
+		nS=nS,
+		isUnobs=isUnobs
 	)
 	
 	return(out)

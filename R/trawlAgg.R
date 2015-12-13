@@ -34,14 +34,13 @@
 #' @return Returns an aggregated data.table. See 'Details' for columns returned.
 #' 
 #' @examples
-#' # updated versions will have "CATCHSEX" as "sex"
-#' trim.neus <- trawlTrim("neus", c.add=c("length","CATCHSEX"))
+#' trim.neus <- trawlTrim("neus", c.add=c("length","sex"))
 #' mini_data <- trim.neus[
 #' 	pick(spp, 2, w=TRUE)
 #' 	& pick(stratum, 5, w=TRUE)
 #' 	& pick(year,5, w=TRUE)
 #' ]
-#' 
+#'
 #' # aggregate species within a haul (among individuals)
 #' # this means taking the sum of many bio metrics
 #' neus1 <- trawlAgg(
@@ -54,7 +53,7 @@
 #' 	metaCols=c("reg","common","datetime","stratum"),
 #' 	meta.action=c("unique1")
 #' )
-#' 
+#'
 #' # aggregate within a species within stratum
 #' # refer to the time_lvl column from previous trawlAgg()
 #' # can use mean for both bio and env
@@ -67,7 +66,7 @@
 #' 	metaCols=c("reg","common","datetime"),
 #' 	meta.action=c("unique1")
 #' )
-#' 
+#'
 #' # A more complex example
 #' # Say we want the weight, count, and length
 #' # Within a stratum, of a given sex of a given species, during a season
@@ -83,10 +82,10 @@
 #' 	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
 #' 	bioCols=c("weight","length"),
 #' 	envCols=c("stemp","btemp", "depth"),
-#' 	metaCols=c("datetime","reg", "cnt", "spp", "common", "CATCHSEX"),
+#' 	metaCols=c("datetime","reg", "cnt", "spp", "common", "sex"),
 #' 	meta.action=c("FUN"),
 #' 	metaFun=list(
-#' 	 # note that these are named, and don't need
+#' 	# note that these are named, and don't need
 #' 	# to be in the same order as metaCols
 #' 		reg = function(x, ...)una(x, ...)[1], # this is unique1
 #' 		datetime = function(x, ...)una(data.table::year(x), ...)[1],
@@ -96,7 +95,7 @@
 #' 		cnt = sumna
 #' 	)
 #' ) # not surprisingly, there wasn't any aggregation at the level of individuals
-#' 
+
 #' @export
 trawlAgg <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","genus"), space_lvl=c("haulid","lon-lat","lat","lon","stratum","reg"), time_lvl=c("haulid","datetime","day","month","season","year"), bioFun=FUN, envFun=FUN, bioCols=c("wtcpue","cntcpue"), envCols=c("stemp","btemp","depth"), metaCols=NULL, meta.action=c("drop","unique1","collapse", "lu", "FUN"), metaFun=NULL, use_nAgg=TRUE, na.rm=TRUE){
 	

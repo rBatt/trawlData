@@ -59,8 +59,7 @@ The argument \code{na.rm} affects any of the functions passed as arguments, even
 The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. So right now, \code{use_nAgg} does not adhere to na.rm=TRUE, and includes NA values in its count.
 }
 \examples{
-# updated versions will have "CATCHSEX" as "sex"
-trim.neus <- trawlTrim("neus", c.add=c("length","CATCHSEX"))
+trim.neus <- trawlTrim("neus", c.add=c("length","sex"))
 mini_data <- trim.neus[
 	pick(spp, 2, w=TRUE)
 	& pick(stratum, 5, w=TRUE)
@@ -108,10 +107,10 @@ trawlAgg(
 	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
 	bioCols=c("weight","length"),
 	envCols=c("stemp","btemp", "depth"),
-	metaCols=c("datetime","reg", "cnt", "spp", "common", "CATCHSEX"),
+	metaCols=c("datetime","reg", "cnt", "spp", "common", "sex"),
 	meta.action=c("FUN"),
 	metaFun=list(
-	 # note that these are named, and don't need
+	# note that these are named, and don't need
 	# to be in the same order as metaCols
 		reg = function(x, ...)una(x, ...)[1], # this is unique1
 		datetime = function(x, ...)una(data.table::year(x), ...)[1],

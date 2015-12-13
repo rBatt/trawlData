@@ -8,7 +8,7 @@
 
 <!--![Random Trawl Species](./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE)-->
 <p align="center">
-<img src="./inst/extdata/taxPictures/Squalus_acanthias.jpg?raw=TRUE", width="500">
+<img src="./inst/extdata/taxPictures/Astropecten_articulatus.jpg?raw=TRUE", width="500">
 </p>
 
 

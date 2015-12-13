@@ -18,12 +18,7 @@ R package for maintaining and manipulating data from bottom trawl survey and ass
 
 
 ## Install this R package
-~~To install this repo as an R package:~~  
-```{r}
-# library(devtools)
-# install_github("rBatt/trawlData", auth_token=pat) # see note below for pat token
-```
-~~Because this is a private repo, you need to generate a Personal Access Token [HERE](https://github.com/settings/tokens). After you sign in to GitHub, click "Generate new token". The default settings for the token are fine. When the token is generated, set copy and paste it in place of `pat` in the code above.~~ *Note:* [`install_github` currently doesn't work with Git LFS](https://github.com/hadley/devtools/issues/889).  
+*Note:* [`install_github` currently doesn't work with Git LFS](https://github.com/hadley/devtools/issues/889).  So you have to clone the repo to install.
 
 To install this repo, the easiest thing to do is to clone it, then then use `devtools:install()`:  
  - In terminal, type:  
@@ -38,6 +33,7 @@ setwd("path/to/folder/to/hold/repo/trawlData")
 devtools::install()
 ```
  - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:  
+ 
  ```{r}
  library(devtools)
  install_version("data.table", version="1.9.4")

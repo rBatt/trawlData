@@ -129,6 +129,12 @@ logic <- expression(
 ebs.a <- ebs.agg2[eval(logic)]
 
 
+# ============================
+# = Save for Trawl Diversity =
+# ============================
+save(ebs.agg2, file="trawl/trawlDiversity/data/ebs.agg2.RData")
+save(ebs.a, file="trawl/trawlDiversity/data/ebs.a.RData")
+
 
 
 # ========

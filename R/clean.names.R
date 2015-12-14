@@ -317,11 +317,11 @@ clean.names.ngulf <- function(X){
 clean.names.sa <- function(X){
 	
 	sa.cols <- c(
-		"COLLECTIONNUMBER" = "haulid", 
+		# "COLLECTIONNUMBER" = "haulid",
 		# "PROJECTNAME",
 		# "PROJECTAGENCY",
 		"DATE" = "date", 
-		# "EVENTNAME",
+		"EVENTNAME" = "haulid",
 		"VESSELNAME" = "vessel", 
 		# "GEARNAME",
 # 		"GEARCODE",

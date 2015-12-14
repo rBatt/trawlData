@@ -17,7 +17,7 @@
 #' 
 #' @import data.table
 #' @export read.trawl
-read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), zippath="./inst/extdata", ...){
+read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), zippath=file.path(system.file(package="trawlData"),"extdata"), ...){
 	reg <- match.arg(reg, several.ok=TRUE)
 	
 	# dots <- list(...)

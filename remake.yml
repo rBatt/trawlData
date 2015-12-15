@@ -9,30 +9,13 @@ packages:
   - devtools
 
 sources:
-  ## - R/clean.columns.R
-  ## - R/clean.format.R
-  ## - R/clean.names.R
-  ## - R/clean.tax.R
-  ## - R/clean.trimCol.R
-  ## - R/clean.trimRow.R
-  ## - R/formatStrat.R
-  ## - R/formatValue.R
-  ## - R/helperFile.R
-  ## - R/helperMisc.R
-  ## - R/helperStat.R
-  ## - R/read.trawl.R
-  ## - R/tax.getCmmn.R
-  ## - R/tax.getSpp.R
-  ## - R/tax.getTax.R
   - R/
   - man-roxygen/
   - pkgBuild/R/makeData.R
   - pkgBuild/R/update_spp.key.R
   - pkgBuild/R/update_rawData.R
   - pkgBuild/R/update_cleanData.R
-  - pkgBuild/R/createSppKey.R
-  # - pkgBuild/R/update_trimData.R
-  
+  - pkgBuild/R/createSppKey.R  
 
 ## Most of a remakefile will be targets.  They can be listed in any
 ## order; whatever makes most sense.  Files can be split up and
@@ -43,38 +26,30 @@ targets:
   ## "depends" on other targets.
   all:
     depends:
-      # - spp
-      # - raw_data
       - clean_data
-      # - data_scripts
-      ## - trim_data
-    # command: check()
+    command: 
+      - document()
 
   # ======================
   # = Update Species Key =
   # ======================
-  spp_references:
-    command:
-      - load("data/taxInfo.RData")
-      - load("data/spp.corr1.RData")
-      - load("data/taxInfo.RData")
-      - load("data/getCmmnData.RData")
-      - load("data/getSppData.RData")
-      - load("data/getTaxData.RData")
-
   spp:
     depends:
       - data/spp.key.RData
       - helper_scripts
-      - spp_references
-      # - inst/extdata/taxonomy/spp.key.csv
     command:
       - update_spp.key()
   
   inst/extdata/taxonomy/spp.key.csv:
     depends:
       - raw_data
-    command: update_spp.key(check_raw=TRUE)
+      # - data/taxInfo.RData
+      # - data/spp.corr1.RData
+      # - data/getSppData.RData
+      # - data/getTaxData.RData
+      # - data/getCmmnData.RData
+    command: 
+      - update_spp.key(check_raw=TRUE)
 
   data/spp.key.RData:
     command: update_spp.key("inst/extdata/taxonomy/spp.key.csv")
@@ -82,19 +57,10 @@ targets:
   # ============================
   # = Scripts that affect data =
   # ============================
-  # data_scripts:
-  #   depends:
-  #     - raw_scripts
-  #     - clean_scripts
-  #     - helper_scripts
-  #   command:
-  #     - document()
   raw_scripts:
     depends:
       - R/read.trawl.R
       - helper_scripts
-    command:
-      # - document()
   clean_scripts:
     depends:
       - R/clean.names.R
@@ -103,18 +69,11 @@ targets:
       - R/clean.tax.R
       - R/clean.trimRow.R
       - helper_scripts
-    command:
-      # - document()
   helper_scripts:
     depends:
       - R/helperFile.R
       - R/helperMisc.R
       - R/helperStat.R
-    command:
-      # - document()
-
-  # inst/extdata/taxonomy/spp.key.csv:
-  #   command: update_spp.key("data/spp.key.RData")
   
   # ===========================
   # = Update Raw .RData Files =
@@ -185,12 +144,7 @@ targets:
   
   # =============================
   # = Update Clean .RData Files =
-  # =============================
-  # clean_input:
-  #   depends:
-  #     - clean_scripts
-  #     - spp
-      
+  # =============================     
   clean_data:
     depends:
       - data/clean.ai.RData
@@ -204,83 +158,59 @@ targets:
       - data/clean.shelf.RData
       - data/clean.wcann.RData
       - data/clean.wctri.RData
-    command:
-      - document()
   data/clean.ai.RData:
     command: update_cleanData("data/raw.ai.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.ebs.RData:
     command: update_cleanData("data/raw.ebs.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.gmex.RData:
     command: update_cleanData("data/raw.gmex.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.goa.RData:
     command: update_cleanData("data/raw.goa.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.neus.RData:
     command: update_cleanData("data/raw.neus.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.newf.RData:
     command: update_cleanData("data/raw.newf.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.sa.RData:
     command: update_cleanData("data/raw.sa.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.sgulf.RData:
     command: update_cleanData("data/raw.sgulf.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.shelf.RData:
     command: update_cleanData("data/raw.shelf.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.wcann.RData:
     command: update_cleanData("data/raw.wcann.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
   data/clean.wctri.RData:
     command: update_cleanData("data/raw.wctri.RData")
     depends: 
-      # - clean_input
-      # - data/spp.key.RData
       - clean_scripts
       - spp
     

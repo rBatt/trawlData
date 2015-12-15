@@ -3,8 +3,112 @@
 #' Semi-Automated Data Set Documentation
 #' 
 #' @param x A data set
-#' @param 
+#' @param title The data set title; if left NULL (default), uses name of object
+#' @param desc The data set descript, if left NULL, default, uses name of object
+#' @param idh character vector specifying each column's definition; when left as NULL (default) tries to match columns to \code{gen.cols}, a set of general column definitions. If no match is found when \code{idh=NULL}, definition is set to "insert description here"
+#' @param clean If TRUE, uses \code{\link(clean.names)} to clean names before trying to match them to the general definitions in \code{gen.cols}
+#' @param reg Character specifying region name to be passed to \code{\link{clean.names}}
+#' @param append logical, when FALSE (default) output is sent to console; if TRUE, searches for a file called "datasets.R", and appends the documentation to the end of the file
+#' 
+#' @details
+#' Output can go to file or to console. Automated definitions are generic, and regions might have important deviations from general definitions, so caution is recommended.
+#' 
+#' @returns
+#' Invisibly returns a character string that can be used to generate documentation. As a side effect, \code{\link{cat}} is called on this character string. Furthermore, A file named datasets.R may be modified.
+#' 
+#' @examples
+#' docData(raw.ai, title="AI Survey Raw Data", clean=TRUE, reg="ai")
 
+
+
+
+
+docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, append=FALSE){
+	x.name <- gsub(".*x \\= (.*\\.[a-zA-Z0-9]*)[, |\\)].*", "\\1", deparse(match.call())[1], perl=T)
+	x.col.names <- names(x)
+	stopifnot(!is.null(x.col.names))
+	stopifnot(!is.null(dim(x)) & length(dim(x))==2)
+	
+	nc <- ncol(x)
+	nr <- nrow(x)
+	if(!is.null(dim(x))){
+		dim.desc <- paste("dim =", paste(dim(x),collapse=" x "))
+	}else if(!is.null(length(x))){
+		dim.desc <- paste("length =",length(x))
+	}
+	
+	x.class <- class(x)
+	x.col.class <- sapply(x, class)
+	
+	# is there an idh ("insert description here")?
+	# if so, use it
+	if(!is.null(idh) & length(idh)==nc){
+		txt <- idh
+	}else{
+		if(!is.null(idh)){
+			warning("idh description not the same length as number of columns; using place-holder description")
+		}
+		txt <- rep("insert_description_here", nc)
+		txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
+		
+		if(clean){
+			if(is.null(reg)){
+				message("Need to supply reg to convert column names to clean version for definition matching")
+			}else{
+				txt <- match_txt(x.col.names, reg, txt)
+				txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
+			}
+		}
+		
+	}
+	
+	if(is.null(title)){
+		title <- x.name
+	}
+	if(is.null(desc)){
+		desc <- x.name
+	}
+	head.txt <- paste0(title, "\n", desc, "\n", "@format\nA ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
+	
+	tab.start <-"\\tabular{rlll}{\n"
+	tab.meat <- c()
+	for(i in 1:nc){
+		# ind <- paste("[,", formatC(i, width=nchar(nc)), "]")
+		c.start <- paste0("[,", i, "]")
+		tn <- x.col.names[i]
+		tc <- x.col.class[i]
+		c.end <- "\\cr"
+		tab.meat[i] <- paste(c(paste(c(c.start, tn, paste0(tc, ""), txt[i]), collapse=" \\tab "),c.end,"\n"), collapse="")
+	}
+	tail.txt <- paste0("\"",x.name,"\"")
+	
+	txt.out <- paste(c(head.txt,tab.start, tab.meat, "}\n",tail.txt), collapse="")
+	
+	cat(txt.out)
+	invisible(txt.out)
+
+}
+
+match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), txt){
+	reg <- match.arg(reg)
+	
+	nms_match_ind <- !nms%in%names(gen.cols)
+	nms2match <- nms[nms_match_ind]
+	tiny <- copy(x[1])
+	clean.names(tiny, reg)
+	tiny_match_ind <- names(tiny)%in%names(gen.cols)
+	match_ind <- nms_match_ind & tiny_match_ind
+	match_ind_nms <- names(tiny)[match_ind]
+	txt[match_ind] <- (gen.cols[names(gen.cols)%in%match_ind_nms])[match_ind_nms]
+	
+	txt[match_ind] <- paste0("cleans up to \\code{", match_ind_nms, "}, ", txt[match_ind])
+	
+	txt
+	
+}
+
+
+#' @describeIn docData General Column Definitions
 gen.cols <- c(
 	# time information
 	"year" = "year of haul", 
@@ -69,87 +173,3 @@ gen.cols <- c(
 	# "weight_sample" = "the weight (mass) of the sample (may be subsampled)"
 	
 )
-
-match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), txt){
-	reg <- match.arg(reg)
-	
-	nms_match_ind <- !nms%in%names(gen.cols)
-	nms2match <- nms[nms_match_ind]
-	tiny <- copy(x[1])
-	clean.names(tiny, reg)
-	tiny_match_ind <- names(tiny)%in%names(gen.cols)
-	match_ind <- nms_match_ind & tiny_match_ind
-	match_ind_nms <- names(tiny)[match_ind]
-	txt[match_ind] <- gen.cols[names(gen.cols)%in%match_ind_nms]
-	
-	txt[match_ind] <- paste0("cleans up to \\code{", match_ind_nms, "}, ", txt[match_ind])
-	
-	txt
-	
-}
-
-docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL){
-	x.name <- gsub(".*x \\= (.*\\.[a-zA-Z0-9]*)[, |\\)].*", "\\1", deparse(match.call()), perl=T)
-	x.col.names <- names(x)
-	stopifnot(!is.null(x.col.names))
-	stopifnot(!is.null(dim(x)) & length(dim(x))==2)
-	
-	nc <- ncol(x)
-	nr <- nrow(x)
-	if(!is.null(dim(x))){
-		dim.desc <- paste("dim =", paste(dim(x),collapse=" x "))
-	}else if(!is.null(length(x))){
-		dim.desc <- paste("length =",length(x))
-	}
-	
-	x.class <- class(x)
-	x.col.class <- sapply(x, class)
-	
-	# is there an idh ("insert description here")?
-	# if so, use it
-	if(!is.null(idh) & length(idh)==nc){
-		txt <- idh
-	}else{
-		if(!is.null(idh)){
-			warning("idh description not the same length as number of columns; using place-holder description")
-		}
-		txt <- rep("insert_description_here", nc)
-		txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
-		
-		if(clean){
-			if(is.null(reg)){
-				message("Need to supply reg to convert column names to clean version for definition matching")
-			}else{
-				txt <- match_txt(x.col.names, reg, txt)
-				txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
-			}
-		}
-		
-	}
-	
-	if(is.null(title)){
-		title <- x.name
-	}
-	if(is.null(desc)){
-		desc <- x.name
-	}
-	head.txt <- paste0(title, "\n", desc, "\n", "@format\nA ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
-	
-	tab.start <-"\\tabular{rlll}{\n"
-	tab.meat <- c()
-	for(i in 1:nc){
-		# ind <- paste("[,", formatC(i, width=nchar(nc)), "]")
-		c.start <- paste0("[,", i, "]")
-		tn <- x.col.names[i]
-		tc <- x.col.class[i]
-		c.end <- "\\cr"
-		tab.meat[i] <- paste(c(paste(c(c.start, tn, paste0(tc, ""), txt[i]), collapse=" \\tab "),c.end,"\n"), collapse="")
-	}
-	tail.txt <- paste0("\"",x.name,"\"")
-	
-	txt.out <- paste(c(head.txt,tab.start, tab.meat, "}\n",tail.txt), collapse="")
-	
-	cat(txt.out)
-	invisible(txt.out)
-
-}

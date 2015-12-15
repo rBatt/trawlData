@@ -34,10 +34,11 @@ createSppKey <- function(new_ref, save.key=FALSE){
 		mtch.src = NA_real_
 	)
 	new_spp.key0 <- rbind(new_spp.key00, X.noMatch)
-	setorder(new_spp.key0, ref, mtch.src, val, na.last=T)
+	setorder(new_spp.key0, ref, val.src, mtch.src, val, na.last=T)
+	
 	
 	# Pick which source's rows will be used for each spp
-	new_spp.key <- unique(new_spp.key0) # unique drops out 
+	new_spp.key <- new_spp.key0[!duplicated(ref)] #unique(new_spp.key0) # unique drops out 
 	setnames(new_spp.key, "val", "spp")
 	setkey(new_spp.key, spp)
 	

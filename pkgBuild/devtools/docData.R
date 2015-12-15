@@ -81,7 +81,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 	
 	txt.out <- paste(c(head.txt,tab.start, tab.meat, rc, "}\n", tail.txt, "\n\n\n"), collapse="")
 	
-	if(append){sink("datasets.R", append=TRUE, type="output")}
+	if(append){sink("R/datasets.R", append=TRUE, type="output")}
 	cat(txt.out)
 	if(append){sink(NULL)}
 	invisible(txt.out)

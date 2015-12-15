@@ -107,7 +107,7 @@ NULL
 \"soda.annMean.mu\"
 "
 	
-	sink("datasets.R", append=TRUE)
+	sink("R/datasets.R", append=TRUE)
 	cat(gridded_data)
 	sink(NULL)
 	

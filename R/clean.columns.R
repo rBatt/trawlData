@@ -227,7 +227,7 @@ clean.columns.neus <- function(X){
 	X[,haulid:=paste(formatC(cruise, width=6, flag=0), formatC(station, width=3, flag=0), formatC(stratum, width=4, flag=0), sep='-')]
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(paste(as.character(year),substr(cruise,5,6),"01",sep="-"), format="%Y-%m-%d", tz="GMT")]
+	X[,datetime:=as.POSIXct(datetime, tz="GMT")]
 	
 	# season
 	# neus already has its own season definition

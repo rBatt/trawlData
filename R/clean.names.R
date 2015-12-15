@@ -220,6 +220,7 @@ clean.names.neus <- function(X){
 		"SVSPP" = "SID",
 		"CATCHSEX" = "sex",
 		"YEAR" = "year",
+		"EST_TOWDATE" = "datetime",
 		"SEASON" = "season",
 		"LAT" = "lat",
 		"LON" = "lon",

@@ -20,7 +20,7 @@
 #' docData(raw.ai, title="AI Survey Raw Data", clean=TRUE, reg="ai")
 
 docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, append=FALSE){
-	x.name <- gsub(".*x \\= (.*\\.[a-zA-Z0-9]*)[, |\\)].*", "\\1", deparse(match.call())[1], perl=T)
+	x.name <- gsub(".*x \\= ([a-zA-z0-9]*[\\.]{0,1}[a-zA-Z0-9]*)[,|\\)].*", "\\1", deparse(match.call())[1], perl=T)
 	x.col.names <- names(x)
 	stopifnot(!is.null(x.col.names))
 	stopifnot(!is.null(dim(x)) & length(dim(x))==2)
@@ -65,7 +65,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 		desc <- x.name
 	}
 	rc <- "#' "
-	head.txt <- paste0(rc,title, "\n", rc, desc, "\n", rc, "@format\n", rc, "A", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
+	head.txt <- paste0(rc,title, "\n", rc, desc, "\n", rc, "@format\n", rc, "A ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
 	
 	tab.start <-paste0(rc, "\\tabular{rlll}{\n")
 	tab.meat <- c()

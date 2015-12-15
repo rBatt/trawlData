@@ -8,6 +8,7 @@ update_spp.key <- function(..., check_raw=FALSE){
 	
 		raw_ref <- c()
 		for(i in 1:length(regs)){
+			load(file.path("data",paste0("raw.",regs[i],".RData")))
 			clean.names(t_reg <- copy(get(paste0("raw.",regs[i]))), reg=regs[i])
 			clean.format(t_reg, regs[i])
 			raw_ref <- c(raw_ref, clean.tax(t_reg, regs[i])[,unique(ref)[!unique(ref)%in%raw_ref]])

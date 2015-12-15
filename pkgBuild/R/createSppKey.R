@@ -1,13 +1,9 @@
-# library(taxize)
-# library(data.table)
-#
-# load("./data/taxInfo.RData")
-# load("./data/spp.corr1.RData")
-# load("data/getSppData.RData")
-# load("data/getTaxData.RData")
-# load("data/getCmmnData.RData")
-
 createSppKey <- function(new_ref, save.key=FALSE){
+	load("data/taxInfo.RData")
+	load("data/spp.corr1.RData")
+	load("data/getSppData.RData")
+	load("data/getTaxData.RData")
+	load("data/getCmmnData.RData")
 	
 	# X.match is from taxInfo
 	X.match <- match.tbl(ref=new_ref, tbl.ref=taxInfo[,raw.spp], tbl.val=taxInfo[,spp])

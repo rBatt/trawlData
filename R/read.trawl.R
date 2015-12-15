@@ -311,6 +311,11 @@ read.neus <- function(zippath){
 
 	# make changes to neus.survdat.raw
 	# setkey(neus.survdat.raw, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
+	
+	# LAT exists in both neus.station and neus.survdat.raw
+	# my checks show that they don't match; I'm going to go with the neus.survdat.raw version
+	# when I look carefully, some different by -6E-15 or 6E-15 ... it's just rounding
+	neus.station[,LAT:=NULL]
 
 	# Merge spp and strata into neus data.table
 	neus <- neus.survdat.raw

@@ -27,11 +27,12 @@ cd path/to/folder/to/hold/repo
 git clone https://github.com/rBatt/trawlData
  ```  
  - In R, type:  
-```{r}
+
+ ```{r}
 library(devtools)
 setwd("path/to/folder/to/hold/repo/trawlData")
 devtools::install()
-```
+ ```
  - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:  
  
  ```{r}

@@ -289,15 +289,15 @@ clean.format.sa <- function(X){
 	# ==============
 	# From Morley
 	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
-	X[haulid == 19910105, effort:=1.71273]
-	X[haulid == 19990065, effort:=0.53648]
-	X[haulid == 20070177, effort:=0.99936]
-	X[haulid == 19950335, effort:=0.9775]
-	X[haulid == 20110393, effort:=1.65726]
-	X[EVENTNAME == 2014325, effort:=1.755] # I get nothing for this EVENTNAME ...
-	X[EVENTNAME == 1992219, effort:=1.796247]
-	X[haulid == 19910423, effort:=0.50031]
-	X[haulid == 20010431, effort:=0.25099]
+	X[COLLECTIONNUMBER == 19910105, effort:=1.71273]
+	X[COLLECTIONNUMBER == 19990065, effort:=0.53648]
+	X[COLLECTIONNUMBER == 20070177, effort:=0.99936]
+	X[COLLECTIONNUMBER == 19950335, effort:=0.9775]
+	X[COLLECTIONNUMBER == 20110393, effort:=1.65726]
+	X[haulid == 2014325, effort:=1.755]
+	X[haulid == 1992219, effort:=1.796247]
+	X[COLLECTIONNUMBER == 19910423, effort:=0.50031]
+	X[COLLECTIONNUMBER == 20010431, effort:=0.25099]
 	
 	
 	# ================================
@@ -305,9 +305,9 @@ clean.format.sa <- function(X){
 	# ================================
 	# Corrections from Morley
 	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
-	X[haulid==20010106 & SPECIESCODE==8713050104, weight:=31.9] # roughtail stingray # NOTE! I Don't get any instances of this species on this haul ...
+	X[COLLECTIONNUMBER==20010106 & SPECIESCODE==8713050104, weight:=31.9] # roughtail stingray 
 	X[(is.na(weight) | weight==0) & SPECIESCODE==5802010101, weight:=(cnt*1.9)] # horseshoe crabs
-	X[haulid==19940236 & SPECIESCODE == 9002050101, weight:=204] # leatherback sea turtle
+	X[COLLECTIONNUMBER==19940236 & SPECIESCODE == 9002050101, weight:=204] # leatherback sea turtle
 	X[(weight==0 | is.na(weight)) & SPECIESCODE==9002040101, weight:=46] # loggerhead
 	
 	

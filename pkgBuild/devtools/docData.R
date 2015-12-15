@@ -51,7 +51,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 			if(is.null(reg)){
 				message("Need to supply reg to convert column names to clean version for definition matching")
 			}else{
-				txt <- match_txt(x.col.names, reg, txt)
+				txt <- match_txt(x, x.col.names, reg, txt)
 				txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
 			}
 		}
@@ -79,7 +79,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 	}
 	tail.txt <- paste0("\"",x.name,"\"")
 	
-	txt.out <- paste(c(head.txt,tab.start, tab.meat, rc, "}\n", tail.txt), collapse="")
+	txt.out <- paste(c(head.txt,tab.start, tab.meat, rc, "}\n", tail.txt, "\n\n\n"), collapse="")
 	
 	if(append){sink("datasets.R", append=TRUE, type="output")}
 	cat(txt.out)
@@ -88,7 +88,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 
 }
 
-match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), txt){
+match_txt <- function(x, nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), txt){
 	reg <- match.arg(reg)
 	
 	nms_match_ind <- !nms%in%names(gen.cols)
@@ -110,6 +110,9 @@ match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ng
 #' @describeIn docData General Column Definitions
 "gen.cols"
 gen.cols <- c(
+	# region information
+	"reg" = "survey region",
+	
 	# time information
 	"year" = "year of haul", 
 	"datetime" = "the day and time of the haul",

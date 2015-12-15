@@ -410,7 +410,7 @@ read.ngulf <- function(zippath){
 # ======
 # = SA =
 # ======
-read.sa <- function(zippath, catch=c("sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
+read.sa <- function(zippath, catch=c("sa-catch.csv", "sa-Coastalbiomass.csv","sa-Coastalindividual.csv","sa-Coastallength.csv")){
 	catch <- match.arg(catch)
 	
 	
@@ -423,8 +423,9 @@ read.sa <- function(zippath, catch=c("sa-Coastalbiomass.csv","sa-Coastalindividu
 	sa.strat <- sa.all[["sa-CoastalEvent.csv"]]
 	
 	# adjustments needed for merge
-	sa.mass[,COLLECTIONNUMBER:=as.character(COLLECTIONNUMBER)]
+	# sa.mass[,COLLECTIONNUMBER:=as.character(COLLECTIONNUMBER)]
 	sa.strat <- sa.strat[!duplicated(COLLECTIONNUMBER)] # not needed for catch 1
+	sa.strat[,c("DATE","LASTUPDATED"):=NULL]
 
 	# merge 
 	sa <- merge(sa.mass, sa.strat, all.x=TRUE, by=c("COLLECTIONNUMBER"))

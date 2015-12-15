@@ -4,21 +4,18 @@
 \name{getCmmnData}
 \alias{getCmmnData}
 \title{Common Names
-Species' common names matched to scientific names}
+Species's common names matched to scientific names}
 \format{A dim = 3548 x 2 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab sppCorr \tab character \tab insert_description_here\cr
-[,2] \tab common \tab character \tab insert_description_here\cr
+[,2] \tab common \tab character \tab the common name of the organism sampled\cr
 }}
 \usage{
 getCmmnData
 }
 \description{
 Common Names
-Species' common names matched to scientific names
-}
-\seealso{
-\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
+Species's common names matched to scientific names
 }
 \keyword{datasets}
 

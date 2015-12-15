@@ -3,66 +3,74 @@
 \docType{data}
 \name{clean.sgulf}
 \alias{clean.sgulf}
-\title{Clean Southern Gulf of St. Lawrence}
-\format{A dim = 180583 x 52 data.table data.frame:
+\title{Clean Southern Gulf of St. Lawrence
+Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey}
+\format{A dim = 180583 x 58 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
-[,2] \tab stratum \tab character \tab insert_description_here\cr
-[,3] \tab vessel \tab character \tab insert_description_here\cr
-[,4] \tab cruise \tab character \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab survey region\cr
+[,2] \tab stratum \tab character \tab year of haul\cr
+[,3] \tab vessel \tab character \tab the day and time of the haul\cr
+[,4] \tab cruise \tab character \tab starting time of the tow\cr
 [,5] \tab set \tab character \tab insert_description_here\cr
-[,6] \tab year \tab character \tab insert_description_here\cr
+[,6] \tab year \tab character \tab reference taxonomic ID from raw data\cr
 [,7] \tab species.code \tab integer \tab insert_description_here\cr
-[,8] \tab cntcpue \tab numeric \tab insert_description_here\cr
-[,9] \tab wtcpue \tab numeric \tab insert_description_here\cr
+[,8] \tab cntcpue \tab numeric \tab species scientific name; Genus species\cr
+[,9] \tab wtcpue \tab numeric \tab the common name of the organism sampled\cr
 [,10] \tab month \tab character \tab insert_description_here\cr
 [,11] \tab day \tab character \tab insert_description_here\cr
 [,12] \tab expt \tab integer \tab insert_description_here\cr
-[,13] \tab time \tab character \tab insert_description_here\cr
+[,13] \tab time \tab character \tab the genus of the species\cr
 [,14] \tab temperature \tab numeric \tab insert_description_here\cr
 [,15] \tab depth.start \tab numeric \tab insert_description_here\cr
 [,16] \tab depth.end \tab numeric \tab insert_description_here\cr
 [,17] \tab dtow \tab numeric \tab insert_description_here\cr
-[,18] \tab depth \tab numeric \tab insert_description_here\cr
-[,19] \tab lat \tab numeric \tab insert_description_here\cr
-[,20] \tab lon \tab numeric \tab insert_description_here\cr
-[,21] \tab cnt \tab numeric \tab insert_description_here\cr
-[,22] \tab weight \tab numeric \tab insert_description_here\cr
-[,23] \tab stemp \tab numeric \tab insert_description_here\cr
+[,18] \tab depth \tab numeric \tab the species name of the species\cr
+[,19] \tab lat \tab numeric \tab vessel ID\cr
+[,20] \tab lon \tab numeric \tab cruise ID\cr
+[,21] \tab cnt \tab numeric \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
+[,22] \tab weight \tab numeric \tab the statistical stratum of the haul\cr
+[,23] \tab stemp \tab numeric \tab the area of the statistical stratum (km2)\cr
 [,24] \tab bsalin \tab numeric \tab insert_description_here\cr
-[,25] \tab btemp \tab numeric \tab insert_description_here\cr
+[,25] \tab btemp \tab numeric \tab latitude of the haul\cr
 [,26] \tab trawlableunits \tab integer \tab insert_description_here\cr
-[,27] \tab stratumarea \tab numeric \tab insert_description_here\cr
-[,28] \tab haulid \tab character \tab insert_description_here\cr
-[,29] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+[,27] \tab stratumarea \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,28] \tab haulid \tab character \tab the maximum depth of the water at the location of the haul\cr
+[,29] \tab datetime \tab c("POSIXct", "POSIXt") \tab water temperature at the surface at the location of the haul\cr
 [,30] \tab season \tab character \tab insert_description_here\cr
-[,31] \tab reg \tab character \tab insert_description_here\cr
+[,31] \tab reg \tab character \tab water temperature at the bottom at the location of the haul\cr
 [,32] \tab val.src \tab character \tab insert_description_here\cr
-[,33] \tab tbl.row \tab numeric \tab insert_description_here\cr
-[,34] \tab mtch.src \tab numeric \tab insert_description_here\cr
-[,35] \tab spp \tab character \tab insert_description_here\cr
-[,36] \tab common \tab character \tab insert_description_here\cr
-[,37] \tab taxLvl \tab character \tab insert_description_here\cr
-[,38] \tab species \tab character \tab insert_description_here\cr
-[,39] \tab genus \tab character \tab insert_description_here\cr
-[,40] \tab family \tab character \tab insert_description_here\cr
-[,41] \tab order \tab character \tab insert_description_here\cr
-[,42] \tab class \tab character \tab insert_description_here\cr
-[,43] \tab superclass \tab character \tab insert_description_here\cr
-[,44] \tab subphylum \tab character \tab insert_description_here\cr
-[,45] \tab phylum \tab character \tab insert_description_here\cr
-[,46] \tab kingdom \tab character \tab insert_description_here\cr
-[,47] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,48] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,49] \tab Picture \tab character \tab insert_description_here\cr
-[,50] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,51] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,52] \tab keep.row \tab logical \tab insert_description_here\cr
+[,33] \tab tbl.row \tab integer \tab insert_description_here\cr
+[,34] \tab mtch.src \tab integer \tab insert_description_here\cr
+[,35] \tab tax.src \tab character \tab insert_description_here\cr
+[,36] \tab spp \tab character \tab weight (mass) of the catch\cr
+[,37] \tab common \tab character \tab number of individuals caught per hectare in the haul\cr
+[,38] \tab taxLvl \tab character \tab insert_description_here\cr
+[,39] \tab species \tab character \tab number of individuals in the whole net (may be extrapolated)\cr
+[,40] \tab genus \tab character \tab the weight (mass) of all items in the net (may be extrapolated)\cr
+[,41] \tab family \tab character \tab insert_description_here\cr
+[,42] \tab order \tab character \tab insert_description_here\cr
+[,43] \tab class \tab character \tab insert_description_here\cr
+[,44] \tab superclass \tab character \tab insert_description_here\cr
+[,45] \tab subphylum \tab character \tab insert_description_here\cr
+[,46] \tab phylum \tab character \tab insert_description_here\cr
+[,47] \tab kingdom \tab character \tab insert_description_here\cr
+[,48] \tab trophicDiet \tab character \tab insert_description_here\cr
+[,49] \tab trophicOrig \tab character \tab insert_description_here\cr
+[,50] \tab Picture \tab character \tab insert_description_here\cr
+[,51] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+[,52] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,53] \tab tax.src2 \tab character \tab insert_description_here\cr
+[,54] \tab conflict \tab logical \tab insert_description_here\cr
+[,55] \tab flag \tab character \tab insert_description_here\cr
+[,56] \tab website \tab character \tab insert_description_here\cr
+[,57] \tab website2 \tab character \tab insert_description_here\cr
+[,58] \tab keep.row \tab logical \tab insert_description_here\cr
 }}
 \usage{
 clean.sgulf
 }
 \description{
+Clean Southern Gulf of St. Lawrence
 Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey
 }
 \keyword{datasets}

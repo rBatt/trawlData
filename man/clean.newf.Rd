@@ -3,83 +3,91 @@
 \docType{data}
 \name{clean.newf}
 \alias{clean.newf}
-\title{Clean Newfoundland}
-\format{A dim = 547790 x 69 data.table data.frame:
+\title{Clean Clean Newfoundland
+Clean data set for the Newfoundland bottom trawl survey}
+\format{A dim = 547790 x 75 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab survey region\cr
 [,2] \tab sppcode \tab integer \tab insert_description_here\cr
 [,3] \tab recordtype \tab integer \tab insert_description_here\cr
-[,4] \tab vessel \tab character \tab insert_description_here\cr
+[,4] \tab vessel \tab character \tab year of haul\cr
 [,5] \tab trip \tab integer \tab insert_description_here\cr
 [,6] \tab set \tab character \tab insert_description_here\cr
-[,7] \tab year \tab numeric \tab insert_description_here\cr
+[,7] \tab year \tab numeric \tab the day and time of the haul\cr
 [,8] \tab month \tab character \tab insert_description_here\cr
 [,9] \tab day \tab character \tab insert_description_here\cr
 [,10] \tab settype \tab integer \tab insert_description_here\cr
-[,11] \tab stratum \tab character \tab insert_description_here\cr
+[,11] \tab stratum \tab character \tab starting time of the tow\cr
 [,12] \tab nafo \tab character \tab insert_description_here\cr
 [,13] \tab unitarea \tab character \tab insert_description_here\cr
 [,14] \tab light \tab numeric \tab insert_description_here\cr
 [,15] \tab winddir \tab numeric \tab insert_description_here\cr
-[,16] \tab windforce \tab numeric \tab insert_description_here\cr
+[,16] \tab wind \tab numeric \tab insert_description_here\cr
 [,17] \tab sea \tab numeric \tab insert_description_here\cr
 [,18] \tab bottom \tab numeric \tab insert_description_here\cr
-[,19] \tab time \tab character \tab insert_description_here\cr
+[,19] \tab time \tab character \tab reference taxonomic ID from raw data\cr
 [,20] \tab towduration \tab numeric \tab insert_description_here\cr
 [,21] \tab towdistance \tab numeric \tab insert_description_here\cr
 [,22] \tab operation \tab numeric \tab insert_description_here\cr
-[,23] \tab depth \tab numeric \tab insert_description_here\cr
+[,23] \tab depth \tab numeric \tab species scientific name; Genus species\cr
 [,24] \tab depth.min \tab numeric \tab insert_description_here\cr
 [,25] \tab depth.max \tab numeric \tab insert_description_here\cr
 [,26] \tab depthbottom \tab character \tab insert_description_here\cr
-[,27] \tab stemp \tab numeric \tab insert_description_here\cr
-[,28] \tab btemp \tab numeric \tab insert_description_here\cr
+[,27] \tab stemp \tab numeric \tab the common name of the organism sampled\cr
+[,28] \tab btemp \tab numeric \tab the genus of the species\cr
 [,29] \tab lat.start \tab numeric \tab insert_description_here\cr
 [,30] \tab lon.start \tab numeric \tab insert_description_here\cr
 [,31] \tab posmethod \tab numeric \tab insert_description_here\cr
-[,32] \tab geartype \tab character \tab insert_description_here\cr
-[,33] \tab cnt \tab numeric \tab insert_description_here\cr
-[,34] \tab weight \tab numeric \tab insert_description_here\cr
+[,32] \tab geartype \tab character \tab the species name of the species\cr
+[,33] \tab cnt \tab numeric \tab vessel ID\cr
+[,34] \tab weight \tab numeric \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 [,35] \tab lat.end \tab numeric \tab insert_description_here\cr
 [,36] \tab lon.end \tab numeric \tab insert_description_here\cr
 [,37] \tab bottempmeth \tab numeric \tab insert_description_here\cr
 [,38] \tab geardevice \tab numeric \tab insert_description_here\cr
 [,39] \tab season \tab character \tab insert_description_here\cr
-[,40] \tab haulid \tab character \tab insert_description_here\cr
-[,41] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
-[,42] \tab lat \tab numeric \tab insert_description_here\cr
-[,43] \tab lon \tab numeric \tab insert_description_here\cr
+[,40] \tab haulid \tab character \tab the statistical stratum of the haul\cr
+[,41] \tab datetime \tab c("POSIXct", "POSIXt") \tab code for the type of gear used\cr
+[,42] \tab lat \tab numeric \tab latitude of the haul\cr
+[,43] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 [,44] \tab towarea \tab numeric \tab insert_description_here\cr
 [,45] \tab effort \tab numeric \tab insert_description_here\cr
-[,46] \tab wtcpue \tab numeric \tab insert_description_here\cr
-[,47] \tab cntcpue \tab numeric \tab insert_description_here\cr
-[,48] \tab reg \tab character \tab insert_description_here\cr
+[,46] \tab wtcpue \tab numeric \tab the maximum depth of the water at the location of the haul\cr
+[,47] \tab cntcpue \tab numeric \tab water temperature at the surface at the location of the haul\cr
+[,48] \tab reg \tab character \tab water temperature at the bottom at the location of the haul\cr
 [,49] \tab val.src \tab character \tab insert_description_here\cr
-[,50] \tab tbl.row \tab numeric \tab insert_description_here\cr
-[,51] \tab mtch.src \tab numeric \tab insert_description_here\cr
-[,52] \tab spp \tab character \tab insert_description_here\cr
-[,53] \tab common \tab character \tab insert_description_here\cr
-[,54] \tab taxLvl \tab character \tab insert_description_here\cr
-[,55] \tab species \tab character \tab insert_description_here\cr
-[,56] \tab genus \tab character \tab insert_description_here\cr
-[,57] \tab family \tab character \tab insert_description_here\cr
-[,58] \tab order \tab character \tab insert_description_here\cr
-[,59] \tab class \tab character \tab insert_description_here\cr
-[,60] \tab superclass \tab character \tab insert_description_here\cr
-[,61] \tab subphylum \tab character \tab insert_description_here\cr
-[,62] \tab phylum \tab character \tab insert_description_here\cr
-[,63] \tab kingdom \tab character \tab insert_description_here\cr
-[,64] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,65] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,66] \tab Picture \tab character \tab insert_description_here\cr
-[,67] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,68] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,69] \tab keep.row \tab logical \tab insert_description_here\cr
+[,50] \tab tbl.row \tab integer \tab insert_description_here\cr
+[,51] \tab mtch.src \tab integer \tab insert_description_here\cr
+[,52] \tab tax.src \tab character \tab insert_description_here\cr
+[,53] \tab spp \tab character \tab weight (mass) of the catch\cr
+[,54] \tab common \tab character \tab number of individuals caught per hectare in the haul\cr
+[,55] \tab taxLvl \tab character \tab insert_description_here\cr
+[,56] \tab species \tab character \tab number of individuals in the whole net (may be extrapolated)\cr
+[,57] \tab genus \tab character \tab the weight (mass) of all items in the net (may be extrapolated)\cr
+[,58] \tab family \tab character \tab insert_description_here\cr
+[,59] \tab order \tab character \tab insert_description_here\cr
+[,60] \tab class \tab character \tab insert_description_here\cr
+[,61] \tab superclass \tab character \tab insert_description_here\cr
+[,62] \tab subphylum \tab character \tab insert_description_here\cr
+[,63] \tab phylum \tab character \tab insert_description_here\cr
+[,64] \tab kingdom \tab character \tab insert_description_here\cr
+[,65] \tab trophicDiet \tab character \tab insert_description_here\cr
+[,66] \tab trophicOrig \tab character \tab insert_description_here\cr
+[,67] \tab Picture \tab character \tab insert_description_here\cr
+[,68] \tab trophicLevel \tab numeric \tab insert_description_here\cr
+[,69] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,70] \tab tax.src2 \tab character \tab insert_description_here\cr
+[,71] \tab conflict \tab logical \tab insert_description_here\cr
+[,72] \tab flag \tab character \tab insert_description_here\cr
+[,73] \tab website \tab character \tab insert_description_here\cr
+[,74] \tab website2 \tab character \tab insert_description_here\cr
+[,75] \tab keep.row \tab logical \tab insert_description_here\cr
 }}
 \usage{
 clean.newf
 }
 \description{
+Clean Clean Newfoundland
 Clean data set for the Newfoundland bottom trawl survey
 }
 \keyword{datasets}

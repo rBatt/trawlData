@@ -7,7 +7,7 @@
 Species names that had been corrected in older version of code}
 \format{A dim = 3990 x 2 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab spp \tab character \tab insert_description_here\cr
+[,1] \tab spp \tab character \tab species scientific name; Genus species\cr
 [,2] \tab sppCorr \tab character \tab insert_description_here\cr
 }}
 \usage{
@@ -16,13 +16,6 @@ spp.corr1
 \description{
 Corrected Species Names (legacy)
 Species names that had been corrected in older version of code
-}
-\details{
-Used to construct spp.key initially, but should no longer be needed. Provided for reproducibility of older results regarding taxonomy.
-Now superceded by \code{\link{getSppData}}. It is recommended that \code{\link{spp.key}} be used for taxonomic reference.
-}
-\seealso{
-\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}} \code{\link{spp.key}}
 }
 \keyword{datasets}
 

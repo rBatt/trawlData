@@ -4,17 +4,15 @@
 \name{taxInfo}
 \alias{taxInfo}
 \title{Taxonomic Information (legacy)
-Taxonomic classification and ecological information
-This is the data set manually checked by Rachel Berman.
-Superceded by \code{\link{spp.key}}.}
+Taxonomic classification and ecological information}
 \format{A dim = 4483 x 20 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab raw.spp \tab character \tab insert_description_here\cr
-[,2] \tab spp \tab character \tab insert_description_here\cr
-[,3] \tab common \tab character \tab insert_description_here\cr
+[,2] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,3] \tab common \tab character \tab the common name of the organism sampled\cr
 [,4] \tab taxLvl \tab character \tab insert_description_here\cr
-[,5] \tab species \tab character \tab insert_description_here\cr
-[,6] \tab genus \tab character \tab insert_description_here\cr
+[,5] \tab species \tab character \tab the genus of the species\cr
+[,6] \tab genus \tab character \tab the species name of the species\cr
 [,7] \tab family \tab character \tab insert_description_here\cr
 [,8] \tab order \tab character \tab insert_description_here\cr
 [,9] \tab class \tab character \tab insert_description_here\cr
@@ -36,8 +34,6 @@ taxInfo
 \description{
 Taxonomic Information (legacy)
 Taxonomic classification and ecological information
-This is the data set manually checked by Rachel Berman.
-Superceded by \code{\link{spp.key}}.
 }
 \keyword{datasets}
 

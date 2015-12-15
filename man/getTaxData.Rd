@@ -9,8 +9,8 @@ Taxonomic classification matched to scientific names}
 \tabular{rlll}{
 [,1] \tab sppCorr \tab character \tab insert_description_here\cr
 [,2] \tab taxLvl \tab character \tab insert_description_here\cr
-[,3] \tab species \tab character \tab insert_description_here\cr
-[,4] \tab genus \tab character \tab insert_description_here\cr
+[,3] \tab species \tab character \tab the genus of the species\cr
+[,4] \tab genus \tab character \tab the species name of the species\cr
 [,5] \tab family \tab character \tab insert_description_here\cr
 [,6] \tab order \tab character \tab insert_description_here\cr
 [,7] \tab class \tab character \tab insert_description_here\cr
@@ -25,9 +25,6 @@ getTaxData
 \description{
 Taxonomic Classification
 Taxonomic classification matched to scientific names
-}
-\seealso{
-\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

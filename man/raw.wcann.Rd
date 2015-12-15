@@ -3,33 +3,35 @@
 \docType{data}
 \name{raw.wcann}
 \alias{raw.wcann}
-\title{Raw West Coast Annual}
-\format{A dim = 183971 x 19 data.table data.frame:
+\title{Raw West Coast Annual
+Raw data set for the West Coast Annual bottom trawl survey}
+\format{A dim = 217514 x 19 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab Trawl Id \tab integer64 \tab insert_description_here\cr
-[,2] \tab Species \tab character \tab insert_description_here\cr
-[,3] \tab Haul Weight (kg) \tab numeric \tab insert_description_here\cr
+[,1] \tab Trawl Id \tab integer64 \tab cleans up to \code{haulid}, a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
+[,2] \tab Species \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
+[,3] \tab Haul Weight (kg) \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
 [,4] \tab Individual Average Weight (kg) \tab numeric \tab insert_description_here\cr
 [,5] \tab Survey \tab character \tab insert_description_here\cr
-[,6] \tab Survey Cycle \tab character \tab insert_description_here\cr
-[,7] \tab Vessel \tab character \tab insert_description_here\cr
+[,6] \tab Survey Cycle \tab character \tab cleans up to \code{year}, year of haul\cr
+[,7] \tab Vessel \tab character \tab cleans up to \code{vessel}, vessel ID\cr
 [,8] \tab Cruise Leg \tab integer \tab insert_description_here\cr
 [,9] \tab Trawl Performance \tab character \tab insert_description_here\cr
-[,10] \tab Trawl Date \tab character \tab insert_description_here\cr
-[,11] \tab Trawl Start Time \tab character \tab insert_description_here\cr
-[,12] \tab Best Latitude (dd) \tab numeric \tab insert_description_here\cr
-[,13] \tab Best Longitude (dd) \tab numeric \tab insert_description_here\cr
+[,10] \tab Trawl Date \tab character \tab cleans up to \code{date}, date of the tow\cr
+[,11] \tab Trawl Start Time \tab character \tab cleans up to \code{datetime}, the day and time of the haul\cr
+[,12] \tab Best Latitude (dd) \tab numeric \tab cleans up to \code{lat}, latitude of the haul\cr
+[,13] \tab Best Longitude (dd) \tab numeric \tab cleans up to \code{lon}, longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 [,14] \tab Best Position Type \tab character \tab insert_description_here\cr
-[,15] \tab Best Depth (m) \tab numeric \tab insert_description_here\cr
+[,15] \tab Best Depth (m) \tab numeric \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
 [,16] \tab Best Depth Type \tab character \tab insert_description_here\cr
 [,17] \tab Trawl Duration (min) \tab numeric \tab insert_description_here\cr
 [,18] \tab Area Swept by the Net (hectares) \tab numeric \tab insert_description_here\cr
-[,19] \tab Temperature At the Gear (degs C) \tab numeric \tab insert_description_here\cr
+[,19] \tab Temperature At the Gear (degs C) \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
 }}
 \usage{
 raw.wcann
 }
 \description{
+Raw West Coast Annual
 Raw data set for the West Coast Annual bottom trawl survey
 }
 \keyword{datasets}

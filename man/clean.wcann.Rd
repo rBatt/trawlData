@@ -3,44 +3,45 @@
 \docType{data}
 \name{clean.wcann}
 \alias{clean.wcann}
-\title{Clean West Coast Annual}
-\format{A dim = 183971 x 48 data.table data.frame:
+\title{Clean West Coast Annual
+Clean data set for the West Coast Annual bottom trawl survey}
+\format{A dim = 217514 x 53 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
-[,2] \tab haulid \tab character \tab insert_description_here\cr
-[,3] \tab weight \tab numeric \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab survey region\cr
+[,2] \tab haulid \tab character \tab year of haul\cr
+[,3] \tab weight \tab numeric \tab the day and time of the haul\cr
 [,4] \tab Individual.Average.Weight..kg. \tab numeric \tab insert_description_here\cr
 [,5] \tab Survey \tab character \tab insert_description_here\cr
-[,6] \tab year \tab character \tab insert_description_here\cr
-[,7] \tab vessel \tab character \tab insert_description_here\cr
+[,6] \tab year \tab character \tab date of the tow\cr
+[,7] \tab vessel \tab character \tab reference taxonomic ID from raw data\cr
 [,8] \tab Cruise.Leg \tab integer \tab insert_description_here\cr
 [,9] \tab Trawl.Performance \tab character \tab insert_description_here\cr
-[,10] \tab date \tab character \tab insert_description_here\cr
-[,11] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
-[,12] \tab lat \tab numeric \tab insert_description_here\cr
-[,13] \tab lon \tab numeric \tab insert_description_here\cr
+[,10] \tab date \tab character \tab species scientific name; Genus species\cr
+[,11] \tab datetime \tab c("POSIXct", "POSIXt") \tab the common name of the organism sampled\cr
+[,12] \tab lat \tab numeric \tab the genus of the species\cr
+[,13] \tab lon \tab numeric \tab the species name of the species\cr
 [,14] \tab Best.Position.Type \tab character \tab insert_description_here\cr
-[,15] \tab depth \tab numeric \tab insert_description_here\cr
+[,15] \tab depth \tab numeric \tab vessel ID\cr
 [,16] \tab Best.Depth.Type \tab character \tab insert_description_here\cr
 [,17] \tab towduration \tab numeric \tab insert_description_here\cr
 [,18] \tab towarea \tab numeric \tab insert_description_here\cr
-[,19] \tab btemp \tab numeric \tab insert_description_here\cr
-[,20] \tab season \tab character \tab insert_description_here\cr
-[,21] \tab stratum \tab character \tab insert_description_here\cr
-[,22] \tab stratumarea \tab numeric \tab insert_description_here\cr
-[,23] \tab effort \tab numeric \tab insert_description_here\cr
-[,24] \tab wtcpue \tab numeric \tab insert_description_here\cr
-[,25] \tab cnt \tab numeric \tab insert_description_here\cr
-[,26] \tab cntcpue \tab numeric \tab insert_description_here\cr
-[,27] \tab reg \tab character \tab insert_description_here\cr
-[,28] \tab val.src \tab character \tab insert_description_here\cr
-[,29] \tab tbl.row \tab numeric \tab insert_description_here\cr
-[,30] \tab mtch.src \tab numeric \tab insert_description_here\cr
-[,31] \tab spp \tab character \tab insert_description_here\cr
-[,32] \tab common \tab character \tab insert_description_here\cr
+[,19] \tab btemp \tab numeric \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
+[,20] \tab stratum \tab character \tab the statistical stratum of the haul\cr
+[,21] \tab stratumarea \tab numeric \tab the area of the statistical stratum (km2)\cr
+[,22] \tab effort \tab numeric \tab insert_description_here\cr
+[,23] \tab wtcpue \tab numeric \tab latitude of the haul\cr
+[,24] \tab cnt \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,25] \tab cntcpue \tab numeric \tab the maximum depth of the water at the location of the haul\cr
+[,26] \tab reg \tab character \tab water temperature at the bottom at the location of the haul\cr
+[,27] \tab val.src \tab character \tab insert_description_here\cr
+[,28] \tab tbl.row \tab integer \tab insert_description_here\cr
+[,29] \tab mtch.src \tab integer \tab insert_description_here\cr
+[,30] \tab tax.src \tab character \tab insert_description_here\cr
+[,31] \tab spp \tab character \tab weight (mass) of the catch\cr
+[,32] \tab common \tab character \tab number of individuals caught per hectare in the haul\cr
 [,33] \tab taxLvl \tab character \tab insert_description_here\cr
-[,34] \tab species \tab character \tab insert_description_here\cr
-[,35] \tab genus \tab character \tab insert_description_here\cr
+[,34] \tab species \tab character \tab number of individuals in the whole net (may be extrapolated)\cr
+[,35] \tab genus \tab character \tab the weight (mass) of all items in the net (may be extrapolated)\cr
 [,36] \tab family \tab character \tab insert_description_here\cr
 [,37] \tab order \tab character \tab insert_description_here\cr
 [,38] \tab class \tab character \tab insert_description_here\cr
@@ -53,12 +54,18 @@
 [,45] \tab Picture \tab character \tab insert_description_here\cr
 [,46] \tab trophicLevel \tab numeric \tab insert_description_here\cr
 [,47] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,48] \tab keep.row \tab logical \tab insert_description_here\cr
+[,48] \tab tax.src2 \tab character \tab insert_description_here\cr
+[,49] \tab conflict \tab logical \tab insert_description_here\cr
+[,50] \tab flag \tab character \tab insert_description_here\cr
+[,51] \tab website \tab character \tab insert_description_here\cr
+[,52] \tab website2 \tab character \tab insert_description_here\cr
+[,53] \tab keep.row \tab logical \tab insert_description_here\cr
 }}
 \usage{
 clean.wcann
 }
 \description{
+Clean West Coast Annual
 Clean data set for the West Coast Annual bottom trawl survey
 }
 \keyword{datasets}

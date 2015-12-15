@@ -3,33 +3,35 @@
 \docType{data}
 \name{raw.goa}
 \alias{raw.goa}
-\title{Raw Gulf of Alaska}
-\format{A dim = 197067 x 18 data.table data.frame:
+\title{Raw Gulf of Alaska
+Raw data set for the Gulf of Mexico bottom trawl survey}
+\format{A dim = 197026 x 18 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab STRATUM \tab integer \tab insert_description_here\cr
-[,2] \tab LATITUDE \tab numeric \tab insert_description_here\cr
-[,3] \tab LONGITUDE \tab numeric \tab insert_description_here\cr
-[,4] \tab STATION \tab character \tab insert_description_here\cr
-[,5] \tab YEAR \tab integer \tab insert_description_here\cr
-[,6] \tab DATETIME \tab character \tab insert_description_here\cr
-[,7] \tab WTCPUE \tab numeric \tab insert_description_here\cr
-[,8] \tab NUMCPUE \tab numeric \tab insert_description_here\cr
-[,9] \tab COMMON \tab character \tab insert_description_here\cr
-[,10] \tab SCIENTIFIC \tab character \tab insert_description_here\cr
-[,11] \tab SID \tab integer \tab insert_description_here\cr
-[,12] \tab BOT_DEPTH \tab integer \tab insert_description_here\cr
-[,13] \tab BOT_TEMP \tab numeric \tab insert_description_here\cr
-[,14] \tab SURF_TEMP \tab numeric \tab insert_description_here\cr
-[,15] \tab VESSEL \tab integer \tab insert_description_here\cr
-[,16] \tab CRUISE \tab integer \tab insert_description_here\cr
-[,17] \tab HAUL \tab character \tab insert_description_here\cr
-[,18] \tab Areakm2 \tab integer \tab insert_description_here\cr
+[,1] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
+[,2] \tab LATITUDE \tab numeric \tab cleans up to \code{lat}, latitude of the haul\cr
+[,3] \tab LONGITUDE \tab numeric \tab cleans up to \code{lon}, longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,4] \tab STATION \tab character \tab cleans up to \code{station}, the station ID for the haul\cr
+[,5] \tab YEAR \tab integer \tab cleans up to \code{year}, year of haul\cr
+[,6] \tab DATETIME \tab character \tab cleans up to \code{datetime}, the day and time of the haul\cr
+[,7] \tab WTCPUE \tab numeric \tab cleans up to \code{wtcpue}, weight (mass) of the catch\cr
+[,8] \tab NUMCPUE \tab numeric \tab cleans up to \code{cntcpue}, number of individuals caught per hectare in the haul\cr
+[,9] \tab COMMON \tab character \tab cleans up to \code{common}, the common name of the organism sampled\cr
+[,10] \tab SCIENTIFIC \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
+[,11] \tab SID \tab character \tab species identification number\cr
+[,12] \tab BOT_DEPTH \tab character \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
+[,13] \tab BOT_TEMP \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
+[,14] \tab SURF_TEMP \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
+[,15] \tab VESSEL \tab numeric \tab cleans up to \code{vessel}, vessel ID\cr
+[,16] \tab CRUISE \tab numeric \tab cleans up to \code{cruise}, cruise ID\cr
+[,17] \tab HAUL \tab character \tab cleans up to \code{haul}, the integer haul number within a cruise\cr
+[,18] \tab Areakm2 \tab integer \tab cleans up to \code{stratumarea}, the area of the statistical stratum (km2)\cr
 }}
 \usage{
 raw.goa
 }
 \description{
-Raw data set for the Gulf of Alaska bottom trawl survey
+Raw Gulf of Alaska
+Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}
 

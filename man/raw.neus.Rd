@@ -3,39 +3,42 @@
 \docType{data}
 \name{raw.neus}
 \alias{raw.neus}
-\title{Raw Northeast US}
-\format{A dim = 2402096 x 24 data.table data.frame:
+\title{Raw Northeast US
+Raw data set for the Gulf of Mexico bottom trawl survey}
+\format{A dim = 2523907 x 25 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab CRUISE6 \tab integer \tab insert_description_here\cr
-[,2] \tab STATION \tab integer \tab insert_description_here\cr
-[,3] \tab STRATUM \tab integer \tab insert_description_here\cr
-[,4] \tab SVSPP \tab integer \tab insert_description_here\cr
+[,1] \tab CRUISE6 \tab integer \tab cleans up to \code{cruise}, cruise ID\cr
+[,2] \tab STATION \tab integer \tab cleans up to \code{station}, the station ID for the haul\cr
+[,3] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
+[,4] \tab SVSPP \tab integer \tab cleans up to \code{SID}, species identification number\cr
 [,5] \tab CATCHSEX \tab integer \tab insert_description_here\cr
-[,6] \tab SVVESSEL \tab character \tab insert_description_here\cr
-[,7] \tab YEAR \tab integer \tab insert_description_here\cr
+[,6] \tab SVVESSEL \tab character \tab cleans up to \code{vessel}, vessel ID\cr
+[,7] \tab YEAR \tab integer \tab cleans up to \code{year}, year of haul\cr
 [,8] \tab SEASON \tab character \tab insert_description_here\cr
-[,9] \tab LAT \tab numeric \tab insert_description_here\cr
-[,10] \tab LON \tab numeric \tab insert_description_here\cr
-[,11] \tab DEPTH \tab integer \tab insert_description_here\cr
-[,12] \tab SURFTEMP \tab numeric \tab insert_description_here\cr
-[,13] \tab SURFSALIN \tab numeric \tab insert_description_here\cr
-[,14] \tab BOTTEMP \tab numeric \tab insert_description_here\cr
-[,15] \tab BOTSALIN \tab numeric \tab insert_description_here\cr
-[,16] \tab ABUNDANCE \tab numeric \tab insert_description_here\cr
-[,17] \tab BIOMASS \tab numeric \tab insert_description_here\cr
-[,18] \tab LENGTH \tab numeric \tab insert_description_here\cr
-[,19] \tab NUMLEN \tab integer \tab insert_description_here\cr
-[,20] \tab SCINAME \tab character \tab insert_description_here\cr
-[,21] \tab ITISSPP \tab integer \tab insert_description_here\cr
-[,22] \tab COMNAME \tab character \tab insert_description_here\cr
-[,23] \tab AUTHOR \tab character \tab insert_description_here\cr
-[,24] \tab Areanmi2 \tab integer \tab insert_description_here\cr
+[,9] \tab LAT \tab numeric \tab cleans up to \code{lat}, latitude of the haul\cr
+[,10] \tab LON \tab numeric \tab cleans up to \code{lon}, longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,11] \tab EST_TOWDATE \tab c("POSIXct", "POSIXt") \tab cleans up to \code{datetime}, the day and time of the haul\cr
+[,12] \tab DEPTH \tab integer \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
+[,13] \tab SURFTEMP \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
+[,14] \tab SURFSALIN \tab numeric \tab insert_description_here\cr
+[,15] \tab BOTTEMP \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
+[,16] \tab BOTSALIN \tab numeric \tab insert_description_here\cr
+[,17] \tab ABUNDANCE \tab numeric \tab cleans up to \code{cnt}, number of individuals in the whole net (may be extrapolated)\cr
+[,18] \tab BIOMASS \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
+[,19] \tab LENGTH \tab numeric \tab insert_description_here\cr
+[,20] \tab NUMLEN \tab integer \tab insert_description_here\cr
+[,21] \tab SCINAME \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
+[,22] \tab ITISSPP \tab integer \tab insert_description_here\cr
+[,23] \tab COMNAME \tab character \tab cleans up to \code{common}, the common name of the organism sampled\cr
+[,24] \tab AUTHOR \tab character \tab insert_description_here\cr
+[,25] \tab Areanmi2 \tab integer \tab cleans up to \code{stratumarea}, the area of the statistical stratum (km2)\cr
 }}
 \usage{
 raw.neus
 }
 \description{
-Raw data set for the Northeast US bottom trawl survey
+Raw Northeast US
+Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}
 

@@ -7,7 +7,7 @@
 Scientific names matched to raw taxonomic name entries}
 \format{A dim = 6016 x 2 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab spp \tab character \tab insert_description_here\cr
+[,1] \tab spp \tab character \tab species scientific name; Genus species\cr
 [,2] \tab sppCorr \tab character \tab insert_description_here\cr
 }}
 \usage{
@@ -16,9 +16,6 @@ getSppData
 \description{
 Spp Names
 Scientific names matched to raw taxonomic name entries
-}
-\seealso{
-\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

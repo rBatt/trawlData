@@ -4,22 +4,19 @@
 \name{spp.key}
 \alias{spp.key}
 \title{Species Key
-Key to taxonomic and ecological information for all species surveyed
-This data.table is the desirable key to use for species names. Relates survey-entered taxonomic identifiers to true scientific names and other related information.
-This key was partially derived from the \code{\link{taxInfo}} data set checked by Rachel Berman. However, taxonomy for this data set seems to be an ongoing process, and is always improving. Thus, \code{spp.key} should represent an improvement, and will continue to improve. Check for updates.
-To match the values in this key to taxonomic data, one can use \code{merge} using \code{by="ref"}; alternatively, \code{trawlData::match.tbl} may also be convenient for grabbing specific values.}
-\format{A dim = 6015 x 27 data.table data.frame:
+Key to taxonomic and ecological information for all species surveyed}
+\format{A dim = 7146 x 27 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab val.src \tab character \tab insert_description_here\cr
 [,3] \tab tbl.row \tab integer \tab insert_description_here\cr
 [,4] \tab mtch.src \tab integer \tab insert_description_here\cr
 [,5] \tab tax.src \tab character \tab insert_description_here\cr
-[,6] \tab spp \tab character \tab insert_description_here\cr
-[,7] \tab common \tab character \tab insert_description_here\cr
+[,6] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,7] \tab common \tab character \tab the common name of the organism sampled\cr
 [,8] \tab taxLvl \tab character \tab insert_description_here\cr
-[,9] \tab species \tab character \tab insert_description_here\cr
-[,10] \tab genus \tab character \tab insert_description_here\cr
+[,9] \tab species \tab character \tab the genus of the species\cr
+[,10] \tab genus \tab character \tab the species name of the species\cr
 [,11] \tab family \tab character \tab insert_description_here\cr
 [,12] \tab order \tab character \tab insert_description_here\cr
 [,13] \tab class \tab character \tab insert_description_here\cr
@@ -44,9 +41,6 @@ spp.key
 \description{
 Species Key
 Key to taxonomic and ecological information for all species surveyed
-This data.table is the desirable key to use for species names. Relates survey-entered taxonomic identifiers to true scientific names and other related information.
-This key was partially derived from the \code{\link{taxInfo}} data set checked by Rachel Berman. However, taxonomy for this data set seems to be an ongoing process, and is always improving. Thus, \code{spp.key} should represent an improvement, and will continue to improve. Check for updates.
-To match the values in this key to taxonomic data, one can use \code{merge} using \code{by="ref"}; alternatively, \code{trawlData::match.tbl} may also be convenient for grabbing specific values.
 }
 \keyword{datasets}
 

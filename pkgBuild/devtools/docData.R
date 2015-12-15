@@ -1,3 +1,10 @@
+#' Document Data
+#' 
+#' Semi-Automated Data Set Documentation
+#' 
+#' @param x A data set
+#' @param 
+
 gen.cols <- c(
 	# time information
 	"year" = "year of haul", 
@@ -75,7 +82,7 @@ match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ng
 	match_ind_nms <- names(tiny)[match_ind]
 	txt[match_ind] <- gen.cols[names(gen.cols)%in%match_ind_nms]
 	
-	txt[match_ind] <- paste0("cleans up to \\code{", match_ind_nms, "}, ")
+	txt[match_ind] <- paste0("cleans up to \\code{", match_ind_nms, "}, ", txt[match_ind])
 	
 	txt
 	
@@ -114,6 +121,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL){
 				message("Need to supply reg to convert column names to clean version for definition matching")
 			}else{
 				txt <- match_txt(x.col.names, reg, txt)
+				txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
 			}
 		}
 		

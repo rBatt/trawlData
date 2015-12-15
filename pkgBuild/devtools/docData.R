@@ -65,7 +65,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 		desc <- x.name
 	}
 	rc <- "#' "
-	head.txt <- paste0(rc,title, "\n", rc, desc, "\n", rc, "@format\n", rc, "A ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
+	head.txt <- paste0(rc,title, "  \n", rc, "  \n", rc, desc, "  \n", rc, "  \n", rc, "@format\n", rc, "A ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
 	
 	tab.start <-paste0(rc, "\\tabular{rlll}{\n")
 	tab.meat <- c()

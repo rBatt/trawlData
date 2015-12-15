@@ -1,5 +1,7 @@
-#' Raw Aleutian Islands
-#' Raw data from the Aleutian Islands bottom trawl
+#' Raw Aleutian Islands  
+#'   
+#' Raw data from the Aleutian Islands bottom trawl  
+#'   
 #' @format
 #' A dim = 118661 x 18 data.table data.frame:  
 #' \tabular{rlll}{
@@ -25,8 +27,10 @@
 "raw.ai"
 
 
-#' Raw Eastern Berring Sea
-#' Raw data set for the Eastern Berring Sea bottom trawl survey
+#' Raw Eastern Berring Sea  
+#'   
+#' Raw data set for the Eastern Berring Sea bottom trawl survey  
+#'   
 #' @format
 #' A dim = 380027 x 18 data.table data.frame:  
 #' \tabular{rlll}{
@@ -52,8 +56,10 @@
 "raw.ebs"
 
 
-#' Raw Gulf of Mexico
-#' Raw data set for the Gulf of Mexico bottom trawl survey
+#' Raw Gulf of Mexico  
+#'   
+#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 716550 x 37 data.table data.frame:  
 #' \tabular{rlll}{
@@ -98,8 +104,10 @@
 "raw.gmex"
 
 
-#' Raw Gulf of Alaska
-#' Raw data set for the Gulf of Mexico bottom trawl survey
+#' Raw Gulf of Alaska  
+#'   
+#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 197026 x 18 data.table data.frame:  
 #' \tabular{rlll}{
@@ -125,8 +133,10 @@
 "raw.goa"
 
 
-#' Raw Northeast US
-#' Raw data set for the Gulf of Mexico bottom trawl survey
+#' Raw Northeast US  
+#'   
+#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 2523907 x 25 data.table data.frame:  
 #' \tabular{rlll}{
@@ -159,8 +169,10 @@
 "raw.neus"
 
 
-#' Raw Raw Newfoundland
-#' Raw data set for the Newfoundland bottom trawl survey
+#' Raw Raw Newfoundland  
+#'   
+#' Raw data set for the Newfoundland bottom trawl survey  
+#'   
 #' @format
 #' A dim = 547790 x 40 data.table data.frame:  
 #' \tabular{rlll}{
@@ -208,8 +220,10 @@
 "raw.newf"
 
 
-#' Raw South Atlantic (Southeast US)
-#' Raw data set for the South Atlantic (Southeast US) bottom trawl survey
+#' Raw South Atlantic (Southeast US)  
+#'   
+#' Raw data set for the South Atlantic (Southeast US) bottom trawl survey  
+#'   
 #' @format
 #' A dim = 351427 x 62 data.table data.frame:  
 #' \tabular{rlll}{
@@ -279,8 +293,10 @@
 "raw.sa"
 
 
-#' Raw Southern Gulf of St. Lawrence
-#' Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey
+#' Raw Southern Gulf of St. Lawrence  
+#'   
+#' Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey  
+#'   
 #' @format
 #' A dim = 180583 x 28 data.table data.frame:  
 #' \tabular{rlll}{
@@ -316,8 +332,10 @@
 "raw.sgulf"
 
 
-#' Raw Scotian Shelf
-#' Raw data set for the Gulf of Mexico bottom trawl survey
+#' Raw Scotian Shelf  
+#'   
+#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 184631 x 42 data.table data.frame:  
 #' \tabular{rlll}{
@@ -367,8 +385,10 @@
 "raw.shelf"
 
 
-#' Raw West Coast Annual
-#' Raw data set for the West Coast Annual bottom trawl survey
+#' Raw West Coast Annual  
+#'   
+#' Raw data set for the West Coast Annual bottom trawl survey  
+#'   
 #' @format
 #' A dim = 217514 x 19 data.table data.frame:  
 #' \tabular{rlll}{
@@ -395,8 +415,10 @@
 "raw.wcann"
 
 
-#' Raw West Coast Triennial
-#' Raw data set for the West Coast Triennial bottom trawl survey
+#' Raw West Coast Triennial  
+#'   
+#' Raw data set for the West Coast Triennial bottom trawl survey  
+#'   
 #' @format
 #' A dim = 108138 x 42 data.table data.frame:  
 #' \tabular{rlll}{
@@ -446,8 +468,10 @@
 "raw.wctri"
 
 
-#' Clean Aleutian Islands
-#' Clean data from the Aleutian Islands bottom trawl
+#' Clean Aleutian Islands  
+#'   
+#' Clean data from the Aleutian Islands bottom trawl  
+#'   
 #' @format
 #' A dim = 118661 x 47 data.table data.frame:  
 #' \tabular{rlll}{
@@ -502,8 +526,10 @@
 "clean.ai"
 
 
-#' Clean Eastern Berring Sea
-#' Clean data set for the Eastern Berring Sea bottom trawl survey
+#' Clean Eastern Berring Sea  
+#'   
+#' Clean data set for the Eastern Berring Sea bottom trawl survey  
+#'   
 #' @format
 #' A dim = 380027 x 47 data.table data.frame:  
 #' \tabular{rlll}{
@@ -558,8 +584,10 @@
 "clean.ebs"
 
 
-#' Clean Gulf of Mexico
-#' Clean data set for the Gulf of Mexico bottom trawl survey
+#' Clean Gulf of Mexico  
+#'   
+#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 716550 x 74 data.table data.frame:  
 #' \tabular{rlll}{
@@ -641,8 +669,10 @@
 "clean.gmex"
 
 
-#' Clean Gulf of Alaska
-#' Clean data set for the Gulf of Mexico bottom trawl survey
+#' Clean Gulf of Alaska  
+#'   
+#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 197026 x 47 data.table data.frame:  
 #' \tabular{rlll}{
@@ -697,8 +727,10 @@
 "clean.goa"
 
 
-#' Clean Northeast US
-#' Clean data set for the Gulf of Mexico bottom trawl survey
+#' Clean Northeast US  
+#'   
+#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 2523907 x 55 data.table data.frame:  
 #' \tabular{rlll}{
@@ -761,8 +793,10 @@
 "clean.neus"
 
 
-#' Clean Clean Newfoundland
-#' Clean data set for the Newfoundland bottom trawl survey
+#' Clean Clean Newfoundland  
+#'   
+#' Clean data set for the Newfoundland bottom trawl survey  
+#'   
 #' @format
 #' A dim = 547790 x 75 data.table data.frame:  
 #' \tabular{rlll}{
@@ -845,8 +879,10 @@
 "clean.newf"
 
 
-#' Clean South Atlantic (Southeast US)
-#' Clean data set for the South Atlantic (Southeast US) bottom trawl survey
+#' Clean South Atlantic (Southeast US)  
+#'   
+#' Clean data set for the South Atlantic (Southeast US) bottom trawl survey  
+#'   
 #' @format
 #' A dim = 351427 x 97 data.table data.frame:  
 #' \tabular{rlll}{
@@ -951,8 +987,10 @@
 "clean.sa"
 
 
-#' Clean Southern Gulf of St. Lawrence
-#' Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey
+#' Clean Southern Gulf of St. Lawrence  
+#'   
+#' Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey  
+#'   
 #' @format
 #' A dim = 180583 x 58 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1018,8 +1056,10 @@
 "clean.sgulf"
 
 
-#' Clean Scotian Shelf
-#' Clean data set for the Gulf of Mexico bottom trawl survey
+#' Clean Scotian Shelf  
+#'   
+#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#'   
 #' @format
 #' A dim = 184631 x 75 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1102,8 +1142,10 @@
 "clean.shelf"
 
 
-#' Clean West Coast Annual
-#' Clean data set for the West Coast Annual bottom trawl survey
+#' Clean West Coast Annual  
+#'   
+#' Clean data set for the West Coast Annual bottom trawl survey  
+#'   
 #' @format
 #' A dim = 217514 x 53 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1164,8 +1206,10 @@
 "clean.wcann"
 
 
-#' Clean West Coast Triennial
-#' Clean data set for the West Coast Triennial bottom trawl survey
+#' Clean West Coast Triennial  
+#'   
+#' Clean data set for the West Coast Triennial bottom trawl survey  
+#'   
 #' @format
 #' A dim = 108138 x 79 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1252,8 +1296,10 @@
 "clean.wctri"
 
 
-#' Common Names
-#' Species's common names matched to scientific names
+#' Common Names  
+#'   
+#' Species's common names matched to scientific names  
+#'   
 #' @format
 #' A dim = 3548 x 2 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1263,8 +1309,10 @@
 "getCmmnData"
 
 
-#' Spp Names
-#' Scientific names matched to raw taxonomic name entries
+#' Spp Names  
+#'   
+#' Scientific names matched to raw taxonomic name entries  
+#'   
 #' @format
 #' A dim = 6016 x 2 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1274,8 +1322,10 @@
 "getSppData"
 
 
-#' Taxonomic Classification
-#' Taxonomic classification matched to scientific names
+#' Taxonomic Classification  
+#'   
+#' Taxonomic classification matched to scientific names  
+#'   
 #' @format
 #' A dim = 3548 x 11 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1294,8 +1344,10 @@
 "getTaxData"
 
 
-#' Corrected Species Names (legacy)
-#' Species names that had been corrected in older version of code
+#' Corrected Species Names (legacy)  
+#'   
+#' Species names that had been corrected in older version of code  
+#'   
 #' @format
 #' A dim = 3990 x 2 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1305,8 +1357,10 @@
 "spp.corr1"
 
 
-#' Taxonomic Information (legacy)
-#' Taxonomic classification and ecological information
+#' Taxonomic Information (legacy)  
+#'   
+#' Taxonomic classification and ecological information  
+#'   
 #' @format
 #' A dim = 4483 x 20 data.table data.frame:  
 #' \tabular{rlll}{
@@ -1334,8 +1388,10 @@
 "taxInfo"
 
 
-#' Species Key
-#' Key to taxonomic and ecological information for all species surveyed
+#' Species Key  
+#'   
+#' Key to taxonomic and ecological information for all species surveyed  
+#'   
 #' @format
 #' A dim = 7146 x 27 data.table data.frame:  
 #' \tabular{rlll}{

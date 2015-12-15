@@ -53,10 +53,20 @@ targets:
   # ======================
   # = Update Species Key =
   # ======================
+  spp_references:
+    command:
+      - load("data/taxInfo.RData")
+      - load("data/spp.corr1.RData")
+      - load("data/taxInfo.RData")
+      - load("data/getCmmnData.RData")
+      - load("data/getSppData.RData")
+      - load("data/getTaxData.RData")
+
   spp:
     depends:
       - data/spp.key.RData
       - helper_scripts
+      - spp_references
       # - inst/extdata/taxonomy/spp.key.csv
     command:
       - update_spp.key()

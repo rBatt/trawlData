@@ -136,6 +136,7 @@ gen.cols <- c(
 	"haulid" = "a unique identifier for the haul; vessel ID - cruise ID - haul number", 
 	"stratum" = "the statistical stratum of the haul",
 	"station"= "the station ID for the haul" ,
+	"CRUISE_NO" = "cruise ID as number",
 	
 	# Method info
 	"BGSCODE" = "flags information about the biological sample",
@@ -145,6 +146,8 @@ gen.cols <- c(
 	"duration" = "duration of the haul (how long the net was being towed)",
 	"towspeed" = "the speed of the vessel",
 	"areaswept" = "area sweap by the net (an index of effort)",
+	"towduration" = "the duration (time) for the tow",
+	"effort" = "some measure of the effort for this catch; could be area, time, speed, net size, or some combination. When possible, was converted to area swept by net during the entire tow",
 	
 	# location info
 	"stratumarea" = "the area of the statistical stratum (km2)",
@@ -166,13 +169,52 @@ gen.cols <- c(
 	# environmental info
 	"stemp" = "water temperature at the surface at the location of the haul", 
 	"btemp" = "water temperature at the bottom at the location of the haul",
+	"sdo" = "surface dissolved oxygen",
+	"bdo" = "bottom dissolved oxygen",
+	"ssalin" = "surface salinity",
+	"bsalin" = "bottom salinity",
+	"airtemp" = "air temperature",
+	"wind" = "wind speed (?)",
+	
+	
+	
 	
 	# species measurements
 	"wtcpue" = "weight (mass) of the catch", 
 	"cntcpue"="number of individuals caught per hectare in the haul",
 	"cnt" = "number of individuals in the whole net (may be extrapolated)",
-	# "cnt_sample" = "number of individuals counted (may be a subsample)",
-	"weight"="the weight (mass) of all items in the net (may be extrapolated)"#,
-	# "weight_sample" = "the weight (mass) of the sample (may be subsampled)"
+	"weight"="the weight (mass) of all items in the net (may be extrapolated)",
+	"length" = "length of catch (typically of an individual, but may be average for some regions)",
+	"NUMLEN" = "number of individuals used to ascertain catch length",
 	
+	
+	# biological info
+	"trophicDiet" = "source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source",
+	"trophicOrig" = "from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?",
+	"Picture" = "Is there a picture of this critter assoicated with the package? Note: this isn't always accurate",
+	"trophicLevel" = "the trophic level from Fish Base or Sea Life Base",
+	"trophicLevel.se" = "the standard error of the trophic level",
+	"sex" = "the gender of the catch",
+	
+	
+	# taxonomy info
+	"taxLvl" = "the most specific level of classification indicated by spp",
+	"family" = "taxonomic family",
+	"order" = "taxonomic order", 
+	"class" = "taxonomic class", 
+	"superclass" = "taxonomic superclass",
+	"subphylum" = "taxonomic subphylum",
+	"kingdom" = "taxonomic kingdom", 
+	"tax.src" = "informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet",
+	"tax.src2" = "informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)",
+	"conflict" = "for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking",
+	"flag" = "flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key",
+	"website" = "URL reference for taxonomic information",
+	"website2" = "secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name",
+	"keep.row" = "Column indicating whether or not the row show likely be excluded",
+	"row_flag" = "if keep.row is TRUE, why was this row flagged to be dropped?",
+	"val.src" = "indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \\code{\\link{cull}}) needed to be adjusted, m3 indicates that \\code{\\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match",
+	"tbl.row" = "the row in the taxonomic data base where a match was found",
+	"mtch.src" = "the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3"
+
 )

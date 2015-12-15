@@ -19,10 +19,6 @@
 #' @examples
 #' docData(raw.ai, title="AI Survey Raw Data", clean=TRUE, reg="ai")
 
-
-
-
-
 docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, append=FALSE){
 	x.name <- gsub(".*x \\= (.*\\.[a-zA-Z0-9]*)[, |\\)].*", "\\1", deparse(match.call())[1], perl=T)
 	x.col.names <- names(x)
@@ -84,7 +80,9 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 	
 	txt.out <- paste(c(head.txt,tab.start, tab.meat, "}\n",tail.txt), collapse="")
 	
+	if(append){sink("datasets.R", append=TRUE, type="output")}
 	cat(txt.out)
+	if(append){sink(NULL)}
 	invisible(txt.out)
 
 }

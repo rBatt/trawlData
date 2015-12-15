@@ -3,22 +3,21 @@
 \docType{data}
 \name{raw.sgulf}
 \alias{raw.sgulf}
-\title{Raw Southern Gulf of St. Lawrence
-Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey}
+\title{Raw Southern Gulf of St. Lawrence}
 \format{A dim = 180583 x 28 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab stratum \tab integer \tab year of haul\cr
-[,2] \tab vessel \tab character \tab starting time of the tow\cr
-[,3] \tab cruise \tab integer \tab the species name of the species\cr
+[,1] \tab stratum \tab integer \tab the statistical stratum of the haul\cr
+[,2] \tab vessel \tab character \tab vessel ID\cr
+[,3] \tab cruise \tab integer \tab cruise ID\cr
 [,4] \tab set \tab integer \tab insert_description_here\cr
-[,5] \tab year \tab integer \tab vessel ID\cr
-[,6] \tab species \tab integer \tab cruise ID\cr
+[,5] \tab year \tab integer \tab year of haul\cr
+[,6] \tab species \tab integer \tab the species name of the species\cr
 [,7] \tab catch \tab numeric \tab cleans up to \code{cntcpue}, number of individuals caught per hectare in the haul\cr
 [,8] \tab biomass \tab numeric \tab cleans up to \code{wtcpue}, weight (mass) of the catch\cr
 [,9] \tab month \tab integer \tab insert_description_here\cr
 [,10] \tab day \tab integer \tab insert_description_here\cr
 [,11] \tab expt \tab integer \tab insert_description_here\cr
-[,12] \tab time \tab integer \tab the statistical stratum of the haul\cr
+[,12] \tab time \tab integer \tab starting time of the tow\cr
 [,13] \tab temperature \tab numeric \tab insert_description_here\cr
 [,14] \tab depthst \tab integer \tab insert_description_here\cr
 [,15] \tab depthend \tab integer \tab insert_description_here\cr
@@ -31,7 +30,7 @@ Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey}
 [,22] \tab N \tab integer \tab cleans up to \code{cnt}, number of individuals in the whole net (may be extrapolated)\cr
 [,23] \tab kg \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
 [,24] \tab t_surface \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
-[,25] \tab salin_bottom \tab numeric \tab insert_description_here\cr
+[,25] \tab salin_bottom \tab numeric \tab cleans up to \code{bsalin}, bottom salinity\cr
 [,26] \tab t_bottom \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
 [,27] \tab trawlableunits \tab integer \tab insert_description_here\cr
 [,28] \tab stratarea \tab numeric \tab cleans up to \code{stratumarea}, the area of the statistical stratum (km2)\cr
@@ -40,7 +39,6 @@ Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey}
 raw.sgulf
 }
 \description{
-Raw Southern Gulf of St. Lawrence
 Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey
 }
 \keyword{datasets}

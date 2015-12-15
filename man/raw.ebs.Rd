@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.ebs}
 \alias{raw.ebs}
-\title{Raw Eastern Berring Sea
-Raw data set for the Eastern Berring Sea bottom trawl survey}
+\title{Raw Eastern Berring Sea}
 \format{A dim = 380027 x 18 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
@@ -30,7 +29,6 @@ Raw data set for the Eastern Berring Sea bottom trawl survey}
 raw.ebs
 }
 \description{
-Raw Eastern Berring Sea
 Raw data set for the Eastern Berring Sea bottom trawl survey
 }
 \keyword{datasets}

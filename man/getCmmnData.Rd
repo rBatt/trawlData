@@ -3,8 +3,7 @@
 \docType{data}
 \name{getCmmnData}
 \alias{getCmmnData}
-\title{Common Names
-Species's common names matched to scientific names}
+\title{Common Names}
 \format{A dim = 3548 x 2 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab sppCorr \tab character \tab insert_description_here\cr
@@ -14,7 +13,6 @@ Species's common names matched to scientific names}
 getCmmnData
 }
 \description{
-Common Names
 Species's common names matched to scientific names
 }
 \keyword{datasets}

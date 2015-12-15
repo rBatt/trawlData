@@ -3,15 +3,14 @@
 \docType{data}
 \name{raw.neus}
 \alias{raw.neus}
-\title{Raw Northeast US
-Raw data set for the Gulf of Mexico bottom trawl survey}
+\title{Raw Northeast US}
 \format{A dim = 2523907 x 25 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab CRUISE6 \tab integer \tab cleans up to \code{cruise}, cruise ID\cr
 [,2] \tab STATION \tab integer \tab cleans up to \code{station}, the station ID for the haul\cr
 [,3] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
 [,4] \tab SVSPP \tab integer \tab cleans up to \code{SID}, species identification number\cr
-[,5] \tab CATCHSEX \tab integer \tab insert_description_here\cr
+[,5] \tab CATCHSEX \tab integer \tab cleans up to \code{sex}, the gender of the catch\cr
 [,6] \tab SVVESSEL \tab character \tab cleans up to \code{vessel}, vessel ID\cr
 [,7] \tab YEAR \tab integer \tab cleans up to \code{year}, year of haul\cr
 [,8] \tab SEASON \tab character \tab insert_description_here\cr
@@ -20,13 +19,13 @@ Raw data set for the Gulf of Mexico bottom trawl survey}
 [,11] \tab EST_TOWDATE \tab c("POSIXct", "POSIXt") \tab cleans up to \code{datetime}, the day and time of the haul\cr
 [,12] \tab DEPTH \tab integer \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
 [,13] \tab SURFTEMP \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
-[,14] \tab SURFSALIN \tab numeric \tab insert_description_here\cr
+[,14] \tab SURFSALIN \tab numeric \tab cleans up to \code{ssalin}, surface salinity\cr
 [,15] \tab BOTTEMP \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
-[,16] \tab BOTSALIN \tab numeric \tab insert_description_here\cr
+[,16] \tab BOTSALIN \tab numeric \tab cleans up to \code{bsalin}, bottom salinity\cr
 [,17] \tab ABUNDANCE \tab numeric \tab cleans up to \code{cnt}, number of individuals in the whole net (may be extrapolated)\cr
 [,18] \tab BIOMASS \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
-[,19] \tab LENGTH \tab numeric \tab insert_description_here\cr
-[,20] \tab NUMLEN \tab integer \tab insert_description_here\cr
+[,19] \tab LENGTH \tab numeric \tab cleans up to \code{length}, length of catch (typically of an individual, but may be average for some regions)\cr
+[,20] \tab NUMLEN \tab integer \tab number of individuals used to ascertain catch length\cr
 [,21] \tab SCINAME \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
 [,22] \tab ITISSPP \tab integer \tab insert_description_here\cr
 [,23] \tab COMNAME \tab character \tab cleans up to \code{common}, the common name of the organism sampled\cr
@@ -37,7 +36,6 @@ Raw data set for the Gulf of Mexico bottom trawl survey}
 raw.neus
 }
 \description{
-Raw Northeast US
 Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}

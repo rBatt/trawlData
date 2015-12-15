@@ -3,8 +3,7 @@
 \docType{data}
 \name{getSppData}
 \alias{getSppData}
-\title{Spp Names
-Scientific names matched to raw taxonomic name entries}
+\title{Spp Names}
 \format{A dim = 6016 x 2 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab spp \tab character \tab species scientific name; Genus species\cr
@@ -14,7 +13,6 @@ Scientific names matched to raw taxonomic name entries}
 getSppData
 }
 \description{
-Spp Names
 Scientific names matched to raw taxonomic name entries
 }
 \keyword{datasets}

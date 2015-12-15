@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.wcann}
 \alias{raw.wcann}
-\title{Raw West Coast Annual
-Raw data set for the West Coast Annual bottom trawl survey}
+\title{Raw West Coast Annual}
 \format{A dim = 217514 x 19 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab Trawl Id \tab integer64 \tab cleans up to \code{haulid}, a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
@@ -23,7 +22,7 @@ Raw data set for the West Coast Annual bottom trawl survey}
 [,14] \tab Best Position Type \tab character \tab insert_description_here\cr
 [,15] \tab Best Depth (m) \tab numeric \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
 [,16] \tab Best Depth Type \tab character \tab insert_description_here\cr
-[,17] \tab Trawl Duration (min) \tab numeric \tab insert_description_here\cr
+[,17] \tab Trawl Duration (min) \tab numeric \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,18] \tab Area Swept by the Net (hectares) \tab numeric \tab insert_description_here\cr
 [,19] \tab Temperature At the Gear (degs C) \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
 }}
@@ -31,7 +30,6 @@ Raw data set for the West Coast Annual bottom trawl survey}
 raw.wcann
 }
 \description{
-Raw West Coast Annual
 Raw data set for the West Coast Annual bottom trawl survey
 }
 \keyword{datasets}

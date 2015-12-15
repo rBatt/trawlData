@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.goa}
 \alias{raw.goa}
-\title{Raw Gulf of Alaska
-Raw data set for the Gulf of Mexico bottom trawl survey}
+\title{Raw Gulf of Alaska}
 \format{A dim = 197026 x 18 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
@@ -30,7 +29,6 @@ Raw data set for the Gulf of Mexico bottom trawl survey}
 raw.goa
 }
 \description{
-Raw Gulf of Alaska
 Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}

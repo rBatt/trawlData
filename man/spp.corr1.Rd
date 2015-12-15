@@ -3,8 +3,7 @@
 \docType{data}
 \name{spp.corr1}
 \alias{spp.corr1}
-\title{Corrected Species Names (legacy)
-Species names that had been corrected in older version of code}
+\title{Corrected Species Names (legacy)}
 \format{A dim = 3990 x 2 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab spp \tab character \tab species scientific name; Genus species\cr
@@ -14,7 +13,6 @@ Species names that had been corrected in older version of code}
 spp.corr1
 }
 \description{
-Corrected Species Names (legacy)
 Species names that had been corrected in older version of code
 }
 \keyword{datasets}

@@ -3,47 +3,46 @@
 \docType{data}
 \name{clean.sa}
 \alias{clean.sa}
-\title{Clean South Atlantic (Southeast US)
-Clean data set for the South Atlantic (Southeast US) bottom trawl survey}
+\title{Clean South Atlantic (Southeast US)}
 \format{A dim = 351427 x 97 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab survey region\cr
+[,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab COLLECTIONNUMBER \tab integer \tab insert_description_here\cr
 [,3] \tab PROJECTNAME \tab character \tab insert_description_here\cr
 [,4] \tab PROJECTAGENCY \tab character \tab insert_description_here\cr
-[,5] \tab date \tab character \tab year of haul\cr
-[,6] \tab haulid \tab character \tab the day and time of the haul\cr
-[,7] \tab vessel \tab character \tab time zone\cr
+[,5] \tab date \tab character \tab date of the tow\cr
+[,6] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
+[,7] \tab vessel \tab character \tab vessel ID\cr
 [,8] \tab GEARNAME \tab character \tab insert_description_here\cr
 [,9] \tab GEARCODE \tab character \tab insert_description_here\cr
 [,10] \tab SPECIESCODE \tab integer64 \tab insert_description_here\cr
 [,11] \tab MRRI_CODE \tab character \tab insert_description_here\cr
-[,12] \tab cnt \tab numeric \tab starting time of the tow\cr
-[,13] \tab weight \tab numeric \tab date of the tow\cr
+[,12] \tab cnt \tab numeric \tab number of individuals in the whole net (may be extrapolated)\cr
+[,13] \tab weight \tab numeric \tab the weight (mass) of all items in the net (may be extrapolated)\cr
 [,14] \tab SPECIESSUBWEIGHT \tab numeric \tab insert_description_here\cr
 [,15] \tab SPECIESWGTPROCESSED \tab numeric \tab insert_description_here\cr
 [,16] \tab WEIGHTMETHODDESC \tab character \tab insert_description_here\cr
 [,17] \tab ORGWTUNITS \tab character \tab insert_description_here\cr
-[,18] \tab effort \tab numeric \tab insert_description_here\cr
+[,18] \tab effort \tab numeric \tab some measure of the effort for this catch; could be area, time, speed, net size, or some combination. When possible, was converted to area swept by net during the entire tow\cr
 [,19] \tab CATCHSUBSAMPLED \tab logical \tab insert_description_here\cr
 [,20] \tab CATCHWEIGHT \tab numeric \tab insert_description_here\cr
 [,21] \tab CATCHSUBWEIGHT \tab numeric \tab insert_description_here\cr
-[,22] \tab time \tab character \tab reference taxonomic ID from raw data\cr
-[,23] \tab towduration \tab numeric \tab insert_description_here\cr
+[,22] \tab time \tab character \tab starting time of the tow\cr
+[,23] \tab towduration \tab numeric \tab the duration (time) for the tow\cr
 [,24] \tab TOWTYPETEXT \tab character \tab insert_description_here\cr
 [,25] \tab LOCATION \tab character \tab insert_description_here\cr
 [,26] \tab REGION \tab character \tab insert_description_here\cr
 [,27] \tab DEPTHZONE \tab character \tab insert_description_here\cr
 [,28] \tab ACCSPGRIDCODE \tab character \tab insert_description_here\cr
-[,29] \tab stratum \tab character \tab species scientific name; Genus species\cr
+[,29] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,30] \tab EVENTTYPEDESCRIPTION \tab character \tab insert_description_here\cr
-[,31] \tab stemp \tab numeric \tab the common name of the organism sampled\cr
-[,32] \tab btemp \tab numeric \tab the genus of the species\cr
-[,33] \tab ssalin \tab numeric \tab insert_description_here\cr
-[,34] \tab bsalin \tab numeric \tab insert_description_here\cr
-[,35] \tab sdo \tab logical \tab insert_description_here\cr
-[,36] \tab bdo \tab numeric \tab insert_description_here\cr
-[,37] \tab airtemp \tab numeric \tab insert_description_here\cr
+[,31] \tab stemp \tab numeric \tab water temperature at the surface at the location of the haul\cr
+[,32] \tab btemp \tab numeric \tab water temperature at the bottom at the location of the haul\cr
+[,33] \tab ssalin \tab numeric \tab surface salinity\cr
+[,34] \tab bsalin \tab numeric \tab bottom salinity\cr
+[,35] \tab sdo \tab logical \tab surface dissolved oxygen\cr
+[,36] \tab bdo \tab numeric \tab bottom dissolved oxygen\cr
+[,37] \tab airtemp \tab numeric \tab air temperature\cr
 [,38] \tab lat.start \tab numeric \tab insert_description_here\cr
 [,39] \tab lat.end \tab numeric \tab insert_description_here\cr
 [,40] \tab lon.start \tab numeric \tab insert_description_here\cr
@@ -51,11 +50,11 @@ Clean data set for the South Atlantic (Southeast US) bottom trawl survey}
 [,42] \tab SPECSTATUSDESCRIPTION \tab character \tab insert_description_here\cr
 [,43] \tab LASTUPDATED \tab character \tab insert_description_here\cr
 [,44] \tab LIGHTPHASE \tab character \tab insert_description_here\cr
-[,45] \tab timezone \tab character \tab the species name of the species\cr
+[,45] \tab timezone \tab character \tab time zone\cr
 [,46] \tab depth.start \tab numeric \tab insert_description_here\cr
 [,47] \tab depth.end \tab numeric \tab insert_description_here\cr
 [,48] \tab PRESSURE \tab numeric \tab insert_description_here\cr
-[,49] \tab wind \tab integer \tab insert_description_here\cr
+[,49] \tab wind \tab integer \tab wind speed (?)\cr
 [,50] \tab WINDDIRECTION \tab integer \tab insert_description_here\cr
 [,51] \tab WAVEHEIGHT \tab integer \tab insert_description_here\cr
 [,52] \tab PRECIPITATION \tab logical \tab insert_description_here\cr
@@ -68,48 +67,47 @@ Clean data set for the South Atlantic (Southeast US) bottom trawl survey}
 [,59] \tab ACTIVITYDESC \tab logical \tab insert_description_here\cr
 [,60] \tab NUMBERREP \tab logical \tab insert_description_here\cr
 [,61] \tab comment \tab character \tab insert_description_here\cr
-[,62] \tab year \tab integer \tab vessel ID\cr
-[,63] \tab datetime \tab c("POSIXct", "POSIXt") \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
-[,64] \tab lat \tab numeric \tab the statistical stratum of the haul\cr
-[,65] \tab lon \tab numeric \tab the area of the statistical stratum (km2)\cr
-[,66] \tab depth \tab numeric \tab latitude of the haul\cr
-[,67] \tab stratumarea \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
-[,68] \tab cntcpue \tab numeric \tab the maximum depth of the water at the location of the haul\cr
-[,69] \tab wtcpue \tab numeric \tab water temperature at the surface at the location of the haul\cr
-[,70] \tab reg \tab character \tab water temperature at the bottom at the location of the haul\cr
-[,71] \tab val.src \tab character \tab insert_description_here\cr
-[,72] \tab tbl.row \tab integer \tab insert_description_here\cr
-[,73] \tab mtch.src \tab integer \tab insert_description_here\cr
-[,74] \tab tax.src \tab character \tab insert_description_here\cr
-[,75] \tab spp \tab character \tab weight (mass) of the catch\cr
-[,76] \tab common \tab character \tab number of individuals caught per hectare in the haul\cr
-[,77] \tab taxLvl \tab character \tab insert_description_here\cr
-[,78] \tab species \tab character \tab number of individuals in the whole net (may be extrapolated)\cr
-[,79] \tab genus \tab character \tab the weight (mass) of all items in the net (may be extrapolated)\cr
-[,80] \tab family \tab character \tab insert_description_here\cr
-[,81] \tab order \tab character \tab insert_description_here\cr
-[,82] \tab class \tab character \tab insert_description_here\cr
-[,83] \tab superclass \tab character \tab insert_description_here\cr
-[,84] \tab subphylum \tab character \tab insert_description_here\cr
+[,62] \tab year \tab integer \tab year of haul\cr
+[,63] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
+[,64] \tab lat \tab numeric \tab latitude of the haul\cr
+[,65] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,66] \tab depth \tab numeric \tab the maximum depth of the water at the location of the haul\cr
+[,67] \tab stratumarea \tab numeric \tab the area of the statistical stratum (km2)\cr
+[,68] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
+[,69] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
+[,70] \tab reg \tab character \tab survey region\cr
+[,71] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
+[,72] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
+[,73] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+[,74] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
+[,75] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,76] \tab common \tab character \tab the common name of the organism sampled\cr
+[,77] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+[,78] \tab species \tab character \tab the species name of the species\cr
+[,79] \tab genus \tab character \tab the genus of the species\cr
+[,80] \tab family \tab character \tab taxonomic family\cr
+[,81] \tab order \tab character \tab taxonomic order\cr
+[,82] \tab class \tab character \tab taxonomic class\cr
+[,83] \tab superclass \tab character \tab taxonomic superclass\cr
+[,84] \tab subphylum \tab character \tab taxonomic subphylum\cr
 [,85] \tab phylum \tab character \tab insert_description_here\cr
-[,86] \tab kingdom \tab character \tab insert_description_here\cr
-[,87] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,88] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,89] \tab Picture \tab character \tab insert_description_here\cr
-[,90] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,91] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,92] \tab tax.src2 \tab character \tab insert_description_here\cr
-[,93] \tab conflict \tab logical \tab insert_description_here\cr
-[,94] \tab flag \tab character \tab insert_description_here\cr
-[,95] \tab website \tab character \tab insert_description_here\cr
-[,96] \tab website2 \tab character \tab insert_description_here\cr
-[,97] \tab keep.row \tab logical \tab insert_description_here\cr
+[,86] \tab kingdom \tab character \tab taxonomic kingdom\cr
+[,87] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
+[,88] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
+[,89] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
+[,90] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
+[,91] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
+[,92] \tab tax.src2 \tab character \tab informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)\cr
+[,93] \tab conflict \tab logical \tab for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking\cr
+[,94] \tab flag \tab character \tab flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key\cr
+[,95] \tab website \tab character \tab URL reference for taxonomic information\cr
+[,96] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
+[,97] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
 }}
 \usage{
 clean.sa
 }
 \description{
-Clean South Atlantic (Southeast US)
 Clean data set for the South Atlantic (Southeast US) bottom trawl survey
 }
 \keyword{datasets}

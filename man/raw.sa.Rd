@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.sa}
 \alias{raw.sa}
-\title{Raw South Atlantic (Southeast US)
-Raw data set for the South Atlantic (Southeast US) bottom trawl survey}
+\title{Raw South Atlantic (Southeast US)}
 \format{A dim = 351427 x 62 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab COLLECTIONNUMBER \tab integer \tab insert_description_here\cr
@@ -25,12 +24,12 @@ Raw data set for the South Atlantic (Southeast US) bottom trawl survey}
 [,16] \tab SPECIESWGTPROCESSED \tab numeric \tab insert_description_here\cr
 [,17] \tab WEIGHTMETHODDESC \tab character \tab insert_description_here\cr
 [,18] \tab ORGWTUNITS \tab character \tab insert_description_here\cr
-[,19] \tab EFFORT \tab numeric \tab insert_description_here\cr
+[,19] \tab EFFORT \tab numeric \tab cleans up to \code{effort}, some measure of the effort for this catch; could be area, time, speed, net size, or some combination. When possible, was converted to area swept by net during the entire tow\cr
 [,20] \tab CATCHSUBSAMPLED \tab logical \tab insert_description_here\cr
 [,21] \tab CATCHWEIGHT \tab numeric \tab insert_description_here\cr
 [,22] \tab CATCHSUBWEIGHT \tab numeric \tab insert_description_here\cr
 [,23] \tab TIMESTART \tab character \tab cleans up to \code{time}, starting time of the tow\cr
-[,24] \tab DURATION \tab integer \tab insert_description_here\cr
+[,24] \tab DURATION \tab integer \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,25] \tab TOWTYPETEXT \tab character \tab insert_description_here\cr
 [,26] \tab LOCATION \tab character \tab insert_description_here\cr
 [,27] \tab REGION \tab character \tab insert_description_here\cr
@@ -40,11 +39,11 @@ Raw data set for the South Atlantic (Southeast US) bottom trawl survey}
 [,31] \tab EVENTTYPEDESCRIPTION \tab character \tab insert_description_here\cr
 [,32] \tab TEMPSURFACE \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
 [,33] \tab TEMPBOTTOM \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
-[,34] \tab SALINITYSURFACE \tab numeric \tab insert_description_here\cr
-[,35] \tab SALINITYBOTTOM \tab numeric \tab insert_description_here\cr
-[,36] \tab SDO \tab logical \tab insert_description_here\cr
-[,37] \tab BDO \tab logical \tab insert_description_here\cr
-[,38] \tab TEMPAIR \tab numeric \tab insert_description_here\cr
+[,34] \tab SALINITYSURFACE \tab numeric \tab cleans up to \code{ssalin}, surface salinity\cr
+[,35] \tab SALINITYBOTTOM \tab numeric \tab cleans up to \code{bsalin}, bottom salinity\cr
+[,36] \tab SDO \tab logical \tab cleans up to \code{sdo}, surface dissolved oxygen\cr
+[,37] \tab BDO \tab logical \tab cleans up to \code{bdo}, bottom dissolved oxygen\cr
+[,38] \tab TEMPAIR \tab numeric \tab cleans up to \code{airtemp}, air temperature\cr
 [,39] \tab LATITUDESTART \tab numeric \tab insert_description_here\cr
 [,40] \tab LATITUDEEND \tab numeric \tab insert_description_here\cr
 [,41] \tab LONGITUDESTART \tab numeric \tab insert_description_here\cr
@@ -56,7 +55,7 @@ Raw data set for the South Atlantic (Southeast US) bottom trawl survey}
 [,47] \tab DEPTHSTART \tab integer \tab insert_description_here\cr
 [,48] \tab DEPTHEND \tab integer \tab insert_description_here\cr
 [,49] \tab PRESSURE \tab numeric \tab insert_description_here\cr
-[,50] \tab WINDSPEED \tab integer \tab insert_description_here\cr
+[,50] \tab WINDSPEED \tab integer \tab cleans up to \code{wind}, wind speed (?)\cr
 [,51] \tab WINDDIRECTION \tab integer \tab insert_description_here\cr
 [,52] \tab WAVEHEIGHT \tab integer \tab insert_description_here\cr
 [,53] \tab PRECIPITATION \tab logical \tab insert_description_here\cr
@@ -74,7 +73,6 @@ Raw data set for the South Atlantic (Southeast US) bottom trawl survey}
 raw.sa
 }
 \description{
-Raw South Atlantic (Southeast US)
 Raw data set for the South Atlantic (Southeast US) bottom trawl survey
 }
 \keyword{datasets}

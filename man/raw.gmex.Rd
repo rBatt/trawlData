@@ -3,15 +3,14 @@
 \docType{data}
 \name{raw.gmex}
 \alias{raw.gmex}
-\title{Raw Gulf of Mexico
-Raw data set for the Gulf of Mexico bottom trawl survey}
+\title{Raw Gulf of Mexico}
 \format{A dim = 716550 x 37 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab CRUISEID \tab integer \tab cleans up to \code{cruise}, cruise ID\cr
 [,2] \tab VESSEL \tab integer \tab cleans up to \code{vessel}, vessel ID\cr
 [,3] \tab BIO_BGS \tab character \tab cleans up to \code{SID}, species identification number\cr
 [,4] \tab STATIONID \tab character \tab cleans up to \code{station}, the station ID for the haul\cr
-[,5] \tab CRUISE_NO \tab numeric \tab insert_description_here\cr
+[,5] \tab CRUISE_NO \tab numeric \tab cruise ID as number\cr
 [,6] \tab P_STA_NO \tab numeric \tab insert_description_here\cr
 [,7] \tab BGSID \tab integer \tab record ID number\cr
 [,8] \tab CATEGORY \tab integer \tab insert_description_here\cr
@@ -25,7 +24,7 @@ Raw data set for the Gulf of Mexico bottom trawl survey}
 [,16] \tab GEAR_TYPE \tab character \tab cleans up to \code{geartype}, code for the type of gear used\cr
 [,17] \tab MESH_SIZE \tab numeric \tab cleans up to \code{meshsize}, the size of the net mesh (inches of stretch)\cr
 [,18] \tab OP \tab character \tab insert_description_here\cr
-[,19] \tab MIN_FISH \tab integer \tab insert_description_here\cr
+[,19] \tab MIN_FISH \tab integer \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,20] \tab TIME_ZN \tab character \tab cleans up to \code{timezone}, time zone\cr
 [,21] \tab TIME_MIL \tab character \tab cleans up to \code{time}, starting time of the tow\cr
 [,22] \tab S_LATD \tab character \tab insert_description_here\cr
@@ -49,7 +48,6 @@ Raw data set for the Gulf of Mexico bottom trawl survey}
 raw.gmex
 }
 \description{
-Raw Gulf of Mexico
 Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}

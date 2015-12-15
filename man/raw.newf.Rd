@@ -3,32 +3,31 @@
 \docType{data}
 \name{raw.newf}
 \alias{raw.newf}
-\title{Raw Raw Newfoundland
-Raw data set for the Newfoundland bottom trawl survey}
+\title{Raw Raw Newfoundland}
 \format{A dim = 547790 x 40 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab sppcode \tab integer \tab insert_description_here\cr
 [,2] \tab recordtype \tab integer \tab insert_description_here\cr
-[,3] \tab vessel \tab integer \tab species scientific name; Genus species\cr
+[,3] \tab vessel \tab integer \tab vessel ID\cr
 [,4] \tab trip \tab integer \tab insert_description_here\cr
 [,5] \tab set \tab integer \tab insert_description_here\cr
 [,6] \tab yearl \tab integer \tab cleans up to \code{year}, year of haul\cr
 [,7] \tab monthl \tab integer \tab insert_description_here\cr
 [,8] \tab dayl \tab integer \tab insert_description_here\cr
 [,9] \tab settype \tab integer \tab insert_description_here\cr
-[,10] \tab stratum \tab character \tab the common name of the organism sampled\cr
+[,10] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,11] \tab nafo \tab character \tab insert_description_here\cr
 [,12] \tab unitarea \tab character \tab insert_description_here\cr
 [,13] \tab light \tab numeric \tab insert_description_here\cr
 [,14] \tab winddir \tab numeric \tab insert_description_here\cr
-[,15] \tab windforce \tab numeric \tab insert_description_here\cr
+[,15] \tab windforce \tab numeric \tab cleans up to \code{wind}, wind speed (?)\cr
 [,16] \tab sea \tab numeric \tab insert_description_here\cr
 [,17] \tab bottom \tab numeric \tab insert_description_here\cr
 [,18] \tab timel \tab character \tab cleans up to \code{time}, starting time of the tow\cr
-[,19] \tab duration \tab numeric \tab vessel ID\cr
+[,19] \tab duration \tab numeric \tab duration of the haul (how long the net was being towed)\cr
 [,20] \tab distance \tab numeric \tab insert_description_here\cr
 [,21] \tab operation \tab numeric \tab insert_description_here\cr
-[,22] \tab depth \tab character \tab the statistical stratum of the haul\cr
+[,22] \tab depth \tab character \tab the maximum depth of the water at the location of the haul\cr
 [,23] \tab depthmin \tab character \tab insert_description_here\cr
 [,24] \tab depthmax \tab character \tab insert_description_here\cr
 [,25] \tab depthbottom \tab character \tab insert_description_here\cr
@@ -44,15 +43,14 @@ Raw data set for the Newfoundland bottom trawl survey}
 [,35] \tab lonend \tab character \tab insert_description_here\cr
 [,36] \tab bottempmeth \tab numeric \tab insert_description_here\cr
 [,37] \tab geardevice \tab numeric \tab insert_description_here\cr
-[,38] \tab common \tab character \tab duration of the haul (how long the net was being towed)\cr
-[,39] \tab spp \tab character \tab the maximum depth of the water at the location of the haul\cr
+[,38] \tab common \tab character \tab the common name of the organism sampled\cr
+[,39] \tab spp \tab character \tab species scientific name; Genus species\cr
 [,40] \tab season \tab character \tab insert_description_here\cr
 }}
 \usage{
 raw.newf
 }
 \description{
-Raw Raw Newfoundland
 Raw data set for the Newfoundland bottom trawl survey
 }
 \keyword{datasets}

@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.ai}
 \alias{raw.ai}
-\title{Raw Aleutian Islands
-Raw data from the Aleutian Islands bottom trawl}
+\title{Raw Aleutian Islands}
 \format{A dim = 118661 x 18 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
@@ -30,7 +29,6 @@ Raw data from the Aleutian Islands bottom trawl}
 raw.ai
 }
 \description{
-Raw Aleutian Islands
 Raw data from the Aleutian Islands bottom trawl
 }
 \keyword{datasets}

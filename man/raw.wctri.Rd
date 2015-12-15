@@ -3,8 +3,7 @@
 \docType{data}
 \name{raw.wctri}
 \alias{raw.wctri}
-\title{Raw West Coast Triennial
-Raw data set for the West Coast Triennial bottom trawl survey}
+\title{Raw West Coast Triennial}
 \format{A dim = 108138 x 42 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab SPECIES_CODE \tab integer \tab cleans up to \code{SID}, species identification number\cr
@@ -23,7 +22,7 @@ Raw data set for the West Coast Triennial bottom trawl survey}
 [,14] \tab HAUL_TYPE \tab integer \tab insert_description_here\cr
 [,15] \tab PERFORMANCE \tab numeric \tab insert_description_here\cr
 [,16] \tab START_TIME \tab character \tab cleans up to \code{datetime}, the day and time of the haul\cr
-[,17] \tab DURATION \tab numeric \tab insert_description_here\cr
+[,17] \tab DURATION \tab numeric \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,18] \tab DISTANCE_FISHED \tab numeric \tab insert_description_here\cr
 [,19] \tab NET_WIDTH \tab numeric \tab cleans up to \code{gearsize}, the dimension of the gear; for trawl net, the width of the mouth in ft\cr
 [,20] \tab NET_MEASURED \tab character \tab insert_description_here\cr
@@ -54,7 +53,6 @@ Raw data set for the West Coast Triennial bottom trawl survey}
 raw.wctri
 }
 \description{
-Raw West Coast Triennial
 Raw data set for the West Coast Triennial bottom trawl survey
 }
 \keyword{datasets}

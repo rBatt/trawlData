@@ -45,14 +45,14 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 			warning("idh description not the same length as number of columns; using place-holder description")
 		}
 		txt <- rep("insert_description_here", nc)
-		txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
+		txt[x.col.names%in%names(gen.cols)] <- gen.cols[x.col.names[x.col.names%in%names(gen.cols)]]
 		
 		if(clean){
 			if(is.null(reg)){
 				message("Need to supply reg to convert column names to clean version for definition matching")
 			}else{
 				txt <- match_txt(x, x.col.names, reg, txt)
-				txt[x.col.names%in%names(gen.cols)] <- gen.cols[names(gen.cols)%in%x.col.names]
+				txt[x.col.names%in%names(gen.cols)] <- gen.cols[x.col.names[x.col.names%in%names(gen.cols)]]
 			}
 		}
 		

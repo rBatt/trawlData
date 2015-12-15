@@ -55,7 +55,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
 			nm <- paste0("raw.", regions[i])
-			assign(nm, read.trawl(regions[i]))
+			assign(nm, read.trawl(regions[i], zippath="inst/extdata"))
 			
 			# ensure encoding is ASCII
 			makeAsciiChar(get(nm))

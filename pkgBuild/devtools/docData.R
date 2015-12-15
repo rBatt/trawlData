@@ -7,7 +7,7 @@ gen.cols <- c(
 	"date" = "date of the tow",
 	
 	# species names
-	"ref" = "reference taxonomic ID from raw data"
+	"ref" = "reference taxonomic ID from raw data",
 	"spp" = "species scientific name; Genus species",
 	"common" = "the common name of the organism sampled",
 	"genus" = "the genus of the species",

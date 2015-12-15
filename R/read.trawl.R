@@ -170,11 +170,11 @@ read.gmex <- function(zippath){
 	
 	
 	# define colClasses for each file
-	colClasses1 <- c(rep("integer",7), rep("character",3), rep("integer",2), "numeric", "numeric", "character", rep("character",3))
-	colClasses2 <- NULL
-	colClasses3 <- c(rep("integer",7), "character", "numeric","character", "integer", rep("character",3), rep("numeric", 12))
-	colClasses4 <- c("integer", "character", "character", "integer", "integer", "character", "character")
-	colClasses5 <- NULL
+	colClasses1 <- structure(c("integer", "integer", "character", "integer", "integer", "integer", "integer", "character", "character", "character", "integer", "numeric", "character"), .Names = c("BGSID", "CRUISEID", "STATIONID", "VESSEL", "CRUISE_NO", "P_STA_NO", "CATEGORY", "GENUS_BGS", "SPEC_BGS", "BGSCODE", "CNTEXP", "SELECT_BGS", "BIO_BGS"))
+	colClasses2 <- structure(c("character", "numeric", "numeric", "numeric", "character", "character", "character", "numeric", "integer", "numeric", "numeric", "character", "integer", "numeric", "integer", "numeric", "numeric", "numeric", "numeric", "character"), .Names = c("STATIONID", "CRUISEID", "CRUISE_NO", "P_STA_NO", "TIME_ZN", "TIME_MIL", "S_LATD", "S_LATM", "S_LOND", "S_LONM", "DEPTH_SSTA", "MO_DAY_YR", "E_LATD", "E_LATM", "E_LOND", "E_LONM", "TEMP_SSURF", "TEMP_BOT", "VESSEL_SPD", "COMSTAT" ))
+	colClasses3 <- structure(c("integer", "character", "integer", "integer", "integer", "integer", "integer", "character", "numeric", "character", "integer", "character", "character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"), .Names = c("INVRECID", "STATIONID", "CRUISEID", "VESSEL", "CRUISE_NO", "P_STA_NO", "GEAR_SIZE", "GEAR_TYPE", "MESH_SIZE", "OP", "MIN_FISH", "WBCOLOR", "BOT_TYPE", "BOT_REG", "TOT_LIVE", "FIN_CATCH", "CRUS_CATCH", "OTHR_CATCH", "T_SAMPLEWT", "T_SELECTWT", "FIN_SMP_WT", "FIN_SEL_WT", "CRU_SMP_WT", "CRU_SEL_WT", "OTH_SMP_WT", "OTH_SEL_WT"))
+	colClasses4 <- structure(c("integer", "character", "character", "integer", "integer", "character", "integer"), .Names = c("Key1", "TAXONOMIC", "CODE", "TAXONSIZECODE", "isactive", "common_name", "tsn"))
+	colClasses5 <- structure(c("integer", "integer", "character", "integer", "integer", "character", "character", "character", "integer"), .Names = c("CRUISEID", "YR", "SOURCE", "VESSEL", "CRUISE_NO", "STARTCRU", "ENDCRU", "TITLE", "NOTE"))
 	
 	
 	# read in each file type 1 at a time

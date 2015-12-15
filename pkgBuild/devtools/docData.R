@@ -64,13 +64,14 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 	if(is.null(desc)){
 		desc <- x.name
 	}
-	head.txt <- paste0(title, "\n", desc, "\n", "@format\nA ", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
+	rc <- "#' "
+	head.txt <- paste0(rc,title, "\n", rc, desc, "\n", rc, "@format\n", rc, "A", dim.desc, " ", paste(x.class,collapse=" "), ":  \n")
 	
-	tab.start <-"\\tabular{rlll}{\n"
+	tab.start <-paste0(rc, "\\tabular{rlll}{\n")
 	tab.meat <- c()
 	for(i in 1:nc){
 		# ind <- paste("[,", formatC(i, width=nchar(nc)), "]")
-		c.start <- paste0("[,", i, "]")
+		c.start <- paste0(rc, "[,", i, "]")
 		tn <- x.col.names[i]
 		tc <- x.col.class[i]
 		c.end <- "\\cr"
@@ -78,7 +79,7 @@ docData <- function(x, title=NULL, desc=NULL, idh=NULL, clean=FALSE, reg=NULL, a
 	}
 	tail.txt <- paste0("\"",x.name,"\"")
 	
-	txt.out <- paste(c(head.txt,tab.start, tab.meat, "}\n",tail.txt), collapse="")
+	txt.out <- paste(c(head.txt,tab.start, tab.meat, rc, "}\n", tail.txt), collapse="")
 	
 	if(append){sink("datasets.R", append=TRUE, type="output")}
 	cat(txt.out)
@@ -107,6 +108,7 @@ match_txt <- function(nms, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ng
 
 
 #' @describeIn docData General Column Definitions
+"gen.cols"
 gen.cols <- c(
 	# time information
 	"year" = "year of haul", 

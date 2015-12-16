@@ -4,24 +4,16 @@
 ^\.DS_Store$
 ^\.gitignore$
 ^\.gitattributes$
-
-# Scripts to Ignore
 ^tax\.getTL\.R$
 ^testRepo\.R$
-
-# yaml ignore
 ^\.travis\.yml$
 ^remake\.yml$
-
-# Ignore Directories
 ^pkgBuild$
 ^man-roxygen$
 ^\.git$
 ^\.remake$
 ^testFormat$
 ^git-lfs$
-
-# Ignore Data Files
 ^inst/extdata/soda\.zip$
 ^inst/extdata/HadISST\.zip$
 ^inst/extdata/depthData\.zip$

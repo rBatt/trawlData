@@ -114,7 +114,8 @@ createSppKey <- function(new_ref, save.key=FALSE){
 	new_spp.key[needs.cmmn&has.cmmn,common:=match.cmmn[needs.cmmn&has.cmmn,val]]
 
 	# Define conflicts in new_spp.key
-	new_spp.key[!is.na(spp), conflict:=any(!sapply(.SD, function(x)lu(x[!is.na(x)])<=1)), by="spp"]
+	conflict_cols <- c("common", "taxLvl", "species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom", "trophicDiet", "trophicOrig", "Picture", "trophicLevel", "trophicLevel.se", "tax.src2")
+	new_spp.key[!is.na(spp), conflict:=any(!sapply(.SD[,eval(s2c(conflict_cols))], function(x)lu(x[!is.na(x)])<=1)), by="spp"]
 	
 	
 	# Add flag column if it doesn't exist

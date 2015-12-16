@@ -50,7 +50,15 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	has.nc <- names(X)[names(X)%in%numeric.cols]
 	has.cc <- names(X)[names(X)%in%character.cols]
 	# X[,c(has.nc):=eval(s2c(has.nc))]
-	X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
+	
+	as.n <- function(x){
+		x <- gsub("\\s|[O]*", "", x)
+		x[x==""] <- NA_real_
+		as.numeric(x)
+	}
+	if(reg%in%c("newf")){
+		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.n)]
+	}
 	X[,c(has.cc):=lapply(eval(s2c(has.cc)), as.character)]
 	
 	# Change factors to characters

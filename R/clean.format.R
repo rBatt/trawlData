@@ -40,15 +40,18 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	# standard column names that should be numeric
 	# can't do the lat/lon.start/end as numeric because newf needs them to stay as character 
 	# in order for their conversion to decimal units to be simple
-	# numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.end", "lat.min.end", "lat.min.start", "lat.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.end", "lon.min.end", "lon.min.start", "lon.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
 	numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.min.end", "lat.min.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.min.end", "lon.min.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
 	
 	# standard column names that should be character
-	character.cols <- c("comment", "common", "cruise", "date", "date.end", "datetime", "day", "dayl", "geartype","genus", "haul", "haulid", "month", "monthl", "season", "set", "station", "station.comment", "stratum", "str", "survey.name", "time", "timel", "timezone", "towID", "vessel", "year", "yearl")
+	character.cols <- c("comment", "common", "cruise", "date", "date.end", "datetime", "geartype","genus", "haul", "haulid", "season", "set", "station", "station.comment", "stratum", "str", "survey.name", "time", "timel", "timezone", "towID", "vessel")
+	
+	integer.cols <- c("day","dayl","month","monthl","year", "yearl")
+	
 	# test <- copy(ai)
 # 	X <- test
 	has.nc <- names(X)[names(X)%in%numeric.cols]
 	has.cc <- names(X)[names(X)%in%character.cols]
+	has.ic <- names(X)[names(X)%in%integer.cols]
 	# X[,c(has.nc):=eval(s2c(has.nc))]
 	
 	as.n <- function(x){
@@ -62,6 +65,7 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
 	}
 	X[,c(has.cc):=lapply(eval(s2c(has.cc)), as.character)]
+	X[,c(has.ic):=lapply(eval(s2c(has.ic)), as.integer)]
 	
 	# Change factors to characters
 	isfactor <- sapply(X, is.factor)
@@ -364,7 +368,7 @@ clean.format.shelf <- function(X){
 clean.format.wcann <- function(X){
 	
 	# nothing to add beyond generic
-	X[,year:=gsub("Cycle ", "", year)]
+	X[,year:=as.integer(gsub("Cycle ", "", year))]
 	
 }
 

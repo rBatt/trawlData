@@ -58,6 +58,8 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	}
 	if(reg%in%c("newf")){
 		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.n)]
+	}else{
+		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
 	}
 	X[,c(has.cc):=lapply(eval(s2c(has.cc)), as.character)]
 	

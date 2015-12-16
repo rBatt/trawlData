@@ -64,7 +64,7 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	X[,row_flag:=""]
 	get.clean.trimRow(reg) # do the region-specific checks on which rows to trim out
 	X[,keep.row:=(keep.row&spp.i)]
-	X[spp.i,row_flag:=paste(row_flag, "Spp2")]
+	X[!spp.i,row_flag:=paste(row_flag, "Spp2")]
 	
 	invisible(NULL)
 }
@@ -144,11 +144,11 @@ clean.trimRow.gmex <- function(X){
 	keep.row.i <- spp.i & survey.i & gear.i & tow.i & haul.i
 	X[,keep.row:=keep.row.i]
 	
-	X[gear.i,row_flag:=paste(row_flag, "Gear")]
-	X[haul.i,row_flag:=paste(row_flag, "Haul")]
-	X[spp.i,row_flag:=paste(row_flag, "Spp1")]
-	X[survey.i,row_flag:=paste(row_flag, "Surv")]
-	X[tow.i,row_flag:=paste(row_flag, "Tow")]
+	X[!gear.i,row_flag:=paste(row_flag, "Gear")]
+	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
+	X[!spp.i,row_flag:=paste(row_flag, "Spp1")]
+	X[!survey.i,row_flag:=paste(row_flag, "Surv")]
+	X[!tow.i,row_flag:=paste(row_flag, "Tow")]
 	
 	invisible(NULL)
 }
@@ -176,7 +176,7 @@ clean.trimRow.neus <- function(X){
 	keep.row.i <- season.i
 	X[,keep.row:=keep.row.i]
 	
-	X[season.i,row_flag:=paste(row_flag, "Seas")]
+	X[!season.i,row_flag:=paste(row_flag, "Seas")]
 	
 	
 	# some trimmings in original read file were related to bad spp
@@ -203,11 +203,11 @@ clean.trimRow.newf <- function(X){
 	keep.row.i <- record.i & haul.i & gear.i & tow.i & season.i
 	X[,keep.row:=keep.row.i]
 	
-	X[gear.i,row_flag:=paste(row_flag, "Gear")]
-	X[haul.i,row_flag:=paste(row_flag, "Haul")]
-	X[record.i,row_flag:=paste(row_flag, "Rec")]
-	X[season.i,row_flag:=paste(row_flag, "Seas")]
-	X[tow.i,row_flag:=paste(row_flag, "Tow")]
+	X[!gear.i,row_flag:=paste(row_flag, "Gear")]
+	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
+	X[!record.i,row_flag:=paste(row_flag, "Rec")]
+	X[!season.i,row_flag:=paste(row_flag, "Seas")]
+	X[!tow.i,row_flag:=paste(row_flag, "Tow")]
 	
 	invisible(NULL)
 }
@@ -237,10 +237,10 @@ clean.trimRow.sa <- function(X){
 	keep.row.i <- haul.i & strat.i & survey.i & effort.i
 	X[,keep.row:=keep.row.i]
 	
-	X[effort.i,row_flag:=paste(row_flag, "Eff")]
-	X[haul.i,row_flag:=paste(row_flag, "Haul")]
-	X[strat.i,row_flag:=paste(row_flag, "Strat")]
-	X[survey.i,row_flag:=paste(row_flag, "Surv")]
+	X[!effort.i,row_flag:=paste(row_flag, "Eff")]
+	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
+	X[!strat.i,row_flag:=paste(row_flag, "Strat")]
+	X[!survey.i,row_flag:=paste(row_flag, "Surv")]
 	
 	invisible(NULL)
 	
@@ -257,7 +257,7 @@ clean.trimRow.sgulf <- function(X){
 	keep.row.i <- set.i
 	X[,keep.row:=keep.row.i]
 	
-	X[set.i,row_flag:=paste(row_flag, "Set")]
+	X[!set.i,row_flag:=paste(row_flag, "Set")]
 	
 	invisible(NULL)
 }
@@ -295,9 +295,9 @@ clean.trimRow.shelf <- function(X){
 	keep.row.i <- type.i & date.i & haul.i
 	X[,keep.row:=keep.row.i]
 	
-	X[date.i,row_flag:=paste(row_flag, "Date")]
-	X[haul.i,row_flag:=paste(row_flag, "Haul")]
-	X[type.i,row_flag:=paste(row_flag, "Type")]
+	X[!date.i,row_flag:=paste(row_flag, "Date")]
+	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
+	X[!type.i,row_flag:=paste(row_flag, "Type")]
 	
 	invisible(NULL)
 }

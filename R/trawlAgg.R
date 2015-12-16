@@ -43,6 +43,9 @@
 #'
 #' # aggregate species within a haul (among individuals)
 #' # this means taking the sum of many bio metrics
+#' # Note that I put 'sex' in metaCols, b/c I don't want
+#' # the bioFun applied to it (preferring instead to
+#' # take the first unique value as a form of aggregating)
 #' neus1 <- trawlAgg(
 #' 	X=mini_data,
 #' 	bioFun=sumna,
@@ -50,7 +53,7 @@
 #' 	bio_lvl="spp", space_lvl="haulid", time_lvl="season",
 #' 	bioCols=c("wtcpue","cntcpue"),
 #' 	envCols=c("btemp"),
-#' 	metaCols=c("reg","common","datetime","stratum"),
+#' 	metaCols=c("reg","common","datetime","stratum","sex"),
 #' 	meta.action=c("unique1")
 #' )
 #'
@@ -87,11 +90,11 @@
 #' 	metaFun=list(
 #' 	# note that these are named, and don't need
 #' 	# to be in the same order as metaCols
+#' 		sex = function(x, ...)una(x, ...)[1],
 #' 		reg = function(x, ...)una(x, ...)[1], # this is unique1
 #' 		datetime = function(x, ...)una(data.table::year(x), ...)[1],
 #' 		common = function(x, ...)una(x, ...)[1],
 #' 		spp = function(x, ...)una(x, ...)[1],
-#' 		CATCHSEX = function(x, ...)una(x, ...)[1],
 #' 		cnt = sumna
 #' 	)
 #' ) # not surprisingly, there wasn't any aggregation at the level of individuals

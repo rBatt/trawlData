@@ -25,7 +25,8 @@ update_spp.key <- function(..., check_raw=FALSE){
 		}
 	}else{
 		# Read in CSV
-		spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"))
+		sk_classes <- structure(c("character", "character", "integer", "integer", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "character", "numeric", "numeric", "character", "logical", "character", "character", "character"), .Names = c("ref", "val.src", "tbl.row", "mtch.src", "tax.src", "spp", "common", "taxLvl", "species", "genus", "family", "order", "class", "superclass", "subphylum", "phylum", "kingdom", "trophicDiet", "trophicOrig", "Picture", "trophicLevel", "trophicLevel.se", "tax.src2", "conflict", "flag", "website", "website2"))
+		spp.key <- fread("inst/extdata/taxonomy/spp.key.csv", na.strings=c("","NA"), colClasses=sk_classes)
 
 		# make sure encoding is ASCII
 		makeAsciiChar(spp.key)

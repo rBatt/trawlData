@@ -23,5 +23,8 @@ Suggests:
     taxize,
     rfishbase,
     testthat,
-    rgdal
+    rgdal,
+    knitr,
+    rmarkdown
 RoxygenNote: 5.0.0.9000
+VignetteBuilder: knitr

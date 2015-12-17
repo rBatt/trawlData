@@ -7,53 +7,53 @@
 \format{A dim = 184631 x 42 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab CODE \tab integer \tab insert_description_here\cr
-[,2] \tab stratum \tab character \tab insert_description_here\cr
+[,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,3] \tab MISSION \tab character \tab insert_description_here\cr
 [,4] \tab SETNO \tab integer \tab insert_description_here\cr
 [,5] \tab MARKET \tab logical \tab insert_description_here\cr
 [,6] \tab SAMPWGT \tab numeric \tab insert_description_here\cr
-[,7] \tab ADJ_TOTWGT \tab numeric \tab insert_description_here\cr
-[,8] \tab ADJ_TOTNO \tab numeric \tab insert_description_here\cr
+[,7] \tab ADJ_TOTWGT \tab numeric \tab cleans up to \code{wtcpue}, weight (mass) of the catch\cr
+[,8] \tab ADJ_TOTNO \tab numeric \tab cleans up to \code{cntcpue}, number of individuals caught per hectare in the haul\cr
 [,9] \tab CALWT \tab integer \tab insert_description_here\cr
 [,10] \tab REMARKS \tab character \tab insert_description_here\cr
 [,11] \tab SIZE_CLASS \tab integer \tab insert_description_here\cr
-[,12] \tab SDATE \tab character \tab insert_description_here\cr
-[,13] \tab TIME \tab integer \tab insert_description_here\cr
+[,12] \tab SDATE \tab character \tab cleans up to \code{date}, date of the tow\cr
+[,13] \tab TIME \tab integer \tab cleans up to \code{time}, starting time of the tow\cr
 [,14] \tab SLAT \tab numeric \tab insert_description_here\cr
 [,15] \tab SLONG \tab numeric \tab insert_description_here\cr
 [,16] \tab ELAT \tab numeric \tab insert_description_here\cr
 [,17] \tab ELONG \tab numeric \tab insert_description_here\cr
 [,18] \tab AREA \tab integer \tab insert_description_here\cr
-[,19] \tab DUR \tab integer \tab insert_description_here\cr
+[,19] \tab DUR \tab integer \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,20] \tab DIST \tab numeric \tab insert_description_here\cr
 [,21] \tab HOWD \tab integer \tab insert_description_here\cr
-[,22] \tab SPEED \tab numeric \tab insert_description_here\cr
+[,22] \tab SPEED \tab numeric \tab cleans up to \code{towspeed}, the speed of the vessel\cr
 [,23] \tab HOWS \tab integer \tab insert_description_here\cr
 [,24] \tab DMIN \tab integer \tab insert_description_here\cr
 [,25] \tab DMAX \tab integer \tab insert_description_here\cr
-[,26] \tab WIND \tab integer \tab insert_description_here\cr
+[,26] \tab WIND \tab integer \tab cleans up to \code{wind}, wind speed (?)\cr
 [,27] \tab FORCE \tab integer \tab insert_description_here\cr
 [,28] \tab CURNT \tab integer \tab insert_description_here\cr
 [,29] \tab TYPE \tab integer \tab insert_description_here\cr
 [,30] \tab GEAR \tab integer \tab insert_description_here\cr
 [,31] \tab AUX \tab integer \tab insert_description_here\cr
-[,32] \tab DEPTH \tab integer \tab insert_description_here\cr
+[,32] \tab DEPTH \tab integer \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
 [,33] \tab ETIME \tab character \tab insert_description_here\cr
 [,34] \tab START_DEPTH \tab integer \tab insert_description_here\cr
 [,35] \tab END_DEPTH \tab integer \tab insert_description_here\cr
-[,36] \tab SURFACE_TEMPERATURE \tab numeric \tab insert_description_here\cr
-[,37] \tab BOTTOM_TEMPERATURE \tab numeric \tab insert_description_here\cr
-[,38] \tab BOTTOM_SALINITY \tab numeric \tab insert_description_here\cr
+[,36] \tab SURFACE_TEMPERATURE \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
+[,37] \tab BOTTOM_TEMPERATURE \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
+[,38] \tab BOTTOM_SALINITY \tab numeric \tab cleans up to \code{bsalin}, bottom salinity\cr
 [,39] \tab depthzone_fathoms \tab character \tab insert_description_here\cr
-[,40] \tab stratarea_nmi2 \tab integer \tab insert_description_here\cr
-[,41] \tab spp \tab character \tab insert_description_here\cr
-[,42] \tab common \tab character \tab insert_description_here\cr
+[,40] \tab stratarea_nmi2 \tab integer \tab cleans up to \code{stratumarea}, the area of the statistical stratum (km2)\cr
+[,41] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,42] \tab common \tab character \tab the common name of the organism sampled\cr
 }}
 \usage{
 raw.shelf
 }
 \description{
-Raw data set for the Scotian Shelf bottom trawl survey
+Raw data set for the Gulf of Mexico bottom trawl survey
 }
 \keyword{datasets}
 

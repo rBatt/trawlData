@@ -1,6 +1,6 @@
 Package: trawlData
 Title: Read and Clean Data from Bottom Trawl Surveys
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", role=c("aut","cre")),
 	person(given="James W.", family="Morley", email="jw.morley@rutgers.edu", role=c("aut")),
 	person(given="Rebecca L.", family="Selden", email="becca.selden@gmail.com", role=c("aut")),
@@ -17,11 +17,15 @@ Imports:
     stringr,
     stringi,
     PBSmapping,
-    reshape2
+    reshape2,
+    lubridate
 Suggests: 
     raster,
     taxize,
     rfishbase,
     testthat,
-    rgdal
+    rgdal,
+    knitr,
+    rmarkdown
 RoxygenNote: 5.0.0.9000
+VignetteBuilder: knitr

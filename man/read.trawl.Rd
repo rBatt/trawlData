@@ -5,7 +5,8 @@
 \title{Read Trawl}
 \usage{
 read.trawl(reg = c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa",
-  "sgulf", "shelf", "wcann", "wctri"), zippath = "./inst/extdata", ...)
+  "sgulf", "shelf", "wcann", "wctri"), zippath = file.path(system.file(package
+  = "trawlData"), "extdata"), ...)
 }
 \arguments{
 \item{reg}{the region name;  should be one of the following: \code{c("ai","ebs","gmex","goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri")}}

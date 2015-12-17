@@ -59,8 +59,7 @@ The argument \code{na.rm} affects any of the functions passed as arguments, even
 The use of \code{use_nAgg} is complicated by the fact that when na.rm=TRUE, each column may very well have a different number of aggregated values. So right now, \code{use_nAgg} does not adhere to na.rm=TRUE, and includes NA values in its count.
 }
 \examples{
-# updated versions will have "CATCHSEX" as "sex"
-trim.neus <- trawlTrim("neus", c.add=c("length","CATCHSEX"))
+trim.neus <- trawlTrim("neus", c.add=c("length","sex"))
 mini_data <- trim.neus[
 	pick(spp, 2, w=TRUE)
 	& pick(stratum, 5, w=TRUE)
@@ -69,6 +68,9 @@ mini_data <- trim.neus[
 
 # aggregate species within a haul (among individuals)
 # this means taking the sum of many bio metrics
+# Note that I put 'sex' in metaCols, b/c I don't want
+# the bioFun applied to it (preferring instead to
+# take the first unique value as a form of aggregating)
 neus1 <- trawlAgg(
 	X=mini_data,
 	bioFun=sumna,
@@ -76,7 +78,7 @@ neus1 <- trawlAgg(
 	bio_lvl="spp", space_lvl="haulid", time_lvl="season",
 	bioCols=c("wtcpue","cntcpue"),
 	envCols=c("btemp"),
-	metaCols=c("reg","common","datetime","stratum"),
+	metaCols=c("reg","common","datetime","stratum","sex"),
 	meta.action=c("unique1")
 )
 
@@ -108,16 +110,16 @@ trawlAgg(
 	bio_lvl="individual", space_lvl="stratum",time_lvl="season",
 	bioCols=c("weight","length"),
 	envCols=c("stemp","btemp", "depth"),
-	metaCols=c("datetime","reg", "cnt", "spp", "common", "CATCHSEX"),
+	metaCols=c("datetime","reg", "cnt", "spp", "common", "sex"),
 	meta.action=c("FUN"),
 	metaFun=list(
-	 # note that these are named, and don't need
+	# note that these are named, and don't need
 	# to be in the same order as metaCols
+		sex = function(x, ...)una(x, ...)[1],
 		reg = function(x, ...)una(x, ...)[1], # this is unique1
 		datetime = function(x, ...)una(data.table::year(x), ...)[1],
 		common = function(x, ...)una(x, ...)[1],
 		spp = function(x, ...)una(x, ...)[1],
-		CATCHSEX = function(x, ...)una(x, ...)[1],
 		cnt = sumna
 	)
 ) # not surprisingly, there wasn't any aggregation at the level of individuals

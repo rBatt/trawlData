@@ -1,0 +1,158 @@
+---
+title: "An overview of trawlData: A compendium of North American bottom trawl survey data, documentation, and related tools and resources"
+author: "Ryan D batt"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{trawlData Overview}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## It's a Data Package
+The primary focus on this package is its data sets. The philosophy of the package is largely twofold:  
+ 1. Minimize changes to data that result in loss of information
+ 2. R functions should not be necessary for one to benefit from the package, which emphasizes the data sets
+ 
+With respect to the first aspect of the package's philosophy, the package has 4 types of data sets:  
+ 1. Raw trawl data files as recieved by data providers (.zip of .csv, .dat, etc)
+ 2. Raw trawl data files that have been converted to R objects (`raw.___`)
+ 3. Clean trawl data files have standardized naming conventions, units, and minor corrections (`clean.___`)
+ 4. Gridded data sets as R objects (surface and bottom temperature, depth)
+ 
+
+The raw data (1) can be found using `system.file(package='trawlData')`, which will point you to the 'inst' directory. Modifications to these files by the package maintainers are rare and minor, and are made only to enable R to read them. The raw data files as R objects (2) often constitute merging multiple raw data files, and so in some cases minor modifications to content type had to be made; but modifications are minor. The clean trawl data as R objects (3) have been greatly modified from the original version, but modifications generally take the form of corrections (taxonomy, confirmed typos), formatting (capitalization, date/time formats), or units (area, mass, latitude/ longitude coordinates). Cleaning emphasizes maintaining as much of the original information as possible; no aggregation is performed, no columns are deleted, and no rows are dropped. However, columns are added, included one indicating which rows likely represent low-quality observations that should be deleted, as well as a column indicating why a row has been recommended for deletion. Finally, gridded data sets (4) contain environmental data that are in formats consistent with the `raster` package.
+
+
+With respect to the second aspect of the package's philosophy, I encourage users to do the following:
+
+```{r, eval=TRUE, echo=TRUE}
+data(package="trawlData") # list data files
+```
+
+For each of the data files listed there, please explore using using `?`. Documentation of these data sets is an ongoing effort, and is still in its infancy as of v0.2.0; however, for objects that are `data.frame`s or `data.table`s the help file should at least provide an accurate description of the dimensions of the data set and the column names/ classes.
+
+
+## Data Functions (reading, cleaning, taxonomy)
+
+The data sets are the most valuable part of the package. However, we have added value by trying to standardize the content among these data sets, fixing errors, and formatting the content so that it will be readily usable for most analyses.
+
+The code that generates The bulk of the code that generates these data sets is included in the package as functions. Some of the code that automates these procedures are not in the package, but are still available on [the package's GitHub repo](https://github.com/rBatt/trawlData) (mostly under the `pkgBuild` folder). Let's take, for example, the Newfoundland data set. Like all regions, this survey region has 3 data sets associated with it: raw data files (zipped up under `inst/newf/newf/zip`), the raw R object (`raw.newf`), and the clean R object (`clean.newf`). To illustrate how the functions in the package emphasize the data, I will show how to use the package functions to recreate the Newfoundland .RData files. A similar process can be applied to any region.
+
+#### Raw R Ojbect from Raw File
+```{r, echo=TRUE}
+library(data.table) # fast
+library(LaF) # for reading newf, which is .fwf
+library(trawlData)
+
+newf <- read.trawl("newf") # just supply any region abbreivation 
+all.equal(newf, raw.newf) # the result of read.trawl() is the raw.__ object
+
+str(newf) # alternatively, check out ?raw.newf
+
+tables() # at the time of writing this vignette, newf is 151 MB.
+```
+
+We use the `data.table` package to handle as many aspects of data storage and manipulation as possible. Why? It is remarkably fast and versatile. For all regions except newf, data read-in is largely handled by `data.table::fread()`; however, the Newfoundland data sets are fix-width-format (fwf), and we use the `LaF` package to read in these data formats because they are not supported by `fread`.
+
+Note that we just recreated the `raw.newf` object very succinctly using the `read.trawl()` function. Any region name can be passed to that function to read in the zip file (`"neus"` is the only region that does not have raw data files zipped)
+
+#### Clean R Ojbect from Raw R Object
+Cleaning the data sets requires more steps than reading. Because of the large impact that cleaning data can have on any analysis, we take care to organize and document the procedures we use in `trawlData`; by documenting and modularizing these procedures, we offer users both guidance and freedom.  
+
+The cleaning procedures that produce the clean.___ objects are grouped into 5 functions, arranged by the type of cleaning task that they perform. These functions are intended to be executed in a specific order (for reason which may become obvious), but there are currently no checks as to whether a particular object has already been modified by the 'prerequisite' cleaning functions. The 5 functions are:  
+
+ 1. **`clean.names`** standardizes column names  
+	 - changes STRATUM to stratum, e.g.  
+ 2. **`clean.format`** standardizes classes, units, and fixes typos; minimal date formatting  
+	 - confirms the classes of standardized columns from `clean.names`  
+	 - convert units; e.g., in gmex multiply depth by 1.8288 to convert fathoms to meters  
+	 - fix typos; e.g., in gmex a towspeed was recorded as 30, but we confirmed with data provider it should be 3  
+	 - fix numeric formats; e.g., newf has 2 digit years, which are converted to 4 digits  
+ 3. **`clean.columns`** adds columns that can be calculated from current columns, formats dates  
+	 - bulk of date formatting handled here, because it often requires combining information from several columns  
+	 - ensures the existence of a few main categories of columns:  
+		 * haulid  
+		 * date, time, datetime  
+		 * season  
+		 * longitude/ latitude  
+		 * depth  
+		 * stratum  
+		 * stratum area  
+		 * towarea/ effort  
+		 * weight/ count per unit effort  
+		 * region name  
+	 - new columns added often by using more than 1 existing column; e.g., wtcpue from weight and effort  
+ 4. **`clean.tax`** fixes taxonomy, adds ecological information  
+	 - this is an ongoing effort, but it translates raw taxonomic identifiers into scientific names  
+	 - adds taxnomic classification  
+	 - adds some information about trophic level  
+	 - mcuh generated using `rfishbase` and `taxize` packages, but huge manual effort too  
+ 5. **`clean.trimRow`** adds columns indicating which rows should be dropped  
+	 - does not actually remove any rows, simply adds `keep.row` column (TRUE means keep, FALSE drop)  
+	 - also adds the `row_flag` column, which helps to diagnose *why* a row is recommended for deletion:  
+		 * **Date** the time of year of the sample is outside preferred time frame  
+		 * **Eff** the region usually reports effort, but here it was 0 or NA  
+		 * **Haul** sometimes hauls are duplicated, or particular hauls are known to be problematic  
+		 * **Gear** non-standard or ineffective gear/ method used  
+		 * **Rec** not the desired record type; e.g., not for biological data  
+		 * **Seas** the sample was not taken during a preferred season; similar to date  
+		 * **Set** undesirable set method; sgulf only  
+		 * **Spp1** the taxonomic identifer is flagged for a region-specific reason; often for similar reason as Spp2  
+		 * **Spp2** ref contains patterns indicating non-standard data (egg, purse, yoy, larvae, fish)  
+		 * **Strat** the location (stratum) of the sample is non-standard  
+		 * **Surv** samples from a non-preferred survey (surveys differ in season, equipment, etc)  
+		 * **Tow** non-standard aspect of tow; usually due to odd speed, duration  
+		 * **Type** undesirable sample type, shelf only  
+
+As you can see, these functions do a lot. Keeping track of what they do is essential to making sure that the corrections to the data are appropriate for your project and analysis. Organizing these common alterations to the trawl data, and giving them names, will allow you to more readily communicate to colleagues and others who interact with your research what aspects of your data you altered. Furthermore, this organization makes it easy to find an tailor alterations. Most `clean.__` functions have two mains parts: 1) a function that manipulates all regions based on the same rules, and that then calls 2) a region-specific function to address the needs of the data from that region alone. For example, you may examine the `clean.trimRow` function and its subfuction, `trawlData:::clean.trimRow`:
+
+```{r, echo=TRUE}
+print(trawlData::clean.trimRow) # only the Spp2 flag is added here
+
+# But we can see the call to switch(),
+# which specifies region-specific functions;
+# Let's examine one:
+print(head(trawlData:::clean.trimRow.newf, 5)) # use ::: b/c this is not an exported function
+# ...
+print(tail(trawlData:::clean.trimRow.newf, 5))
+```
+
+Thus, we can treat the functions as a notebook for the procedures. Even if we never use them, knowing they exist and reading them informs us about how why we recommend certain changes, which better enables users to an informed decision about when to accept and when to deviate from a prescribed procedure.
+
+Below we use these functions to recreate the contents to `raw.newf`.
+
+```{r, echo=TRUE}
+(clean.names(newf, reg="newf")) # changes made in-place
+(clean.format(newf, reg="newf"))
+(clean.columns(newf, reg="newf"))
+(newf <- clean.tax(newf, reg="newf")) # only function requiring reassignment
+(clean.trimRow(newf, reg="newf"))
+
+all.equal(newf, clean.newf)
+
+```
+
+
+#### Dropping Columns and Rows
+Up to this point, very little information has been lost relative to original data files, and in fact much has been added. However, all of this information is obviously cumbersome to work with. When you first load `trawlData`, you will have the clean.___ data available to you, which is where we left off with `newf`. Let's trim it down to something more manageable. First, we'll remove bad rows. 
+
+```{r, echo=TRUE}
+(newf <- newf[(keep.row)])
+```
+
+Then we can drop columns. Although you can use standard `data.table` syntax (or `data.frame`, if you convert it first) to drop columns, `clean.trimCol` can be a handy function to work with. There are 3 ways to use the function. First, you can simply specify the columns you want to keep via the `cols` argument. But `cols` already has a list of recommended columns, so it may be more convenient to simply `c.add=` columns to that list, and/or `c.drop=` columns. Note that columns non-existent columns are specified, no action is taken. Below is an example where we make use of `c.add=` and `c.drop=`.
+
+```{r, echo=TRUE}
+clean.trimCol(
+	X=newf, 
+	c.add=c("trophicLevel"), 
+	c.drop=c("ref","species", "genus", "weight","cnt", "cntcpue",
+		"season", "effort", "cntcpue","stemp","keep.row"
+	)
+)
+```
+
+
+
+

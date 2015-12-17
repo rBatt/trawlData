@@ -3,41 +3,35 @@
 \docType{data}
 \name{taxInfo}
 \alias{taxInfo}
-\title{Taxonomic Information (legacy)
-Taxonomic classification and ecological information
-This is the data set manually checked by Rachel Berman.
-Superceded by \code{\link{spp.key}}.}
+\title{Taxonomic Information (legacy)}
 \format{A dim = 4483 x 20 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab raw.spp \tab character \tab insert_description_here\cr
-[,2] \tab spp \tab character \tab insert_description_here\cr
-[,3] \tab common \tab character \tab insert_description_here\cr
-[,4] \tab taxLvl \tab character \tab insert_description_here\cr
-[,5] \tab species \tab character \tab insert_description_here\cr
-[,6] \tab genus \tab character \tab insert_description_here\cr
-[,7] \tab family \tab character \tab insert_description_here\cr
-[,8] \tab order \tab character \tab insert_description_here\cr
-[,9] \tab class \tab character \tab insert_description_here\cr
-[,10] \tab superclass \tab character \tab insert_description_here\cr
-[,11] \tab subphylum \tab character \tab insert_description_here\cr
+[,2] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,3] \tab common \tab character \tab the common name of the organism sampled\cr
+[,4] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+[,5] \tab species \tab character \tab the species name of the species\cr
+[,6] \tab genus \tab character \tab the genus of the species\cr
+[,7] \tab family \tab character \tab taxonomic family\cr
+[,8] \tab order \tab character \tab taxonomic order\cr
+[,9] \tab class \tab character \tab taxonomic class\cr
+[,10] \tab superclass \tab character \tab taxonomic superclass\cr
+[,11] \tab subphylum \tab character \tab taxonomic subphylum\cr
 [,12] \tab phylum \tab character \tab insert_description_here\cr
-[,13] \tab kingdom \tab character \tab insert_description_here\cr
+[,13] \tab kingdom \tab character \tab taxonomic kingdom\cr
 [,14] \tab isSpecies \tab logical \tab insert_description_here\cr
 [,15] \tab correctSpp \tab logical \tab insert_description_here\cr
-[,16] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,17] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,18] \tab Picture \tab character \tab insert_description_here\cr
-[,19] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,20] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
+[,16] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
+[,17] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
+[,18] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
+[,19] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
+[,20] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
 }}
 \usage{
 taxInfo
 }
 \description{
-Taxonomic Information (legacy)
 Taxonomic classification and ecological information
-This is the data set manually checked by Rachel Berman.
-Superceded by \code{\link{spp.key}}.
 }
 \keyword{datasets}
 

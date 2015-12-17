@@ -1,0 +1,1091 @@
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg viewBox="0.00 0.00 2415.97 992.78" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 100%; height: 100%;" version="1.1" xmlns="http://www.w3.org/2000/svg"><defs xmlns="http://www.w3.org/1999/xhtml"><style type="text/css"><![CDATA[]]></style></defs>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 988.78)">
+<title>remake</title>
+<polygon fill="white" stroke="none" points="-4,4 -4,-988.78 2411.97,-988.78 2411.97,4 -4,4"/>
+<!-- all -->
+<g id="node1" class="node"><title>all</title>
+<ellipse fill="#d6dbdf" stroke="#34495e" cx="1439.97" cy="-20.4437" rx="20.3875" ry="20.3875"/>
+<text text-anchor="middle" x="1439.97" y="-17.4437" font-family="Courier,monospace" font-size="10.00">all</text>
+</g>
+<!-- raw_scripts -->
+<g id="node2" class="node"><title>raw_scripts</title>
+<ellipse fill="#d6dbdf" stroke="#34495e" cx="1350.97" cy="-707.226" rx="49.107" ry="49.107"/>
+<text text-anchor="middle" x="1350.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">raw_scripts</text>
+</g>
+<!-- data/raw.ai.RData -->
+<g id="node9" class="node"><title>data/raw.ai.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="675.958,-621.923 557.991,-621.923 557.991,-585.923 675.958,-585.923 675.958,-621.923"/>
+<text text-anchor="middle" x="616.975" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.ai.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.ai.RData -->
+<g id="edge15" class="edge"><title>raw_scripts-&gt;data/raw.ai.RData</title>
+<g id="a_edge15"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1316.48,-671.641C1309.24,-666.147 1301.26,-661.202 1292.97,-657.923 1169.95,-609.243 834.297,-640.927 686.095,-621.813"/>
+<polygon fill="black" stroke="black" points="686.572,-618.345 676.181,-620.413 685.593,-625.277 686.572,-618.345"/>
+</a>
+</g>
+</g>
+<!-- data/raw.ebs.RData -->
+<g id="node10" class="node"><title>data/raw.ebs.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="817.957,-621.923 693.992,-621.923 693.992,-585.923 817.957,-585.923 817.957,-621.923"/>
+<text text-anchor="middle" x="755.975" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.ebs.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.ebs.RData -->
+<g id="edge16" class="edge"><title>raw_scripts-&gt;data/raw.ebs.RData</title>
+<g id="a_edge16"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1316.43,-671.762C1309.19,-666.256 1301.23,-661.276 1292.97,-657.923 1199.56,-619.987 945.084,-636.99 828.383,-621.869"/>
+<polygon fill="black" stroke="black" points="828.597,-618.364 818.201,-620.41 827.604,-625.294 828.597,-618.364"/>
+</a>
+</g>
+</g>
+<!-- data/raw.gmex.RData -->
+<g id="node11" class="node"><title>data/raw.gmex.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="965.956,-621.923 835.993,-621.923 835.993,-585.923 965.956,-585.923 965.956,-621.923"/>
+<text text-anchor="middle" x="900.975" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.gmex.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.gmex.RData -->
+<g id="edge17" class="edge"><title>raw_scripts-&gt;data/raw.gmex.RData</title>
+<g id="a_edge17"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1316.34,-671.999C1309.1,-666.471 1301.17,-661.423 1292.97,-657.923 1165.1,-603.32 1117.33,-643.967 976.146,-621.962"/>
+<polygon fill="black" stroke="black" points="976.698,-618.505 966.264,-620.344 975.567,-625.413 976.698,-618.505"/>
+</a>
+</g>
+</g>
+<!-- data/raw.goa.RData -->
+<g id="node12" class="node"><title>data/raw.goa.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1107.96,-621.923 983.992,-621.923 983.992,-585.923 1107.96,-585.923 1107.96,-621.923"/>
+<text text-anchor="middle" x="1045.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.goa.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.goa.RData -->
+<g id="edge18" class="edge"><title>raw_scripts-&gt;data/raw.goa.RData</title>
+<g id="a_edge18"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1315.75,-672.337C1308.63,-666.848 1300.89,-661.727 1292.97,-657.923 1223.83,-624.683 1197.03,-638.057 1118.17,-622.067"/>
+<polygon fill="black" stroke="black" points="1118.79,-618.623 1108.29,-619.967 1117.34,-625.47 1118.79,-618.623"/>
+</a>
+</g>
+</g>
+<!-- data/raw.neus.RData -->
+<g id="node13" class="node"><title>data/raw.neus.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1255.96,-621.923 1125.99,-621.923 1125.99,-585.923 1255.96,-585.923 1255.96,-621.923"/>
+<text text-anchor="middle" x="1190.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.neus.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.neus.RData -->
+<g id="edge19" class="edge"><title>raw_scripts-&gt;data/raw.neus.RData</title>
+<g id="a_edge19"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1314.45,-673.813C1307.52,-668.242 1300.18,-662.712 1292.97,-657.923 1275.57,-646.349 1255.33,-635.374 1237.49,-626.445"/>
+<polygon fill="black" stroke="black" points="1238.93,-623.25 1228.41,-621.97 1235.83,-629.529 1238.93,-623.25"/>
+</a>
+</g>
+</g>
+<!-- data/raw.newf.RData -->
+<g id="node14" class="node"><title>data/raw.newf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1403.96,-621.923 1273.99,-621.923 1273.99,-585.923 1403.96,-585.923 1403.96,-621.923"/>
+<text text-anchor="middle" x="1338.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.newf.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.newf.RData -->
+<g id="edge20" class="edge"><title>raw_scripts-&gt;data/raw.newf.RData</title>
+<g id="a_edge20"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1345.29,-658.245C1344.24,-649.385 1343.18,-640.415 1342.23,-632.425"/>
+<polygon fill="black" stroke="black" points="1345.68,-631.758 1341.03,-622.239 1338.73,-632.581 1345.68,-631.758"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sa.RData -->
+<g id="node15" class="node"><title>data/raw.sa.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1577.96,-621.923 1459.99,-621.923 1459.99,-585.923 1577.96,-585.923 1577.96,-621.923"/>
+<text text-anchor="middle" x="1518.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.sa.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.sa.RData -->
+<g id="edge21" class="edge"><title>raw_scripts-&gt;data/raw.sa.RData</title>
+<g id="a_edge21"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1387.38,-673.633C1394.32,-668.08 1401.7,-662.603 1408.97,-657.923 1427.51,-645.996 1449.14,-635.014 1468.29,-626.177"/>
+<polygon fill="black" stroke="black" points="1469.8,-629.334 1477.46,-622.016 1466.91,-622.958 1469.8,-629.334"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sgulf.RData -->
+<g id="node16" class="node"><title>data/raw.sgulf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1731.95,-621.923 1595.99,-621.923 1595.99,-585.923 1731.95,-585.923 1731.95,-621.923"/>
+<text text-anchor="middle" x="1663.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.sgulf.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.sgulf.RData -->
+<g id="edge22" class="edge"><title>raw_scripts-&gt;data/raw.sgulf.RData</title>
+<g id="a_edge22"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1386.19,-672.323C1393.31,-666.836 1401.06,-661.718 1408.97,-657.923 1478.91,-624.397 1505.89,-637.483 1585.94,-622.036"/>
+<polygon fill="black" stroke="black" points="1586.86,-625.42 1595.97,-620.006 1585.47,-618.559 1586.86,-625.42"/>
+</a>
+</g>
+</g>
+<!-- data/raw.shelf.RData -->
+<g id="node17" class="node"><title>data/raw.shelf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1885.95,-621.923 1749.99,-621.923 1749.99,-585.923 1885.95,-585.923 1885.95,-621.923"/>
+<text text-anchor="middle" x="1817.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.shelf.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.shelf.RData -->
+<g id="edge23" class="edge"><title>raw_scripts-&gt;data/raw.shelf.RData</title>
+<g id="a_edge23"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1385.6,-671.967C1392.83,-666.443 1400.77,-661.403 1408.97,-657.923 1542.54,-601.261 1592.27,-643.944 1739.32,-622.036"/>
+<polygon fill="black" stroke="black" points="1740.28,-625.429 1749.62,-620.422 1739.19,-618.514 1740.28,-625.429"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wcann.RData -->
+<g id="node18" class="node"><title>data/raw.wcann.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="2039.95,-621.923 1903.99,-621.923 1903.99,-585.923 2039.95,-585.923 2039.95,-621.923"/>
+<text text-anchor="middle" x="1971.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.wcann.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.wcann.RData -->
+<g id="edge24" class="edge"><title>raw_scripts-&gt;data/raw.wcann.RData</title>
+<g id="a_edge24"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1385.51,-671.741C1392.75,-666.237 1400.71,-661.263 1408.97,-657.923 1506.53,-618.483 1772.2,-636.536 1893.41,-621.909"/>
+<polygon fill="black" stroke="black" points="1894.19,-625.337 1903.63,-620.544 1893.26,-618.398 1894.19,-625.337"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wctri.RData -->
+<g id="node19" class="node"><title>data/raw.wctri.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="2199.95,-621.923 2063.99,-621.923 2063.99,-585.923 2199.95,-585.923 2199.95,-621.923"/>
+<text text-anchor="middle" x="2131.97" y="-600.923" font-family="Courier,monospace" font-size="10.00">data/raw.wctri.RData</text>
+</g>
+<!-- raw_scripts&#45;&gt;data/raw.wctri.RData -->
+<g id="edge25" class="edge"><title>raw_scripts-&gt;data/raw.wctri.RData</title>
+<g id="a_edge25"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1385.46,-671.622C1392.71,-666.129 1400.68,-661.19 1408.97,-657.923 1541.51,-605.708 1907.71,-640.263 2048.97,-621.923 2050.48,-621.728 2052,-621.521 2053.52,-621.303"/>
+<polygon fill="black" stroke="black" points="2054.37,-624.714 2063.71,-619.726 2053.3,-617.797 2054.37,-624.714"/>
+</a>
+</g>
+</g>
+<!-- raw_data -->
+<g id="node31" class="node"><title>raw_data</title>
+<ellipse fill="#3498db" stroke="#3498db" cx="1383.97" cy="-531.923" rx="38.4616" ry="18"/>
+<text text-anchor="middle" x="1383.97" y="-528.923" font-family="Courier,monospace" font-size="10.00">raw_data</text>
+</g>
+<!-- raw_scripts&#45;&gt;raw_data -->
+<g id="edge14" class="edge"><title>raw_scripts-&gt;raw_data</title>
+<g id="a_edge14"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1384.69,-670.936C1395.96,-656.823 1407.14,-639.703 1412.97,-621.923 1417.96,-606.721 1416.94,-601.425 1412.97,-585.923 1410.49,-576.222 1405.83,-566.385 1400.96,-557.864"/>
+<polygon fill="black" stroke="black" points="1403.87,-555.921 1395.68,-549.202 1397.89,-559.563 1403.87,-555.921"/>
+</a>
+</g>
+</g>
+<!-- clean_scripts -->
+<g id="node3" class="node"><title>clean_scripts</title>
+<ellipse fill="#d6dbdf" stroke="#34495e" cx="1726.97" cy="-277.405" rx="56.5359" ry="56.5359"/>
+<text text-anchor="middle" x="1726.97" y="-274.405" font-family="Courier,monospace" font-size="10.00">clean_scripts</text>
+</g>
+<!-- data/clean.ai.RData -->
+<g id="node20" class="node"><title>data/clean.ai.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="722.956,-184.887 592.993,-184.887 592.993,-148.887 722.956,-148.887 722.956,-184.887"/>
+<text text-anchor="middle" x="657.975" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.ai.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.ai.RData -->
+<g id="edge26" class="edge"><title>clean_scripts-&gt;data/clean.ai.RData</title>
+<g id="a_edge26"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1672.61,-261.583C1622.09,-248.479 1544.54,-230.062 1475.97,-220.887 1151.21,-177.432 1061.75,-229.047 733.507,-184.941"/>
+<polygon fill="black" stroke="black" points="733.609,-181.422 723.228,-183.539 732.663,-188.358 733.609,-181.422"/>
+</a>
+</g>
+</g>
+<!-- data/clean.ebs.RData -->
+<g id="node21" class="node"><title>data/clean.ebs.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="876.955,-184.887 740.994,-184.887 740.994,-148.887 876.955,-148.887 876.955,-184.887"/>
+<text text-anchor="middle" x="808.975" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.ebs.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.ebs.RData -->
+<g id="edge27" class="edge"><title>clean_scripts-&gt;data/clean.ebs.RData</title>
+<g id="a_edge27"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1672.58,-261.785C1622.04,-248.819 1544.48,-230.493 1475.97,-220.887 1219.11,-184.87 1147.95,-220.392 887.451,-184.958"/>
+<polygon fill="black" stroke="black" points="887.693,-181.458 877.308,-183.555 886.734,-188.392 887.693,-181.458"/>
+</a>
+</g>
+</g>
+<!-- data/clean.gmex.RData -->
+<g id="node22" class="node"><title>data/clean.gmex.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1036.95,-184.887 894.995,-184.887 894.995,-148.887 1036.95,-148.887 1036.95,-184.887"/>
+<text text-anchor="middle" x="965.975" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.gmex.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.gmex.RData -->
+<g id="edge28" class="edge"><title>clean_scripts-&gt;data/clean.gmex.RData</title>
+<g id="a_edge28"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1672.53,-262.146C1621.96,-249.429 1544.37,-231.266 1475.97,-220.887 1289.61,-192.605 1237.47,-212.179 1047.05,-184.927"/>
+<polygon fill="black" stroke="black" points="1047.39,-181.44 1036.99,-183.463 1046.38,-188.367 1047.39,-181.44"/>
+</a>
+</g>
+</g>
+<!-- data/clean.goa.RData -->
+<g id="node23" class="node"><title>data/clean.goa.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1190.95,-184.887 1054.99,-184.887 1054.99,-148.887 1190.95,-148.887 1190.95,-184.887"/>
+<text text-anchor="middle" x="1122.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.goa.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.goa.RData -->
+<g id="edge29" class="edge"><title>clean_scripts-&gt;data/clean.goa.RData</title>
+<g id="a_edge29"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1671.92,-262.763C1621.25,-250.558 1543.89,-232.804 1475.97,-220.887 1357.34,-200.072 1323.59,-205.907 1201.47,-185.062"/>
+<polygon fill="black" stroke="black" points="1201.8,-181.567 1191.35,-183.308 1200.6,-188.464 1201.8,-181.567"/>
+</a>
+</g>
+</g>
+<!-- data/clean.neus.RData -->
+<g id="node24" class="node"><title>data/clean.neus.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1350.95,-184.887 1209,-184.887 1209,-148.887 1350.95,-148.887 1350.95,-184.887"/>
+<text text-anchor="middle" x="1279.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.neus.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.neus.RData -->
+<g id="edge30" class="edge"><title>clean_scripts-&gt;data/clean.neus.RData</title>
+<g id="a_edge30"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1672.16,-263.099C1594.08,-244.142 1450.32,-209.241 1360.22,-187.37"/>
+<polygon fill="black" stroke="black" points="1360.87,-183.924 1350.33,-184.966 1359.22,-190.727 1360.87,-183.924"/>
+</a>
+</g>
+</g>
+<!-- data/clean.newf.RData -->
+<g id="node25" class="node"><title>data/clean.newf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1510.95,-184.887 1369,-184.887 1369,-148.887 1510.95,-148.887 1510.95,-184.887"/>
+<text text-anchor="middle" x="1439.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.newf.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.newf.RData -->
+<g id="edge31" class="edge"><title>clean_scripts-&gt;data/clean.newf.RData</title>
+<g id="a_edge31"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1674.33,-256.501C1623.41,-237.245 1546.54,-208.18 1494.86,-188.641"/>
+<polygon fill="black" stroke="black" points="1495.79,-185.25 1485.2,-184.987 1493.31,-191.798 1495.79,-185.25"/>
+</a>
+</g>
+</g>
+<!-- data/clean.sa.RData -->
+<g id="node26" class="node"><title>data/clean.sa.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1658.96,-184.887 1528.99,-184.887 1528.99,-148.887 1658.96,-148.887 1658.96,-184.887"/>
+<text text-anchor="middle" x="1593.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.sa.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.sa.RData -->
+<g id="edge32" class="edge"><title>clean_scripts-&gt;data/clean.sa.RData</title>
+<g id="a_edge32"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1683.43,-240.872C1663.63,-224.724 1640.75,-206.053 1623.08,-191.638"/>
+<polygon fill="black" stroke="black" points="1624.83,-188.543 1614.87,-184.933 1620.4,-193.967 1624.83,-188.543"/>
+</a>
+</g>
+</g>
+<!-- data/clean.sgulf.RData -->
+<g id="node27" class="node"><title>data/clean.sgulf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1824.95,-184.887 1677,-184.887 1677,-148.887 1824.95,-148.887 1824.95,-184.887"/>
+<text text-anchor="middle" x="1750.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.sgulf.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.sgulf.RData -->
+<g id="edge33" class="edge"><title>clean_scripts-&gt;data/clean.sgulf.RData</title>
+<g id="a_edge33"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1738.97,-222.146C1741.05,-212.758 1743.13,-203.369 1744.96,-195.105"/>
+<polygon fill="black" stroke="black" points="1748.38,-195.843 1747.12,-185.323 1741.54,-194.331 1748.38,-195.843"/>
+</a>
+</g>
+</g>
+<!-- data/clean.shelf.RData -->
+<g id="node28" class="node"><title>data/clean.shelf.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1990.95,-184.887 1843,-184.887 1843,-148.887 1990.95,-148.887 1990.95,-184.887"/>
+<text text-anchor="middle" x="1916.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.shelf.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.shelf.RData -->
+<g id="edge34" class="edge"><title>clean_scripts-&gt;data/clean.shelf.RData</title>
+<g id="a_edge34"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1775.9,-248.459C1807.79,-230.248 1848.81,-206.818 1878.39,-189.923"/>
+<polygon fill="black" stroke="black" points="1880.23,-192.902 1887.18,-184.903 1876.76,-186.823 1880.23,-192.902"/>
+</a>
+</g>
+</g>
+<!-- data/clean.wcann.RData -->
+<g id="node29" class="node"><title>data/clean.wcann.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="2156.95,-184.887 2009,-184.887 2009,-148.887 2156.95,-148.887 2156.95,-184.887"/>
+<text text-anchor="middle" x="2082.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.wcann.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.wcann.RData -->
+<g id="edge35" class="edge"><title>clean_scripts-&gt;data/clean.wcann.RData</title>
+<g id="a_edge35"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1781.04,-259.924C1844.36,-240.625 1949.19,-208.667 2017.17,-187.945"/>
+<polygon fill="black" stroke="black" points="2018.38,-191.236 2026.93,-184.972 2016.34,-184.54 2018.38,-191.236"/>
+</a>
+</g>
+</g>
+<!-- data/clean.wctri.RData -->
+<g id="node30" class="node"><title>data/clean.wctri.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="2322.95,-184.887 2175,-184.887 2175,-148.887 2322.95,-148.887 2322.95,-184.887"/>
+<text text-anchor="middle" x="2248.97" y="-163.887" font-family="Courier,monospace" font-size="10.00">data/clean.wctri.RData</text>
+</g>
+<!-- clean_scripts&#45;&gt;data/clean.wctri.RData -->
+<g id="edge36" class="edge"><title>clean_scripts-&gt;data/clean.wctri.RData</title>
+<g id="a_edge36"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1782.34,-264.895C1873.94,-245.852 2057.57,-207.678 2165.14,-185.315"/>
+<polygon fill="black" stroke="black" points="2165.91,-188.73 2174.99,-183.268 2164.49,-181.877 2165.91,-188.73"/>
+</a>
+</g>
+</g>
+<!-- helper_scripts -->
+<g id="node4" class="node"><title>helper_scripts</title>
+<ellipse fill="#d6dbdf" stroke="#34495e" cx="2239.97" cy="-852.655" rx="60.251" ry="60.251"/>
+<text text-anchor="middle" x="2239.97" y="-849.655" font-family="Courier,monospace" font-size="10.00">helper_scripts</text>
+</g>
+<!-- helper_scripts&#45;&gt;raw_scripts -->
+<g id="edge38" class="edge"><title>helper_scripts-&gt;raw_scripts</title>
+<g id="a_edge38"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2180.32,-842.975C2095.02,-830.735 1933.21,-808.153 1794.97,-792.529 1623.76,-773.179 1568.09,-822.627 1408.97,-756.529 1403.83,-754.393 1398.8,-751.635 1393.98,-748.52"/>
+<polygon fill="black" stroke="black" points="1395.75,-745.485 1385.56,-742.585 1391.72,-751.207 1395.75,-745.485"/>
+</a>
+</g>
+</g>
+<!-- helper_scripts&#45;&gt;clean_scripts -->
+<g id="edge39" class="edge"><title>helper_scripts-&gt;clean_scripts</title>
+<g id="a_edge39"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2253.55,-793.689C2273.94,-690.108 2298.16,-474.333 2175.97,-369.923 2101.98,-306.699 2055.37,-353.214 1959.97,-333.923 1902.83,-322.367 1838.38,-306.815 1791.78,-295.111"/>
+<polygon fill="black" stroke="black" points="1792.37,-291.651 1781.82,-292.6 1790.66,-298.439 1792.37,-291.651"/>
+</a>
+</g>
+</g>
+<!-- spp -->
+<g id="node5" class="node"><title>spp</title>
+<ellipse fill="#d6eaf8" stroke="#3498db" cx="1439.97" cy="-277.405" rx="27" ry="18"/>
+<text text-anchor="middle" x="1439.97" y="-274.405" font-family="Courier,monospace" font-size="10.00">spp</text>
+</g>
+<!-- helper_scripts&#45;&gt;spp -->
+<g id="edge37" class="edge"><title>helper_scripts-&gt;spp</title>
+<g id="a_edge37"><a xlink:title="update_spp.key">
+<path fill="none" stroke="black" d="M2250.92,-793.297C2258.52,-733.539 2259.62,-641.73 2208.97,-585.923 2001.48,-357.271 1794.74,-577.405 1537.97,-405.923 1498.96,-379.871 1468.95,-333.091 1452.92,-304.011"/>
+<polygon fill="black" stroke="black" points="1455.84,-302.044 1448.03,-294.883 1449.67,-305.351 1455.84,-302.044"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.ai.RData -->
+<g id="edge1" class="edge"><title>spp-&gt;data/clean.ai.RData</title>
+<g id="a_edge1"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1413.47,-273.919C1321,-265.047 1003.97,-232.978 733.287,-185.036"/>
+<polygon fill="black" stroke="black" points="733.733,-181.56 723.274,-183.251 732.504,-188.451 733.733,-181.56"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.ebs.RData -->
+<g id="edge2" class="edge"><title>spp-&gt;data/clean.ebs.RData</title>
+<g id="a_edge2"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1413.93,-272.61C1335.74,-261.109 1096.07,-225.078 887.287,-185.094"/>
+<polygon fill="black" stroke="black" points="887.85,-181.638 877.369,-183.187 886.528,-188.512 887.85,-181.638"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.gmex.RData -->
+<g id="edge3" class="edge"><title>spp-&gt;data/clean.gmex.RData</title>
+<g id="a_edge3"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1414.82,-270.648C1346.8,-255.075 1156.94,-211.607 1047.16,-186.475"/>
+<polygon fill="black" stroke="black" points="1047.65,-182.996 1037.12,-184.176 1046.09,-189.82 1047.65,-182.996"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.goa.RData -->
+<g id="edge4" class="edge"><title>spp-&gt;data/clean.goa.RData</title>
+<g id="a_edge4"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1416.41,-268.337C1367.35,-251.543 1252.95,-212.382 1182.36,-188.217"/>
+<polygon fill="black" stroke="black" points="1183.3,-184.838 1172.7,-184.911 1181.03,-191.461 1183.3,-184.838"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.neus.RData -->
+<g id="edge5" class="edge"><title>spp-&gt;data/clean.neus.RData</title>
+<g id="a_edge5"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1421.62,-263.957C1395.32,-246.121 1346.48,-212.992 1313.6,-190.691"/>
+<polygon fill="black" stroke="black" points="1315.43,-187.707 1305.19,-184.991 1311.5,-193.5 1315.43,-187.707"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.newf.RData -->
+<g id="edge6" class="edge"><title>spp-&gt;data/clean.newf.RData</title>
+<g id="a_edge6"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1439.97,-258.97C1439.97,-241.703 1439.97,-215.015 1439.97,-194.984"/>
+<polygon fill="black" stroke="black" points="1443.47,-194.922 1439.97,-184.922 1436.47,-194.922 1443.47,-194.922"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.sa.RData -->
+<g id="edge7" class="edge"><title>spp-&gt;data/clean.sa.RData</title>
+<g id="a_edge7"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1455.13,-262.169C1467.93,-250.465 1487,-233.771 1504.97,-220.887 1520.25,-209.938 1537.88,-199.097 1553.4,-190.101"/>
+<polygon fill="black" stroke="black" points="1555.32,-193.034 1562.26,-185.03 1551.84,-186.959 1555.32,-193.034"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.sgulf.RData -->
+<g id="edge8" class="edge"><title>spp-&gt;data/clean.sgulf.RData</title>
+<g id="a_edge8"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1463.35,-268.249C1511.58,-251.419 1623.4,-212.403 1692.54,-188.276"/>
+<polygon fill="black" stroke="black" points="1693.72,-191.574 1702.01,-184.974 1691.41,-184.964 1693.72,-191.574"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.shelf.RData -->
+<g id="edge9" class="edge"><title>spp-&gt;data/clean.shelf.RData</title>
+<g id="a_edge9"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1464.75,-269.82C1505.54,-259.06 1589.44,-237.269 1660.97,-220.887 1677.79,-217.037 1764.91,-199.069 1832.91,-185.109"/>
+<polygon fill="black" stroke="black" points="1833.7,-188.52 1842.79,-183.08 1832.29,-181.663 1833.7,-188.52"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.wcann.RData -->
+<g id="edge10" class="edge"><title>spp-&gt;data/clean.wcann.RData</title>
+<g id="a_edge10"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1464.26,-269.112C1504.69,-257.239 1588.53,-233.768 1660.97,-220.887 1806.94,-194.934 1848.48,-207.543 1998.77,-184.98"/>
+<polygon fill="black" stroke="black" points="1999.47,-188.414 2008.83,-183.442 1998.41,-181.494 1999.47,-188.414"/>
+</a>
+</g>
+</g>
+<!-- spp&#45;&gt;data/clean.wctri.RData -->
+<g id="edge11" class="edge"><title>spp-&gt;data/clean.wctri.RData</title>
+<g id="a_edge11"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1463.89,-268.929C1504.13,-256.681 1588.12,-232.543 1660.97,-220.887 1879.91,-185.861 1941.27,-214.658 2164.77,-184.936"/>
+<polygon fill="black" stroke="black" points="2165.41,-188.382 2174.85,-183.571 2164.47,-181.445 2165.41,-188.382"/>
+</a>
+</g>
+</g>
+<!-- neus_raw_files -->
+<g id="node6" class="node"><title>neus_raw_files</title>
+<ellipse fill="#d6eaf8" stroke="#3498db" cx="1063.97" cy="-707.226" rx="60.251" ry="18"/>
+<text text-anchor="middle" x="1063.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">neus_raw_files</text>
+</g>
+<!-- neus_raw_files&#45;&gt;data/raw.neus.RData -->
+<g id="edge49" class="edge"><title>neus_raw_files-&gt;data/raw.neus.RData</title>
+<g id="a_edge49"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1084.1,-690.175C1104.87,-673.606 1137.5,-647.575 1161.25,-628.634"/>
+<polygon fill="black" stroke="black" points="1163.61,-631.229 1169.24,-622.257 1159.24,-625.757 1163.61,-631.229"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/taxonomy/spp.key.csv -->
+<g id="node7" class="node"><title>inst/extdata/taxonomy/spp.key.csv</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1490.94,-477.923 1277.01,-477.923 1277.01,-441.923 1490.94,-441.923 1490.94,-477.923"/>
+<text text-anchor="middle" x="1383.97" y="-456.923" font-family="Courier,monospace" font-size="10.00">inst/extdata/taxonomy/spp.key.csv</text>
+</g>
+<!-- data/spp.key.RData -->
+<g id="node8" class="node"><title>data/spp.key.RData</title>
+<polygon fill="#f6ddcc" stroke="#d35400" points="1448.96,-405.923 1324.99,-405.923 1324.99,-369.923 1448.96,-369.923 1448.96,-405.923"/>
+<text text-anchor="middle" x="1386.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">data/spp.key.RData</text>
+</g>
+<!-- inst/extdata/taxonomy/spp.key.csv&#45;&gt;data/spp.key.RData -->
+<g id="edge12" class="edge"><title>inst/extdata/taxonomy/spp.key.csv-&gt;data/spp.key.RData</title>
+<g id="a_edge12"><a xlink:title="update_spp.key">
+<path fill="none" stroke="black" d="M1384.72,-441.62C1385.05,-433.906 1385.44,-424.636 1385.81,-416.036"/>
+<polygon fill="black" stroke="black" points="1389.31,-416.168 1386.24,-406.028 1382.32,-415.868 1389.31,-416.168"/>
+</a>
+</g>
+</g>
+<!-- data/spp.key.RData&#45;&gt;spp -->
+<g id="edge13" class="edge"><title>data/spp.key.RData-&gt;spp</title>
+<g id="a_edge13"><a xlink:title="update_spp.key">
+<path fill="none" stroke="black" d="M1395.49,-369.488C1404.14,-351.776 1417.63,-324.152 1427.49,-303.968"/>
+<polygon fill="black" stroke="black" points="1430.76,-305.254 1432,-294.732 1424.47,-302.182 1430.76,-305.254"/>
+</a>
+</g>
+</g>
+<!-- data/raw.ai.RData&#45;&gt;data/clean.ai.RData -->
+<g id="edge42" class="edge"><title>data/raw.ai.RData-&gt;data/clean.ai.RData</title>
+<g id="a_edge42"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M621.022,-585.546C626.866,-558.89 636.975,-506.234 636.975,-460.923 636.975,-460.923 636.975,-460.923 636.975,-386.923 636.975,-317.664 647.507,-236.647 653.654,-195.263"/>
+<polygon fill="black" stroke="black" points="657.148,-195.566 655.186,-185.154 650.227,-194.517 657.148,-195.566"/>
+</a>
+</g>
+</g>
+<!-- data/raw.ai.RData&#45;&gt;raw_data -->
+<g id="edge41" class="edge"><title>data/raw.ai.RData-&gt;raw_data</title>
+<g id="a_edge41"><a xlink:title="document">
+<path fill="none" stroke="black" d="M676.19,-587.492C679.151,-586.918 682.091,-586.389 684.975,-585.923 927.013,-546.782 1220.99,-536.423 1335.27,-533.785"/>
+<polygon fill="black" stroke="black" points="1335.52,-537.281 1345.44,-533.56 1335.37,-530.282 1335.52,-537.281"/>
+</a>
+</g>
+</g>
+<!-- data/raw.ebs.RData&#45;&gt;data/clean.ebs.RData -->
+<g id="edge44" class="edge"><title>data/raw.ebs.RData-&gt;data/clean.ebs.RData</title>
+<g id="a_edge44"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M761.236,-585.622C768.833,-559.065 781.975,-506.537 781.975,-460.923 781.975,-460.923 781.975,-460.923 781.975,-386.923 781.975,-317.311 795.574,-236.183 803.47,-194.947"/>
+<polygon fill="black" stroke="black" points="806.907,-195.605 805.389,-185.119 800.037,-194.263 806.907,-195.605"/>
+</a>
+</g>
+</g>
+<!-- data/raw.ebs.RData&#45;&gt;raw_data -->
+<g id="edge43" class="edge"><title>data/raw.ebs.RData-&gt;raw_data</title>
+<g id="a_edge43"><a xlink:title="document">
+<path fill="none" stroke="black" d="M818.212,-587.5C821.167,-586.932 824.099,-586.402 826.975,-585.923 1013.73,-554.838 1238.96,-540.365 1335.85,-535.227"/>
+<polygon fill="black" stroke="black" points="1336.11,-538.718 1345.92,-534.702 1335.75,-531.728 1336.11,-538.718"/>
+</a>
+</g>
+</g>
+<!-- data/raw.gmex.RData&#45;&gt;data/clean.gmex.RData -->
+<g id="edge46" class="edge"><title>data/raw.gmex.RData-&gt;data/clean.gmex.RData</title>
+<g id="a_edge46"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M907.653,-585.734C917.295,-559.325 933.975,-506.987 933.975,-460.923 933.975,-460.923 933.975,-460.923 933.975,-386.923 933.975,-317.101 950.092,-236.061 959.45,-194.894"/>
+<polygon fill="black" stroke="black" points="962.876,-195.615 961.725,-185.083 956.057,-194.034 962.876,-195.615"/>
+</a>
+</g>
+</g>
+<!-- data/raw.gmex.RData&#45;&gt;raw_data -->
+<g id="edge45" class="edge"><title>data/raw.gmex.RData-&gt;raw_data</title>
+<g id="a_edge45"><a xlink:title="document">
+<path fill="none" stroke="black" d="M966.274,-587.561C969.21,-586.984 972.12,-586.435 974.975,-585.923 1104.89,-562.64 1259.76,-545.408 1336.3,-537.585"/>
+<polygon fill="black" stroke="black" points="1336.97,-541.035 1346.57,-536.544 1336.27,-534.07 1336.97,-541.035"/>
+</a>
+</g>
+</g>
+<!-- data/raw.goa.RData&#45;&gt;data/clean.goa.RData -->
+<g id="edge48" class="edge"><title>data/raw.goa.RData-&gt;data/clean.goa.RData</title>
+<g id="a_edge48"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1053.66,-585.83C1064.77,-559.547 1083.97,-507.37 1083.97,-460.923 1083.97,-460.923 1083.97,-460.923 1083.97,-386.923 1083.97,-316.747 1103.62,-235.855 1115.02,-194.804"/>
+<polygon fill="black" stroke="black" points="1118.44,-195.599 1117.8,-185.023 1111.7,-193.689 1118.44,-195.599"/>
+</a>
+</g>
+</g>
+<!-- data/raw.goa.RData&#45;&gt;raw_data -->
+<g id="edge47" class="edge"><title>data/raw.goa.RData-&gt;raw_data</title>
+<g id="a_edge47"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1108.28,-587.859C1111.22,-587.195 1114.13,-586.547 1116.97,-585.923 1194.66,-568.919 1285.59,-551.368 1338.78,-541.337"/>
+<polygon fill="black" stroke="black" points="1339.72,-544.722 1348.9,-539.434 1338.42,-537.843 1339.72,-544.722"/>
+</a>
+</g>
+</g>
+<!-- data/raw.neus.RData&#45;&gt;data/clean.neus.RData -->
+<g id="edge51" class="edge"><title>data/raw.neus.RData-&gt;data/clean.neus.RData</title>
+<g id="a_edge51"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1192.95,-585.901C1195.86,-559.279 1200.97,-506.15 1200.97,-460.923 1200.97,-460.923 1200.97,-460.923 1200.97,-386.923 1200.97,-311.598 1202.01,-288.616 1234.97,-220.887 1239.94,-210.689 1247.32,-200.836 1254.68,-192.45"/>
+<polygon fill="black" stroke="black" points="1257.44,-194.619 1261.64,-184.895 1252.29,-189.874 1257.44,-194.619"/>
+</a>
+</g>
+</g>
+<!-- data/raw.neus.RData&#45;&gt;raw_data -->
+<g id="edge50" class="edge"><title>data/raw.neus.RData-&gt;raw_data</title>
+<g id="a_edge50"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1238.19,-585.799C1270.91,-573.929 1313.98,-558.31 1344.8,-547.13"/>
+<polygon fill="black" stroke="black" points="1346.14,-550.367 1354.35,-543.667 1343.76,-543.786 1346.14,-550.367"/>
+</a>
+</g>
+</g>
+<!-- data/raw.newf.RData&#45;&gt;data/clean.newf.RData -->
+<g id="edge53" class="edge"><title>data/raw.newf.RData-&gt;data/clean.newf.RData</title>
+<g id="a_edge53"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1319,-585.878C1292.49,-561.234 1248.97,-512.877 1248.97,-460.923 1248.97,-460.923 1248.97,-460.923 1248.97,-386.923 1248.97,-295.928 1343.77,-224.434 1399.8,-190.126"/>
+<polygon fill="black" stroke="black" points="1401.66,-193.088 1408.43,-184.941 1398.06,-187.086 1401.66,-193.088"/>
+</a>
+</g>
+</g>
+<!-- data/raw.newf.RData&#45;&gt;raw_data -->
+<g id="edge52" class="edge"><title>data/raw.newf.RData-&gt;raw_data</title>
+<g id="a_edge52"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1350.1,-585.62C1355.41,-577.361 1361.86,-567.317 1367.71,-558.223"/>
+<polygon fill="black" stroke="black" points="1370.83,-559.85 1373.29,-549.546 1364.94,-556.065 1370.83,-559.85"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sa.RData&#45;&gt;data/clean.sa.RData -->
+<g id="edge55" class="edge"><title>data/raw.sa.RData-&gt;data/clean.sa.RData</title>
+<g id="a_edge55"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1518.97,-585.874C1518.97,-559.215 1518.97,-506.038 1518.97,-460.923 1518.97,-460.923 1518.97,-460.923 1518.97,-386.923 1518.97,-313.803 1556.85,-233.997 1578.77,-193.93"/>
+<polygon fill="black" stroke="black" points="1581.89,-195.522 1583.7,-185.084 1575.77,-192.111 1581.89,-195.522"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sa.RData&#45;&gt;raw_data -->
+<g id="edge54" class="edge"><title>data/raw.sa.RData-&gt;raw_data</title>
+<g id="a_edge54"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1485.95,-585.799C1465.37,-575.129 1438.95,-561.429 1418.16,-550.647"/>
+<polygon fill="black" stroke="black" points="1419.53,-547.417 1409.04,-545.921 1416.31,-553.631 1419.53,-547.417"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sgulf.RData&#45;&gt;data/clean.sgulf.RData -->
+<g id="edge57" class="edge"><title>data/raw.sgulf.RData-&gt;data/clean.sgulf.RData</title>
+<g id="a_edge57"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1732.04,-587.721C1883.07,-553.758 2232.97,-473.698 2232.97,-460.923 2232.97,-460.923 2232.97,-460.923 2232.97,-386.923 2232.97,-300.278 1971.56,-222.456 1833.76,-187.455"/>
+<polygon fill="black" stroke="black" points="1834.21,-183.958 1823.66,-184.908 1832.5,-190.746 1834.21,-183.958"/>
+</a>
+</g>
+</g>
+<!-- data/raw.sgulf.RData&#45;&gt;raw_data -->
+<g id="edge56" class="edge"><title>data/raw.sgulf.RData-&gt;raw_data</title>
+<g id="a_edge56"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1595.84,-585.889C1543.16,-572.721 1471.87,-554.897 1426.9,-543.654"/>
+<polygon fill="black" stroke="black" points="1427.72,-540.251 1417.17,-541.221 1426.02,-547.042 1427.72,-540.251"/>
+</a>
+</g>
+</g>
+<!-- data/raw.shelf.RData&#45;&gt;data/clean.shelf.RData -->
+<g id="edge59" class="edge"><title>data/raw.shelf.RData-&gt;data/clean.shelf.RData</title>
+<g id="a_edge59"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M1883.36,-585.873C2008.81,-552.704 2270.97,-480.987 2270.97,-460.923 2270.97,-460.923 2270.97,-460.923 2270.97,-386.923 2270.97,-279.709 2188.83,-274.485 2095.97,-220.887 2078.57,-210.843 2036.04,-198.095 1996.79,-187.619"/>
+<polygon fill="black" stroke="black" points="1997.47,-184.177 1986.91,-185.008 1995.68,-190.945 1997.47,-184.177"/>
+</a>
+</g>
+</g>
+<!-- data/raw.shelf.RData&#45;&gt;raw_data -->
+<g id="edge58" class="edge"><title>data/raw.shelf.RData-&gt;raw_data</title>
+<g id="a_edge58"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1749.59,-587.566C1746.68,-586.995 1743.8,-586.445 1740.97,-585.923 1630.2,-565.498 1498.96,-547.623 1430.62,-538.789"/>
+<polygon fill="black" stroke="black" points="1430.97,-535.306 1420.6,-537.501 1430.07,-542.248 1430.97,-535.306"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wcann.RData&#45;&gt;data/clean.wcann.RData -->
+<g id="edge61" class="edge"><title>data/raw.wcann.RData-&gt;data/clean.wcann.RData</title>
+<g id="a_edge61"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M2040.17,-588.67C2138.64,-566.096 2308.97,-518.698 2308.97,-460.923 2308.97,-460.923 2308.97,-460.923 2308.97,-386.923 2308.97,-296.904 2261.53,-279.222 2192.97,-220.887 2177.71,-207.903 2158.73,-197.281 2140.84,-189.048"/>
+<polygon fill="black" stroke="black" points="2142.18,-185.811 2131.62,-184.96 2139.34,-192.211 2142.18,-185.811"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wcann.RData&#45;&gt;raw_data -->
+<g id="edge60" class="edge"><title>data/raw.wcann.RData-&gt;raw_data</title>
+<g id="a_edge60"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1903.62,-587.408C1900.7,-586.88 1897.81,-586.382 1894.97,-585.923 1725.84,-558.572 1522.81,-542.426 1431.98,-536.069"/>
+<polygon fill="black" stroke="black" points="1432.21,-532.576 1421.99,-535.378 1431.73,-539.56 1432.21,-532.576"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wctri.RData&#45;&gt;data/clean.wctri.RData -->
+<g id="edge63" class="edge"><title>data/raw.wctri.RData-&gt;data/clean.wctri.RData</title>
+<g id="a_edge63"><a xlink:title="update_cleanData">
+<path fill="none" stroke="black" d="M2200,-588.188C2262.99,-570.071 2346.97,-532.496 2346.97,-460.923 2346.97,-460.923 2346.97,-460.923 2346.97,-386.923 2346.97,-311.011 2297.32,-232.192 2268.7,-193.065"/>
+<polygon fill="black" stroke="black" points="2271.39,-190.809 2262.6,-184.887 2265.78,-194.995 2271.39,-190.809"/>
+</a>
+</g>
+</g>
+<!-- data/raw.wctri.RData&#45;&gt;raw_data -->
+<g id="edge62" class="edge"><title>data/raw.wctri.RData-&gt;raw_data</title>
+<g id="a_edge62"><a xlink:title="document">
+<path fill="none" stroke="black" d="M2063.7,-588.248C2058.73,-587.392 2053.78,-586.604 2048.97,-585.923 1819.58,-553.414 1542.62,-539.349 1432.52,-534.753"/>
+<polygon fill="black" stroke="black" points="1432.52,-531.251 1422.39,-534.338 1432.24,-538.245 1432.52,-531.251"/>
+</a>
+</g>
+</g>
+<!-- clean_data -->
+<g id="node32" class="node"><title>clean_data</title>
+<ellipse fill="#3498db" stroke="#3498db" cx="1439.97" cy="-94.8874" rx="45.8922" ry="18"/>
+<text text-anchor="middle" x="1439.97" y="-91.8874" font-family="Courier,monospace" font-size="10.00">clean_data</text>
+</g>
+<!-- data/clean.ai.RData&#45;&gt;clean_data -->
+<g id="edge65" class="edge"><title>data/clean.ai.RData-&gt;clean_data</title>
+<g id="a_edge65"><a xlink:title="document">
+<path fill="none" stroke="black" d="M723.242,-150.331C726.186,-149.807 729.107,-149.321 731.975,-148.887 973.256,-112.356 1264.79,-100.63 1384.54,-97.1911"/>
+<polygon fill="black" stroke="black" points="1384.67,-100.689 1394.57,-96.9111 1384.47,-93.6917 1384.67,-100.689"/>
+</a>
+</g>
+</g>
+<!-- data/clean.ebs.RData&#45;&gt;clean_data -->
+<g id="edge66" class="edge"><title>data/clean.ebs.RData-&gt;clean_data</title>
+<g id="a_edge66"><a xlink:title="document">
+<path fill="none" stroke="black" d="M877.326,-150.343C880.243,-149.824 883.135,-149.335 885.975,-148.887 1067.34,-120.301 1284.7,-104.951 1384.69,-98.9374"/>
+<polygon fill="black" stroke="black" points="1385.08,-102.42 1394.86,-98.3339 1384.67,-95.4326 1385.08,-102.42"/>
+</a>
+</g>
+</g>
+<!-- data/clean.gmex.RData&#45;&gt;clean_data -->
+<g id="edge67" class="edge"><title>data/clean.gmex.RData-&gt;clean_data</title>
+<g id="a_edge67"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1037.02,-150.499C1040.04,-149.936 1043.04,-149.396 1045.97,-148.887 1166.95,-127.929 1310.03,-110.507 1386.1,-101.826"/>
+<polygon fill="black" stroke="black" points="1386.83,-105.265 1396.37,-100.66 1386.04,-98.3095 1386.83,-105.265"/>
+</a>
+</g>
+</g>
+<!-- data/clean.goa.RData&#45;&gt;clean_data -->
+<g id="edge68" class="edge"><title>data/clean.goa.RData-&gt;clean_data</title>
+<g id="a_edge68"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1190.98,-150.871C1251.14,-137.586 1337.46,-118.525 1391.05,-106.692"/>
+<polygon fill="black" stroke="black" points="1391.97,-110.071 1400.98,-104.497 1390.47,-103.236 1391.97,-110.071"/>
+</a>
+</g>
+</g>
+<!-- data/clean.neus.RData&#45;&gt;clean_data -->
+<g id="edge69" class="edge"><title>data/clean.neus.RData-&gt;clean_data</title>
+<g id="a_edge69"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1319.11,-148.763C1344.03,-137.865 1376.16,-123.806 1401.03,-112.924"/>
+<polygon fill="black" stroke="black" points="1402.76,-115.989 1410.52,-108.774 1399.96,-109.576 1402.76,-115.989"/>
+</a>
+</g>
+</g>
+<!-- data/clean.newf.RData&#45;&gt;clean_data -->
+<g id="edge70" class="edge"><title>data/clean.newf.RData-&gt;clean_data</title>
+<g id="a_edge70"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1439.97,-148.584C1439.97,-140.87 1439.97,-131.6 1439.97,-123"/>
+<polygon fill="black" stroke="black" points="1443.47,-122.992 1439.97,-112.992 1436.47,-122.992 1443.47,-122.992"/>
+</a>
+</g>
+</g>
+<!-- data/clean.sa.RData&#45;&gt;clean_data -->
+<g id="edge71" class="edge"><title>data/clean.sa.RData-&gt;clean_data</title>
+<g id="a_edge71"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1556.3,-148.763C1532.56,-137.972 1502,-124.082 1478.16,-113.246"/>
+<polygon fill="black" stroke="black" points="1479.61,-110.059 1469.06,-109.107 1476.71,-116.432 1479.61,-110.059"/>
+</a>
+</g>
+</g>
+<!-- data/clean.sgulf.RData&#45;&gt;clean_data -->
+<g id="edge72" class="edge"><title>data/clean.sgulf.RData-&gt;clean_data</title>
+<g id="a_edge72"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1676.88,-149.21C1618.72,-136.12 1539.41,-118.268 1488.94,-106.908"/>
+<polygon fill="black" stroke="black" points="1489.46,-103.437 1478.93,-104.656 1487.92,-110.266 1489.46,-103.437"/>
+</a>
+</g>
+</g>
+<!-- data/clean.shelf.RData&#45;&gt;clean_data -->
+<g id="edge73" class="edge"><title>data/clean.shelf.RData-&gt;clean_data</title>
+<g id="a_edge73"><a xlink:title="document">
+<path fill="none" stroke="black" d="M1842.81,-150.436C1839.83,-149.897 1836.87,-149.379 1833.97,-148.887 1712.76,-128.347 1569.48,-110.731 1493.53,-101.915"/>
+<polygon fill="black" stroke="black" points="1493.6,-98.4002 1483.26,-100.73 1492.8,-105.354 1493.6,-98.4002"/>
+</a>
+</g>
+</g>
+<!-- data/clean.wcann.RData&#45;&gt;clean_data -->
+<g id="edge74" class="edge"><title>data/clean.wcann.RData-&gt;clean_data</title>
+<g id="a_edge74"><a xlink:title="document">
+<path fill="none" stroke="black" d="M2008.83,-150.29C2005.85,-149.792 2002.88,-149.322 1999.97,-148.887 1815.97,-121.418 1595.7,-105.481 1495.05,-99.1253"/>
+<polygon fill="black" stroke="black" points="1495.01,-95.6166 1484.82,-98.4864 1494.58,-102.603 1495.01,-95.6166"/>
+</a>
+</g>
+</g>
+<!-- data/clean.wctri.RData&#45;&gt;clean_data -->
+<g id="edge75" class="edge"><title>data/clean.wctri.RData-&gt;clean_data</title>
+<g id="a_edge75"><a xlink:title="document">
+<path fill="none" stroke="black" d="M2174.84,-150.21C2171.85,-149.734 2168.89,-149.29 2165.97,-148.887 1917.53,-114.521 1617.96,-101.586 1495.85,-97.5077"/>
+<polygon fill="black" stroke="black" points="1495.75,-94.0023 1485.64,-97.1733 1495.52,-100.999 1495.75,-94.0023"/>
+</a>
+</g>
+</g>
+<!-- raw_data&#45;&gt;inst/extdata/taxonomy/spp.key.csv -->
+<g id="edge40" class="edge"><title>raw_data-&gt;inst/extdata/taxonomy/spp.key.csv</title>
+<g id="a_edge40"><a xlink:title="update_spp.key">
+<path fill="none" stroke="black" d="M1383.97,-513.62C1383.97,-505.906 1383.97,-496.636 1383.97,-488.036"/>
+<polygon fill="black" stroke="black" points="1387.47,-488.028 1383.97,-478.028 1380.47,-488.028 1387.47,-488.028"/>
+</a>
+</g>
+</g>
+<!-- clean_data&#45;&gt;all -->
+<g id="edge64" class="edge"><title>clean_data-&gt;all</title>
+<g id="a_edge64"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1439.97,-76.7192C1439.97,-69.1042 1439.97,-59.9184 1439.97,-51.2409"/>
+<polygon fill="black" stroke="black" points="1443.47,-51.0479 1439.97,-41.048 1436.47,-51.048 1443.47,-51.0479"/>
+</a>
+</g>
+</g>
+<!-- R/read.trawl.R -->
+<g id="node33" class="node"><title>R/read.trawl.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1785.96,-870.655 1685.99,-870.655 1685.99,-834.655 1785.96,-834.655 1785.96,-870.655"/>
+<text text-anchor="middle" x="1735.97" y="-849.655" font-family="Courier,monospace" font-size="10.00">R/read.trawl.R</text>
+</g>
+<!-- R/read.trawl.R&#45;&gt;raw_scripts -->
+<g id="edge76" class="edge"><title>R/read.trawl.R-&gt;raw_scripts</title>
+<g id="a_edge76"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1724.03,-834.605C1713.37,-820.825 1696.47,-802.186 1676.97,-792.529 1569.29,-739.176 1519,-804.873 1408.97,-756.529 1403.88,-754.289 1398.87,-751.461 1394.07,-748.303"/>
+<polygon fill="black" stroke="black" points="1395.85,-745.271 1385.67,-742.316 1391.78,-750.971 1395.85,-745.271"/>
+</a>
+</g>
+</g>
+<!-- R/clean.names.R -->
+<g id="node34" class="node"><title>R/clean.names.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1652.96,-405.923 1546.99,-405.923 1546.99,-369.923 1652.96,-369.923 1652.96,-405.923"/>
+<text text-anchor="middle" x="1599.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">R/clean.names.R</text>
+</g>
+<!-- R/clean.names.R&#45;&gt;clean_scripts -->
+<g id="edge77" class="edge"><title>R/clean.names.R-&gt;clean_scripts</title>
+<g id="a_edge77"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1620.1,-369.728C1635.29,-356.749 1656.82,-338.35 1676.58,-321.464"/>
+<polygon fill="black" stroke="black" points="1679.01,-323.993 1684.34,-314.836 1674.46,-318.672 1679.01,-323.993"/>
+</a>
+</g>
+</g>
+<!-- R/clean.format.R -->
+<g id="node35" class="node"><title>R/clean.format.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1782.96,-405.923 1670.99,-405.923 1670.99,-369.923 1782.96,-369.923 1782.96,-405.923"/>
+<text text-anchor="middle" x="1726.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">R/clean.format.R</text>
+</g>
+<!-- R/clean.format.R&#45;&gt;clean_scripts -->
+<g id="edge78" class="edge"><title>R/clean.format.R-&gt;clean_scripts</title>
+<g id="a_edge78"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1726.97,-369.488C1726.97,-362.36 1726.97,-353.627 1726.97,-344.42"/>
+<polygon fill="black" stroke="black" points="1730.47,-344.296 1726.97,-334.296 1723.47,-344.296 1730.47,-344.296"/>
+</a>
+</g>
+</g>
+<!-- R/clean.columns.R -->
+<g id="node36" class="node"><title>R/clean.columns.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1918.96,-405.923 1800.99,-405.923 1800.99,-369.923 1918.96,-369.923 1918.96,-405.923"/>
+<text text-anchor="middle" x="1859.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">R/clean.columns.R</text>
+</g>
+<!-- R/clean.columns.R&#45;&gt;clean_scripts -->
+<g id="edge79" class="edge"><title>R/clean.columns.R-&gt;clean_scripts</title>
+<g id="a_edge79"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1838.9,-369.728C1822.66,-356.48 1799.5,-337.584 1778.46,-320.415"/>
+<polygon fill="black" stroke="black" points="1780.48,-317.545 1770.52,-313.935 1776.05,-322.968 1780.48,-317.545"/>
+</a>
+</g>
+</g>
+<!-- R/clean.tax.R -->
+<g id="node37" class="node"><title>R/clean.tax.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2030.96,-405.923 1936.99,-405.923 1936.99,-369.923 2030.96,-369.923 2030.96,-405.923"/>
+<text text-anchor="middle" x="1983.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">R/clean.tax.R</text>
+</g>
+<!-- R/clean.tax.R&#45;&gt;clean_scripts -->
+<g id="edge80" class="edge"><title>R/clean.tax.R-&gt;clean_scripts</title>
+<g id="a_edge80"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M1943.54,-369.848C1901.79,-352.221 1836.16,-324.507 1788.08,-304.206"/>
+<polygon fill="black" stroke="black" points="1789.28,-300.916 1778.71,-300.25 1786.56,-307.364 1789.28,-300.916"/>
+</a>
+</g>
+</g>
+<!-- R/clean.trimRow.R -->
+<g id="node38" class="node"><title>R/clean.trimRow.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2166.96,-405.923 2048.99,-405.923 2048.99,-369.923 2166.96,-369.923 2166.96,-405.923"/>
+<text text-anchor="middle" x="2107.97" y="-384.923" font-family="Courier,monospace" font-size="10.00">R/clean.trimRow.R</text>
+</g>
+<!-- R/clean.trimRow.R&#45;&gt;clean_scripts -->
+<g id="edge81" class="edge"><title>R/clean.trimRow.R-&gt;clean_scripts</title>
+<g id="a_edge81"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2048.86,-370.086C1978.99,-350.186 1863.15,-317.191 1791.15,-296.683"/>
+<polygon fill="black" stroke="black" points="1791.86,-293.248 1781.29,-293.874 1789.94,-299.98 1791.86,-293.248"/>
+</a>
+</g>
+</g>
+<!-- R/helperFile.R -->
+<g id="node39" class="node"><title>R/helperFile.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2171.96,-984.78 2071.99,-984.78 2071.99,-948.78 2171.96,-948.78 2171.96,-984.78"/>
+<text text-anchor="middle" x="2121.97" y="-963.78" font-family="Courier,monospace" font-size="10.00">R/helperFile.R</text>
+</g>
+<!-- R/helperFile.R&#45;&gt;helper_scripts -->
+<g id="edge82" class="edge"><title>R/helperFile.R-&gt;helper_scripts</title>
+<g id="a_edge82"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2139.9,-948.751C2153.1,-936.207 2171.74,-918.488 2189.37,-901.739"/>
+<polygon fill="black" stroke="black" points="2192.01,-904.063 2196.84,-894.638 2187.18,-898.989 2192.01,-904.063"/>
+</a>
+</g>
+</g>
+<!-- R/helperMisc.R -->
+<g id="node40" class="node"><title>R/helperMisc.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2289.96,-984.78 2189.99,-984.78 2189.99,-948.78 2289.96,-948.78 2289.96,-984.78"/>
+<text text-anchor="middle" x="2239.97" y="-963.78" font-family="Courier,monospace" font-size="10.00">R/helperMisc.R</text>
+</g>
+<!-- R/helperMisc.R&#45;&gt;helper_scripts -->
+<g id="edge83" class="edge"><title>R/helperMisc.R-&gt;helper_scripts</title>
+<g id="a_edge83"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2239.97,-948.751C2239.97,-941.476 2239.97,-932.46 2239.97,-922.902"/>
+<polygon fill="black" stroke="black" points="2243.47,-922.796 2239.97,-912.796 2236.47,-922.796 2243.47,-922.796"/>
+</a>
+</g>
+</g>
+<!-- R/helperStat.R -->
+<g id="node41" class="node"><title>R/helperStat.R</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2407.96,-984.78 2307.99,-984.78 2307.99,-948.78 2407.96,-948.78 2407.96,-984.78"/>
+<text text-anchor="middle" x="2357.97" y="-963.78" font-family="Courier,monospace" font-size="10.00">R/helperStat.R</text>
+</g>
+<!-- R/helperStat.R&#45;&gt;helper_scripts -->
+<g id="edge84" class="edge"><title>R/helperStat.R-&gt;helper_scripts</title>
+<g id="a_edge84"><a xlink:title="(dependency only)">
+<path fill="none" stroke="black" d="M2340.05,-948.751C2326.85,-936.207 2308.2,-918.488 2290.58,-901.739"/>
+<polygon fill="black" stroke="black" points="2292.76,-898.989 2283.1,-894.638 2287.94,-904.063 2292.76,-898.989"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/ai.zip -->
+<g id="node42" class="node"><title>inst/extdata/ai.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="517.956,-725.226 387.993,-725.226 387.993,-689.226 517.956,-689.226 517.956,-725.226"/>
+<text text-anchor="middle" x="452.975" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/ai.zip</text>
+</g>
+<!-- inst/extdata/ai.zip&#45;&gt;data/raw.ai.RData -->
+<g id="edge85" class="edge"><title>inst/extdata/ai.zip-&gt;data/raw.ai.RData</title>
+<g id="a_edge85"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M478.473,-689.168C492.653,-679.786 510.678,-668.033 526.975,-657.923 543.591,-647.615 562.178,-636.587 578.127,-627.275"/>
+<polygon fill="black" stroke="black" points="580.295,-630.063 587.178,-622.008 576.774,-624.012 580.295,-630.063"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/ebs.zip -->
+<g id="node43" class="node"><title>inst/extdata/ebs.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="671.955,-725.226 535.994,-725.226 535.994,-689.226 671.955,-689.226 671.955,-725.226"/>
+<text text-anchor="middle" x="603.975" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/ebs.zip</text>
+</g>
+<!-- inst/extdata/ebs.zip&#45;&gt;data/raw.ebs.RData -->
+<g id="edge86" class="edge"><title>inst/extdata/ebs.zip-&gt;data/raw.ebs.RData</title>
+<g id="a_edge86"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M629.759,-689.042C655.057,-672.181 693.791,-646.367 721.676,-627.782"/>
+<polygon fill="black" stroke="black" points="723.937,-630.481 730.317,-622.023 720.055,-624.656 723.937,-630.481"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/gmex.zip -->
+<g id="node44" class="node"><title>inst/extdata/gmex.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="831.954,-725.226 689.995,-725.226 689.995,-689.226 831.954,-689.226 831.954,-725.226"/>
+<text text-anchor="middle" x="760.975" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/gmex.zip</text>
+</g>
+<!-- inst/extdata/gmex.zip&#45;&gt;data/raw.gmex.RData -->
+<g id="edge87" class="edge"><title>inst/extdata/gmex.zip-&gt;data/raw.gmex.RData</title>
+<g id="a_edge87"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M784.724,-689.042C807.853,-672.305 843.177,-646.745 868.817,-628.192"/>
+<polygon fill="black" stroke="black" points="871.059,-630.89 877.109,-622.192 866.956,-625.219 871.059,-630.89"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/goa.zip -->
+<g id="node45" class="node"><title>inst/extdata/goa.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="985.955,-725.226 849.994,-725.226 849.994,-689.226 985.955,-689.226 985.955,-725.226"/>
+<text text-anchor="middle" x="917.975" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/goa.zip</text>
+</g>
+<!-- inst/extdata/goa.zip&#45;&gt;data/raw.goa.RData -->
+<g id="edge88" class="edge"><title>inst/extdata/goa.zip-&gt;data/raw.goa.RData</title>
+<g id="a_edge88"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M939.688,-689.042C960.743,-672.378 992.851,-646.967 1016.27,-628.435"/>
+<polygon fill="black" stroke="black" points="1018.49,-631.143 1024.15,-622.192 1014.14,-625.654 1018.49,-631.143"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;bigelow_fall_calibration.csv -->
+<g id="node46" class="node"><title>inst/extdata/neus/neus-bigelow_fall_calibration.csv</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="321.924,-870.655 0.025496,-870.655 0.025496,-834.655 321.924,-834.655 321.924,-870.655"/>
+<text text-anchor="middle" x="160.975" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-bigelow_fall_calibration.csv</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;bigelow_fall_calibration.csv&#45;&gt;neus_raw_files -->
+<g id="edge89" class="edge"><title>inst/extdata/neus/neus-bigelow_fall_calibration.csv-&gt;neus_raw_files</title>
+<g id="a_edge89"><a xlink:title="c">
+<path fill="none" stroke="black" d="M199.946,-834.575C233.852,-820.579 284.679,-801.646 330.975,-792.529 475.962,-763.978 855.294,-804.758 994.975,-756.529 1010.81,-751.062 1026.29,-740.815 1038.56,-731.16"/>
+<polygon fill="black" stroke="black" points="1041,-733.687 1046.51,-724.637 1036.56,-728.276 1041,-733.687"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;bigelow_spring_calibration.csv -->
+<g id="node47" class="node"><title>inst/extdata/neus/neus-bigelow_spring_calibration.csv</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="673.922,-870.655 340.027,-870.655 340.027,-834.655 673.922,-834.655 673.922,-870.655"/>
+<text text-anchor="middle" x="506.975" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-bigelow_spring_calibration.csv</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;bigelow_spring_calibration.csv&#45;&gt;neus_raw_files -->
+<g id="edge90" class="edge"><title>inst/extdata/neus/neus-bigelow_spring_calibration.csv-&gt;neus_raw_files</title>
+<g id="a_edge90"><a xlink:title="c">
+<path fill="none" stroke="black" d="M549.3,-834.647C584.516,-821.177 636.256,-802.951 682.975,-792.529 819.212,-762.138 864.475,-806.07 994.975,-756.529 1010.53,-750.626 1025.88,-740.432 1038.14,-730.926"/>
+<polygon fill="black" stroke="black" points="1040.51,-733.514 1046.1,-724.516 1036.12,-728.062 1040.51,-733.514"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;neusStrata.csv -->
+<g id="node48" class="node"><title>inst/extdata/neus/neus-neusStrata.csv</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="929.938,-870.655 692.011,-870.655 692.011,-834.655 929.938,-834.655 929.938,-870.655"/>
+<text text-anchor="middle" x="810.975" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-neusStrata.csv</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;neusStrata.csv&#45;&gt;neus_raw_files -->
+<g id="edge91" class="edge"><title>inst/extdata/neus/neus-neusStrata.csv-&gt;neus_raw_files</title>
+<g id="a_edge91"><a xlink:title="c">
+<path fill="none" stroke="black" d="M847.367,-834.625C885.057,-816.577 945.28,-786.585 994.975,-756.529 1008.26,-748.491 1022.41,-738.808 1034.4,-730.228"/>
+<polygon fill="black" stroke="black" points="1036.66,-732.911 1042.72,-724.215 1032.56,-727.239 1036.66,-732.911"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;station.RData -->
+<g id="node49" class="node"><title>inst/extdata/neus/neus-station.RData</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1179.94,-870.655 948.01,-870.655 948.01,-834.655 1179.94,-834.655 1179.94,-870.655"/>
+<text text-anchor="middle" x="1063.97" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-station.RData</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;station.RData&#45;&gt;neus_raw_files -->
+<g id="edge92" class="edge"><title>inst/extdata/neus/neus-station.RData-&gt;neus_raw_files</title>
+<g id="a_edge92"><a xlink:title="c">
+<path fill="none" stroke="black" d="M1063.97,-834.638C1063.97,-810.293 1063.97,-765.242 1063.97,-736.017"/>
+<polygon fill="black" stroke="black" points="1067.47,-735.668 1063.97,-725.668 1060.47,-735.668 1067.47,-735.668"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;SurvDat.RData -->
+<g id="node50" class="node"><title>inst/extdata/neus/neus-SurvDat.RData</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1429.94,-870.655 1198.01,-870.655 1198.01,-834.655 1429.94,-834.655 1429.94,-870.655"/>
+<text text-anchor="middle" x="1313.97" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-SurvDat.RData</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;SurvDat.RData&#45;&gt;neus_raw_files -->
+<g id="edge93" class="edge"><title>inst/extdata/neus/neus-SurvDat.RData-&gt;neus_raw_files</title>
+<g id="a_edge93"><a xlink:title="c">
+<path fill="none" stroke="black" d="M1278.2,-834.534C1241.15,-816.414 1181.93,-786.364 1132.97,-756.529 1119.71,-748.447 1105.58,-738.755 1093.57,-730.182"/>
+<polygon fill="black" stroke="black" points="1095.41,-727.192 1085.26,-724.176 1091.32,-732.868 1095.41,-727.192"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/neus/neus&#45;SVSPP.RData -->
+<g id="node51" class="node"><title>inst/extdata/neus/neus-SVSPP.RData</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1667.94,-870.655 1448.01,-870.655 1448.01,-834.655 1667.94,-834.655 1667.94,-870.655"/>
+<text text-anchor="middle" x="1557.97" y="-849.655" font-family="Courier,monospace" font-size="10.00">inst/extdata/neus/neus-SVSPP.RData</text>
+</g>
+<!-- inst/extdata/neus/neus&#45;SVSPP.RData&#45;&gt;neus_raw_files -->
+<g id="edge94" class="edge"><title>inst/extdata/neus/neus-SVSPP.RData-&gt;neus_raw_files</title>
+<g id="a_edge94"><a xlink:title="c">
+<path fill="none" stroke="black" d="M1530.25,-834.438C1506.83,-820.751 1471.92,-802.329 1438.97,-792.529 1307.72,-753.488 1260.94,-805.273 1132.97,-756.529 1117.43,-750.609 1102.08,-740.413 1089.81,-730.91"/>
+<polygon fill="black" stroke="black" points="1091.84,-728.046 1081.85,-724.503 1087.45,-733.5 1091.84,-728.046"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/newf.zip -->
+<g id="node52" class="node"><title>inst/extdata/newf.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1283.95,-725.226 1142,-725.226 1142,-689.226 1283.95,-689.226 1283.95,-725.226"/>
+<text text-anchor="middle" x="1212.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/newf.zip</text>
+</g>
+<!-- inst/extdata/newf.zip&#45;&gt;data/raw.newf.RData -->
+<g id="edge95" class="edge"><title>inst/extdata/newf.zip-&gt;data/raw.newf.RData</title>
+<g id="a_edge95"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1234.35,-689.042C1254.98,-672.451 1286.4,-647.189 1309.43,-628.678"/>
+<polygon fill="black" stroke="black" points="1311.9,-631.186 1317.5,-622.192 1307.51,-625.73 1311.9,-631.186"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/sa.zip -->
+<g id="node53" class="node"><title>inst/extdata/sa.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1547.96,-725.226 1417.99,-725.226 1417.99,-689.226 1547.96,-689.226 1547.96,-725.226"/>
+<text text-anchor="middle" x="1482.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/sa.zip</text>
+</g>
+<!-- inst/extdata/sa.zip&#45;&gt;data/raw.sa.RData -->
+<g id="edge96" class="edge"><title>inst/extdata/sa.zip-&gt;data/raw.sa.RData</title>
+<g id="a_edge96"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1489.08,-689.042C1494.67,-673.324 1503.02,-649.824 1509.47,-631.655"/>
+<polygon fill="black" stroke="black" points="1512.79,-632.787 1512.84,-622.192 1506.19,-630.443 1512.79,-632.787"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/sgulf.zip -->
+<g id="node54" class="node"><title>inst/extdata/sgulf.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1713.95,-725.226 1566,-725.226 1566,-689.226 1713.95,-689.226 1713.95,-725.226"/>
+<text text-anchor="middle" x="1639.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/sgulf.zip</text>
+</g>
+<!-- inst/extdata/sgulf.zip&#45;&gt;data/raw.sgulf.RData -->
+<g id="edge97" class="edge"><title>inst/extdata/sgulf.zip-&gt;data/raw.sgulf.RData</title>
+<g id="a_edge97"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1644.05,-689.042C1647.74,-673.469 1653.23,-650.259 1657.52,-632.161"/>
+<polygon fill="black" stroke="black" points="1660.98,-632.73 1659.88,-622.192 1654.17,-631.116 1660.98,-632.73"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/shelf.zip -->
+<g id="node55" class="node"><title>inst/extdata/shelf.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="1879.95,-725.226 1732,-725.226 1732,-689.226 1879.95,-689.226 1879.95,-725.226"/>
+<text text-anchor="middle" x="1805.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/shelf.zip</text>
+</g>
+<!-- inst/extdata/shelf.zip&#45;&gt;data/raw.shelf.RData -->
+<g id="edge98" class="edge"><title>inst/extdata/shelf.zip-&gt;data/raw.shelf.RData</title>
+<g id="a_edge98"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1808.01,-689.042C1809.85,-673.469 1812.6,-650.259 1814.75,-632.161"/>
+<polygon fill="black" stroke="black" points="1818.23,-632.535 1815.93,-622.192 1811.28,-631.711 1818.23,-632.535"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/wcann.zip -->
+<g id="node56" class="node"><title>inst/extdata/wcann.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2045.95,-725.226 1898,-725.226 1898,-689.226 2045.95,-689.226 2045.95,-725.226"/>
+<text text-anchor="middle" x="1971.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/wcann.zip</text>
+</g>
+<!-- inst/extdata/wcann.zip&#45;&gt;data/raw.wcann.RData -->
+<g id="edge99" class="edge"><title>inst/extdata/wcann.zip-&gt;data/raw.wcann.RData</title>
+<g id="a_edge99"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M1971.97,-689.042C1971.97,-673.542 1971.97,-650.475 1971.97,-632.415"/>
+<polygon fill="black" stroke="black" points="1975.47,-632.192 1971.97,-622.192 1968.47,-632.192 1975.47,-632.192"/>
+</a>
+</g>
+</g>
+<!-- inst/extdata/wctri.zip -->
+<g id="node57" class="node"><title>inst/extdata/wctri.zip</title>
+<polygon fill="#1abc9c" stroke="#1abc9c" points="2211.95,-725.226 2064,-725.226 2064,-689.226 2211.95,-689.226 2211.95,-725.226"/>
+<text text-anchor="middle" x="2137.97" y="-704.226" font-family="Courier,monospace" font-size="10.00">inst/extdata/wctri.zip</text>
+</g>
+<!-- inst/extdata/wctri.zip&#45;&gt;data/raw.wctri.RData -->
+<g id="edge100" class="edge"><title>inst/extdata/wctri.zip-&gt;data/raw.wctri.RData</title>
+<g id="a_edge100"><a xlink:title="update_rawData">
+<path fill="none" stroke="black" d="M2136.96,-689.042C2136.04,-673.542 2134.67,-650.475 2133.6,-632.415"/>
+<polygon fill="black" stroke="black" points="2137.08,-631.968 2133,-622.192 2130.09,-632.382 2137.08,-631.968"/>
+</a>
+</g>
+</g>
+</g>
+</svg>

@@ -1,21 +1,16 @@
 soda.zip
 .DS_Store
 
-
 # History files
 .Rhistory
 .Rapp.history
-
 # Session Data files
 .RData
-
 # Example code in package build process
 *-Ex.R
-
 # RStudio files
 .Rproj.user/
 ^.*\.Rproj$
-
-
 # Random files to ignore
 tempo-image-spp.key.RData
+inst/doc

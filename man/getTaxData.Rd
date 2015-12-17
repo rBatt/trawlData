@@ -3,31 +3,26 @@
 \docType{data}
 \name{getTaxData}
 \alias{getTaxData}
-\title{Taxonomic Classification
-Taxonomic classification matched to scientific names}
+\title{Taxonomic Classification}
 \format{A dim = 3548 x 11 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab sppCorr \tab character \tab insert_description_here\cr
-[,2] \tab taxLvl \tab character \tab insert_description_here\cr
-[,3] \tab species \tab character \tab insert_description_here\cr
-[,4] \tab genus \tab character \tab insert_description_here\cr
-[,5] \tab family \tab character \tab insert_description_here\cr
-[,6] \tab order \tab character \tab insert_description_here\cr
-[,7] \tab class \tab character \tab insert_description_here\cr
-[,8] \tab superclass \tab character \tab insert_description_here\cr
-[,9] \tab subphylum \tab character \tab insert_description_here\cr
+[,2] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+[,3] \tab species \tab character \tab the species name of the species\cr
+[,4] \tab genus \tab character \tab the genus of the species\cr
+[,5] \tab family \tab character \tab taxonomic family\cr
+[,6] \tab order \tab character \tab taxonomic order\cr
+[,7] \tab class \tab character \tab taxonomic class\cr
+[,8] \tab superclass \tab character \tab taxonomic superclass\cr
+[,9] \tab subphylum \tab character \tab taxonomic subphylum\cr
 [,10] \tab phylum \tab character \tab insert_description_here\cr
-[,11] \tab kingdom \tab character \tab insert_description_here\cr
+[,11] \tab kingdom \tab character \tab taxonomic kingdom\cr
 }}
 \usage{
 getTaxData
 }
 \description{
-Taxonomic Classification
 Taxonomic classification matched to scientific names
-}
-\seealso{
-\code{\link{getCmmn}} \code{\link{getSpp}} \code{\link{getTax}}
 }
 \keyword{datasets}
 

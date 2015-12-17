@@ -40,18 +40,32 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 	# standard column names that should be numeric
 	# can't do the lat/lon.start/end as numeric because newf needs them to stay as character 
 	# in order for their conversion to decimal units to be simple
-	# numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.end", "lat.min.end", "lat.min.start", "lat.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.end", "lon.min.end", "lon.min.start", "lon.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
 	numeric.cols <- c("airtemp","areaswept","bdo", "bsalin", "btemp", "cnt", "cntcpue", "depth", "depth.end", "depth.max", "depth.min", "depth.start", "depth2.start", "effort", "lat", "lat.deg.end", "lat.deg.start", "lat.min.end", "lat.min.start", "length", "lon", "lon.deg.end", "lon.deg.start", "lon.min.end", "lon.min.start", "ssalin", "stemp", "stratumarea", "stratumarea2", "temperature", "towarea", "towdistance", "towduration", "towspeed", "weight", "wtcpue")
 	
 	# standard column names that should be character
-	character.cols <- c("comment", "common", "cruise", "date", "date.end", "datetime", "day", "dayl", "geartype","genus", "haul", "haulid", "month", "monthl", "season", "set", "station", "station.comment", "stratum", "str", "survey.name", "time", "timel", "timezone", "towID", "vessel", "year", "yearl")
+	character.cols <- c("comment", "common", "cruise", "date", "date.end", "datetime", "geartype","genus", "haul", "haulid", "season", "set", "station", "station.comment", "stratum", "str", "survey.name", "time", "timel", "timezone", "towID", "vessel")
+	
+	integer.cols <- c("day","dayl","month","monthl","year", "yearl")
+	
 	# test <- copy(ai)
 # 	X <- test
 	has.nc <- names(X)[names(X)%in%numeric.cols]
 	has.cc <- names(X)[names(X)%in%character.cols]
+	has.ic <- names(X)[names(X)%in%integer.cols]
 	# X[,c(has.nc):=eval(s2c(has.nc))]
-	X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
+	
+	as.n <- function(x){
+		x <- gsub("\\s|[O]*", "", x)
+		x[x==""] <- NA_real_
+		as.numeric(x)
+	}
+	if(reg%in%c("newf")){
+		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.n)]
+	}else{
+		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
+	}
 	X[,c(has.cc):=lapply(eval(s2c(has.cc)), as.character)]
+	X[,c(has.ic):=lapply(eval(s2c(has.ic)), as.integer)]
 	
 	# Change factors to characters
 	isfactor <- sapply(X, is.factor)
@@ -113,6 +127,8 @@ clean.format.gmex <- function(X){
 	X[,depth:=depth*1.8288] # convert fathoms to meters
 
 	X[towspeed==30, towspeed:=3] # fix typo according to Jeff Rester: 30 = 3
+	
+	X[btemp<0.01 | btemp > 100, btemp:=NA]
 	
 	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
 	
@@ -289,15 +305,15 @@ clean.format.sa <- function(X){
 	# ==============
 	# From Morley
 	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
-	X[haulid == 19910105, effort:=1.71273]
-	X[haulid == 19990065, effort:=0.53648]
-	X[haulid == 20070177, effort:=0.99936]
-	X[haulid == 19950335, effort:=0.9775]
-	X[haulid == 20110393, effort:=1.65726]
-	X[EVENTNAME == 2014325, effort:=1.755] # I get nothing for this EVENTNAME ...
-	X[EVENTNAME == 1992219, effort:=1.796247]
-	X[haulid == 19910423, effort:=0.50031]
-	X[haulid == 20010431, effort:=0.25099]
+	X[COLLECTIONNUMBER == 19910105, effort:=1.71273]
+	X[COLLECTIONNUMBER == 19990065, effort:=0.53648]
+	X[COLLECTIONNUMBER == 20070177, effort:=0.99936]
+	X[COLLECTIONNUMBER == 19950335, effort:=0.9775]
+	X[COLLECTIONNUMBER == 20110393, effort:=1.65726]
+	X[haulid == 2014325, effort:=1.755]
+	X[haulid == 1992219, effort:=1.796247]
+	X[COLLECTIONNUMBER == 19910423, effort:=0.50031]
+	X[COLLECTIONNUMBER == 20010431, effort:=0.25099]
 	
 	
 	# ================================
@@ -305,9 +321,9 @@ clean.format.sa <- function(X){
 	# ================================
 	# Corrections from Morley
 	# https://github.com/mpinsky/OceanAdapt/blob/master/complete_r_script.R#L225-L348
-	X[haulid==20010106 & SPECIESCODE==8713050104, weight:=31.9] # roughtail stingray # NOTE! I Don't get any instances of this species on this haul ...
+	X[COLLECTIONNUMBER==20010106 & SPECIESCODE==8713050104, weight:=31.9] # roughtail stingray 
 	X[(is.na(weight) | weight==0) & SPECIESCODE==5802010101, weight:=(cnt*1.9)] # horseshoe crabs
-	X[haulid==19940236 & SPECIESCODE == 9002050101, weight:=204] # leatherback sea turtle
+	X[COLLECTIONNUMBER==19940236 & SPECIESCODE == 9002050101, weight:=204] # leatherback sea turtle
 	X[(weight==0 | is.na(weight)) & SPECIESCODE==9002040101, weight:=46] # loggerhead
 	
 	
@@ -354,7 +370,7 @@ clean.format.shelf <- function(X){
 clean.format.wcann <- function(X){
 	
 	# nothing to add beyond generic
-	X[,year:=gsub("Cycle ", "", year)]
+	X[,year:=as.integer(gsub("Cycle ", "", year))]
 	
 }
 

@@ -35,7 +35,7 @@ The aim of the function is to guide the selection of which strata to exclude fro
 check_strat(clean.goa[,c("year"):=list(as.integer(year))], "goa")
 
 # a more thorough data processing example for shelf
-\dontRun{
+\dontrun{
 	# trim shelf
 	shelf <- trawlTrim("shelf", c.add=c("val.src", "flag"))
 	shelf <- shelf[(taxLvl=="species" |taxLvl=="subspecies") & (flag!="bad" | is.na(flag)) & (val.src!="m3" | (!is.na(flag) & flag!="bad"))]

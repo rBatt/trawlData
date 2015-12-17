@@ -54,7 +54,7 @@ clean.columns.ai <- function(X){
 	makeHaul(X)
 	
 	# date, time, datetime
-	X,datetime:=getDate(datetime)
+	X[,datetime:=getDate(datetime)]
 	
 	# season
 	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]

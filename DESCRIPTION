@@ -17,7 +17,8 @@ Imports:
     stringr,
     stringi,
     PBSmapping,
-    reshape2
+    reshape2,
+    lubridate
 Suggests: 
     raster,
     taxize,

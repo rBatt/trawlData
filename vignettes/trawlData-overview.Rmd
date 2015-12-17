@@ -123,11 +123,11 @@ Thus, we can treat the functions as a notebook for the procedures. Even if we ne
 Below we use these functions to recreate the contents to `raw.newf`.
 
 ```{r, echo=TRUE}
-(clean.names(newf, reg="newf")) # changes made in-place
-(clean.format(newf, reg="newf"))
-(clean.columns(newf, reg="newf"))
-(newf <- clean.tax(newf, reg="newf")) # only function requiring reassignment
-(clean.trimRow(newf, reg="newf"))
+clean.names(newf, reg="newf") # changes made in-place
+clean.format(newf, reg="newf")
+clean.columns(newf, reg="newf")
+newf <- clean.tax(newf, reg="newf") # only function requiring reassignment
+clean.trimRow(newf, reg="newf")
 
 all.equal(newf, clean.newf)
 

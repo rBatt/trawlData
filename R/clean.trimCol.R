@@ -22,6 +22,8 @@
 #' Names passed to \code{c.drop} take precedence over names passed to \code{cols} or \code{c.add}; e.g., if the same name is passed to both \code{c.drop} and \code{c.add}, it will not be included in the final data.table. The choice is somewhat arbitrary, although giving preference to dropping names is consistent with the intended use of the function.  
 #' 
 #' Finally, duplicate columns will not be returned if a name is supplied to both \code{cols} and to \code{c.add}.  
+#' 
+#' @template clean_seeAlso_template
 #'   
 #' @examples
 #' # use a subset of Aleutian Islands

@@ -8,7 +8,7 @@
 #' @param prompt_strat_tol Logical, if in \code{\link{interactive}} mode, prompt user for tolerance? If not, and if \code{append_keep_strat} is TRUE and \code{strat_tol} is left \code{\link{missing}}, then a default will be selected for \code{strat_tol}
 #' @param strat_tol The maximum number of unsampled years that is tolerated for any stratum before all rows corresponding to that stratum have their value in the "keep_strat" column set to FALSE
 #' @param plot Logical, visualize strata over time and the number of strata sampled in all but N years?
-#'
+#' 
 #' @details
 #' The aim of the function is to guide the selection of which strata to exclude from analysis because they are not sampled often enough. Having fewer gaps in your data set is better, but sometimes tolerating a tiny amount of missingness can result in huge increases in data; the visualization provided by this funciton will help gauge that tradeoff.
 #' 
@@ -22,8 +22,12 @@
 #' \dontrun{
 #' 	# trim shelf
 #' 	shelf <- trawlTrim("shelf", c.add=c("val.src", "flag"))
-#' 	shelf <- shelf[(taxLvl=="species" |taxLvl=="subspecies") & (flag!="bad" | is.na(flag)) & (val.src!="m3" | (!is.na(flag) & flag!="bad"))]
-#'
+#' 	shelf <- shelf[
+#' 		(taxLvl=="species" |taxLvl=="subspecies") & 
+#' 		(flag!="bad" | is.na(flag)) & 
+#' 		(val.src!="m3" | (!is.na(flag) & flag!="bad"))
+#' 	]
+#' 
 #' 	# aggregate species within a haul (among individuals)
 #' 	# this means taking the sum of many bio metrics
 #' 	shelf <- trawlAgg(
@@ -36,7 +40,7 @@
 #' 		metaCols=c("reg","common","year","datetime","stratum", "lon", "lat"),
 #' 		meta.action=c("unique1")
 #' 	)
-#'
+#' 
 #' 	# aggregate within a species within stratum
 #' 	# refer to the time_lvl column from previous trawlAgg()
 #' 	# can use mean for both bio and env
@@ -53,7 +57,10 @@
 #' 	)
 #' 	setnames(shelf, "time_lvl", "year")
 #' 	shelf[,year:=as.integer(as.character(year))]
-#' 	setcolorder(shelf, c("reg", "year", "stratum", "lon", "lat", "spp", "common", "btemp", "wtcpue", "nAgg"))
+#' 	setcolorder(shelf, c(
+#' 		"reg", "year", "stratum", "lon", "lat", 
+#' 		"spp", "common", "btemp", "wtcpue", "nAgg"
+#' 	))
 #' 	setkey(shelf, reg, year, stratum, spp, common)
 #' }
 #' 

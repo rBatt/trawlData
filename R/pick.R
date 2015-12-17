@@ -11,6 +11,8 @@
 #' @details
 #' The anticipated use-case related to trawl data is subsampling a data set.
 #' 
+#' @seealso \code{\link{mpick}}
+#' 
 #' @return Either a logical vector of same length as \code{x}, or a a vector with same class as \code{x} and length \code{n}
 #' 
 #' @examples

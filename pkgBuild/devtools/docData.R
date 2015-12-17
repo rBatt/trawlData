@@ -213,8 +213,8 @@ gen.cols <- c(
 	"website2" = "secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name",
 	"keep.row" = "Column indicating whether or not the row show likely be excluded",
 	"row_flag" = "if keep.row is TRUE, why was this row flagged to be dropped?",
-	"val.src" = "indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \\code{\\link{cull}}) needed to be adjusted, m3 indicates that \\code{\\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match",
-	"tbl.row" = "the row in the taxonomic data base where a match was found",
-	"mtch.src" = "the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3"
+	"val.src" = "indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \\code{\\link{cull}}) needed to be adjusted, m3 indicates that \\code{\\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \\code{\\link{match.tbl}}.",
+	"tbl.row" = "the row in the taxonomic data base where a match was found. See \\code{\\link{match.tbl}}.",
+	"mtch.src" = "the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \\code{\\link{match.tbl}}."
 
 )

@@ -106,7 +106,7 @@
 
 #' Raw Gulf of Alaska  
 #'   
-#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#' Raw data set for the Gulf of Alaska bottom trawl survey  
 #'   
 #' @format
 #' A dim = 197026 x 18 data.table data.frame:  
@@ -135,7 +135,7 @@
 
 #' Raw Northeast US  
 #'   
-#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#' Raw data set for the Northeast US bottom trawl survey  
 #'   
 #' @format
 #' A dim = 2523907 x 25 data.table data.frame:  
@@ -169,7 +169,7 @@
 "raw.neus"
 
 
-#' Raw Raw Newfoundland  
+#' Raw Newfoundland  
 #'   
 #' Raw data set for the Newfoundland bottom trawl survey  
 #'   
@@ -334,7 +334,7 @@
 
 #' Raw Scotian Shelf  
 #'   
-#' Raw data set for the Gulf of Mexico bottom trawl survey  
+#' Raw data set for the Scotian Shelf bottom trawl survey  
 #'   
 #' @format
 #' A dim = 184631 x 42 data.table data.frame:  
@@ -495,9 +495,9 @@
 #' [,18] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 #' [,19] \tab season \tab character \tab insert_description_here\cr
 #' [,20] \tab reg \tab character \tab survey region\cr
-#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,24] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,25] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,26] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -554,9 +554,9 @@
 #' [,18] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 #' [,19] \tab season \tab character \tab insert_description_here\cr
 #' [,20] \tab reg \tab character \tab survey region\cr
-#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,24] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,25] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,26] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -641,9 +641,9 @@
 #' [,46] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,47] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,48] \tab reg \tab character \tab survey region\cr
-#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,52] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,53] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,54] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -675,7 +675,7 @@
 
 #' Clean Gulf of Alaska  
 #'   
-#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#' Clean data set for the Gulf of Alaska bottom trawl survey  
 #'   
 #' @format
 #' A dim = 197026 x 48 data.table data.frame:  
@@ -700,9 +700,9 @@
 #' [,18] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 #' [,19] \tab season \tab character \tab insert_description_here\cr
 #' [,20] \tab reg \tab character \tab survey region\cr
-#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,21] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,22] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,23] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,24] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,25] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,26] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -734,7 +734,7 @@
 
 #' Clean Northeast US  
 #'   
-#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#' Clean data set for the Northeast US bottom trawl survey  
 #'   
 #' @format
 #' A dim = 2523907 x 56 data.table data.frame:  
@@ -767,9 +767,9 @@
 #' [,26] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,27] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,28] \tab reg \tab character \tab survey region\cr
-#' [,29] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,30] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,31] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,29] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,30] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,31] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,32] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,33] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,34] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -799,7 +799,7 @@
 "clean.neus"
 
 
-#' Clean Clean Newfoundland  
+#' Clean Newfoundland  
 #'   
 #' Clean data set for the Newfoundland bottom trawl survey  
 #'   
@@ -854,9 +854,9 @@
 #' [,46] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,47] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,48] \tab reg \tab character \tab survey region\cr
-#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,52] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,53] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,54] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -963,9 +963,9 @@
 #' [,68] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,69] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,70] \tab reg \tab character \tab survey region\cr
-#' [,71] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,72] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,73] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,71] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,72] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,73] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,74] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,75] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,76] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -1033,9 +1033,9 @@
 #' [,29] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 #' [,30] \tab season \tab character \tab insert_description_here\cr
 #' [,31] \tab reg \tab character \tab survey region\cr
-#' [,32] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,33] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,34] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,32] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,33] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,34] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,35] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,36] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,37] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -1067,7 +1067,7 @@
 
 #' Clean Scotian Shelf  
 #'   
-#' Clean data set for the Gulf of Mexico bottom trawl survey  
+#' Clean data set for the Scotian Shelf bottom trawl survey  
 #'   
 #' @format
 #' A dim = 184631 x 76 data.table data.frame:  
@@ -1120,9 +1120,9 @@
 #' [,46] \tab lat \tab numeric \tab latitude of the haul\cr
 #' [,47] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 #' [,48] \tab reg \tab character \tab survey region\cr
-#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,52] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,53] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,54] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -1185,9 +1185,9 @@
 #' [,24] \tab cnt \tab numeric \tab number of individuals in the whole net (may be extrapolated)\cr
 #' [,25] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,26] \tab reg \tab character \tab survey region\cr
-#' [,27] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,28] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,29] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,27] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,28] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,29] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,30] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,31] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,32] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -1276,9 +1276,9 @@
 #' [,50] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,51] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,52] \tab reg \tab character \tab survey region\cr
-#' [,53] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,54] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,55] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,53] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,54] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,55] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,56] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,57] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,58] \tab common \tab character \tab the common name of the organism sampled\cr
@@ -1408,9 +1408,9 @@
 #' A dim = 7146 x 27 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
-#' [,2] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,3] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,4] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,2] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+#' [,3] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+#' [,4] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 #' [,5] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 #' [,6] \tab spp \tab character \tab species scientific name; Genus species\cr
 #' [,7] \tab common \tab character \tab the common name of the organism sampled\cr

@@ -9,17 +9,17 @@ update_dataset_doc <- function(){
 
 	docData(raw.gmex, title="Raw Gulf of Mexico", desc="Raw data set for the Gulf of Mexico bottom trawl survey", clean=TRUE, reg="gmex", append=T)
 
-	docData(raw.goa, title="Raw Gulf of Alaska", desc="Raw data set for the Gulf of Mexico bottom trawl survey", clean=TRUE, reg="goa", append=T)
+	docData(raw.goa, title="Raw Gulf of Alaska", desc="Raw data set for the Gulf of Alaska bottom trawl survey", clean=TRUE, reg="goa", append=T)
 	
-	docData(raw.neus, title="Raw Northeast US", desc="Raw data set for the Gulf of Mexico bottom trawl survey", clean=TRUE, reg="neus", append=T)
+	docData(raw.neus, title="Raw Northeast US", desc="Raw data set for the Northeast US bottom trawl survey", clean=TRUE, reg="neus", append=T)
 	
-	docData(raw.newf, title="Raw Raw Newfoundland", desc="Raw data set for the Newfoundland bottom trawl survey", clean=TRUE, reg="newf", append=T)
+	docData(raw.newf, title="Raw Newfoundland", desc="Raw data set for the Newfoundland bottom trawl survey", clean=TRUE, reg="newf", append=T)
 	
 	docData(raw.sa, title="Raw South Atlantic (Southeast US)", desc="Raw data set for the South Atlantic (Southeast US) bottom trawl survey", reg="sa", clean=TRUE,  append=T)
 	
 	docData(raw.sgulf, title="Raw Southern Gulf of St. Lawrence", desc="Raw data set for the Southern Gulf of St. Lawrence bottom trawl survey", clean=TRUE, reg="sgulf", append=T)
 	
-	docData(raw.shelf, title="Raw Scotian Shelf", desc="Raw data set for the Gulf of Mexico bottom trawl survey", clean=TRUE, reg="shelf", append=T)
+	docData(raw.shelf, title="Raw Scotian Shelf", desc="Raw data set for the Scotian Shelf bottom trawl survey", clean=TRUE, reg="shelf", append=T)
 	
 	docData(raw.wcann, title="Raw West Coast Annual", desc="Raw data set for the West Coast Annual bottom trawl survey", clean=TRUE, reg="wcann", append=T)
 	
@@ -32,17 +32,17 @@ update_dataset_doc <- function(){
 
 	docData(clean.gmex, title="Clean Gulf of Mexico", desc="Clean data set for the Gulf of Mexico bottom trawl survey",  append=T)
 
-	docData(clean.goa, title="Clean Gulf of Alaska", desc="Clean data set for the Gulf of Mexico bottom trawl survey",  append=T)
+	docData(clean.goa, title="Clean Gulf of Alaska", desc="Clean data set for the Gulf of Alaska bottom trawl survey",  append=T)
 	
-	docData(clean.neus, title="Clean Northeast US", desc="Clean data set for the Gulf of Mexico bottom trawl survey",  append=T)
+	docData(clean.neus, title="Clean Northeast US", desc="Clean data set for the Northeast US bottom trawl survey",  append=T)
 	
-	docData(clean.newf, title="Clean Clean Newfoundland", desc="Clean data set for the Newfoundland bottom trawl survey",  append=T)
+	docData(clean.newf, title="Clean Newfoundland", desc="Clean data set for the Newfoundland bottom trawl survey",  append=T)
 	
 		docData(clean.sa, title="Clean South Atlantic (Southeast US)", desc="Clean data set for the South Atlantic (Southeast US) bottom trawl survey",  append=T)
 	
 	docData(clean.sgulf, title="Clean Southern Gulf of St. Lawrence", desc="Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey",  append=T)
 	
-	docData(clean.shelf, title="Clean Scotian Shelf", desc="Clean data set for the Gulf of Mexico bottom trawl survey",  append=T)
+	docData(clean.shelf, title="Clean Scotian Shelf", desc="Clean data set for the Scotian Shelf bottom trawl survey",  append=T)
 	
 	docData(clean.wcann, title="Clean West Coast Annual", desc="Clean data set for the West Coast Annual bottom trawl survey",  append=T)
 	

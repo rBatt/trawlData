@@ -1,6 +1,6 @@
 
 update_spp.key <- function(..., check_raw=FALSE){
-	
+	load("data/spp.key.RData")
 	# Check raw regional objects for new ref names
 	# ref is a column with spp names from raw data files
 	if(check_raw){

@@ -4,7 +4,7 @@
 \name{clean.newf}
 \alias{clean.newf}
 \title{Clean Clean Newfoundland}
-\format{A dim = 547790 x 75 data.table data.frame:
+\format{A dim = 547790 x 76 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab sppcode \tab integer \tab insert_description_here\cr
@@ -13,8 +13,8 @@
 [,5] \tab trip \tab integer \tab insert_description_here\cr
 [,6] \tab set \tab character \tab insert_description_here\cr
 [,7] \tab year \tab numeric \tab year of haul\cr
-[,8] \tab month \tab character \tab insert_description_here\cr
-[,9] \tab day \tab character \tab insert_description_here\cr
+[,8] \tab month \tab integer \tab insert_description_here\cr
+[,9] \tab day \tab integer \tab insert_description_here\cr
 [,10] \tab settype \tab integer \tab insert_description_here\cr
 [,11] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,12] \tab nafo \tab character \tab insert_description_here\cr
@@ -81,6 +81,7 @@
 [,73] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,74] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,75] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,76] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.newf

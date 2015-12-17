@@ -4,14 +4,14 @@
 \name{clean.wcann}
 \alias{clean.wcann}
 \title{Clean West Coast Annual}
-\format{A dim = 217514 x 53 data.table data.frame:
+\format{A dim = 217514 x 54 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 [,3] \tab weight \tab numeric \tab the weight (mass) of all items in the net (may be extrapolated)\cr
 [,4] \tab Individual.Average.Weight..kg. \tab numeric \tab insert_description_here\cr
 [,5] \tab Survey \tab character \tab insert_description_here\cr
-[,6] \tab year \tab character \tab year of haul\cr
+[,6] \tab year \tab integer \tab year of haul\cr
 [,7] \tab vessel \tab character \tab vessel ID\cr
 [,8] \tab Cruise.Leg \tab integer \tab insert_description_here\cr
 [,9] \tab Trawl.Performance \tab character \tab insert_description_here\cr
@@ -59,6 +59,7 @@
 [,51] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,52] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,53] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,54] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.wcann

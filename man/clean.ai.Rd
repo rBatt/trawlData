@@ -4,14 +4,14 @@
 \name{clean.ai}
 \alias{clean.ai}
 \title{Clean Aleutian Islands}
-\format{A dim = 118661 x 47 data.table data.frame:
+\format{A dim = 118661 x 48 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,3] \tab lat \tab numeric \tab latitude of the haul\cr
 [,4] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 [,5] \tab station \tab character \tab the station ID for the haul\cr
-[,6] \tab year \tab character \tab year of haul\cr
+[,6] \tab year \tab integer \tab year of haul\cr
 [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 [,8] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 [,9] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
@@ -53,6 +53,7 @@
 [,45] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,46] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,47] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,48] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.ai

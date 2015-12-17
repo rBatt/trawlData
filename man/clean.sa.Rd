@@ -4,7 +4,7 @@
 \name{clean.sa}
 \alias{clean.sa}
 \title{Clean South Atlantic (Southeast US)}
-\format{A dim = 351427 x 97 data.table data.frame:
+\format{A dim = 351427 x 98 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab COLLECTIONNUMBER \tab integer \tab insert_description_here\cr
@@ -103,6 +103,7 @@
 [,95] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,96] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,97] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,98] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.sa

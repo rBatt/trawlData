@@ -473,14 +473,14 @@
 #' Clean data from the Aleutian Islands bottom trawl  
 #'   
 #' @format
-#' A dim = 118661 x 47 data.table data.frame:  
+#' A dim = 118661 x 48 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 #' [,3] \tab lat \tab numeric \tab latitude of the haul\cr
 #' [,4] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 #' [,5] \tab station \tab character \tab the station ID for the haul\cr
-#' [,6] \tab year \tab character \tab year of haul\cr
+#' [,6] \tab year \tab integer \tab year of haul\cr
 #' [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 #' [,8] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,9] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
@@ -522,6 +522,7 @@
 #' [,45] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,46] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,47] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,48] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.ai"
 
@@ -531,14 +532,14 @@
 #' Clean data set for the Eastern Berring Sea bottom trawl survey  
 #'   
 #' @format
-#' A dim = 380027 x 47 data.table data.frame:  
+#' A dim = 380027 x 48 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 #' [,3] \tab lat \tab numeric \tab latitude of the haul\cr
 #' [,4] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 #' [,5] \tab station \tab character \tab the station ID for the haul\cr
-#' [,6] \tab year \tab character \tab year of haul\cr
+#' [,6] \tab year \tab integer \tab year of haul\cr
 #' [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 #' [,8] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,9] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
@@ -580,6 +581,7 @@
 #' [,45] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,46] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,47] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,48] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.ebs"
 
@@ -589,7 +591,7 @@
 #' Clean data set for the Gulf of Mexico bottom trawl survey  
 #'   
 #' @format
-#' A dim = 716550 x 74 data.table data.frame:  
+#' A dim = 716550 x 76 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab cruise \tab character \tab cruise ID\cr
@@ -628,43 +630,45 @@
 #' [,35] \tab survey.name \tab character \tab insert_description_here\cr
 #' [,36] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 #' [,37] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
-#' [,38] \tab year \tab character \tab year of haul\cr
-#' [,39] \tab lat \tab numeric \tab latitude of the haul\cr
-#' [,40] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
-#' [,41] \tab stratum \tab character \tab the statistical stratum of the haul\cr
-#' [,42] \tab stratumarea \tab numeric \tab the area of the statistical stratum (km2)\cr
-#' [,43] \tab towarea \tab numeric \tab insert_description_here\cr
-#' [,44] \tab effort \tab numeric \tab some measure of the effort for this catch; could be area, time, speed, net size, or some combination. When possible, was converted to area swept by net during the entire tow\cr
-#' [,45] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
-#' [,46] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
-#' [,47] \tab reg \tab character \tab survey region\cr
-#' [,48] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-#' [,49] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-#' [,50] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
-#' [,51] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
-#' [,52] \tab spp \tab character \tab species scientific name; Genus species\cr
-#' [,53] \tab common \tab character \tab the common name of the organism sampled\cr
-#' [,54] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
-#' [,55] \tab species \tab character \tab the species name of the species\cr
-#' [,56] \tab genus \tab character \tab the genus of the species\cr
-#' [,57] \tab family \tab character \tab taxonomic family\cr
-#' [,58] \tab order \tab character \tab taxonomic order\cr
-#' [,59] \tab class \tab character \tab taxonomic class\cr
-#' [,60] \tab superclass \tab character \tab taxonomic superclass\cr
-#' [,61] \tab subphylum \tab character \tab taxonomic subphylum\cr
-#' [,62] \tab phylum \tab character \tab insert_description_here\cr
-#' [,63] \tab kingdom \tab character \tab taxonomic kingdom\cr
-#' [,64] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
-#' [,65] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
-#' [,66] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
-#' [,67] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
-#' [,68] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
-#' [,69] \tab tax.src2 \tab character \tab informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)\cr
-#' [,70] \tab conflict \tab logical \tab for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking\cr
-#' [,71] \tab flag \tab character \tab flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key\cr
-#' [,72] \tab website \tab character \tab URL reference for taxonomic information\cr
-#' [,73] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
-#' [,74] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,38] \tab year \tab integer \tab year of haul\cr
+#' [,39] \tab season \tab character \tab insert_description_here\cr
+#' [,40] \tab lat \tab numeric \tab latitude of the haul\cr
+#' [,41] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+#' [,42] \tab stratum \tab character \tab the statistical stratum of the haul\cr
+#' [,43] \tab stratumarea \tab numeric \tab the area of the statistical stratum (km2)\cr
+#' [,44] \tab towarea \tab numeric \tab insert_description_here\cr
+#' [,45] \tab effort \tab numeric \tab some measure of the effort for this catch; could be area, time, speed, net size, or some combination. When possible, was converted to area swept by net during the entire tow\cr
+#' [,46] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
+#' [,47] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
+#' [,48] \tab reg \tab character \tab survey region\cr
+#' [,49] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
+#' [,50] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
+#' [,51] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+#' [,52] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
+#' [,53] \tab spp \tab character \tab species scientific name; Genus species\cr
+#' [,54] \tab common \tab character \tab the common name of the organism sampled\cr
+#' [,55] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+#' [,56] \tab species \tab character \tab the species name of the species\cr
+#' [,57] \tab genus \tab character \tab the genus of the species\cr
+#' [,58] \tab family \tab character \tab taxonomic family\cr
+#' [,59] \tab order \tab character \tab taxonomic order\cr
+#' [,60] \tab class \tab character \tab taxonomic class\cr
+#' [,61] \tab superclass \tab character \tab taxonomic superclass\cr
+#' [,62] \tab subphylum \tab character \tab taxonomic subphylum\cr
+#' [,63] \tab phylum \tab character \tab insert_description_here\cr
+#' [,64] \tab kingdom \tab character \tab taxonomic kingdom\cr
+#' [,65] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
+#' [,66] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
+#' [,67] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
+#' [,68] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
+#' [,69] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
+#' [,70] \tab tax.src2 \tab character \tab informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)\cr
+#' [,71] \tab conflict \tab logical \tab for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking\cr
+#' [,72] \tab flag \tab character \tab flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key\cr
+#' [,73] \tab website \tab character \tab URL reference for taxonomic information\cr
+#' [,74] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
+#' [,75] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,76] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.gmex"
 
@@ -674,14 +678,14 @@
 #' Clean data set for the Gulf of Mexico bottom trawl survey  
 #'   
 #' @format
-#' A dim = 197026 x 47 data.table data.frame:  
+#' A dim = 197026 x 48 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 #' [,3] \tab lat \tab numeric \tab latitude of the haul\cr
 #' [,4] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
 #' [,5] \tab station \tab character \tab the station ID for the haul\cr
-#' [,6] \tab year \tab character \tab year of haul\cr
+#' [,6] \tab year \tab integer \tab year of haul\cr
 #' [,7] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 #' [,8] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 #' [,9] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
@@ -723,6 +727,7 @@
 #' [,45] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,46] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,47] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,48] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.goa"
 
@@ -732,7 +737,7 @@
 #' Clean data set for the Gulf of Mexico bottom trawl survey  
 #'   
 #' @format
-#' A dim = 2523907 x 55 data.table data.frame:  
+#' A dim = 2523907 x 56 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab cruise \tab character \tab cruise ID\cr
@@ -741,7 +746,7 @@
 #' [,5] \tab SID \tab integer \tab species identification number\cr
 #' [,6] \tab sex \tab integer \tab the gender of the catch\cr
 #' [,7] \tab vessel \tab character \tab vessel ID\cr
-#' [,8] \tab year \tab character \tab year of haul\cr
+#' [,8] \tab year \tab integer \tab year of haul\cr
 #' [,9] \tab season \tab character \tab insert_description_here\cr
 #' [,10] \tab lat \tab numeric \tab latitude of the haul\cr
 #' [,11] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
@@ -789,6 +794,7 @@
 #' [,53] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,54] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,55] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,56] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.neus"
 
@@ -798,7 +804,7 @@
 #' Clean data set for the Newfoundland bottom trawl survey  
 #'   
 #' @format
-#' A dim = 547790 x 75 data.table data.frame:  
+#' A dim = 547790 x 76 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab sppcode \tab integer \tab insert_description_here\cr
@@ -807,8 +813,8 @@
 #' [,5] \tab trip \tab integer \tab insert_description_here\cr
 #' [,6] \tab set \tab character \tab insert_description_here\cr
 #' [,7] \tab year \tab numeric \tab year of haul\cr
-#' [,8] \tab month \tab character \tab insert_description_here\cr
-#' [,9] \tab day \tab character \tab insert_description_here\cr
+#' [,8] \tab month \tab integer \tab insert_description_here\cr
+#' [,9] \tab day \tab integer \tab insert_description_here\cr
 #' [,10] \tab settype \tab integer \tab insert_description_here\cr
 #' [,11] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 #' [,12] \tab nafo \tab character \tab insert_description_here\cr
@@ -875,6 +881,7 @@
 #' [,73] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,74] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,75] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,76] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.newf"
 
@@ -884,7 +891,7 @@
 #' Clean data set for the South Atlantic (Southeast US) bottom trawl survey  
 #'   
 #' @format
-#' A dim = 351427 x 97 data.table data.frame:  
+#' A dim = 351427 x 98 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab COLLECTIONNUMBER \tab integer \tab insert_description_here\cr
@@ -983,6 +990,7 @@
 #' [,95] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,96] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,97] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,98] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.sa"
 
@@ -992,19 +1000,19 @@
 #' Clean data set for the Southern Gulf of St. Lawrence bottom trawl survey  
 #'   
 #' @format
-#' A dim = 180583 x 58 data.table data.frame:  
+#' A dim = 180583 x 59 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 #' [,3] \tab vessel \tab character \tab vessel ID\cr
 #' [,4] \tab cruise \tab character \tab cruise ID\cr
 #' [,5] \tab set \tab character \tab insert_description_here\cr
-#' [,6] \tab year \tab character \tab year of haul\cr
+#' [,6] \tab year \tab integer \tab year of haul\cr
 #' [,7] \tab species.code \tab integer \tab insert_description_here\cr
 #' [,8] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 #' [,9] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
-#' [,10] \tab month \tab character \tab insert_description_here\cr
-#' [,11] \tab day \tab character \tab insert_description_here\cr
+#' [,10] \tab month \tab integer \tab insert_description_here\cr
+#' [,11] \tab day \tab integer \tab insert_description_here\cr
 #' [,12] \tab expt \tab integer \tab insert_description_here\cr
 #' [,13] \tab time \tab character \tab starting time of the tow\cr
 #' [,14] \tab temperature \tab numeric \tab insert_description_here\cr
@@ -1052,6 +1060,7 @@
 #' [,56] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,57] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,58] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,59] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.sgulf"
 
@@ -1061,7 +1070,7 @@
 #' Clean data set for the Gulf of Mexico bottom trawl survey  
 #'   
 #' @format
-#' A dim = 184631 x 75 data.table data.frame:  
+#' A dim = 184631 x 76 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab CODE \tab integer \tab insert_description_here\cr
@@ -1138,6 +1147,7 @@
 #' [,73] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,74] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,75] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,76] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.shelf"
 
@@ -1147,14 +1157,14 @@
 #' Clean data set for the West Coast Annual bottom trawl survey  
 #'   
 #' @format
-#' A dim = 217514 x 53 data.table data.frame:  
+#' A dim = 217514 x 54 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
 #' [,3] \tab weight \tab numeric \tab the weight (mass) of all items in the net (may be extrapolated)\cr
 #' [,4] \tab Individual.Average.Weight..kg. \tab numeric \tab insert_description_here\cr
 #' [,5] \tab Survey \tab character \tab insert_description_here\cr
-#' [,6] \tab year \tab character \tab year of haul\cr
+#' [,6] \tab year \tab integer \tab year of haul\cr
 #' [,7] \tab vessel \tab character \tab vessel ID\cr
 #' [,8] \tab Cruise.Leg \tab integer \tab insert_description_here\cr
 #' [,9] \tab Trawl.Performance \tab character \tab insert_description_here\cr
@@ -1202,6 +1212,7 @@
 #' [,51] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,52] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,53] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,54] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.wcann"
 
@@ -1211,7 +1222,7 @@
 #' Clean data set for the West Coast Triennial bottom trawl survey  
 #'   
 #' @format
-#' A dim = 108138 x 79 data.table data.frame:  
+#' A dim = 108138 x 80 data.table data.frame:  
 #' \tabular{rlll}{
 #' [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 #' [,2] \tab SID \tab integer \tab species identification number\cr
@@ -1292,6 +1303,7 @@
 #' [,77] \tab website \tab character \tab URL reference for taxonomic information\cr
 #' [,78] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 #' [,79] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+#' [,80] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 #' }
 "clean.wctri"
 

@@ -4,7 +4,7 @@
 \name{clean.wctri}
 \alias{clean.wctri}
 \title{Clean West Coast Triennial}
-\format{A dim = 108138 x 79 data.table data.frame:
+\format{A dim = 108138 x 80 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab SID \tab integer \tab species identification number\cr
@@ -85,6 +85,7 @@
 [,77] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,78] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,79] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,80] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.wctri

@@ -4,7 +4,7 @@
 \name{clean.shelf}
 \alias{clean.shelf}
 \title{Clean Scotian Shelf}
-\format{A dim = 184631 x 75 data.table data.frame:
+\format{A dim = 184631 x 76 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab CODE \tab integer \tab insert_description_here\cr
@@ -81,6 +81,7 @@
 [,73] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,74] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,75] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,76] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.shelf

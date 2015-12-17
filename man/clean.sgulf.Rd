@@ -4,19 +4,19 @@
 \name{clean.sgulf}
 \alias{clean.sgulf}
 \title{Clean Southern Gulf of St. Lawrence}
-\format{A dim = 180583 x 58 data.table data.frame:
+\format{A dim = 180583 x 59 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
 [,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
 [,3] \tab vessel \tab character \tab vessel ID\cr
 [,4] \tab cruise \tab character \tab cruise ID\cr
 [,5] \tab set \tab character \tab insert_description_here\cr
-[,6] \tab year \tab character \tab year of haul\cr
+[,6] \tab year \tab integer \tab year of haul\cr
 [,7] \tab species.code \tab integer \tab insert_description_here\cr
 [,8] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 [,9] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
-[,10] \tab month \tab character \tab insert_description_here\cr
-[,11] \tab day \tab character \tab insert_description_here\cr
+[,10] \tab month \tab integer \tab insert_description_here\cr
+[,11] \tab day \tab integer \tab insert_description_here\cr
 [,12] \tab expt \tab integer \tab insert_description_here\cr
 [,13] \tab time \tab character \tab starting time of the tow\cr
 [,14] \tab temperature \tab numeric \tab insert_description_here\cr
@@ -64,6 +64,7 @@
 [,56] \tab website \tab character \tab URL reference for taxonomic information\cr
 [,57] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 [,58] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,59] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.sgulf

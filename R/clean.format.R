@@ -128,6 +128,8 @@ clean.format.gmex <- function(X){
 
 	X[towspeed==30, towspeed:=3] # fix typo according to Jeff Rester: 30 = 3
 	
+	X[btemp<0.01 | btemp > 100, btemp:=NA]
+	
 	X[,time:=gsub("(?<=\\d)([\\d]{2})(?=$)", ":\\1", time, perl=TRUE)]
 	
 	X[survey.name=='Summer SEAMAP Groundfish Suvey', survey.name:='Summer SEAMAP Groundfish Survey']

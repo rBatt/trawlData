@@ -101,45 +101,51 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 		nstrata[i+1] <- X[,sum(strat_table>=(nT-i))]
 	}
 
-	# Initialize graphical device
-	layout(matrix(c(rep(1,3), rep(2,3), rep(1,3), rep(2,3), 3:8),ncol=3))
-	par(mar=c(2.0,1.75,1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
+	if(plot){
+		# Initialize graphical device
+		layout(matrix(c(rep(1,3), rep(2,3), rep(1,3), rep(2,3), 3:8),ncol=3))
+		par(mar=c(2.0,1.75,1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
 
-	# Tolerance vs. Missingness Panels
-	plot(0:(nT-1), nstrata, type="o", xlab="N years missing", ylab="Number of strata missing in fewer than N years", main="# strata vs. tolerance of missingness")
-	image(x=X[,sort(unique(year))], y=X[,1:length(unique(stratum))], z=X[,table(year, stratum)>0], xlab="year", ylab="stratum", main="stratum presence vs. time; red is absent")
+		# Tolerance vs. Missingness Panels
+		plot(0:(nT-1), nstrata, type="o", xlab="N years missing", ylab="Number of strata missing in fewer than N years", main="# strata vs. tolerance of missingness")
+		image(x=X[,sort(unique(year))], y=X[,1:length(unique(stratum))], z=X[,table(year, stratum)>0], xlab="year", ylab="stratum", main="stratum presence vs. time; red is absent")
 
-	# Tolerance Maps
-	par(mar=c(1.25,1.25,0.1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
+		# Tolerance Maps
+		par(mar=c(1.25,1.25,0.1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
 	
-	tol0_ind <- strat_table >= (nT-0)
+		tol0_ind <- strat_table >= (nT-0)
 
-	tol_plot <- function(lon,lat){
-		col <- 1+(!paste(lon,lat)%in%tol0[,paste(lon,lat)])
-		plot(lon, lat, xlab="", ylab="", xlim=lon.range, ylim=lat.range, col=col)
-	}
-	tol0 <- X[stratum%in%X[,names(strat_table)[tol0_ind]]]
-	tol0[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
-	for(i in 1:6){
-		name_i <- names(strat_table)[strat_table>=(nT-i)]
-		tolC <- X[(stratum %in% name_i)]
-		tolC[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
-		setkey(tolC, stratum, lat, lon)
-		tolC <- unique(tolC)
-		tolC[,tol_plot(lon,lat)]
-		legend("topleft", paste("missing years =",i), inset=c(-0.1, -0.12), bty="n")
+		tol_plot <- function(lon,lat){
+			col <- 1+(!paste(lon,lat)%in%tol0[,paste(lon,lat)])
+			plot(lon, lat, xlab="", ylab="", xlim=lon.range, ylim=lat.range, col=col)
+		}
+		tol0 <- X[stratum%in%X[,names(strat_table)[tol0_ind]]]
+		tol0[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
+		for(i in 1:6){
+			name_i <- names(strat_table)[strat_table>=(nT-i)]
+			tolC <- X[(stratum %in% name_i)]
+			tolC[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
+			setkey(tolC, stratum, lat, lon)
+			tolC <- unique(tolC)
+			tolC[,tol_plot(lon,lat)]
+			legend("topleft", paste("missing years =",i), inset=c(-0.1, -0.12), bty="n")
 		
-		tol0 <- tolC
+			tol0 <- tolC
+		}
+	
 	}
 	
 	
 	if(append_keep_strat){
 		if(prompt_strat_tol){
-			strat_tol <- readline(paste("Select your tolerance for missingness in",neus,":\n"))
+			strat_tol <- readline(paste("Select your tolerance for missingness in",reg,":\n"))
 		}
 	
-		goodStrat2 <- X[,names(colSums(table(year, stratum)>0))[colSums(table(year, stratum)>0)>=(nT-strat_tol)]]
+		goodStrat2 <- X[,names(strat_table)[strat_table>=(nT-strat_tol)]]
 		X[,keep_strat:=(stratum%in%goodStrat2)]
 		
 	}
+	
+	invisible(NULL)
+	
 }

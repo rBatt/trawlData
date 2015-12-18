@@ -4,6 +4,7 @@
 #' 
 #' @param X A trawl data.table
 #' @param reg region name
+#' @param gridSize grid size to be passed to \code{\link{ll2strat}}
 #' @param append_keep_strat Logical, whether to add the \code{keep_strat} column to \code{X}
 #' @param prompt_strat_tol Logical, if in \code{\link{interactive}} mode, prompt user for tolerance? If not, and if \code{append_keep_strat} is TRUE and \code{strat_tol} is left \code{\link{missing}}, then a default will be selected for \code{strat_tol}
 #' @param strat_tol The maximum number of unsampled years that is tolerated for any stratum before all rows corresponding to that stratum have their value in the "keep_strat" column set to FALSE
@@ -65,7 +66,7 @@
 #' }
 #' 
 #' @export
-check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri"), append_keep_strat=FALSE, prompt_strat_tol=FALSE, strat_tol, plot=TRUE){
+check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa", "sgulf", "shelf", "wcann", "wctri"), gridSize=1, append_keep_strat=FALSE, prompt_strat_tol=FALSE, strat_tol, plot=TRUE){
 	
 	stopifnot(is.data.table(X))
 	stopifnot(X[,is.numeric(year)])
@@ -120,11 +121,11 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 			plot(lon, lat, xlab="", ylab="", xlim=lon.range, ylim=lat.range, col=col)
 		}
 		tol0 <- X[stratum%in%X[,names(strat_table)[tol0_ind]]]
-		tol0[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
+		tol0[,c("lat","lon"):=list(roundGrid(lat, gridSize),roundGrid(lon, gridSize))]
 		for(i in 1:6){
 			name_i <- names(strat_table)[strat_table>=(nT-i)]
 			tolC <- X[(stratum %in% name_i)]
-			tolC[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
+			tolC[,c("lat","lon"):=list(roundGrid(lat, gridSize),roundGrid(lon, gridSize))]
 			setkey(tolC, stratum, lat, lon)
 			tolC <- unique(tolC)
 			tolC[,tol_plot(lon,lat)]

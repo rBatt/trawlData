@@ -94,10 +94,11 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 	# ===============
 	lat.range <- X[,range(lat, na.rm=TRUE)]
 	lon.range <- X[,range(lon, na.rm=TRUE)]
-
+	
+	strat_table <- X[,colSums(table(year, stratum)>0)]
 	nstrata <- c()
 	for(i in 0:(nT-1)){
-		nstrata[i+1] <- X[,sum(colSums(table(year, stratum)>0)>=(nT-i))]
+		nstrata[i+1] <- X[,sum(strat_table>=(nT-i))]
 	}
 
 	# Initialize graphical device
@@ -110,14 +111,22 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 
 	# Tolerance Maps
 	par(mar=c(1.25,1.25,0.1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
-	tol0 <- X[stratum%in%X[,names(colSums(table(year, stratum)>0))[colSums(table(year, stratum)>0)>=(nT-0)]]]
+	
+	tol0_ind <- strat_table >= (nT-0)
+
+	tol_plot <- function(lon,lat){
+		col <- 1+(!paste(lon,lat)%in%tol0[,paste(lon,lat)])
+		plot(lon, lat, xlab="", ylab="", xlim=lon.range, ylim=lat.range, col=col)
+	}
+	tol0 <- X[stratum%in%X[,names(strat_table)[tol0_ind]]]
 	tol0[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
 	for(i in 1:6){
-		tolC <- X[stratum%in%X[,names(colSums(table(year, stratum)>0))[colSums(table(year, stratum)>0)>=(nT-i)]]]
+		name_i <- names(strat_table)[strat_table>=(nT-i)]
+		tolC <- X[(stratum %in% name_i)]
 		tolC[,c("lat","lon"):=list(roundGrid(lat),roundGrid(lon))]
-		setkey(tolC, lat, lon)
+		setkey(tolC, stratum, lat, lon)
 		tolC <- unique(tolC)
-		tolC[,plot(lon, lat, xlab="", ylab="", xlim=lon.range, ylim=lat.range, col=1+(!paste(lon,lat)%in%tol0[,paste(lon,lat)]))]
+		tolC[,tol_plot(lon,lat)]
 		legend("topleft", paste("missing years =",i), inset=c(-0.1, -0.12), bty="n")
 		
 		tol0 <- tolC

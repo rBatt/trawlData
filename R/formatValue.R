@@ -95,7 +95,7 @@ rmWhite <- function(x){
 #' 
 #' @return Nothing, but affects data.table passed as \code{x}.
 #' 
-#' @seealso \code{\link{rmWhite}} \code{\link{clean.format
+#' @seealso \code{\link{rmWhite}} \code{\link{clean.format}}
 #' 
 #' @export
 rm9s <- function(x){

@@ -21,4 +21,7 @@ Also adds taxonomic classification, some ecological information (trophic level),
 
 The \code{ref} column in the output is the name of the original species name/ taxonomic identifier.
 }
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

@@ -28,4 +28,7 @@ Read in all files contained in a zip file
 The function works by unzipping a file into a temporary directory, reading in all the files in that temporarily unzipped folder, and then deleting the temporary folder and all of its contents. Thus, is a handy way of keep all of your files stored as compressed files, but being able to access them. Obviously comes at the performance cost of having to do all of the unzipping and deleting.
 Uses data.table's \code{\link{fread}} in most cases, except for .fwf formats, in which case \code{\link{fread.fwf}} is used.
 }
+\seealso{
+\code{\link{fread.fwf}} \code{\link{read.trawl}}
+}
 

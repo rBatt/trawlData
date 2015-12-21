@@ -18,4 +18,7 @@ Clean by standardizing the column names
 \details{
 Regions tend to have very different column names for what are essentiallythe same measurements, descriptors, etc. This function tries to give everything a standardized name when it's appropriate.
 }
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

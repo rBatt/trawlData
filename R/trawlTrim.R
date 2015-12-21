@@ -1,4 +1,5 @@
 #' Trim Trawl Data
+#' 
 #' Get a trimmed data set for one or more regions
 #' 
 #' @param reg a list of data.tables or a character vector of regions to be in data set. If a list of data.tables, trimming and combining is performed on those data.tables. If a charcter vector of region names, package data sets by the name of \code{paste0("clean.", reg)} are used. If nothing is supplied, \code{reg} is a character vector of all region names.

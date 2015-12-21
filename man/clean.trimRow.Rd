@@ -18,4 +18,7 @@ Cleans by indicating which rows should be dropped
 \details{
 Recommended rows to drop according to Malin's original scripts and what's in the OceanAdapt repo. Rows are not actually dropped; rather, a column called \code{keep.row} is added to the data.table; when \code{keep.row} is \code{FALSE}, it is recommended that the row be dropped.
 }
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

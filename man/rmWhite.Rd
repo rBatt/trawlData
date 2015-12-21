@@ -18,4 +18,7 @@ Remove white space from a data.table
 \details{
 Removes white space from the columns of a data.table that are characters (tested by \code{is.character}). Affects the data.table passed to \code{x}.
 }
+\seealso{
+\code{\link{rm9s}} \code{\link{clean.format}}
+}
 

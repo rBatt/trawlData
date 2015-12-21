@@ -24,4 +24,7 @@ Fast read for fixed width format files
 \details{
 uses data.table and LaF packages. The read is performed entirely by \code{LaF:laf_open_fwf}, but the output is converted to a data.table.
 }
+\seealso{
+\code{\link{read.zip}} \code{\link{read.trawl}}
+}
 

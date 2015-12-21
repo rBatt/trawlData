@@ -29,7 +29,7 @@
 raw.goa
 }
 \description{
-Raw data set for the Gulf of Mexico bottom trawl survey
+Raw data set for the Gulf of Alaska bottom trawl survey
 }
 \keyword{datasets}
 

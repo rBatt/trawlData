@@ -18,4 +18,7 @@ Clean by ensuring the presence of standard columns.
 \details{
 Add missing columns if they don't exist. These are standard values like \code{wtcpue}, \code{spp}, \code{datetime}, and \code{reg}. I will make a full list in future versions, when the decisions are finalized.
 }
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

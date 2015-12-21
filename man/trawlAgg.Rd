@@ -37,7 +37,7 @@ trawlAgg(X, FUN = NULL, bio_lvl = c("individual", "sex", "spp", "species",
 Returns an aggregated data.table. See 'Details' for columns returned.
 }
 \description{
-Aggregate trawl Data to specified levels of biological, spatial, and temporal dimensions
+Aggregate trawl data to specified levels of biological, spatial, and temporal dimensions
 }
 \details{
 In each of \code{bio_lvl}, \code{space_lvl}, and \code{time_lvl}, the default arguments are listed in order of decreasing specificity. Some of these levels are crossed, others nested. Default behavior and side-effects of the organization of these factors are described below, but in general they are not limiting to the user. The default behaviors are meant to be intuitive for common analyses.

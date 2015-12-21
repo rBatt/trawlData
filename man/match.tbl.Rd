@@ -41,7 +41,7 @@ Fuzzy matching performed with \code{\link{agrep}}, with arguments \code{ignore.c
 }
 \section{Warning}{
 
-I am suspicous that the values returned in \code{tbl.ref} may be in accurate. However, this quality, and the function in general, has not been thoroughly tested. Although use-cases have given desirable results, albeit I think that the fuzzy matching can be a bit too fuzzy (finding matches where there shouldn't be any). Be aware.
+I am suspicous that the values returned in \code{tbl.ref} may be inaccurate. However, this quality, and the function in general, has not been thoroughly tested. Although use-cases have given desirable results, albeit I think that the fuzzy matching can be a bit too fuzzy (finding matches where there shouldn't be any). Be aware.
 }
 \examples{
 library(data.table)

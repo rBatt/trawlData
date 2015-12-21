@@ -26,7 +26,11 @@ Robust conversion of variably formatted characters to dates
 \details{
 See \code{\link{lubridate::parse_date_time}} for a summary of how to specify \code{orders}. Examples show a conversion of variable formats. The only reason this function exists is that \code{parse_date_time} did not handle the century very well on some test data.
 
-The default \code{orders} is \code{paste0(rep(c("ymd", "mdy", "Ymd", "mdY"),each=5), c(" HMS"," HM", " H", "M", ""))}
+The default \code{orders} is
+\code{paste0(
+	rep(c("ymd", "mdy", "Ymd", "mdY"),each=5),
+	c(" HMS"," HM", " H", "M", "")
+)}
 }
 \section{Note}{
 
@@ -35,7 +39,13 @@ In 2056 I will turn 70. At that point, I'll still be able to assume that a date 
 Oh, and the oldest observation in this package is 1958, I believe (the soda bottom temperatures). As for trawl data, NEUS goes back to 1963. So 1957 is a date choice that will work for all dates currently in this package, and given a 1 year buffer, maximizes the duration of the appropriateness of this default for these data sets into the future.
 }
 \examples{
-test <- c("2012-11-11", "12-5-23", "12/5/86", "2015-12-16 1300", "8/6/92 3:00", "11/6/14 4", "10/31/14 52", "06/15/2014 14:37:01", "2/10/06", "95-06-26", "82-10-03", "11/18/56 2:30:42pm", "11/18/57 1:00", "11/18/58")
-getDate(test, orders=orders, truncated=3) # note that default orders ignores the pm!
+test <- c(
+	"2012-11-11", "12-5-23", "12/5/86",
+	"2015-12-16 1300", "8/6/92 3:00",
+	"11/6/14 4", "10/31/14 52", "06/15/2014 14:37:01",
+	"2/10/06", "95-06-26", "82-10-03",
+	"11/18/56 2:30:42pm", "11/18/57 1:00", "11/18/58"
+)
+getDate(test, orders=orders, truncated=3) # default orders ignores pm
 }
 

@@ -23,4 +23,7 @@ una(1:3)
 una(c(1:3,NA))
 una(c(1:3,NA), na.rm=TRUE)
 }
+\seealso{
+\code{\link{lu}}
+}
 

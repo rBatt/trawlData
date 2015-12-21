@@ -17,5 +17,7 @@ Turn factor or character columns of a data.table into ASCII characters
 }
 \details{
 Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).
+
+This function is used when resaving data sets when building the package to ensure that it is portable.
 }
 

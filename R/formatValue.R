@@ -18,6 +18,8 @@
 #' 
 #' @return a character vector that has been altered by removing content unlikely to belong to a species name.
 #' 
+#' @seealso \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+#' 
 #' @export
 cull <- function(x) cullPost2(cullParen(cullSp(fixCase(cullExSpace(x)))))
 
@@ -55,7 +57,7 @@ cullPost2 <- function(x){
 #' 
 #' @return
 #' logical vector of same length as x
-#' @export is.species
+#' @export
 is.species <- function(x){
 	sapply(strsplit(x, " "), length) >= 2
 }
@@ -71,6 +73,8 @@ is.species <- function(x){
 #' 
 #' @return
 #' Nothing, but has the side affect of impacting whatever object was passed as \code{x}.
+#' 
+#' @seealso \code{\link{rm9s}} \code{\link{clean.format}}
 #' 
 #' @export
 rmWhite <- function(x){
@@ -90,6 +94,9 @@ rmWhite <- function(x){
 #' All instances of -9999 (numeric or integer) are replaced as NA's of the appropriate class. Checks also for class "integer64".
 #' 
 #' @return Nothing, but affects data.table passed as \code{x}.
+#' 
+#' @seealso \code{\link{rmWhite}} \code{\link{clean.format}}
+#' 
 #' @export
 rm9s <- function(x){
 	stopifnot(is.data.table(x))
@@ -114,6 +121,8 @@ rm9s <- function(x){
 #' 
 #' @details
 #' Dual functionality: turn factors into a characters, and ensure those characters are encoded as ASCII. Converting to ASCII relies on the \code{stringi} package, particularly  \code{stringi::stri_enc_mark} (for detection of non-ASCII) and \code{stringi::stri_enc_toascii} (for conversion to ASCII).
+#' 
+#' This function is used when resaving data sets when building the package to ensure that it is portable.
 #' 
 #' @return NULL (invisibly), but affects the contents of the data.table whose name was passed to this function
 #' 
@@ -161,18 +170,28 @@ makeAsciiChar <- function(X){
 #' @details
 #' See \code{\link{lubridate::parse_date_time}} for a summary of how to specify \code{orders}. Examples show a conversion of variable formats. The only reason this function exists is that \code{parse_date_time} did not handle the century very well on some test data.
 #' 
-#' The default \code{orders} is \code{paste0(rep(c("ymd", "mdy", "Ymd", "mdY"),each=5), c(" HMS"," HM", " H", "M", ""))}
+#' The default \code{orders} is 
+#' \code{paste0(
+#' 	rep(c("ymd", "mdy", "Ymd", "mdY"),each=5), 
+#' 	c(" HMS"," HM", " H", "M", "")
+#' )}
 #' 
 #' @section Note:
 #' In 2056 I will turn 70. At that point, I'll still be able to assume that a date of '57 associated with an ecological field observation was probably made in 1957. If I see '56, I'll round it up to 2056. I'll probably retire by the time I'm 70, or hopefully someone else will have cleaned up the date formats in all ecological data sets by that time. Either way, it is in my own self interest to set the default as `year=1957`; I do not currently use very many data sets that begin before 1957 (and none of such vast size that I need computer code to automate the corrections), and as a result, the default 1957 will continue to work for me until I retire. After that, a date of '57 that was actually taken in 2057 will have its date reverted to 1957. Shame on them.
-#'
+#' 
 #' Oh, and the oldest observation in this package is 1958, I believe (the soda bottom temperatures). As for trawl data, NEUS goes back to 1963. So 1957 is a date choice that will work for all dates currently in this package, and given a 1 year buffer, maximizes the duration of the appropriateness of this default for these data sets into the future.
 #' 
 #' @return a vector of dates formatted as POSIXct
-
+#' 
 #' @examples
-#' test <- c("2012-11-11", "12-5-23", "12/5/86", "2015-12-16 1300", "8/6/92 3:00", "11/6/14 4", "10/31/14 52", "06/15/2014 14:37:01", "2/10/06", "95-06-26", "82-10-03", "11/18/56 2:30:42pm", "11/18/57 1:00", "11/18/58")
-#' getDate(test, orders=orders, truncated=3) # note that default orders ignores the pm!
+#' test <- c(
+#' 	"2012-11-11", "12-5-23", "12/5/86",
+#' 	"2015-12-16 1300", "8/6/92 3:00", 
+#' 	"11/6/14 4", "10/31/14 52", "06/15/2014 14:37:01", 
+#' 	"2/10/06", "95-06-26", "82-10-03", 
+#' 	"11/18/56 2:30:42pm", "11/18/57 1:00", "11/18/58"
+#' )
+#' getDate(test, orders=orders, truncated=3) # default orders ignores pm
 #' 
 #' @export
 getDate <-  function(x, orders, year=1957, tz="GMT", ...){

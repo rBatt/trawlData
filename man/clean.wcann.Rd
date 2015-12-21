@@ -32,9 +32,9 @@
 [,24] \tab cnt \tab numeric \tab number of individuals in the whole net (may be extrapolated)\cr
 [,25] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 [,26] \tab reg \tab character \tab survey region\cr
-[,27] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-[,28] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-[,29] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+[,27] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+[,28] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+[,29] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 [,30] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 [,31] \tab spp \tab character \tab species scientific name; Genus species\cr
 [,32] \tab common \tab character \tab the common name of the organism sampled\cr

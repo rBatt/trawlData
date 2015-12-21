@@ -50,4 +50,7 @@ Remove/ fix characters that are unlikely to be part of a species name
 
 \item \code{cullPost2}: Remove words after the last two
 }}
+\seealso{
+\code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

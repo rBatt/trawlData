@@ -2,8 +2,7 @@
 % Please edit documentation in R/trawlTrim.R
 \name{trawlTrim}
 \alias{trawlTrim}
-\title{Trim Trawl Data
-Get a trimmed data set for one or more regions}
+\title{Trim Trawl Data}
 \usage{
 trawlTrim(reg, ...)
 }
@@ -13,7 +12,6 @@ trawlTrim(reg, ...)
 \item{...}{arguments to be passed to \code{\link{clean.trimCol}}}
 }
 \description{
-Trim Trawl Data
 Get a trimmed data set for one or more regions
 }
 \details{

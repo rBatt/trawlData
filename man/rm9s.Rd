@@ -18,4 +18,7 @@ Remove 9's and switch them to NA
 \details{
 All instances of -9999 (numeric or integer) are replaced as NA's of the appropriate class. Checks also for class "integer64".
 }
+\seealso{
+\code{\link{rmWhite}} \code{\link{clean.format}}
+}
 

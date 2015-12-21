@@ -11,6 +11,9 @@
 #' @details uses data.table and LaF packages. The read is performed entirely by \code{LaF:laf_open_fwf}, but the output is converted to a data.table.
 #' 
 #' @return a data.table
+#' 
+#' @seealso \code{\link{read.zip}} \code{\link{read.trawl}}
+#' 
 #' @export fread.fwf
 fread.fwf <- function(..., cols, column_types, column_names){
 	# if(!requireNamespace("LaF", quietly = TRUE)){
@@ -56,6 +59,8 @@ fread.fwf <- function(..., cols, column_types, column_names){
 #' Uses data.table's \code{\link{fread}} in most cases, except for .fwf formats, in which case \code{\link{fread.fwf}} is used.
 #' 
 #' @return a data.table, or list of data.tables. The name of each element of the list is the name of the file within the .zip file.
+#' 
+#' @seealso \code{\link{fread.fwf}} \code{\link{read.trawl}}
 #' 
 #' @export read.zip
 read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, ...){

@@ -46,4 +46,7 @@ clean.trimCol(ai.trim) # uses default
 ai.trim2 <- copy(ai.eg) # copy
 clean.trimCol(ai.trim2)
 }
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
+}
 

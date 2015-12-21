@@ -3,7 +3,7 @@
 \docType{data}
 \name{raw.newf}
 \alias{raw.newf}
-\title{Raw Raw Newfoundland}
+\title{Raw Newfoundland}
 \format{A dim = 547790 x 40 data.table data.frame:
 \tabular{rlll}{
 [,1] \tab sppcode \tab integer \tab insert_description_here\cr

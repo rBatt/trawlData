@@ -2,8 +2,7 @@
 % Please edit documentation in R/helperMisc.R
 \name{s2c}
 \alias{s2c}
-\title{String to call
-Convert a character vector to a call of the desired class}
+\title{String to call}
 \usage{
 s2c(x, type = "list")
 }
@@ -16,7 +15,6 @@ s2c(x, type = "list")
 a list
 }
 \description{
-String to call
 Convert a character vector to a call of the desired class
 }
 \details{

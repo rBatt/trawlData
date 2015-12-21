@@ -17,8 +17,14 @@ Clean by fixing data entry errors, and standardizing value formats
 }
 \details{
 It is this function that makes specific corrections for data entry errors. For example, in one region a tow duration of 3 should have been 30. In another region some of the \code{effort} values were entered as \code{0} or \code{NA}, but should have had a particular value.
+
 This function also ensures that longitude and latitude are in the same format among regions.
+
 Other data entry errors or necessary corrections are implemented here, too.
+
 Dates are not thoroughly formatted here, except in some cases where getting a \code{year}, e.g., requires parsing values out of other columns. POSIX class dates not created.
+}
+\seealso{
+\code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}
 }
 

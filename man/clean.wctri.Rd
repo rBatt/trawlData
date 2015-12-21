@@ -58,9 +58,9 @@
 [,50] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
 [,51] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
 [,52] \tab reg \tab character \tab survey region\cr
-[,53] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
-[,54] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
-[,55] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+[,53] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match. See \code{\link{match.tbl}}.\cr
+[,54] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found. See \code{\link{match.tbl}}.\cr
+[,55] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3. See \code{\link{match.tbl}}.\cr
 [,56] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
 [,57] \tab spp \tab character \tab species scientific name; Genus species\cr
 [,58] \tab common \tab character \tab the common name of the organism sampled\cr

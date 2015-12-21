@@ -36,7 +36,7 @@
 raw.neus
 }
 \description{
-Raw data set for the Gulf of Mexico bottom trawl survey
+Raw data set for the Northeast US bottom trawl survey
 }
 \keyword{datasets}
 

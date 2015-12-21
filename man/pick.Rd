@@ -71,4 +71,7 @@ mini_data <- clean.ai[eval(expr)]
 # (could subset iteratively to ensure)
 mini_data[,list(nSpp=lu(spp), nY=lu(year))]
 }
+\seealso{
+\code{\link{mpick}}
+}
 

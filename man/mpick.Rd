@@ -63,4 +63,7 @@ logic <- expression(
 clean.ebs[eval(logic)]
 }
 }
+\seealso{
+\code{\link{pick}}
+}
 

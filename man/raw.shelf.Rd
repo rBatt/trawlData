@@ -53,7 +53,7 @@
 raw.shelf
 }
 \description{
-Raw data set for the Gulf of Mexico bottom trawl survey
+Raw data set for the Scotian Shelf bottom trawl survey
 }
 \keyword{datasets}
 

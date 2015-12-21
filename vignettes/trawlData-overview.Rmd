@@ -37,7 +37,7 @@ For each of the data files listed there, please explore using using `?`. Documen
 
 The data sets are the most valuable part of the package. However, we have added value by trying to standardize the content among these data sets, fixing errors, and formatting the content so that it will be readily usable for most analyses.
 
-The code that generates The bulk of the code that generates these data sets is included in the package as functions. Some of the code that automates these procedures are not in the package, but are still available on [the package's GitHub repo](https://github.com/rBatt/trawlData) (mostly under the `pkgBuild` folder). Let's take, for example, the Newfoundland data set. Like all regions, this survey region has 3 data sets associated with it: raw data files (zipped up under `inst/newf/newf/zip`), the raw R object (`raw.newf`), and the clean R object (`clean.newf`). To illustrate how the functions in the package emphasize the data, I will show how to use the package functions to recreate the Newfoundland .RData files. A similar process can be applied to any region.
+The bulk of the code that generates these data sets is included in the package as functions. Some of the code that automates these procedures are not in the package, but are still available on [the package's GitHub repo](https://github.com/rBatt/trawlData) (mostly under the `pkgBuild` folder). Let's take, for example, the Newfoundland data set. Like all regions, this survey region has 3 data sets associated with it: raw data files (zipped up under `inst/newf/newf/zip`), the raw R object (`raw.newf`), and the clean R object (`clean.newf`). To illustrate how the functions in the package emphasize the data, I will show how to use the package functions to recreate the Newfoundland .RData files. A similar process can be applied to any region.
 
 #### Raw R Ojbect from Raw File
 ```{r, echo=TRUE}
@@ -123,11 +123,11 @@ Thus, we can treat the functions as a notebook for the procedures. Even if we ne
 Below we use these functions to recreate the contents to `raw.newf`.
 
 ```{r, echo=TRUE}
-(clean.names(newf, reg="newf")) # changes made in-place
-(clean.format(newf, reg="newf"))
-(clean.columns(newf, reg="newf"))
-(newf <- clean.tax(newf, reg="newf")) # only function requiring reassignment
-(clean.trimRow(newf, reg="newf"))
+clean.names(newf, reg="newf") # changes made in-place
+clean.format(newf, reg="newf")
+clean.columns(newf, reg="newf")
+newf <- clean.tax(newf, reg="newf") # only function requiring reassignment
+clean.trimRow(newf, reg="newf")
 
 all.equal(newf, clean.newf)
 

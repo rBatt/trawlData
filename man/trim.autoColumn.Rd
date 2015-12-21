@@ -17,7 +17,9 @@ Trim columns generated automatically during a merge of data sets that share non-
 }
 \details{
 Expects that duplicate column names are given the suffixes ".x" and ".y". The ".y" columns are dropped (thus, columns from the second data set in \code{merge(x, y)}), and the suffix dropped from the name of the ".x" column.
+
 The function also checks to make sure that the column being dropped has the same content as the column being retained. If the ".x" column had NA values where the ".y" column had non-NA's, then the ".x" column gets teh values of the ".y" column for those rows. If there are diffences between the two columns for non-NA cases, a \code{\link{message}} is printed indicating as much.
+
 A message is also printed if this function does not find any columns to trim.
 }
 \examples{

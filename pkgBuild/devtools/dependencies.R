@@ -8,6 +8,8 @@ update_dependencies <- function(){
 	devtools::use_package("stringr", "Imports") # for rmWhite
 	devtools::use_package("stringi", "Imports") # for converting to ASCII
 	devtools::use_package("PBSmapping", "Imports") # for calculating stratum areas
+	devtools::use_package("reshape2", "Imports")
+	devtools::use_package("lubridate", "Imports") # for date formatting
 
 	devtools::use_package("raster", "Suggests") # for gridded environmental data sets
 	# devtools::use_package("maptools", "Suggests") # for calculating stratum areas

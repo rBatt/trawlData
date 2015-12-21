@@ -4,44 +4,44 @@
 \name{raw.gmex}
 \alias{raw.gmex}
 \title{Raw Gulf of Mexico}
-\format{A dim = 688107 x 37 data.table data.frame:
+\format{A dim = 716550 x 37 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab CRUISEID \tab integer \tab insert_description_here\cr
-[,2] \tab VESSEL \tab integer \tab insert_description_here\cr
-[,3] \tab BIO_BGS \tab character \tab insert_description_here\cr
-[,4] \tab STATIONID \tab integer \tab insert_description_here\cr
-[,5] \tab CRUISE_NO \tab integer \tab insert_description_here\cr
-[,6] \tab P_STA_NO \tab integer \tab insert_description_here\cr
-[,7] \tab BGSID \tab integer \tab insert_description_here\cr
+[,1] \tab CRUISEID \tab integer \tab cleans up to \code{cruise}, cruise ID\cr
+[,2] \tab VESSEL \tab integer \tab cleans up to \code{vessel}, vessel ID\cr
+[,3] \tab BIO_BGS \tab character \tab cleans up to \code{SID}, species identification number\cr
+[,4] \tab STATIONID \tab character \tab cleans up to \code{station}, the station ID for the haul\cr
+[,5] \tab CRUISE_NO \tab numeric \tab cruise ID as number\cr
+[,6] \tab P_STA_NO \tab numeric \tab insert_description_here\cr
+[,7] \tab BGSID \tab integer \tab record ID number\cr
 [,8] \tab CATEGORY \tab integer \tab insert_description_here\cr
-[,9] \tab GENUS_BGS \tab character \tab insert_description_here\cr
-[,10] \tab SPEC_BGS \tab character \tab insert_description_here\cr
-[,11] \tab BGSCODE \tab character \tab insert_description_here\cr
-[,12] \tab CNTEXP \tab integer \tab insert_description_here\cr
-[,13] \tab SELECT_BGS \tab numeric \tab insert_description_here\cr
+[,9] \tab GENUS_BGS \tab character \tab cleans up to \code{genus}, the genus of the species\cr
+[,10] \tab SPEC_BGS \tab character \tab cleans up to \code{species}, the species name of the species\cr
+[,11] \tab BGSCODE \tab character \tab flags information about the biological sample\cr
+[,12] \tab CNTEXP \tab integer \tab cleans up to \code{cnt}, number of individuals in the whole net (may be extrapolated)\cr
+[,13] \tab SELECT_BGS \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
 [,14] \tab INVRECID \tab integer \tab insert_description_here\cr
-[,15] \tab GEAR_SIZE \tab integer \tab insert_description_here\cr
-[,16] \tab GEAR_TYPE \tab character \tab insert_description_here\cr
-[,17] \tab MESH_SIZE \tab numeric \tab insert_description_here\cr
+[,15] \tab GEAR_SIZE \tab integer \tab cleans up to \code{gearsize}, the dimension of the gear; for trawl net, the width of the mouth in ft\cr
+[,16] \tab GEAR_TYPE \tab character \tab cleans up to \code{geartype}, code for the type of gear used\cr
+[,17] \tab MESH_SIZE \tab numeric \tab cleans up to \code{meshsize}, the size of the net mesh (inches of stretch)\cr
 [,18] \tab OP \tab character \tab insert_description_here\cr
-[,19] \tab MIN_FISH \tab integer \tab insert_description_here\cr
-[,20] \tab TIME_ZN \tab integer \tab insert_description_here\cr
-[,21] \tab TIME_MIL \tab integer \tab insert_description_here\cr
-[,22] \tab S_LATD \tab integer \tab insert_description_here\cr
+[,19] \tab MIN_FISH \tab integer \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
+[,20] \tab TIME_ZN \tab character \tab cleans up to \code{timezone}, time zone\cr
+[,21] \tab TIME_MIL \tab character \tab cleans up to \code{time}, starting time of the tow\cr
+[,22] \tab S_LATD \tab character \tab insert_description_here\cr
 [,23] \tab S_LATM \tab numeric \tab insert_description_here\cr
 [,24] \tab S_LOND \tab integer \tab insert_description_here\cr
 [,25] \tab S_LONM \tab numeric \tab insert_description_here\cr
-[,26] \tab DEPTH_SSTA \tab numeric \tab insert_description_here\cr
-[,27] \tab MO_DAY_YR \tab character \tab insert_description_here\cr
+[,26] \tab DEPTH_SSTA \tab numeric \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
+[,27] \tab MO_DAY_YR \tab character \tab cleans up to \code{date}, date of the tow\cr
 [,28] \tab E_LATD \tab integer \tab insert_description_here\cr
 [,29] \tab E_LATM \tab numeric \tab insert_description_here\cr
 [,30] \tab E_LOND \tab integer \tab insert_description_here\cr
 [,31] \tab E_LONM \tab numeric \tab insert_description_here\cr
-[,32] \tab TEMP_SSURF \tab numeric \tab insert_description_here\cr
-[,33] \tab TEMP_BOT \tab numeric \tab insert_description_here\cr
-[,34] \tab VESSEL_SPD \tab numeric \tab insert_description_here\cr
+[,32] \tab TEMP_SSURF \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
+[,33] \tab TEMP_BOT \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
+[,34] \tab VESSEL_SPD \tab numeric \tab cleans up to \code{towspeed}, the speed of the vessel\cr
 [,35] \tab COMSTAT \tab character \tab insert_description_here\cr
-[,36] \tab TAXONOMIC \tab character \tab insert_description_here\cr
+[,36] \tab TAXONOMIC \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
 [,37] \tab TITLE \tab character \tab insert_description_here\cr
 }}
 \usage{

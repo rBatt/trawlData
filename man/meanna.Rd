@@ -4,10 +4,14 @@
 \alias{meanna}
 \title{Mean NA}
 \usage{
-meanna(x)
+meanna(x, na.rm = TRUE, ...)
 }
 \arguments{
 \item{x}{take the mean of these numbers}
+
+\item{na.rm}{logical, default TRUE, remove NA's?}
+
+\item{...}{unused}
 }
 \description{
 Mean where NA's are removed, but if all are NA, return NA (not 0)

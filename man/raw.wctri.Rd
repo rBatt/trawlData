@@ -6,44 +6,44 @@
 \title{Raw West Coast Triennial}
 \format{A dim = 108138 x 42 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab SPECIES_CODE \tab integer \tab insert_description_here\cr
+[,1] \tab SPECIES_CODE \tab integer \tab cleans up to \code{SID}, species identification number\cr
 [,2] \tab CRUISEJOIN \tab integer \tab insert_description_here\cr
 [,3] \tab HAULJOIN \tab integer \tab insert_description_here\cr
 [,4] \tab REGION \tab character \tab insert_description_here\cr
-[,5] \tab VESSEL \tab integer \tab insert_description_here\cr
-[,6] \tab CRUISE \tab integer \tab insert_description_here\cr
-[,7] \tab HAUL \tab integer \tab insert_description_here\cr
+[,5] \tab VESSEL \tab integer \tab cleans up to \code{vessel}, vessel ID\cr
+[,6] \tab CRUISE \tab integer \tab cleans up to \code{cruise}, cruise ID\cr
+[,7] \tab HAUL \tab integer \tab cleans up to \code{haul}, the integer haul number within a cruise\cr
 [,8] \tab CATCHJOIN \tab integer \tab insert_description_here\cr
-[,9] \tab WEIGHT \tab numeric \tab insert_description_here\cr
-[,10] \tab NUMBER_FISH \tab integer \tab insert_description_here\cr
+[,9] \tab WEIGHT \tab numeric \tab cleans up to \code{weight}, the weight (mass) of all items in the net (may be extrapolated)\cr
+[,10] \tab NUMBER_FISH \tab integer \tab cleans up to \code{cnt}, number of individuals in the whole net (may be extrapolated)\cr
 [,11] \tab SUBSAMPLE_CODE \tab logical \tab insert_description_here\cr
 [,12] \tab VOUCHER \tab integer \tab insert_description_here\cr
 [,13] \tab AUDITJOIN \tab integer \tab insert_description_here\cr
 [,14] \tab HAUL_TYPE \tab integer \tab insert_description_here\cr
 [,15] \tab PERFORMANCE \tab numeric \tab insert_description_here\cr
-[,16] \tab START_TIME \tab character \tab insert_description_here\cr
-[,17] \tab DURATION \tab numeric \tab insert_description_here\cr
+[,16] \tab START_TIME \tab character \tab cleans up to \code{datetime}, the day and time of the haul\cr
+[,17] \tab DURATION \tab numeric \tab cleans up to \code{towduration}, the duration (time) for the tow\cr
 [,18] \tab DISTANCE_FISHED \tab numeric \tab insert_description_here\cr
-[,19] \tab NET_WIDTH \tab numeric \tab insert_description_here\cr
+[,19] \tab NET_WIDTH \tab numeric \tab cleans up to \code{gearsize}, the dimension of the gear; for trawl net, the width of the mouth in ft\cr
 [,20] \tab NET_MEASURED \tab character \tab insert_description_here\cr
 [,21] \tab NET_HEIGHT \tab numeric \tab insert_description_here\cr
-[,22] \tab STRATUM \tab integer \tab insert_description_here\cr
+[,22] \tab STRATUM \tab integer \tab cleans up to \code{stratum}, the statistical stratum of the haul\cr
 [,23] \tab START_LATITUDE \tab numeric \tab insert_description_here\cr
 [,24] \tab END_LATITUDE \tab numeric \tab insert_description_here\cr
 [,25] \tab START_LONGITUDE \tab numeric \tab insert_description_here\cr
 [,26] \tab END_LONGITUDE \tab numeric \tab insert_description_here\cr
-[,27] \tab STATIONID \tab character \tab insert_description_here\cr
+[,27] \tab STATIONID \tab character \tab cleans up to \code{station}, the station ID for the haul\cr
 [,28] \tab GEAR_DEPTH \tab integer \tab insert_description_here\cr
-[,29] \tab BOTTOM_DEPTH \tab integer \tab insert_description_here\cr
+[,29] \tab BOTTOM_DEPTH \tab integer \tab cleans up to \code{depth}, the maximum depth of the water at the location of the haul\cr
 [,30] \tab BOTTOM_TYPE \tab character \tab insert_description_here\cr
-[,31] \tab SURFACE_TEMPERATURE \tab numeric \tab insert_description_here\cr
-[,32] \tab GEAR_TEMPERATURE \tab numeric \tab insert_description_here\cr
+[,31] \tab SURFACE_TEMPERATURE \tab numeric \tab cleans up to \code{stemp}, water temperature at the surface at the location of the haul\cr
+[,32] \tab GEAR_TEMPERATURE \tab numeric \tab cleans up to \code{btemp}, water temperature at the bottom at the location of the haul\cr
 [,33] \tab WIRE_LENGTH \tab integer \tab insert_description_here\cr
-[,34] \tab GEAR \tab character \tab insert_description_here\cr
+[,34] \tab GEAR \tab character \tab cleans up to \code{geartype}, code for the type of gear used\cr
 [,35] \tab ACCESSORIES \tab character \tab insert_description_here\cr
 [,36] \tab SUBSAMPLE \tab character \tab insert_description_here\cr
-[,37] \tab SPECIES_NAME \tab character \tab insert_description_here\cr
-[,38] \tab COMMON_NAME \tab character \tab insert_description_here\cr
+[,37] \tab SPECIES_NAME \tab character \tab cleans up to \code{spp}, species scientific name; Genus species\cr
+[,38] \tab COMMON_NAME \tab character \tab cleans up to \code{common}, the common name of the organism sampled\cr
 [,39] \tab REVISION \tab character \tab insert_description_here\cr
 [,40] \tab BS \tab character \tab insert_description_here\cr
 [,41] \tab GOA \tab character \tab insert_description_here\cr

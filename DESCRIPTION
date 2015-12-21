@@ -1,22 +1,31 @@
 Package: trawlData
 Title: Read and Clean Data from Bottom Trawl Surveys
-Version: 0.0.9
+Version: 0.2.0
 Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", role=c("aut","cre")),
 	person(given="James W.", family="Morley", email="jw.morley@rutgers.edu", role=c("aut")),
 	person(given="Rebecca L.", family="Selden", email="becca.selden@gmail.com", role=c("aut")),
 	person(given="Malin L.", family="Pinsky", email="malin.pinsky@rutgers.edu", role=c("aut")))
 Description: Collates and cleans data from North American bottom trawl surveys.
-Depends: R (>= 3.2.2),
+Depends: 
+    R (>= 3.1.3),
     data.table (>= 1.9.4)
 License: CC0
 LazyData: true
-Imports: LaF,
+Imports: 
+    LaF,
     bit64,
     stringr,
     stringi,
-    PBSmapping
-Suggests: raster,
+    PBSmapping,
+    reshape2,
+    lubridate
+Suggests: 
+    raster,
     taxize,
     rfishbase,
     testthat,
-    rgdal
+    rgdal,
+    knitr,
+    rmarkdown
+RoxygenNote: 5.0.0.9000
+VignetteBuilder: knitr

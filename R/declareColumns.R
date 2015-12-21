@@ -40,7 +40,7 @@ globalVariables(c("ABUNDANCE", "ACCESSORIES", "ACCSPGRIDCODE", "ACTIVITYDESC",
 "NUMBERTOTAL", "NUMCPUE", "NUMLEN", "OP", "operation", "order", 
 "ORGWTUNITS", "P_STA_NO", "PERFORMANCE", "phylum", "Picture", 
 "posmethod", "PRECIPITATION", "PRESSURE", "PROJECTAGENCY", "PROJECTNAME", 
-"recordtype", "ref", "reg", "REGION", "REMARKS", "REVISION", 
+"recordtype", "ref", "reg", "REGION", "REMARKS", "REVISION", "row_flag",
 "S_LATD", "S_LATM", "S_LOND", "S_LONM", "salin_bottom", "SALINITYBOTTOM", 
 "SALINITYSURFACE", "SAMPWGT", "SCIENTIFIC", "SCINAME", "SDATE", 
 "sdo", "SDO", "sea", "season", "SEASON", "SEDSIZEDESC", "SELECT_BGS", 
@@ -71,4 +71,4 @@ globalVariables(c("ABUNDANCE", "ACCESSORIES", "ACCSPGRIDCODE", "ACTIVITYDESC",
 "WIRE_LENGTH", "wtcpue", "WTCPUE", "year", "YEAR", "yearl"))
 
 # other columns that need to be declared
-globalVariables(c("value", "nhid", "V1", "t.fill", "sppCorr", "classification", "strat2", "StratumCode", "survdat", "neus.survdat.raw","neus.spp","neus.station","Series","zippath"))
+globalVariables(c("value", "nhid", "V1", "t.fill", "sppCorr", "classification", "strat2", "StratumCode", "survdat", "neus.survdat.raw","neus.spp","neus.station","Series","zippath", "spp.key"))

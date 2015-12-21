@@ -4,60 +4,67 @@
 \name{clean.sgulf}
 \alias{clean.sgulf}
 \title{Clean Southern Gulf of St. Lawrence}
-\format{A dim = 180583 x 52 data.table data.frame:
+\format{A dim = 180583 x 59 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
-[,2] \tab stratum \tab character \tab insert_description_here\cr
-[,3] \tab vessel \tab character \tab insert_description_here\cr
-[,4] \tab cruise \tab character \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
+[,2] \tab stratum \tab character \tab the statistical stratum of the haul\cr
+[,3] \tab vessel \tab character \tab vessel ID\cr
+[,4] \tab cruise \tab character \tab cruise ID\cr
 [,5] \tab set \tab character \tab insert_description_here\cr
-[,6] \tab year \tab character \tab insert_description_here\cr
+[,6] \tab year \tab integer \tab year of haul\cr
 [,7] \tab species.code \tab integer \tab insert_description_here\cr
-[,8] \tab cntcpue \tab numeric \tab insert_description_here\cr
-[,9] \tab wtcpue \tab numeric \tab insert_description_here\cr
-[,10] \tab month \tab character \tab insert_description_here\cr
-[,11] \tab day \tab character \tab insert_description_here\cr
+[,8] \tab cntcpue \tab numeric \tab number of individuals caught per hectare in the haul\cr
+[,9] \tab wtcpue \tab numeric \tab weight (mass) of the catch\cr
+[,10] \tab month \tab integer \tab insert_description_here\cr
+[,11] \tab day \tab integer \tab insert_description_here\cr
 [,12] \tab expt \tab integer \tab insert_description_here\cr
-[,13] \tab time \tab character \tab insert_description_here\cr
+[,13] \tab time \tab character \tab starting time of the tow\cr
 [,14] \tab temperature \tab numeric \tab insert_description_here\cr
 [,15] \tab depth.start \tab numeric \tab insert_description_here\cr
 [,16] \tab depth.end \tab numeric \tab insert_description_here\cr
 [,17] \tab dtow \tab numeric \tab insert_description_here\cr
-[,18] \tab depth \tab numeric \tab insert_description_here\cr
-[,19] \tab lat \tab numeric \tab insert_description_here\cr
-[,20] \tab lon \tab numeric \tab insert_description_here\cr
-[,21] \tab cnt \tab numeric \tab insert_description_here\cr
-[,22] \tab weight \tab numeric \tab insert_description_here\cr
-[,23] \tab stemp \tab numeric \tab insert_description_here\cr
-[,24] \tab bsalin \tab numeric \tab insert_description_here\cr
-[,25] \tab btemp \tab numeric \tab insert_description_here\cr
+[,18] \tab depth \tab numeric \tab the maximum depth of the water at the location of the haul\cr
+[,19] \tab lat \tab numeric \tab latitude of the haul\cr
+[,20] \tab lon \tab numeric \tab longitude of the haul, in western hemisphere degrees (for lon > 0, do lon-360)\cr
+[,21] \tab cnt \tab numeric \tab number of individuals in the whole net (may be extrapolated)\cr
+[,22] \tab weight \tab numeric \tab the weight (mass) of all items in the net (may be extrapolated)\cr
+[,23] \tab stemp \tab numeric \tab water temperature at the surface at the location of the haul\cr
+[,24] \tab bsalin \tab numeric \tab bottom salinity\cr
+[,25] \tab btemp \tab numeric \tab water temperature at the bottom at the location of the haul\cr
 [,26] \tab trawlableunits \tab integer \tab insert_description_here\cr
-[,27] \tab stratumarea \tab numeric \tab insert_description_here\cr
-[,28] \tab haulid \tab character \tab insert_description_here\cr
-[,29] \tab datetime \tab c("POSIXct", "POSIXt") \tab insert_description_here\cr
+[,27] \tab stratumarea \tab numeric \tab the area of the statistical stratum (km2)\cr
+[,28] \tab haulid \tab character \tab a unique identifier for the haul; vessel ID - cruise ID - haul number\cr
+[,29] \tab datetime \tab c("POSIXct", "POSIXt") \tab the day and time of the haul\cr
 [,30] \tab season \tab character \tab insert_description_here\cr
-[,31] \tab reg \tab character \tab insert_description_here\cr
-[,32] \tab val.src \tab character \tab insert_description_here\cr
-[,33] \tab tbl.row \tab numeric \tab insert_description_here\cr
-[,34] \tab mtch.src \tab numeric \tab insert_description_here\cr
-[,35] \tab spp \tab character \tab insert_description_here\cr
-[,36] \tab common \tab character \tab insert_description_here\cr
-[,37] \tab taxLvl \tab character \tab insert_description_here\cr
-[,38] \tab species \tab character \tab insert_description_here\cr
-[,39] \tab genus \tab character \tab insert_description_here\cr
-[,40] \tab family \tab character \tab insert_description_here\cr
-[,41] \tab order \tab character \tab insert_description_here\cr
-[,42] \tab class \tab character \tab insert_description_here\cr
-[,43] \tab superclass \tab character \tab insert_description_here\cr
-[,44] \tab subphylum \tab character \tab insert_description_here\cr
-[,45] \tab phylum \tab character \tab insert_description_here\cr
-[,46] \tab kingdom \tab character \tab insert_description_here\cr
-[,47] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,48] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,49] \tab Picture \tab character \tab insert_description_here\cr
-[,50] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,51] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,52] \tab keep.row \tab logical \tab insert_description_here\cr
+[,31] \tab reg \tab character \tab survey region\cr
+[,32] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
+[,33] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
+[,34] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+[,35] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
+[,36] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,37] \tab common \tab character \tab the common name of the organism sampled\cr
+[,38] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+[,39] \tab species \tab character \tab the species name of the species\cr
+[,40] \tab genus \tab character \tab the genus of the species\cr
+[,41] \tab family \tab character \tab taxonomic family\cr
+[,42] \tab order \tab character \tab taxonomic order\cr
+[,43] \tab class \tab character \tab taxonomic class\cr
+[,44] \tab superclass \tab character \tab taxonomic superclass\cr
+[,45] \tab subphylum \tab character \tab taxonomic subphylum\cr
+[,46] \tab phylum \tab character \tab insert_description_here\cr
+[,47] \tab kingdom \tab character \tab taxonomic kingdom\cr
+[,48] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
+[,49] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
+[,50] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
+[,51] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
+[,52] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
+[,53] \tab tax.src2 \tab character \tab informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)\cr
+[,54] \tab conflict \tab logical \tab for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking\cr
+[,55] \tab flag \tab character \tab flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key\cr
+[,56] \tab website \tab character \tab URL reference for taxonomic information\cr
+[,57] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
+[,58] \tab keep.row \tab logical \tab Column indicating whether or not the row show likely be excluded\cr
+[,59] \tab row_flag \tab character \tab if keep.row is TRUE, why was this row flagged to be dropped?\cr
 }}
 \usage{
 clean.sgulf

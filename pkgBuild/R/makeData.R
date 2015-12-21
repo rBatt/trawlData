@@ -19,7 +19,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 	}
 	
 	
-	compressSave <- function(path){
+	compressSave <- function(path, nm){
 		# first, check to see if this .RData file already exists;
 		# if it does, figure out the optimal type of compression for it
 		# (this is the optimal compression for what was saved before, not what we're doing now)
@@ -55,7 +55,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
 		for(i in 1:length(regions)){
 			nm <- paste0("raw.", regions[i])
-			assign(nm, read.trawl(regions[i]))
+			assign(nm, read.trawl(regions[i], zippath="inst/extdata"))
 			
 			# ensure encoding is ASCII
 			makeAsciiChar(get(nm))
@@ -64,7 +64,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 			# If desired, save, and do so with optimal compression
 			if(raw.save){
 				message("\nSaving raw .RData file\n")
-				compressSave(paste0("data/",nm,".RData"))
+				compressSave(paste0("data/",nm,".RData"), nm)
 			}
 			
 			if(length(regions)>1){setTxtProgressBar(pb, i)}
@@ -137,7 +137,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 		# clean taxa names
 		message("\nCleaning taxonomy and adding ecology\n")
 		if(length(regions)>1){pb <- txtProgressBar(min=1, max=length(regions), style=3)}
-		# load("data/spp.key.RData")
+		load("data/spp.key.RData")
 		for(i in 1:length(regions)){
 			assign(cnms[i], clean.tax(get(cnms[i]), regions[i]))
 			if(length(regions)>1){setTxtProgressBar(pb, i)}
@@ -172,7 +172,7 @@ makeData <- function(regions, raw.read=F, raw.save=raw.read, raw.load=F, clean=F
 			makeAsciiChar(get(cnms[i]))
 			
 			# save
-			compressSave(paste0("data/",nm,".RData"))
+			compressSave(paste0("data/",cnms[i],".RData"), nm=cnms[i])
 			
 			if(length(regions)>1){setTxtProgressBar(pb, i)}
 		}

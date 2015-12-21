@@ -4,10 +4,14 @@
 \alias{sumna}
 \title{Sum NA}
 \usage{
-sumna(x)
+sumna(x, na.rm = TRUE, ...)
 }
 \arguments{
 \item{x}{numbers to be summed}
+
+\item{na.rm}{logical, default TRUE, remove NA's?}
+
+\item{...}{unused}
 }
 \description{
 Sum where NA's are removed, but if all are NA, return NA (not 0)

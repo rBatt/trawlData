@@ -10,14 +10,20 @@
 #' Numeric vector of length two indicating the number of pixes horizontally and vertically; or if no match, returns NULL and prints a message.
 #' 
 #' @examples
-#' pick <- function(x, n){
-#' 	(x)%in%sample(unique(x),n)
-#' }
-#' 
 #' library(rgdal)
 #' dev.new(width=8, height=7)
-#' par(mar=c(0.5,0.5,1,0.5), oma=c(0,0,0,0), ps=8, cex=1, mfrow=c(5,5))
-#' clean.ebs[Picture=="y"][pick(spp,25),sppImg(unique(spp),unique(common),side=3, adj=0.1, line=-0.85, xpd=T),by="spp"]
+#' par(mar=c(0.5,0.5,1,0.5), oma=c(0,0,0,0), ps=8, cex=1, mfrow=c(3,3))
+#' clean.ebs[Picture=="y"][pick(spp,9),
+#' 	sppImg(
+#' 		unique(spp),
+#' 		unique(common),
+#' 		side=3,
+#' 		adj=0.1,
+#' 		line=-0.85,
+#' 		xpd=TRUE
+#' 	),
+#' 	by="spp"
+#' ]
 #' 
 #' @export
 sppImg <- function(x, common=NULL, ...){
@@ -25,7 +31,7 @@ sppImg <- function(x, common=NULL, ...){
 		message("Please install package 'rgdal' via install.packages('rgdal')")
 	}
 	# library(rgdal)
-	imgs <- list.files(file.path(system.file(package="trawlData"),"extdata/taxPictures"), full=T)
+	imgs <- list.files(file.path(system.file(package="trawlData"),"extdata/taxPictures"), full.names=TRUE)
 	imgs_spp <- gsub("copy|\\.[a-z]*$", "", basename(imgs), ignore.case=TRUE)
 	imgs_spp <- gsub("_", " ", imgs_spp)
 	mtch <- match(x, imgs_spp)

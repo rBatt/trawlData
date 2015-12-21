@@ -3,50 +3,42 @@
 \docType{data}
 \name{spp.key}
 \alias{spp.key}
-\title{Species Key
-Key to taxonomic and ecological information for all species surveyed
-This data.table is the desirable key to use for species names. Relates survey-entered taxonomic identifiers to true scientific names and other related information.
-This key was partially derived from the \code{\link{taxInfo}} data set checked by Rachel Berman. However, taxonomy for this data set seems to be an ongoing process, and is always improving. Thus, \code{spp.key} should represent an improvement, and will continue to improve. Check for updates.
-To match the values in this key to taxonomic data, one can use \code{merge} using \code{by="ref"}; alternatively, \code{trawlData::match.tbl} may also be convenient for grabbing specific values.}
-\format{A dim = 6015 x 27 data.table data.frame:
+\title{Species Key}
+\format{A dim = 7146 x 27 data.table data.frame:
 \tabular{rlll}{
-[,1] \tab ref \tab character \tab insert_description_here\cr
-[,2] \tab val.src \tab character \tab insert_description_here\cr
-[,3] \tab tbl.row \tab integer \tab insert_description_here\cr
-[,4] \tab mtch.src \tab integer \tab insert_description_here\cr
-[,5] \tab tax.src \tab character \tab insert_description_here\cr
-[,6] \tab spp \tab character \tab insert_description_here\cr
-[,7] \tab common \tab character \tab insert_description_here\cr
-[,8] \tab taxLvl \tab character \tab insert_description_here\cr
-[,9] \tab species \tab character \tab insert_description_here\cr
-[,10] \tab genus \tab character \tab insert_description_here\cr
-[,11] \tab family \tab character \tab insert_description_here\cr
-[,12] \tab order \tab character \tab insert_description_here\cr
-[,13] \tab class \tab character \tab insert_description_here\cr
-[,14] \tab superclass \tab character \tab insert_description_here\cr
-[,15] \tab subphylum \tab character \tab insert_description_here\cr
+[,1] \tab ref \tab character \tab reference taxonomic ID from raw data\cr
+[,2] \tab val.src \tab character \tab indicates the degree of 'fuzziness' required to find a match to ref in a data.base of taxonomic information; m1 indicates perfect match, m2 indicates that capitalization, whitespace, etc (see \code{\link{cull}}) needed to be adjusted, m3 indicates that \code{\link{agrep}} was used, and m4 means that measures in both m2 and m3 were taken to find the match\cr
+[,3] \tab tbl.row \tab integer \tab the row in the taxonomic data base where a match was found\cr
+[,4] \tab mtch.src \tab integer \tab the database containing the match; 1 is taxInfo, 2 is spp.corr1, 3 is getSppData; if matches are found in multiple sources, a match to 1 takes precedence over 1 & 2, and 2 over 3\cr
+[,5] \tab tax.src \tab character \tab informs source of taxonomic correction of ref to spp and other tax info; is taxInfo if found from manually checked spreadsheet\cr
+[,6] \tab spp \tab character \tab species scientific name; Genus species\cr
+[,7] \tab common \tab character \tab the common name of the organism sampled\cr
+[,8] \tab taxLvl \tab character \tab the most specific level of classification indicated by spp\cr
+[,9] \tab species \tab character \tab the species name of the species\cr
+[,10] \tab genus \tab character \tab the genus of the species\cr
+[,11] \tab family \tab character \tab taxonomic family\cr
+[,12] \tab order \tab character \tab taxonomic order\cr
+[,13] \tab class \tab character \tab taxonomic class\cr
+[,14] \tab superclass \tab character \tab taxonomic superclass\cr
+[,15] \tab subphylum \tab character \tab taxonomic subphylum\cr
 [,16] \tab phylum \tab character \tab insert_description_here\cr
-[,17] \tab kingdom \tab character \tab insert_description_here\cr
-[,18] \tab trophicDiet \tab character \tab insert_description_here\cr
-[,19] \tab trophicOrig \tab character \tab insert_description_here\cr
-[,20] \tab Picture \tab character \tab insert_description_here\cr
-[,21] \tab trophicLevel \tab numeric \tab insert_description_here\cr
-[,22] \tab trophicLevel.se \tab numeric \tab insert_description_here\cr
-[,23] \tab tax.src2 \tab character \tab insert_description_here\cr
-[,24] \tab conflict \tab logical \tab insert_description_here\cr
-[,25] \tab flag \tab character \tab insert_description_here\cr
-[,26] \tab website \tab character \tab insert_description_here\cr
-[,27] \tab website2 \tab character \tab insert_description_here\cr
+[,17] \tab kingdom \tab character \tab taxonomic kingdom\cr
+[,18] \tab trophicDiet \tab character \tab source of trophic level from Fish Base or Sea Life Base; 'y' means it was from this source\cr
+[,19] \tab trophicOrig \tab character \tab from Fish Base or Sea Life Base; was the trophic level estimated from an 'Original sample'?\cr
+[,20] \tab Picture \tab character \tab Is there a picture of this critter assoicated with the package? Note: this isn't always accurate\cr
+[,21] \tab trophicLevel \tab numeric \tab the trophic level from Fish Base or Sea Life Base\cr
+[,22] \tab trophicLevel.se \tab numeric \tab the standard error of the trophic level\cr
+[,23] \tab tax.src2 \tab character \tab informs source of taxonomic correct; the name of a source of taxonomic information other than taxInfo (other than manual entries)\cr
+[,24] \tab conflict \tab logical \tab for a given 'spp' value in spp.key, was there a conflict in the other taxonomic columns? E.g., a single spp corresponding to multiple common names; also TRUE if different ref values were found in different databases (affecting the val.src, tbl.row, mtch.src, tax.src, etc columns), but then the refs converged to same spp -- that would not necessarily be an error, but might deserve checking\cr
+[,25] \tab flag \tab character \tab flag related to correcting taxonomic information; relates to automated input, potential errors, and signature of people or methods that have made corrections to spp.key\cr
+[,26] \tab website \tab character \tab URL reference for taxonomic information\cr
+[,27] \tab website2 \tab character \tab secondary URL reference for taxonomic information; often used when website finds the name for a spp name as entered, but website2 points to the most up-to-date scientific name\cr
 }}
 \usage{
 spp.key
 }
 \description{
-Species Key
 Key to taxonomic and ecological information for all species surveyed
-This data.table is the desirable key to use for species names. Relates survey-entered taxonomic identifiers to true scientific names and other related information.
-This key was partially derived from the \code{\link{taxInfo}} data set checked by Rachel Berman. However, taxonomy for this data set seems to be an ongoing process, and is always improving. Thus, \code{spp.key} should represent an improvement, and will continue to improve. Check for updates.
-To match the values in this key to taxonomic data, one can use \code{merge} using \code{by="ref"}; alternatively, \code{trawlData::match.tbl} may also be convenient for grabbing specific values.
 }
 \keyword{datasets}
 

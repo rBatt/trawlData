@@ -492,7 +492,8 @@ clean.columns.wcann <- function(X){
 	# not needed
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%y %H:%M", tz="GMT")]
+	X[,datetime:=getDate(datetime)]
+	X[,year:=data.table::year(datetime)]
 	
 	# season
 	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]

@@ -210,7 +210,7 @@ getDate <-  function(x, orders, year=1957, tz="GMT", ...){
 	# 	lubridate::year(x)[yxl] <- ifelse(m >= year %% 100, 1900+m, 2000+m)
 	# }
 	m <- yx %% 100
-	year(x) <- ifelse(m > year %% 100, 1900+m, 2000+m)
+	lubridate::year(x) <- ifelse(m > year %% 100, 1900+m, 2000+m)
   x
 }
 

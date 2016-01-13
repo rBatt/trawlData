@@ -368,8 +368,8 @@ clean.columns.sa <- function(X){
 	# not needed
 	
 	# date, time, datetime
-	X[,year:=as.integer(substr(haulid, 1, 4))]
-	X[,datetime:=as.POSIXct(paste(date, time), format="%m/%d/%y %H:%M", tz="GMT")]
+	X[,datetime:=getDate(paste(date, time))]
+	X[,year:=data.table::year(datetime)]
 	
 	# season
 	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]

@@ -378,7 +378,7 @@ clean.format.shelf <- function(X){
 clean.format.wcann <- function(X){
 	
 	# nothing to add beyond generic
-	X[,year:=as.integer(gsub("Cycle ", "", year))]
+	# X[,year:=as.integer(gsub("Cycle ", "", year))]
 	
 }
 

@@ -70,7 +70,10 @@ clean.format <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "n
 		X[,c(has.nc):=lapply(eval(s2c(has.nc)), as.numeric)]
 	}
 	X[,c(has.cc):=lapply(eval(s2c(has.cc)), as.character)]
-	X[,c(has.ic):=lapply(eval(s2c(has.ic)), as.integer)]
+	
+	if(length(has.ic)){
+		X[,c(has.ic):=lapply(eval(s2c(has.ic)), as.integer)]
+	}
 	
 	# Change factors to characters
 	isfactor <- sapply(X, is.factor)

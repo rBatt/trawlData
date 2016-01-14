@@ -554,6 +554,10 @@ clean.columns.wctri <- function(X){
 	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
 	
 	# towarea/ effort
+	X[,c("towduration", "towdistance", "gearsize"):=lapply(list(towduration, towdistance, gearsize), fill.mean), by=c("haulid")]
+	
+	X[,c("gearsize"):=lapply(list(gearsize), fill.mean), by=c("year", "geartype", "vessel")]
+	
 	X[,towarea:=towdistance*1E3*gearsize/1E4]
 	X[,effort:=towarea]
 	

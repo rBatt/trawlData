@@ -387,7 +387,8 @@ clean.format.wcann <- function(X){
 # ==========
 clean.format.wctri <- function(X){
 	
-	# nothing to add beyond generic
+	X[towduration==0, towduration:=NA]
+	X[towdistance==0, towdistance:=NA]
 	
 }
 

@@ -273,7 +273,7 @@ clean.columns.newf <- function(X){
 	X[season=="fall" & !is.na(season) & as.numeric(month)<4, year:=year-1] # this is survey year, not calendar year
 	
 	# season
-	# not needed
+	X[is.na(season), season:=getSeason(datetime)]
 	
 	# lon/ lat
 	X[,lat:=(lat.start+lat.end)/2]

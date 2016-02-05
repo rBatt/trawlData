@@ -278,8 +278,8 @@ clean.columns.newf <- function(X){
 	# lon/ lat
 	X[,lat:=(lat.start+lat.end)/2]
 	X[,lon:=(lon.start+lon.end)/2]
-	X[lat.end==0,lat:=lat.start]
-	X[lon.end==0,lon:=lon.start]
+	X[lat.end==0 | is.na(lat.end),lat:=lat.start]
+	X[lon.end==0 | is.na(lon.end),lon:=lon.start]
 	
 	# depth
 	# not needed

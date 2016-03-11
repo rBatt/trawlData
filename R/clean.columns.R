@@ -7,6 +7,8 @@
 #' 
 #' @template X_reg
 #' 
+#' @template clean_seeAlso_template
+#' 
 #' @import data.table
 #' @export clean.columns
 clean.columns <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri")){
@@ -271,13 +273,13 @@ clean.columns.newf <- function(X){
 	X[season=="fall" & !is.na(season) & as.numeric(month)<4, year:=year-1] # this is survey year, not calendar year
 	
 	# season
-	# not needed
+	X[is.na(season), season:=getSeason(datetime)]
 	
 	# lon/ lat
 	X[,lat:=(lat.start+lat.end)/2]
 	X[,lon:=(lon.start+lon.end)/2]
-	X[lat.end==0,lat:=lat.start]
-	X[lon.end==0,lon:=lon.start]
+	X[lat.end==0 | is.na(lat.end),lat:=lat.start]
+	X[lon.end==0 | is.na(lon.end),lon:=lon.start]
 	
 	# depth
 	# not needed
@@ -366,8 +368,8 @@ clean.columns.sa <- function(X){
 	# not needed
 	
 	# date, time, datetime
-	X[,year:=as.integer(substr(haulid, 1, 4))]
-	X[,datetime:=as.POSIXct(paste(date, time), format="%m/%d/%y %H:%M", tz="GMT")]
+	X[,datetime:=getDate(paste(date, time))]
+	X[,year:=data.table::year(datetime)]
 	
 	# season
 	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
@@ -490,7 +492,8 @@ clean.columns.wcann <- function(X){
 	# not needed
 	
 	# date, time, datetime
-	X[,datetime:=as.POSIXct(datetime, format="%m/%d/%y %H:%M", tz="GMT")]
+	X[,datetime:=getDate(datetime)]
+	X[,year:=data.table::year(datetime)]
 	
 	# season
 	X[!is.na(datetime),season:=getSeason(unique(datetime)),by="datetime"]
@@ -551,6 +554,10 @@ clean.columns.wctri <- function(X){
 	X[!is.na(lon)&!is.na(lat),stratumarea:=suppressMessages(calcarea(cbind(lon, lat))), by=stratum]
 	
 	# towarea/ effort
+	X[,c("towduration", "towdistance", "gearsize"):=lapply(list(towduration, towdistance, gearsize), fill.mean), by=c("haulid")]
+	
+	X[,c("gearsize"):=lapply(list(gearsize), fill.mean), by=c("year", "geartype", "vessel")]
+	
 	X[,towarea:=towdistance*1E3*gearsize/1E4]
 	X[,effort:=towarea]
 	

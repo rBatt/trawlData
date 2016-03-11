@@ -1,6 +1,7 @@
 library(hypervolume)
 library(spatstat)
 library(SpatialTools)
+library(MASS)
 
 # ---- data ----
 tr <- trawlTrim(clean.neus)
@@ -11,7 +12,7 @@ ch <- tr_a[chull(lon,lat),list(lon,lat)]
 plot(rbind(ch,ch[1]), type="l")
 
 # ---- spatstat ----
-tr_owin <- tr_a[,owin(range(lon), range(lat))]
+tr_owin <- tr_a[,owin(range(lon), range(lat))] # try tr_a[,as.owin(data.frame(x=lon, y=lat))]
 tr_ppp <- tr_a[!duplicated(haulid) & !is.na(btemp) & !duplicated(paste(lon,lat)), ppp(lon, lat, window=tr_owin, marks=btemp)]
 
 # spatstat 1

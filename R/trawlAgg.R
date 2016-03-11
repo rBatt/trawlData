@@ -1,6 +1,6 @@
 #' Aggregate Trawl Data
 #' 
-#' Aggregate trawl Data to specified levels of biological, spatial, and temporal dimensions
+#' Aggregate trawl data to specified levels of biological, spatial, and temporal dimensions
 #' 
 #' @param X A data.table containing trawl data
 #' @param FUN Function used for aggregating each subset of \code{X}.

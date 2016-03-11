@@ -9,6 +9,8 @@
 #' @param screen Logical If TRUE (default) then before random searching, will screen out factor levels that definitely cannot satisfy the full sweet of conditions in \code{p}. Can be a little slow, but is extremely effect when most combinations of factors in \code{p} do not exist. See 'Details'.  
 #' @param dt Logical, if TRUE, returns a data.table; if FALSE (default), returns an index of that data.table?  
 #' 
+#' @seealso \code{\link{pick}}
+#' 
 #' @details
 #' This problem may ultimately be better suited for a real optimization algorithm. Right now, relies and arbitrary guess-and-check. Does not "forget" failed guesses (only specific combinations are worth forgetting, and for large data sets there's a very low probability of happening upon same combination). Thus, this is a very brute-force approach, with the exception of the checking done when \code{screen=TRUE}.
 #' 

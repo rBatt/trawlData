@@ -7,6 +7,8 @@
 #' @details
 #' Recommended rows to drop according to Malin's original scripts and what's in the OceanAdapt repo. Rows are not actually dropped; rather, a column called \code{keep.row} is added to the data.table; when \code{keep.row} is \code{FALSE}, it is recommended that the row be dropped.
 #' 
+#' In SA, \code{c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")} were only ID'd to genus correctly. Rows corresponding to these species are flagged for being dropped, but if desired for an analysis at genus level, can be recovered by examining the \code{spp} column for these species and the \code{row_flag} column for "Spp1".
+#' 
 #' @template clean_seeAlso_template
 #' 
 #' @export clean.trimRow
@@ -236,11 +238,14 @@ clean.trimRow.sa <- function(X){
 	
 	effort.i <- X[,effort!=0 | is.na(effort)] # just don't let it be 0 ...
 	
-	keep.row.i <- haul.i & strat.i & survey.i & effort.i
+	spp.i <- X[,spp%in%c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")] # these anchovy spp were really only ID to genus
+	
+	keep.row.i <- haul.i & strat.i & survey.i & effort.i & spp.i
 	X[,keep.row:=keep.row.i]
 	
 	X[!effort.i,row_flag:=paste(row_flag, "Eff")]
 	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
+	X[!spp.i,row_flag:=paste(row_flag, "Spp1")]
 	X[!strat.i,row_flag:=paste(row_flag, "Strat")]
 	X[!survey.i,row_flag:=paste(row_flag, "Surv")]
 	

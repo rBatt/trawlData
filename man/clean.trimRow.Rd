@@ -17,6 +17,8 @@ Cleans by indicating which rows should be dropped
 }
 \details{
 Recommended rows to drop according to Malin's original scripts and what's in the OceanAdapt repo. Rows are not actually dropped; rather, a column called \code{keep.row} is added to the data.table; when \code{keep.row} is \code{FALSE}, it is recommended that the row be dropped.
+
+In SA, \code{c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")} were only ID'd to genus correctly. Rows corresponding to these species are flagged for being dropped, but if desired for an analysis at genus level, can be recovered by examining the \code{spp} column for these species and the \code{row_flag} column for "Spp1".
 }
 \seealso{
 \code{\link{clean.names}}, \code{\link{clean.format}}, \code{\link{clean.columns}}, \code{\link{clean.tax}} \code{\link{clean.trimRow}}

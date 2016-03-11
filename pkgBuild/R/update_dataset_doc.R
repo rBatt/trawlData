@@ -137,6 +137,14 @@ NULL
 
 #' @rdname SODA
 \"soda.annMean.mu\"
+
+#' Rugosity
+#' 
+#' Rugosity and depth data
+#' 
+#' @format raster brick
+\"rugosity\"
+
 "
 	
 	sink("R/datasets.R", append=TRUE)

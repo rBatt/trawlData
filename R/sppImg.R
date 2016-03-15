@@ -44,7 +44,7 @@ sppImg <- function(x, common=NULL, ...){
 	dims <- img@grid@cells.dim
 	
 	if(missing(common)){
-		common <- spp.key[spp==x,common]
+		common <- spp.key[spp==x,unique(common)]
 	}
 	
 	# cin <- par()$cin

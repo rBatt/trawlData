@@ -238,7 +238,7 @@ clean.trimRow.sa <- function(X){
 	
 	effort.i <- X[,effort!=0 | is.na(effort)] # just don't let it be 0 ...
 	
-	spp.i <- X[,spp%in%c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")] # these anchovy spp were really only ID to genus
+	spp.i <- X[,!spp%in%c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")] # these anchovy spp were really only ID to genus
 	
 	keep.row.i <- haul.i & strat.i & survey.i & effort.i & spp.i
 	X[,keep.row:=keep.row.i]

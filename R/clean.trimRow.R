@@ -62,8 +62,9 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	noID <- X[,spp=="" | is.na(spp)]
 	missSpecies <- X[,species=="" | is.na(species)]
 	missGenus <- X[,genus=="" | is.na(genus)]
+	bad_flag <- X[,flag%in%c("badJWM","bad")&!is.na(flag)]
 	
-	spp.i <- !(badSpp | noID | missSpecies | missGenus)
+	spp.i <- !(badSpp | noID | missSpecies | missGenus | bad_flag)
 	
 	X[,row_flag:=""]
 	get.clean.trimRow(reg) # do the region-specific checks on which rows to trim out

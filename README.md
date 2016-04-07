@@ -22,9 +22,9 @@ R package for maintaining and manipulating data from bottom trawl survey and ass
 
 To install this repo, the easiest thing to do is to clone it, then then use `devtools:install()`:  
  - In terminal, type:  
- ```
+ 
+ ```{bash}
 cd path/to/folder/to/hold/repo
-
 git clone https://github.com/rBatt/trawlData
  ```  
  - In R, type:  

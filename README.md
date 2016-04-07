@@ -24,6 +24,7 @@ To install this repo, the easiest thing to do is to clone it, then then use `dev
  - In terminal, type:  
  ```
 cd path/to/folder/to/hold/repo
+
 git clone https://github.com/rBatt/trawlData
  ```  
  - In R, type:  

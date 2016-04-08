@@ -239,7 +239,7 @@ clean.trimRow.sa <- function(X){
 	
 	effort.i <- X[,effort!=0 | is.na(effort)] # just don't let it be 0 ...
 	
-	gear.i <- X[!is.na(wtcpue)] # a lot of the missing weights are long-line data, according to JWM
+	gear.i <- X[, !is.na(wtcpue)] # a lot of the missing weights are long-line data, according to JWM
 	
 	spp.i <- X[,!spp%in%c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")] # these anchovy spp were really only ID to genus
 	

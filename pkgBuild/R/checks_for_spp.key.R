@@ -43,7 +43,8 @@ sk3 <- copy(sk)
 # need to write another command to set common to NA and set flag to check
 c4 <- sk[,is.na(species) & (!is.na(common)&!common%in%generic_common) & (is.na(flag) | (!flag%in%c("bad","check","JM")))]
 c4 <- c4&!is.na(c4)
-check(sk, c4)
+check(sk, c4, google=TRUE)
+sk4 <- copy(sk)
 
 
 # need a check to see if spp is "very" different from ref

@@ -236,7 +236,7 @@ set2nonNA <- function(Z, index){
 # = check =
 # =========
 
-check <- function(X, check_ind, random=FALSE){
+check <- function(X, check_ind, random=FALSE, google=FALSE){
 	pr <- function(X, index, check_num=NULL, check_tot=NULL){
 		
 		help_msg <- "
@@ -261,6 +261,9 @@ check <- function(X, check_ind, random=FALSE){
 			cat(current_msg)
 		}
 		cat(print(X[index]))
+		if(google & grepl(" ", cull(X[index,ref]))){
+			system("bash -l", input=paste0("google ", "'",cull(X[index,ref]),"'"))
+		}
 		
 		get_piece <- function(rl1){
 			gsub("(?=[ --]).*", "", rl1, perl=TRUE)

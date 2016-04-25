@@ -104,5 +104,57 @@ sk[ref%in%c("POTOPHILUS","OXYCEPHALUS","MALACOCEPHALUS","HYMEOCEPHALUS","GADUS  
 sk[ref=="PTERYGIOTEUTHIS SP.", c("common","flag"):=list(NA,"bad")]
 ref2spp("LAGODO RHOMBOIDES","Lagodon rhomboides",Z=sk)
 
+ref2spp("LEIOLAMBRUS NITIDUS", "Leiolambrus nitidus", Z=sk)
+sk[spp=="Leiolambrus nitidus", c("taxLvl","species","genus","common","flag"):=list("species","Leiolambrus nitidus","Leiolambrus", NA, "check")]
+
+sk[spp=="Lepophidium", common:=NA]
+sk[spp=="Lepophidium", flag:="check"]
+ref2spp("LEPOPHIDIUM JEAAE", "Lepophidium jeannae", Z=sk)
+sk[spp=="Lepophidium jeannae", c("taxLvl","species","genus", "family", "order", "class", "phylum", "kingdom", "flag"):=list("species","Lepophidium jeannae","Lepophidium", "Ophidiidae", "Ophidiiformes","Actinopterygii","Chordata","Animalia","check")]
+
+sk[spp=="Leptychaster", common:=NA]
+ref2spp("RAJA ERINACEA", "Leucoraja erinacea", Z=sk)
+sk[spp=="Libinia", common:=NA]
+
+ref2spp("LIRONECA OVALIS", "Livoneca ovalis", Z=sk)
+sk[spp=="Livoneca ovalis", c("taxLvl","species","genus"):=list("species","Livoneca ovalis","Livoneca")]
+ref2spp("LOLLIGUNCULA", "Lolliguncula brevis", Z=sk) # just genus, but this copies everythign else too
+sk[ref=="LOLLIGUNCULA", c("spp","taxLvl","species","common","flag"):=list("Lolliguncula brevis","genus",NA,NA,"check")]
+
+ref2spp("LOPHIODES BEROE", "Lophiodes beroe", Z=sk)
+sk[spp=="Lophiodes beroe", c("taxLvl","species","common","flag"):=list("species","Lophiodes beroe",NA,"check")]
+sk[spp=="Lophiodes reticulatus", common:=c("reticulated goosefish")]
+ref2spp("OPHIONEREIS RETICULATA","Ophionereis reticulata", Z=sk)
+sk[spp=="Ophionereis reticulata", c("taxLvl","species","genus","family","order","class","phylum","kingdom","flag","subphylum","superclass","common"):=list("species","Ophionereis reticulata","Ophionereis","Ophionereididae","	Ophiurida","Ophiuroidea","Echinodermata","Animalia","check","Eleutherozoa",NA,"reticulated brittle star")]
+ref2spp("OREASTER RETICULATUS","Oreaster reticulatus", Z=sk)
+sk[spp=="Oreaster reticulatus", c("taxLvl","species","genus","family","order","class","phylum","kingdom","flag","subphylum","superclass","common"):=list("species","Oreaster reticulatus","Oreaster","Oreasteridae","Valvatida","Asteroidea","Echinodermata","Animalia","check","Asterozoa",NA,"red cushion sea star")]
+
+sk[spp=="Luidia", common:=NA]
+
+sk[spp=="Lutjanidae", common:=NA]
+sk[spp=="Loxorhynchus grandis",common:="sheep crab"]
+ref2spp("Lepidopus xantusi","Lepidopus caudatus",Z=sk)
+sk[spp=="Lepidopus caudatus",c("taxLvl","species","genus","flag","common"):=list("species","Lepidopus caudatus","Lepidopus", "check", "silver scabbardfish")]
+
+
+sk[spp=="Lampanyctus macdonaldi", common:="rakery beaconlamp"]
+sk[ref=="SARDA ORIENTALIS", c("taxLvl","species","genus","family","order","class","phylum","kingdom","flag","common","superclass","subphylum"):=list("species","Sarda orientalis","Sarda",NA,NA,NA,NA,NA,"check","striped bonito",NA,NA)]
+sk[spp=="Microgobius thalassinus", common:="green goby"]
+
+sk[spp=="Sicyonia brevirostris", common:="brown rock shrimp"]
+
+sk[ref=="ZENOPSIS OCELLATUS", c("family","order","class","phylum","kingdom","flag","common","superclass","subphylum","trophicLevel","trophicLevel.se"):=list("Zeidae","Zeiformes","Actinopteri","Chordata","Animalia","check", "silvery John dory", "Pisces","Vertebrata",4.17,0.71)]
+
+sk[ref=="EUPHAUSIIDAE", c("taxLvl","genus"):=list("family",NA)]
+sk[ref=="NASSARIIDAE", flag:="check"]
+
+sk[common=="bad", flag:="bad"]
+sk[common=="No cmmon name", common:=NA]
+
+sk[ref=="Bathyraja mariposa", c("taxLvl","species"):=list("species","Bathyraja mariposa")]
+sk[ref=="CAELORICHUS", common:=NA]
+sk[ref=="CHRYSAORA QUINQUECIRRHA", c("taxLvl","species","genus","flag"):=list("species","Chrysaora quinquecirrha","Chrysaora","check")]
+
+
 
 

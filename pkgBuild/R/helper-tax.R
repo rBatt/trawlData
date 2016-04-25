@@ -236,7 +236,7 @@ set2nonNA <- function(Z, index){
 # = check =
 # =========
 
-check <- function(X, check_ind, random=FALSE, google=FALSE){
+check <- function(X, check_ind, random=FALSE){
 	pr <- function(X, index, check_num=NULL, check_tot=NULL){
 		
 		help_msg <- "
@@ -249,6 +249,7 @@ check <- function(X, check_ind, random=FALSE, google=FALSE){
 				r2s --spp:              apply ref2spp function; after supplying spp name, check for it in rest of data set, and import values from other instances of spp
 				undo --n:               undoes changes to past n lines (note: not past n *changes*, but *lines*!)
 				z:                      undoes all changes made to current line (undo --1)
+				g:                      google the 'ref' in chrome
 				c:                      continue to next line
 			"
 			
@@ -261,9 +262,6 @@ check <- function(X, check_ind, random=FALSE, google=FALSE){
 			cat(current_msg)
 		}
 		cat(print(X[index]))
-		if(google & grepl(" ", cull(X[index,ref]))){
-			system("bash -l", input=paste0("google ", "'",cull(X[index,ref]),"'"))
-		}
 		
 		get_piece <- function(rl1){
 			gsub("(?=[ --]).*", "", rl1, perl=TRUE)
@@ -271,7 +269,7 @@ check <- function(X, check_ind, random=FALSE, google=FALSE){
 		
 		rl1 <- readline("Declare action (type 'h' for help): ")
 		piece <- get_piece(rl1)
-		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","c")){
+		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","c")){
 			
 			if(piece=="h"){
 				cat(help_msg)
@@ -290,7 +288,7 @@ check <- function(X, check_ind, random=FALSE, google=FALSE){
 		# }
 		
 		piece <- get_piece(rl1)
-		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","c"))
+		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","c"))
 		
 		return(list(rl1=rl1, piece=piece))
 	}
@@ -448,6 +446,7 @@ check <- function(X, check_ind, random=FALSE, google=FALSE){
 				r2s=r2s(X, t_ind, t_pr$rl1),
 				undo=undo(X, hist, rl1=t_pr$rl1, r=check_num),
 				z=undo(X, hist, rl1="z", r=check_num),
+				g=system("bash -l", input=paste0("google ", "'",cull(X[t_ind,ref]),"'")),
 				c="c"
 			)
 		}

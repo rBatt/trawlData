@@ -155,6 +155,11 @@ sk[ref=="Bathyraja mariposa", c("taxLvl","species"):=list("species","Bathyraja m
 sk[ref=="CAELORICHUS", common:=NA]
 sk[ref=="CHRYSAORA QUINQUECIRRHA", c("taxLvl","species","genus","flag"):=list("species","Chrysaora quinquecirrha","Chrysaora","check")]
 
+sk[ref=="ETROPUS", common:=NA]
+sk[spp=="Halosaurus ovenii",c("trophicLevel","trophicLevel.se"):=list(3.51, 0.48)]
+sk[spp=="Acanthostracion quadricornis", c("taxLvl","species","genus","flag"):=list("species","Acanthostracion quadricornis","Acanthostracion","check")]
+sk[ref=="Leptasterias katharinae", c("spp","taxLvl","species","genus","flag","common"):=list("Leptasterias katharinae","species","Leptasterias katharinae","Leptasterias","check","Katherine's six-rayed star")]
+
 
 
 

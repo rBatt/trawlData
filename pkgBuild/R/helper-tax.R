@@ -198,7 +198,7 @@ ref2spp <- function(Ref, Spp, Z=spp.key){
 	}
 	
 	# Return
-	setkey(Z, ref, spp)
+	# setkey(Z, ref, spp)
 	invisible(NULL)
 }
 
@@ -244,6 +244,9 @@ check <- function(X, check_ind, random=FALSE){
 				change --col1-col2 val: type change followed by column names to change to val
 				clearFlag:              changes most columns to NA, sets flag to bad
 				genusCheck:             genus is correct, but taxLvl, species, spp and trophic information wrong; flag as check
+				splitSpp:               copy spp into species, first word of spp into genus, set taxLvl to spp, flag as check
+				comNA:                  set common to NA, flag as check
+				r2s --spp:              apply ref2spp function; after supplying spp name, check for it in rest of data set, and import values from other instances of spp
 				undo --n:               undoes changes to past n lines (note: not past n *changes*, but *lines*!)
 				z:                      undoes all changes made to current line (undo --1)
 				c:                      continue to next line
@@ -265,7 +268,7 @@ check <- function(X, check_ind, random=FALSE){
 		
 		rl1 <- readline("Declare action (type 'h' for help): ")
 		piece <- get_piece(rl1)
-		while(!piece%in%c("others","change","clearFlag","genusCheck","z","undo","c")){
+		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","c")){
 			
 			if(piece=="h"){
 				cat(help_msg)
@@ -284,7 +287,7 @@ check <- function(X, check_ind, random=FALSE){
 		# }
 		
 		piece <- get_piece(rl1)
-		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","z","undo","c"))
+		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","c"))
 		
 		return(list(rl1=rl1, piece=piece))
 	}
@@ -359,6 +362,28 @@ check <- function(X, check_ind, random=FALSE){
 		invisible(NULL)
 	}
 	
+	splitSpp <- function(X, index){
+		spp_name <- X[index, spp]
+		genus_name <- gsub("^([A-Z][[:alnum:]]+).*$", "\\1", spp_name)
+		X[index, c("taxLvl", "species", "genus", "flag"):=list("species",spp_name,genus_name,"check")]
+		
+		invisible(NULL)
+	}
+	
+	comNA <- function(X, index){
+		X[index, c("common","flag"):=list(NA, "check")]
+		invisible(NULL)
+	}
+	
+	r2s <- function(X, index, rl1){
+		spp_name <- gsub("r2s --", "", rl1)
+		Ref <- X[index, ref]
+		ref2spp(Ref=Ref, spp_name, Z=X)
+		
+		invisible(NULL)
+	}
+	
+	
 	
 	undo <- function(X, hist, rl1, r){
 		count_r <- function(hist){sum(sapply(hist, function(x)!is.null(x$index)))}
@@ -415,6 +440,9 @@ check <- function(X, check_ind, random=FALSE){
 				others=others(X, t_ind, t_pr$rl1), 
 				clearFlag=clearFlag(X, t_ind),
 				genusCheck=genusCheck(X, t_ind),
+				splitSpp=splitSpp(X, t_ind),
+				comNA=comNA(X, t_ind),
+				r2s=r2s(X, t_ind, t_pr$rl1),
 				undo=undo(X, hist, rl1=t_pr$rl1, r=check_num),
 				z=undo(X, hist, rl1="z", r=check_num),
 				c="c"

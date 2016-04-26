@@ -35,7 +35,7 @@ flagSpp <- function(Z, index){
 # =========================================
 # = Check for and Correct Inconsistencies =
 # =========================================
-checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","match.src","tax.src")){
+checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","mtch.src","tax.src","website","website2","tax.src2","conflict")){
 	replacementsMade <- 0
 	replacementsFailed <- 0
 	replacementUnneeded <- 0
@@ -45,45 +45,47 @@ checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.cons
 	
 	for(i in unique(Z[,eval(s2c(by.col))][[1]])){
 		for(j in col2check){
-			t.out <- Z[i,get(j)] # temporary value for a given `spp` and the j column
+			t.out <- Z[eval(s2c(by.col))[[1]]==i,get(j)] # temporary value for a given `spp` and the j column
 			if(lu(t.out)>1){
 				if(lu(t.out[!is.na(t.out)])==1){ # if the 2+ values are just an NA and something else
 					# then just replace the NA with the something else
 					replacementsMade <- replacementsMade + 1L
-					Z[i,c(j):=list(unique(t.out[!is.na(t.out)]))]
+					Z[eval(s2c(by.col))[[1]]==i,c(j):=list(unique(t.out[!is.na(t.out)]))]
 				}else{ # otherwise, if there are more than 2 non-NA unique values
 					prob.spp <- i # prob. means "problem" / "problematic"
 					prob.col <- j
-					prob.opts <- unique(t.out[!is.na(t.out)])
+					prob.opts <- una(t.out) #unique(t.out[!is.na(t.out)])
 			
 
 					fix.taxProb <- function(){ # defining in function in loop for readability
-						readline(paste(
-							"Pick your solution. SKIP to skip, otherwise enter one of the following exactly (don't add quotes, etc.):\n ", 
-							paste0(prob.opts, collapse="\n  "), "\n"
+						po_opts <- paste0(1:length(prob.opts), ": ", prob.opts)
+						po_ind <- readline(paste(
+							"Pick your solution. SKIP to skip, otherwise pick the number you want:\n ", 
+							paste0(po_opts, collapse="\n  "), "\n"
 						))
+						prob.opts[as.integer(po_ind)]
 					}
-			
+					
 					if(tPS){ # FALSE; a prompt from when I had this in a script, was TRUE if reading in a file that had some answers
-						prob.fix.t <- taxProblemSolution[spp==i & prob.col==j,solution]
+						prob.fix.t <- taxProblemSolution[eval(s2c(by.col))[[1]]==i & prob.col==j,solution]
 						if(length(prob.fix.t)>0){
 							prob.fix <- prob.fix.t
 						}else{
 							print(j)
-							print(Z[i])
+							print(Z[eval(s2c(by.col))[[1]]==i])
 							prob.fix <- fix.taxProb()
 							taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
 						}
 					}else{
 						print(j)
-						print(Z[i])
+						print(Z[eval(s2c(by.col))[[1]]==i])
 						prob.fix <- fix.taxProb()
 						taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
 					}
 			
 			
 					if(prob.fix!="SKIP"){ # I've never tested the use of the SKIP response ...
-						Z[i,c(j):=list(prob.fix)]
+						Z[eval(s2c(by.col))[[1]]==i,c(j):=list(prob.fix)]
 						replacementsMade <- replacementsMade + 1L
 					}else{
 						replacementsFailed <- replacementsFailed + 1L

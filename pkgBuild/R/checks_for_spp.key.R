@@ -23,6 +23,7 @@ sk[(common)=="bivalve", common:="bivalves"]
 
 
 # common name belongs to multiple spp
+# get refs2check from refs_checkFirst.R
 setorderv(sk, c("common","ref","spp"))
 generic_common <- c("sea cucumbers", "barnacles", "bivalves","eels", "lampreys", "mussels", "mackerels", "octopuses", "scallops", "sea fir", "sea stars", "shrimp", "sea anemone", "sea pens", "sea urchin", "sponge", "squids", "true whelks", "soft corals", "hermit crabs","amphipods","nudibranch","ribbonfishes","polychaete worm","true soft corals", "mud crabs", "eelpouts", "ark")
 mltpl_common <- sk[,((common)%in%sk[!is.na(common) & !is.na(spp),list(n_spp=lu(spp)), by="common"][n_spp>1, common])]
@@ -51,6 +52,19 @@ sk4 <- copy(sk)
 
 
 
-# check entries where there is a 2-work spp, but taxLvl and species are NA
+# check entries where there is a 2-word ref, but taxLvl and species are NA
+word2_lett4 <- function(x){ # TRUE if there are at least 2 words with 4 letters; x is a vector of characters
+	sapply(strsplit(x, " "), function(x)sum(nchar(x)>=4))>=2
+}
+c5 <- sk[,(ref%in%refs2check & !c4 & word2_lett4(ref) & (taxLvl!="species" | is.na(taxLvl)) & is.na(species) & (!flag%in%c("check","ok","fine") | is.na(flag))) | ref=="ETROPUS INTERMEDIUS"]
+c5 <- c5&!is.na(c5)
+check(sk, c5)
+sk5 <- copy(sk)
 
 
+
+# check entries that are taxLvl=="species", but ref does not have 2 words
+c6 <- sk[,!word2_lett4(ref) & (taxLvl=="species" & !is.na(taxLvl)) & (is.na(flag) | flag!="bad")]
+c6 <- c6&!is.na(c6)
+check(sk, c6)
+sk6 <- copy(sk)

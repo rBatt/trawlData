@@ -94,6 +94,16 @@ check(sk, c8)
 sk8 <- copy(sk)
 
 
+# do checks based on what are colonizing/ leaving so I can send something good to data providers
+load("~/Documents/School&Work/pinskyPost/trawl/trawlDiversity/pkgBuild/spp_check/colonize_refs.RData")
+col_refs_2check <- colonize_refs[is.na(flag) | !flag%in%c("check","ok"), ref]
+c9 <- sk[,ref%in%col_refs_2check & (is.na(flag) | !flag%in%c("check","ok"))]
+check(sk, c9)
+# sk[spp=="Hippasteria phrygiana", c("trophicLevel","trophicLevel.se"):=list(3.45, 0.39)]
+# sk[spp=="Laqueus vancouveriensis", c("spp","species"):=list("Laqueus californianus","Laqueus californianus")]
+sk9 <- copy(sk)
+
+
 # infer full taxonomy, one step at a time
 genus_family <- sk[!is.na(genus),j={
 	tbl <- table(family)

@@ -45,12 +45,13 @@ checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.cons
 	
 	for(i in unique(Z[,eval(s2c(by.col))][[1]])){
 		for(j in col2check){
-			t.out <- Z[eval(s2c(by.col))[[1]]==i,get(j)] # temporary value for a given `spp` and the j column
+			t_ind <- Z[,eval(s2c(by.col))[[1]]==i & !is.na(eval(s2c(by.col))[[1]])]
+			t.out <- Z[t_ind,get(j)] # temporary value for a given `spp` and the j column
 			if(lu(t.out)>1){
 				if(lu(t.out[!is.na(t.out)])==1){ # if the 2+ values are just an NA and something else
 					# then just replace the NA with the something else
 					replacementsMade <- replacementsMade + 1L
-					Z[eval(s2c(by.col))[[1]]==i,c(j):=list(unique(t.out[!is.na(t.out)]))]
+					Z[t_ind,c(j):=list(unique(t.out[!is.na(t.out)]))]
 				}else{ # otherwise, if there are more than 2 non-NA unique values
 					prob.spp <- i # prob. means "problem" / "problematic"
 					prob.col <- j

@@ -62,7 +62,7 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	noID <- X[,spp=="" | is.na(spp)]
 	missSpecies <- X[,species=="" | is.na(species)]
 	missGenus <- X[,genus=="" | is.na(genus)]
-	bad_flag <- X[,flag%in%c("badJWM","bad","avoid")&!is.na(flag)]
+	bad_flag <- X[,flag%in%c("badJWM","bad","avoid","egg")&!is.na(flag)]
 	
 	spp.i <- !(badSpp | noID | missSpecies | missGenus | bad_flag)
 	

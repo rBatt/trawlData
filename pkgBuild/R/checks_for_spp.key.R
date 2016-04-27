@@ -68,3 +68,56 @@ c6 <- sk[,!word2_lett4(ref) & (taxLvl=="species" & !is.na(taxLvl)) & (is.na(flag
 c6 <- c6&!is.na(c6)
 check(sk, c6)
 sk6 <- copy(sk)
+
+
+
+# check for inconsistences
+ignore_cols <- c("ref","flag","val.src","tbl.row","mtch.src","tax.src","website","website2","tax.src2","conflict", "family","order","class","phylum","kingdom","superclass","subphylum")
+col2check <- names(sk)[!names(sk)%in%ignore_cols]
+spp_tbl <- sk[,table(spp)]
+st_2words <- sk[,spp%in%names(spp_tbl)[grepl(" ", names(spp_tbl))]]
+st_multi <- sk[,spp%in%names(spp_tbl)[spp_tbl>1]]
+spp_inc <- sk[st_2words&st_multi, any(sapply(.SD[,eval(s2c(col2check))], lu, na.rm=TRUE)>1),by=c("spp")][(V1),spp]
+c7 <- sk[,spp%in%spp_inc]
+check(sk, c7)
+
+sk7_0 <- copy(sk)
+checkConsistent(Z=sk7_0, not.consistent=ignore_cols)
+sk7 <- copy(sk7_0)
+
+
+# genus should be the first word of species
+has_species <- sk[,!is.na(species)]
+genus_hat <- sk[, gsub(" .*", "", species)]
+c8 <- sk[,has_species & (genus!=genus_hat | is.na(genus))]
+check(sk, c8)
+sk8 <- copy(sk)
+
+
+# infer full taxonomy, one step at a time
+genus_family <- sk[!is.na(genus),j={
+	tbl <- table(family)
+	fam <- names(tbl)[which.max(tbl)]
+	list(family=fam)
+},by="genus"]
+family_order <- sk[!is.na(family) & family%in%genus_family[,una(family)], j={
+	tbl <- table((order))
+	ord <- names(tbl)[which.max(tbl)]
+	list(order=ord)
+},by="family"]
+order_class <- sk[!is.na(order) & order%in%family_order[,una(order)], j={
+	tbl <- table((class))
+	cla <- names(tbl)[which.max(tbl)]
+	list(class=cla)
+},by="order"]
+class_phylum <- sk[!is.na(class) & class%in%order_class[,una(class)], j={
+	tbl <- table((phylum))
+	phy <- names(tbl)[which.max(tbl)]
+	list(phylum=phy)
+},by="class"]
+phylum_kingdom <- sk[!is.na(phylum) & phylum%in%class_phylum[,una(phylum)], j={
+	tbl <- table((kingdom))
+	kin <- names(tbl)[which.max(tbl)]
+	list(kingdom=kin)
+},by="phylum"]
+

@@ -161,5 +161,9 @@ sk[spp=="Acanthostracion quadricornis", c("taxLvl","species","genus","flag"):=li
 sk[ref=="Leptasterias katharinae", c("spp","taxLvl","species","genus","flag","common"):=list("Leptasterias katharinae","species","Leptasterias katharinae","Leptasterias","check","Katherine's six-rayed star")]
 
 
+sk[ref=="NOTOLEPIS RISSOI KROYERI",c("spp","species"):=list("Arctozenus risso kroyeri","Arctozenus risso")]
+sk[ref=="SARDA ORIENTALIS", spp:="Sarda orientalis"]
+sk[spp=="Pomacanthus arcuatus", c("trophicLevel","trophicLevel.se"):=list(3.19, 0.05)]
+
 
 

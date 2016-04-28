@@ -103,6 +103,20 @@ check(sk, c9)
 # sk[spp=="Laqueus vancouveriensis", c("spp","species"):=list("Laqueus californianus","Laqueus californianus")]
 sk9 <- copy(sk)
 
+# ref is not equal to spp (case aside), and flag is added_automatically or is NA & taxLvl is species
+c10_flag <- sk[,is.na(flag)|flag=="added_automatically"]
+c10_spp_ref <- sk[,tolower(ref)!=tolower(spp) | is.na(spp)]
+c10_taxLvl_species <- sk[,taxLvl=="species" & !is.na(taxLvl)]
+c10 <- c10_taxLvl_species & c10_spp_ref & c10_flag & sk[,ref%in%refs2check]
+check(sk, c10)
+# sk[(spp)=="Ophichthus ophis", c("trophicLevel", "trophicLevel.se"):=list(4.34, 0.44)]
+# sk[(spp)=="Bathyraja richardsoni", c("trohpicLevel","trophicLevel.se"):=list(4.02, 0.69)]
+# sk[(spp)=="Gonostoma denudatum", c("trophicLevel","trophicLevel.se"):=list(3.30, 0.34)]
+sk10 <- copy(sk)
+
+
+
+
 
 # infer full taxonomy, one step at a time
 genus_family <- sk[!is.na(genus),j={

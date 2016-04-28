@@ -449,7 +449,7 @@ check <- function(X, check_ind, random=FALSE){
 				r2s=r2s(X, t_ind, t_pr$rl1),
 				undo=undo(X, hist, rl1=t_pr$rl1, r=check_num),
 				z=undo(X, hist, rl1="z", r=check_num),
-				g=system("bash -l", input=paste0("google ", "'",cull(X[t_ind,ref]),"'")),
+				g=system("bash -l", input=paste0("google ", "'",cull(X[t_ind,ref])," itis'")),
 				c="c"
 			)
 		}

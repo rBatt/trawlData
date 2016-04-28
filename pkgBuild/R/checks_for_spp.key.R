@@ -115,6 +115,12 @@ check(sk, c10)
 sk10 <- copy(sk)
 
 
+# find refs that match the 
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
+check(sk, c11)
+
 
 
 

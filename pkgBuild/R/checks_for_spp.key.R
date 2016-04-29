@@ -151,6 +151,13 @@ needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (
 unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
 c11 <- needs_check & unchecked
 check(sk, c11)
+sk11 <- copy(sk)
+
+# check to make sure they're consistent
+ignore_cols <- c("ref","flag","val.src","tbl.row","mtch.src","tax.src","website","website2","tax.src2","conflict", "family","order","class","phylum","kingdom","superclass","subphylum")
+sk_check <- copy(sk)
+checkConsistent(Z=sk_check, not.consistent=ignore_cols)
+sk <- copy(sk_check)
 
 
 # infer full taxonomy, one step at a time

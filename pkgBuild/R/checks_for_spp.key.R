@@ -119,10 +119,37 @@ sk10 <- copy(sk)
 needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
 unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
 c11 <- needs_check & unchecked
+c11.1 <- sk[,c11 & ref==spp & spp!=species & !is.na(species)]
+check(sk, c11.1)
 
-c11.3 <- sk[,c11 & val.src=="m3"]
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
+c11.2 <- sk[,c11 & ref!=spp & spp!=species & !is.na(species)]
+check(sk, c11.2)
+
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
+c11.3 <- sk[,c11 & ref!=spp & !is.na(spp) & is.na(species)]
 check(sk, c11.3)
 
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
+c11.4 <- sk[,c11 & ref==spp & is.na(species)]
+check(sk, c11.4)
+
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
+c11.5 <- sk[,c11 & ref==spp & spp==species & !is.na(species)]
+check(sk, c11.5)
+sk_11.5 <- copy(sk)
+
+needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
+unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
+c11 <- needs_check & unchecked
 check(sk, c11)
 
 

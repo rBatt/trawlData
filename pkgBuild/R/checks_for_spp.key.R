@@ -119,9 +119,11 @@ sk10 <- copy(sk)
 needs_check <- sk[,ref%in%refs2check & ((taxLvl=="species" & !is.na(taxLvl)) | (is.na(taxLvl) & grepl(" ", spp)))]
 unchecked <- sk[,is.na(flag) | flag=="added_automatically"]
 c11 <- needs_check & unchecked
+
+c11.3 <- sk[,c11 & val.src=="m3"]
+check(sk, c11.3)
+
 check(sk, c11)
-
-
 
 
 # infer full taxonomy, one step at a time

@@ -253,6 +253,8 @@ check <- function(X, check_ind, random=FALSE){
 				undo --n:               undoes changes to past n lines (note: not past n *changes*, but *lines*!)
 				z:                      undoes all changes made to current line (undo --1)
 				g:                      google the 'ref' in chrome
+				f:                      FIND 'ref' using gnr_resolve; matches might be outdated
+				s:                      SYNONYMS of 'spp'; find most up-to-date
 				c:                      continue to next line
 			"
 			
@@ -272,7 +274,7 @@ check <- function(X, check_ind, random=FALSE){
 		
 		rl1 <- readline("Declare action (type 'h' for help): ")
 		piece <- get_piece(rl1)
-		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","c")){
+		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","f","s","c")){
 			
 			if(piece=="h"){
 				cat(help_msg)
@@ -291,7 +293,7 @@ check <- function(X, check_ind, random=FALSE){
 		# }
 		
 		piece <- get_piece(rl1)
-		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","c"))
+		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","f","s","c"))
 		
 		return(list(rl1=rl1, piece=piece))
 	}
@@ -422,6 +424,18 @@ check <- function(X, check_ind, random=FALSE){
 		invisible(NULL)
 	}
 	
+	f <- function(X, index){
+		print(X[index, gnr_resolve(una(ref))])
+		invisible(NULL)
+	}
+	
+	s <- function(X, index){
+		tsn <- get_tsn(X[index,una(spp)], ask=FALSE, verbose=FALSE)
+		acc <- itis_acceptname(tsn)
+		print(acc)
+		invisible(NULL)
+	}
+	
 	hist <- list(list(index=NULL, X=NULL))
 	check_vec <- 1:sum(check_ind)
 	check_tot <- length(check_vec)
@@ -450,6 +464,8 @@ check <- function(X, check_ind, random=FALSE){
 				undo=undo(X, hist, rl1=t_pr$rl1, r=check_num),
 				z=undo(X, hist, rl1="z", r=check_num),
 				g=system("bash -l", input=paste0("google ", "'",cull(X[t_ind,ref])," itis'")),
+				f=f(X, t_ind),
+				s=s(X, t_ind),
 				c="c"
 			)
 		}

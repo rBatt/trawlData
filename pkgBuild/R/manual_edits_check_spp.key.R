@@ -166,4 +166,6 @@ sk[ref=="SARDA ORIENTALIS", spp:="Sarda orientalis"]
 sk[spp=="Pomacanthus arcuatus", c("trophicLevel","trophicLevel.se"):=list(3.19, 0.05)]
 
 
-
+check(sk, sk[,ref=="PERISTEDION GREYAE"]) # spp should be Peristedion greyae, common alligator searobin
+check(sk, sk[,genus=="Peristedion" & !is.na(genus)])
+check(sk, sk[,ref=="GONOSTOMA ATLANTICUM"]) # should be Gonostoma atlanticum

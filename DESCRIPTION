@@ -1,6 +1,6 @@
 Package: trawlData
 Title: Read and Clean Data from Bottom Trawl Surveys
-Version: 0.3.1
+Version: 0.4.0
 Authors@R: c(person(given="Ryan D.", family="Batt", email="battrd@gmail.com", role=c("aut","cre")),
 	person(given="James W.", family="Morley", email="jw.morley@rutgers.edu", role=c("aut")),
 	person(given="Rebecca L.", family="Selden", email="becca.selden@gmail.com", role=c("aut")),

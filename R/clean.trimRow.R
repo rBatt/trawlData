@@ -62,8 +62,9 @@ clean.trimRow <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "
 	noID <- X[,spp=="" | is.na(spp)]
 	missSpecies <- X[,species=="" | is.na(species)]
 	missGenus <- X[,genus=="" | is.na(genus)]
+	bad_flag <- X[,flag%in%c("badJWM","bad","avoid","egg")&!is.na(flag)]
 	
-	spp.i <- !(badSpp | noID | missSpecies | missGenus)
+	spp.i <- !(badSpp | noID | missSpecies | missGenus | bad_flag)
 	
 	X[,row_flag:=""]
 	get.clean.trimRow(reg) # do the region-specific checks on which rows to trim out
@@ -203,7 +204,7 @@ clean.trimRow.newf <- function(X){
 	tow.i <- X[,towduration<=60]
 		
 	season.i <- X[,season=="fall"]
-	
+		
 	keep.row.i <- record.i & haul.i & gear.i & tow.i & season.i
 	X[,keep.row:=keep.row.i]
 	
@@ -238,12 +239,15 @@ clean.trimRow.sa <- function(X){
 	
 	effort.i <- X[,effort!=0 | is.na(effort)] # just don't let it be 0 ...
 	
+	gear.i <- X[, !is.na(wtcpue)] # a lot of the missing weights are long-line data, according to JWM
+	
 	spp.i <- X[,!spp%in%c("Anchoa hepsetus","Anchoa lyolepis","Anchoa mitchilli","Anchoa cubana")] # these anchovy spp were really only ID to genus
 	
-	keep.row.i <- haul.i & strat.i & survey.i & effort.i & spp.i
+	keep.row.i <- haul.i & strat.i & survey.i & effort.i & spp.i & gear.i
 	X[,keep.row:=keep.row.i]
 	
 	X[!effort.i,row_flag:=paste(row_flag, "Eff")]
+	X[!gear.i,row_flag:=paste(row_flag, "Gear")]
 	X[!haul.i,row_flag:=paste(row_flag, "Haul")]
 	X[!spp.i,row_flag:=paste(row_flag, "Spp1")]
 	X[!strat.i,row_flag:=paste(row_flag, "Strat")]

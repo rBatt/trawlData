@@ -163,54 +163,65 @@ targets:
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.ebs.RData:
     command: update_cleanData("data/raw.ebs.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.gmex.RData:
     command: update_cleanData("data/raw.gmex.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.goa.RData:
     command: update_cleanData("data/raw.goa.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.neus.RData:
     command: update_cleanData("data/raw.neus.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.newf.RData:
     command: update_cleanData("data/raw.newf.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.sa.RData:
     command: update_cleanData("data/raw.sa.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.sgulf.RData:
     command: update_cleanData("data/raw.sgulf.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.shelf.RData:
     command: update_cleanData("data/raw.shelf.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.wcann.RData:
     command: update_cleanData("data/raw.wcann.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
   data/clean.wctri.RData:
     command: update_cleanData("data/raw.wctri.RData")
     depends: 
       - clean_scripts
       - spp
+      - data/spp.key.RData
     

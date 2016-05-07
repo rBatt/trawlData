@@ -35,7 +35,7 @@ flagSpp <- function(Z, index){
 # =========================================
 # = Check for and Correct Inconsistencies =
 # =========================================
-checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","match.src","tax.src")){
+checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.consistent)], by.col="spp", not.consistent=c("ref","flag","val.src","tbl.row","mtch.src","tax.src","website","website2","tax.src2","conflict")){
 	replacementsMade <- 0
 	replacementsFailed <- 0
 	replacementUnneeded <- 0
@@ -45,45 +45,48 @@ checkConsistent <- function(Z, col2check=names(Z)[!names(Z)%in%c(by.col,not.cons
 	
 	for(i in unique(Z[,eval(s2c(by.col))][[1]])){
 		for(j in col2check){
-			t.out <- Z[i,get(j)] # temporary value for a given `spp` and the j column
+			t_ind <- Z[,eval(s2c(by.col))[[1]]==i & !is.na(eval(s2c(by.col))[[1]])]
+			t.out <- Z[t_ind,get(j)] # temporary value for a given `spp` and the j column
 			if(lu(t.out)>1){
 				if(lu(t.out[!is.na(t.out)])==1){ # if the 2+ values are just an NA and something else
 					# then just replace the NA with the something else
 					replacementsMade <- replacementsMade + 1L
-					Z[i,c(j):=list(unique(t.out[!is.na(t.out)]))]
+					Z[t_ind,c(j):=list(unique(t.out[!is.na(t.out)]))]
 				}else{ # otherwise, if there are more than 2 non-NA unique values
 					prob.spp <- i # prob. means "problem" / "problematic"
 					prob.col <- j
-					prob.opts <- unique(t.out[!is.na(t.out)])
+					prob.opts <- una(t.out) #unique(t.out[!is.na(t.out)])
 			
 
 					fix.taxProb <- function(){ # defining in function in loop for readability
-						readline(paste(
-							"Pick your solution. SKIP to skip, otherwise enter one of the following exactly (don't add quotes, etc.):\n ", 
-							paste0(prob.opts, collapse="\n  "), "\n"
+						po_opts <- paste0(1:length(prob.opts), ": ", prob.opts)
+						po_ind <- readline(paste(
+							"Pick your solution. SKIP to skip, otherwise pick the number you want:\n ", 
+							paste0(po_opts, collapse="\n  "), "\n"
 						))
+						prob.opts[as.integer(po_ind)]
 					}
-			
+					
 					if(tPS){ # FALSE; a prompt from when I had this in a script, was TRUE if reading in a file that had some answers
-						prob.fix.t <- taxProblemSolution[spp==i & prob.col==j,solution]
+						prob.fix.t <- taxProblemSolution[eval(s2c(by.col))[[1]]==i & prob.col==j,solution]
 						if(length(prob.fix.t)>0){
 							prob.fix <- prob.fix.t
 						}else{
 							print(j)
-							print(Z[i])
+							print(Z[eval(s2c(by.col))[[1]]==i])
 							prob.fix <- fix.taxProb()
 							taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
 						}
 					}else{
 						print(j)
-						print(Z[i])
+						print(Z[eval(s2c(by.col))[[1]]==i])
 						prob.fix <- fix.taxProb()
 						taxProblemSolution <- rbind(taxProblemSolution, data.table(spp=i, prob.col=j, solution=prob.fix))
 					}
 			
 			
 					if(prob.fix!="SKIP"){ # I've never tested the use of the SKIP response ...
-						Z[i,c(j):=list(prob.fix)]
+						Z[eval(s2c(by.col))[[1]]==i,c(j):=list(prob.fix)]
 						replacementsMade <- replacementsMade + 1L
 					}else{
 						replacementsFailed <- replacementsFailed + 1L
@@ -198,7 +201,7 @@ ref2spp <- function(Ref, Spp, Z=spp.key){
 	}
 	
 	# Return
-	setkey(Z, ref, spp)
+	# setkey(Z, ref, spp)
 	invisible(NULL)
 }
 
@@ -228,5 +231,246 @@ set2nonNA <- function(Z, index){
 			Z[index, c(c.to.set[i]):=list(set.val)]
 		}
 	}
+	
+}
+
+
+# =========
+# = check =
+# =========
+
+check <- function(X, check_ind, random=FALSE){
+	pr <- function(X, index, check_num=NULL, check_tot=NULL){
+		
+		help_msg <- "
+				others --col1-col2:     type others followed by column names to match to spp.key
+				change --col1-col2 val: type change followed by column names to change to val
+				clearFlag:              changes most columns to NA, sets flag to bad
+				genusCheck:             genus is correct, but taxLvl, species, spp and trophic information wrong; flag as check
+				splitSpp:               copy spp into species, first word of spp into genus, set taxLvl to spp, flag as check
+				comNA:                  set common to NA, flag as check
+				r2s --spp:              apply ref2spp function; after supplying spp name, check for it in rest of data set, and import values from other instances of spp
+				undo --n:               undoes changes to past n lines (note: not past n *changes*, but *lines*!)
+				z:                      undoes all changes made to current line (undo --1)
+				g:                      google the 'ref' in chrome
+				f:                      FIND 'ref' using gnr_resolve; matches might be outdated
+				s:                      SYNONYMS of 'spp'; find most up-to-date
+				c:                      continue to next line
+			"
+			
+			stopifnot(sum(index)==1)
+		
+		if(is.null(check_num) | is.null(check_tot)){
+			cat("\n>>> Current line to check:\n")
+		}else{
+			current_msg <- paste("\n>>> Current line to check (item ", check_num, " of ", check_tot, ", ", round(check_num/check_tot, 3)*100, "%):\n", sep="")
+			cat(current_msg)
+		}
+		cat(print(X[index]))
+		
+		get_piece <- function(rl1){
+			gsub("(?=[ --]).*", "", rl1, perl=TRUE)
+		}
+		
+		rl1 <- readline("Declare action (type 'h' for help): ")
+		piece <- get_piece(rl1)
+		while(!piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","f","s","c")){
+			
+			if(piece=="h"){
+				cat(help_msg)
+			}else{
+				cat(">>> invalid action selected, type 'h' for help")
+			}
+			
+			rl1 <- readline("Declare action (type 'h' for help): ")
+			piece <- get_piece(rl1)
+			
+		}
+		
+		# while(rl1=="h"){
+		# 	cat(help_msg)
+		# 	rl1 <- readline("Declare action (type 'h' for help): ")
+		# }
+		
+		piece <- get_piece(rl1)
+		stopifnot(piece%in%c("others","change","clearFlag","genusCheck","splitSpp","comNA","r2s","z","undo","g","f","s","c"))
+		
+		return(list(rl1=rl1, piece=piece))
+	}
+	
+	others <- function(X, index, rl1, retInd=FALSE){
+		cols <- c(simplify2array(strsplit(gsub("others --", "", rl1), "-")))
+		
+		X_val <- X[index, eval(s2c(cols))]
+		
+		dt_in <- function(d1, d2, cols){
+			m <- mapply("%in%", d1[,eval(s2c(cols))], d2[,eval(s2c(cols))])
+			rowSums(m)==ncol(m)
+		}
+		X_ind <- dt_in(X, X[index], cols=cols)
+		if(sum(X_ind)==0){
+			cat(">>> no matches found")
+		}else{
+			cat(print(X[X_ind]))
+		}
+		
+		if(retInd){
+			return(X_ind)
+		}else{
+			invisible(NULL)
+		}
+		
+	}
+	
+	change <- function(X, index, rl1){
+		col_char <- gsub("(change --)|( [ a-zA-Z0-9]*$)", "", rl1)
+		val <- gsub("(change --[a-zA-Z0-9-]*[a-zA-Z] )", "", rl1)
+		cols <- c(simplify2array(strsplit(col_char, "-")))
+		
+		if(val=="NA"){
+			val <- NA
+		}else{
+			val <- as(val, unique(sapply(X[,eval(s2c(cols))], class)))
+		}
+		
+		X[index, c(cols):=val]
+		cat("\n>>> changes made\n")
+		flush.console()
+		
+		invisible(NULL)
+	}
+	
+	
+	clearFlag <- function(X, index){
+		rl_flag <- "change --flag bad"
+		rl_clear <- "change --spp-common-taxLvl-species-genus-family-order-class-superclass-subphylum-phylum-kingdom-Picture-trophicOrig-trophicDiet NA"
+		rl_clear_tl <- "change --trophicLevel-trophicLevel.se NA"
+		
+		rlf <- change(X, index, rl_flag)
+		rlc <- change(X, index, rl_clear)
+		rlc_tl <- change(X, index, rl_clear_tl)
+		
+		invisible(NULL)
+	}
+	
+	genusCheck <- function(X, index){
+		rl_flag <- "change --flag check"
+		rl_clear <- "change --spp-common-taxLvl-species-Picture-trophicOrig-trophicDiet NA"
+		rl_clear_tl <- "change --trophicLevel-trophicLevel.se NA"
+		
+		rlf <- change(X, index, rl_flag)
+		rlc <- change(X, index, rl_clear)
+		rlc_tl <- change(X, index, rl_clear_tl)
+		
+		X[index, spp:=genus]
+		X[index, taxLvl:="genus"]
+		
+		invisible(NULL)
+	}
+	
+	splitSpp <- function(X, index){
+		spp_name <- X[index, spp]
+		genus_name <- gsub("^([A-Z][[:alnum:]]+).*$", "\\1", spp_name)
+		X[index, c("taxLvl", "species", "genus", "flag"):=list("species",spp_name,genus_name,"check")]
+		
+		invisible(NULL)
+	}
+	
+	comNA <- function(X, index){
+		X[index, c("common","flag"):=list(NA, "check")]
+		invisible(NULL)
+	}
+	
+	r2s <- function(X, index, rl1){
+		spp_name <- gsub("r2s --", "", rl1)
+		Ref <- X[index, ref]
+		ref2spp(Ref=Ref, spp_name, Z=X)
+		
+		invisible(NULL)
+	}
+	
+	
+	
+	undo <- function(X, hist, rl1, r){
+		count_r <- function(hist){sum(sapply(hist, function(x)!is.null(x$index)))}
+		undo_n <- function(rl1){as.integer(gsub("(undo --)", "", rl1))}
+		
+		if(missing(r)){
+			r <- count_r(hist)
+		}
+		if(rl1=="z"){
+			n <- 1L
+		}else{
+			n <- undo_n(rl1)
+		}
+		
+		undo_ind <- r:(r-n+1)
+		olds <- rbindlist(lapply(hist[undo_ind], function(x)X[x$index]))
+		for(h in undo_ind){
+			# X[hist[[h]]$index] <- hist[[h]]$X
+			
+			cn <- names(X)
+			X[hist[[h]]$index, c(cn):=hist[[h]]$X]
+			
+		}
+		news <- rbindlist(lapply(hist[undo_ind], function(x)X[x$index]))
+		
+		# cat(print(olds))
+		cat("\n>>> reverted to\n")
+		cat(print(news))
+		# cat(print(X[hist[[r]]$index]))
+		flush.console()
+		
+		invisible(NULL)
+	}
+	
+	f <- function(X, index){
+		print(X[index, gnr_resolve(una(ref))])
+		invisible(NULL)
+	}
+	
+	s <- function(X, index){
+		tsn <- get_tsn(X[index,una(spp)], ask=FALSE, verbose=FALSE)
+		acc <- itis_acceptname(tsn)
+		print(acc)
+		invisible(NULL)
+	}
+	
+	hist <- list(list(index=NULL, X=NULL))
+	check_vec <- 1:sum(check_ind)
+	check_tot <- length(check_vec)
+	if(random){
+		check_vec <- sample(check_vec, check_tot, replace=FALSE)
+	}
+	check_num <- 0
+	
+	for(r in check_vec){
+		check_num <- check_num + 1
+		t_ind <- cumsum(check_ind)==r & check_ind
+		out <- NULL
+		
+		hist[[check_num]] <- list(index=t_ind, X=X[t_ind])
+		
+		while(is.null(out) || (!is.null(out) & out!="c")){
+			t_pr <- pr(X, t_ind, check_num=check_num, check_tot=check_tot)
+			out <- switch(t_pr$piece, 
+				change=change(X, t_ind, t_pr$rl1), 
+				others=others(X, t_ind, t_pr$rl1), 
+				clearFlag=clearFlag(X, t_ind),
+				genusCheck=genusCheck(X, t_ind),
+				splitSpp=splitSpp(X, t_ind),
+				comNA=comNA(X, t_ind),
+				r2s=r2s(X, t_ind, t_pr$rl1),
+				undo=undo(X, hist, rl1=t_pr$rl1, r=check_num),
+				z=undo(X, hist, rl1="z", r=check_num),
+				g=system("bash -l", input=paste0("google ", "'",cull(X[t_ind,ref])," itis'")),
+				f=f(X, t_ind),
+				s=s(X, t_ind),
+				c="c"
+			)
+		}
+	}
+	
+	invisible(NULL)
 	
 }

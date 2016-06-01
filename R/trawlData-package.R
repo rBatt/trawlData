@@ -47,7 +47,7 @@
 #' To check the frequency that each stratum was sampled, use \code{\link{check_strat}}. Forthcoming will be \code{plot_check}, which will be useful for checking raw data. A fun one is \code{\link{sppImg}}!
 #' 
 #' @docType package  
-#' @name rbLib  
+#' @name trawlData  
 NULL
 
 

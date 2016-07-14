@@ -56,13 +56,10 @@ read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf"
 # ======
 # = AI =
 # ======
-read.ai <- function(zippath){
-	
-	
+read.ai_raw <- function(zippath){
 	# Read in all files from ai zip file
 	# default pattern is a .csv, and ai is all .csv
 	ai.all <- read.zip(zipfile=file.path(zippath,"ai.zip"), SIMPLIFY=F)
-	
 	
 	# Concat raw ai data files
 	# Have to make some assumption about which files 
@@ -73,11 +70,16 @@ read.ai <- function(zippath){
 	which.raw <- which(file.ncol==data.ncol) # list elements from main raw files
 	ai.raw <- do.call(rbind, ai.all[which.raw])
 	
-	
 	# read in stratum data file
-	which.strat <- which(names(ai.all)=="ai-Strata.csv") # use which so next step can use [[]]
-	ai.strata <- ai.all[[which.strat]][,list(StratumCode, Areakm2)] # subset ai.all, then choose 2 columns
+	which.strat <- which(names(ai.all)=="ai-Strata.csv") # use which so next step can use [[]]; idk why i thot i had to do this
+	ai.strata <- ai.all[[which.strat]] # subset ai.all
 	
+	return(list(ai.raw=ai.raw, ai.strata=ai.strata))
+}
+
+read.ai_merge <- function(ai_list){
+	ai.raw <- ai_list[['ai.raw']]
+	ai.strata <- ai_list[['ai.strata']][,list(StratumCode, Areakm2)]
 	
 	# check for leading or trailing
 	# whitespace in col names
@@ -86,24 +88,26 @@ read.ai <- function(zippath){
 	if(strata.spaces | raw.spaces){
 		message("AI data files have column names with leading or traililing whitespace")
 	}
-	
-	
+
 	# adjust strat column to ai.strata
 	# to match that in ai.raw
 	# so they can be merged
 	setnames(ai.strata, "StratumCode", "STRATUM")
-	
-	
+
 	# set keys
 	setkey(ai.raw, STRATUM)
 	setkey(ai.strata, STRATUM)
-	
-	
+
 	# merge ai.raw and ai.strata
 	ai <- merge(ai.raw, ai.strata, all.x=TRUE)
-	
-	
+
 	return(ai)
+}
+
+read.ai <- function(zippath){
+	ai_list <- read.ai_raw(zippath)
+	ai_merge <- read.ai_merge(ai_list)
+	return(ai_merge)
 }
 
 

@@ -56,7 +56,7 @@ fread.fwf <- function(..., cols, column_types, column_names){
 #' 
 #' @details 
 #' The function works by unzipping a file into a temporary directory, reading in all the files in that temporarily unzipped folder, and then deleting the temporary folder and all of its contents. Thus, is a handy way of keep all of your files stored as compressed files, but being able to access them. Obviously comes at the performance cost of having to do all of the unzipping and deleting.
-#' Uses data.table's \code{\link{fread}} in most cases, except for .fwf formats, in which case \code{\link{fread.fwf}} is used.
+#' No longer uses data.table's \code{\link{fread}} because of a long-standing issue with quoted elements (comment fields in raw data files often have strange characters); now using \code{\link{read.csv}}. For .fwf formats \code{\link{fread.fwf}} is used.
 #' 
 #' @return a data.table, or list of data.tables. The name of each element of the list is the name of the file within the .zip file.
 #' 
@@ -65,17 +65,10 @@ fread.fwf <- function(..., cols, column_types, column_names){
 #' @export read.zip
 read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, ...){
 
-	# Create a name for the dir where we'll unzip
-	zipdir <- tempfile()
-	
-	# Number of file types to be read
-	n.pat <- length(pattern)
-	
-	# Create the dir using that name
-	dir.create(zipdir)
-	
-	# Unzip the file into the dir
-	unzip(zipfile, exdir=zipdir)
+	zipdir <- tempfile()# Create a name for the dir where we'll unzip
+	n.pat <- length(pattern)# Number of file types to be read	
+	dir.create(zipdir)# Create the dir using that name
+	unzip(zipfile, exdir=zipdir)# Unzip the file into the dir
 	
 	# Set up a list to store output for
 	# different file types, if needed
@@ -93,52 +86,36 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 	
 	# Loop through different file types
 	for(i in 1:n.pat){
-		
 		# Get a list of csv files in the dir
 		files <- list.files(zipdir, recursive=TRUE, pattern=pattern[i])
 		
+		# determine read function
 		if(grepl("\\.fwf$", pattern[i]) | use.fwf[i]){
-			fread2 <- fread.fwf
+			read_func <- fread.fwf # needed for newfoundland format
 		}else{
-			fread2 <- function(..., cols)fread(...)
+			read_func <- function(fp, ..., cols){as.data.table(read.csv(fp, ...))} # all other regs
 		}
 		
 		# Create a list of the imported files
+		fp <- sapply(files, function(x,y)file.path(y,x), y=zipdir) #file.path(zipdir, f)
 		if(SIMPLIFY[i]){
-			file.data <- sapply(files, 
-				function(f){
-				    fp <- file.path(zipdir, f)
-					dat <- fread2(fp, ...)
-				    return(dat)
-				}
-			)
+			file.data <- sapply(fp, read_func)
 		}else{
-			file.data <- lapply(files, 
-				function(f){
-				    fp <- file.path(zipdir, f)
-					dat <- fread2(fp, ...)
-				    return(dat)
-				}
-			)
+			file.data <- lapply(fp, read_func)
 		}
 		
-		# Use csv names to name list elements
-		names(file.data) <- basename(files)
-		
 		# Modify output depending on whether we're reading in different file types
+		names(file.data) <- basename(files) # Use csv names to name list elements
 		if(n.pat>1){
 			data.out[[i]] <- file.data
 		}else{
 			data.out <- file.data
 		}
-	}
+	} # end loop through patterns
 	
-	
-	# Delete temporary folder
-	unlink(zipdir)
-	
-	# Return data
-	return(data.out)
+	# clean up and return
+	unlink(zipdir)# Delete temporary folder
+	return(data.out)# Return data
 }
 
 # data.fwf <- read.zip("newf.zip", pattern=c("\\.fwf$", "\\.DAT"), SIMPLIFY=FALSE)

@@ -99,9 +99,9 @@ read.zip <- function(zipfile, pattern="\\.csv$", SIMPLIFY=TRUE, use.fwf=FALSE, .
 		# Create a list of the imported files
 		fp <- sapply(files, function(x,y)file.path(y,x), y=zipdir) #file.path(zipdir, f)
 		if(SIMPLIFY[i]){
-			file.data <- sapply(fp, read_func)
+			file.data <- sapply(fp, read_func, ...)
 		}else{
-			file.data <- lapply(fp, read_func)
+			file.data <- lapply(fp, read_func, ...)
 		}
 		
 		# Modify output depending on whether we're reading in different file types

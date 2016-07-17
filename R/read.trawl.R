@@ -230,11 +230,12 @@ read.neus <- function(zippath){
 # ========
 # = NEWF =
 # ========
-read.newf <- function(zippath){
-	
+
+read.newf_raw <- function(zippath){
 	# read survey info
-	newf.surv1 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table\\.csv", colClasses=rep("character", 16), drop=c("Comment"), SIMPLIFY=F)[[1]] #
-	newf.surv2 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table2009-2011\\.csv", colClasses=rep("character", 7), SIMPLIFY=F)[[1]] #
+	newf.surv1 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table\\.csv", colClasses=rep("character", 16), SIMPLIFY=FALSE)[[1]]
+	newf.surv1[,Comment:=NULL]
+	newf.surv2 <- read.zip(file.path(zippath, "newf.zip"), pattern="surveys_table2009-2011\\.csv", colClasses=rep("character", 7), SIMPLIFY=FALSE)[[1]]
 
 	# read strata
 	# I can't figure out what I needed these for,
@@ -245,43 +246,44 @@ read.newf <- function(zippath){
 # 	strat <- lapply(strat, function(x)setnames(x, names(x), c('stratum', 'area', 'maxdepth', 'nafo')))
 	
 	# read species information
-	newf.spp <- read.zip(file.path(zippath, "newf.zip"), pattern="GFSPCY\\.CODE", SIMPLIFY=F, drop="V1", , colClasses=c("character","integer", rep("character",2)))[[1]]
-		
+	newf.spp <- read.zip(file.path(zippath, "newf.zip"), pattern="GFSPCY\\.CODE", SIMPLIFY=FALSE, colClasses=c("character","integer", rep("character",2)))[[1]]
+	newf.spp[,X:=NULL]
+	
 	# read main data files
 	data.widths <- c(1, 2, 3, 3, 2, 2, 2, 2, 3, 2, 3, 3, 1, 1, 1, 1, 4, 3, 3, 1, 4, 4, 4, 4, 3, 3, 5, 5, 1, 4, 4, 6, 7, 5, 5, 2, 2) # column widths
 	col.types <- c(recordtype="integer", vessel="integer", trip="integer", set="integer", yearl="integer", monthl="integer", dayl="integer", settype="integer", stratum="character", nafo="character", unitarea="character", light="double", winddir="double", windforce="double", sea="double", bottom="double", timel="character", duration="double", distance="double", operation="double", depth="character", depthmin="character", depthmax="character", depthbottom="character", surftemp="double", bottemp="double", latstart="character", lonstart="character", posmethod="double", gear="double", sppcode="double", num="double", wgt="double", latend="character", lonend="character", bottempmeth="double", geardevice="double")
 	data.pattern <- "(199[23456789]|200[0123456789]|201[012])\\.DAT$" # pattern for main data files
 	newf.names <- names(col.types) # column names
-	newf <- read.zip(file.path(zippath, "newf.zip"), pattern=data.pattern, SIMPLIFY=F, use.fwf=TRUE, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
+	newf <- read.zip(file.path(zippath, "newf.zip"), pattern=data.pattern, SIMPLIFY=FALSE, use.fwf=TRUE, cols=data.widths, column_types=col.types, column_names=newf.names) # read data set
 	newf <- do.call(rbind, newf) # combine into 1 data.table
 	setnames(newf, names(newf), newf.names) # set names
 	
 	# merge main data set w/ species names
 	newf[,sppcode:=as.integer(sppcode)]
-	newf <- merge(newf, newf.spp, all.x=TRUE, by="sppcode")
+	
+	return(list(newf=newf, newf.surv1=newf.surv1, newf.surv2=newf.surv2, newf.spp=newf.spp))
+}
 
-
-	# Use the "surv" files to add
-	# the "seson" column to newf
-	# doing this "formatting"/ "column addtion"
-	# in the read file b/c it's only use for 
-	# the surv files
+read.newf_merge <- function(newf_list){
+	newf <- merge(newf_list$newf, newf_list$newf.spp, all.x=TRUE, by="sppcode")
+	
+	# Use the "surv" files to add the "seson" column to newf
+	# Doing this "formatting"/ "column addtion" in the read file b/c it's only use for the surv files
 	fall.surv1 <- c(
 		'2GH - Stratified Random Bottom Trawl Survey - Campelen 1800', 
 		'Fall - Stratified Random Bottom Trawl Survey - Campelen 1800'
 	)
 	fallseries <- c(
-		newf.surv1[Series%in%fall.surv1, as.character(CRUISE)],
-		newf.surv2[season=='fall', as.character(cruise)]
+		newf_list$newf.surv1[Series%in%fall.surv1, as.character(CRUISE)],
+		newf_list$newf.surv2[season=='fall', as.character(cruise)]
 	)
-
 	spring.surv1 <- c(
 		'Annual 3P - Stratified Random Bottom Trawl Survey - Campelen 1800', 
 		'Spring 3LNO - Stratified Random Bottom Trawl Survey - Campelen 1800'
 	)
 	springseries <- c(
-		newf.surv1[Series%in%spring.surv1, as.character(CRUISE)],
-		newf.surv2[season=="spring", as.character(cruise)]
+		newf_list$newf.surv1[Series%in%spring.surv1, as.character(CRUISE)],
+		newf_list$newf.surv2[season=="spring", as.character(cruise)]
 	)
 	
 	cruiseid <- newf[,paste(vessel, formatC(trip, width=3, flag=0), sep='')]
@@ -291,14 +293,17 @@ read.newf <- function(zippath){
 	newf.season <- rep(NA, nrow(newf))
 	newf.season[is.fall] <- "fall"
 	newf.season[is.spring] <- "spring"
-
 	newf[, season:=newf.season]
 	
-
 	return(newf)
-	
-	
 }
+
+read.newf <- function(zippath){
+	newf_list <- read.newf_raw(zippath)
+	newf_merge <- read.newf_merge(newf_list)
+	return(newf_merge)
+}
+
 
 # =========
 # = NGULF =

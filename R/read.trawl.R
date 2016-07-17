@@ -443,25 +443,31 @@ read.wcann <- function(zippath){
 # ==========
 # = WC TRI =
 # ==========
-read.wctri <- function(zippath){
-	
-	# read
+read.wctri_raw <- function(zippath){
 	X.all <- read.zip(file.path(zippath, "wctri.zip"), SIMPLIFY=F)
 	X.catch <- X.all[["wctri-CATCHWCTRIALLCOAST.csv"]]
 	X.haul <- X.all[["wctri-HAULWCTRIALLCOAST.csv"]]
 	X.spp <- X.all[["wctri-RACEBASE_SPECIES.csv"]]
-	
+	return(list(X.catch=X.catch, X.haul=X.haul, X.spp=X.spp))
+}
+
+read.wctri_merge <- function(wctri_list){
 	# modifications to avoid conflicting columns
-	X.haul[,AUDITJOIN:=NULL]
-	X.spp[,AUDITJOIN:=NULL]
+	wctri_list$X.haul[,AUDITJOIN:=NULL]
+	wctri_list$X.spp[,AUDITJOIN:=NULL]
 	
 	# merge
 	m.cols1 <- c("CRUISEJOIN", "HAULJOIN", "REGION", "VESSEL", "CRUISE", "HAUL")
-	wctri <- merge(X.catch, X.haul, by=m.cols1, all.x=TRUE)
-	wctri <- merge(wctri, X.spp, by="SPECIES_CODE", all.x=TRUE)
+	wctri <- merge(wctri_list$X.catch, wctri_list$X.haul, by=m.cols1, all.x=TRUE)
+	wctri <- merge(wctri, wctri_list$X.spp, by="SPECIES_CODE", all.x=TRUE)
 	
 	return(wctri)
-	
+}
+
+read.wctri <- function(zippath){
+	wctri_list <- read.wctri_raw(zippath)
+	wctri_merge <- read.wctri_merge(wctri_list)
+	return(wctri_merge)
 }
 
 

@@ -169,77 +169,68 @@ read.ebs <- function(zippath){
 # ========
 # = GMEX =
 # ========
-read.gmex <- function(zippath){
-	
+read.gmex_raw <- function(zippath){
 	# gmex files need to be read in separately
 	# because need to do more work passing args to fread()
 	
 	# regex patterns for grabbing each file type
 	patterns <- c("BGSREC", "STAREC", "INVREC", "NEWBIOCODESBIG", "CRUISES")
 	
-	
-	# define colClasses for each file
+	# # define colClasses for each file
 	colClasses1 <- structure(c("integer", "integer", "character", "integer", "integer", "integer", "integer", "character", "character", "character", "integer", "numeric", "character"), .Names = c("BGSID", "CRUISEID", "STATIONID", "VESSEL", "CRUISE_NO", "P_STA_NO", "CATEGORY", "GENUS_BGS", "SPEC_BGS", "BGSCODE", "CNTEXP", "SELECT_BGS", "BIO_BGS"))
 	colClasses2 <- structure(c("character", "numeric", "numeric", "numeric", "character", "character", "character", "numeric", "integer", "numeric", "numeric", "character", "integer", "numeric", "integer", "numeric", "numeric", "numeric", "numeric", "character"), .Names = c("STATIONID", "CRUISEID", "CRUISE_NO", "P_STA_NO", "TIME_ZN", "TIME_MIL", "S_LATD", "S_LATM", "S_LOND", "S_LONM", "DEPTH_SSTA", "MO_DAY_YR", "E_LATD", "E_LATM", "E_LOND", "E_LONM", "TEMP_SSURF", "TEMP_BOT", "VESSEL_SPD", "COMSTAT" ))
 	colClasses3 <- structure(c("integer", "character", "integer", "integer", "integer", "integer", "integer", "character", "numeric", "character", "integer", "character", "character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"), .Names = c("INVRECID", "STATIONID", "CRUISEID", "VESSEL", "CRUISE_NO", "P_STA_NO", "GEAR_SIZE", "GEAR_TYPE", "MESH_SIZE", "OP", "MIN_FISH", "WBCOLOR", "BOT_TYPE", "BOT_REG", "TOT_LIVE", "FIN_CATCH", "CRUS_CATCH", "OTHR_CATCH", "T_SAMPLEWT", "T_SELECTWT", "FIN_SMP_WT", "FIN_SEL_WT", "CRU_SMP_WT", "CRU_SEL_WT", "OTH_SMP_WT", "OTH_SEL_WT"))
 	colClasses4 <- structure(c("integer", "character", "character", "integer", "integer", "character", "integer"), .Names = c("Key1", "TAXONOMIC", "CODE", "TAXONSIZECODE", "isactive", "common_name", "tsn"))
 	colClasses5 <- structure(c("integer", "integer", "character", "integer", "integer", "character", "character", "character", "integer"), .Names = c("CRUISEID", "YR", "SOURCE", "VESSEL", "CRUISE_NO", "STARTCRU", "ENDCRU", "TITLE", "NOTE"))
 	
+	cc_all <- mget(paste0("colClasses",1:5))
 	
 	# read in each file type 1 at a time
-	X.bio <- read.zip(
-		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses1, pattern=patterns[1], 
-		drop=c("SAMPLE_BGS", "NODC_BGS", "IS_SAMPLE", "TAXONID", "CNT"), 
-		SIMPLIFY=F
-	)[[1]]
+	gmex_read <- function(pattern, CC=NA, lName=c("X.bio","X.sta","X.tow","X.spp","X.cruises")){
+		lName <- match.arg(lName)
+		rawRead <- read.zip(zipfile=file.path(zippath, "gmex.zip"), pattern=pattern, SIMPLIFY=F, colClasses=CC)[[1]]
+		structure(list(rawRead), .Names=lName)
+	}
 	
-	X.sta <- read.zip(
-		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses2, pattern=patterns[2], 
-		select=c('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', "TEMP_SSURF", "TEMP_BOT", 'VESSEL_SPD', 'COMSTAT'),
-		SIMPLIFY=F
-	)[[1]]
+	gmex_files <- c("X.bio","X.sta","X.tow","X.spp","X.cruises")
+	gmex_out <- structure(mapply(gmex_read, pattern=patterns, CC=cc_all, lName=gmex_files), .Names=gmex_files)
 	
-	X.tow <- read.zip(
-		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses3, pattern=patterns[3], 
-		select=c('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP'), 
-		SIMPLIFY=F
-	)[[1]]
+	return(gmex_out)
+}
+
+read.gmex_merge <- function(gmex_list){
 	
-	X.spp <- read.zip(
-		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses4, pattern=patterns[4], 
-		SIMPLIFY=F
-	)[[1]]
+	bio_select <- names(gmex_list$X.bio)[!names(gmex_list$X.bio)%in%c("SAMPLE_BGS", "NODC_BGS", "IS_SAMPLE", "TAXONID", "CNT")]
+	sta_select <- c('STATIONID', 'CRUISEID', 'CRUISE_NO', 'P_STA_NO', 'TIME_ZN', 'TIME_MIL', 'S_LATD', 'S_LATM', 'S_LOND', 'S_LONM', 'E_LATD', 'E_LATM', 'E_LOND', 'E_LONM', 'DEPTH_SSTA', 'MO_DAY_YR', "TEMP_SSURF", "TEMP_BOT", 'VESSEL_SPD', 'COMSTAT')
+	tow_select <- c('STATIONID', 'CRUISE_NO', 'P_STA_NO', 'INVRECID', 'GEAR_SIZE', 'GEAR_TYPE', 'MESH_SIZE', 'MIN_FISH', 'OP')
+	cruises_select <- c("CRUISEID", "VESSEL", "TITLE")
 	
-	X.cruises <- read.zip(
-		zipfile=file.path(zippath, "gmex.zip"), colClasses=colClasses5, pattern=patterns[5], 
-		select=c("CRUISEID", "VESSEL", "TITLE"),
-		SIMPLIFY=F
-	)[[1]]
+	X.bio <- gmex_list$X.bio[,eval(s2c(bio_select))]
+	X.sta <- gmex_list$X.sta[,eval(s2c(sta_select))]
+	X.tow <- gmex_list$X.tow[,eval(s2c(tow_select))]
+	X.spp <- gmex_list$X.spp
+	X.cruises <- gmex_list$X.cruises[,eval(s2c(cruises_select))]
 	
-	
-	
-	# Subsetting, formatting, etc
-	# that needs to be complete here
-	# (non-optional) for 
-	# effective formatting
 	X.tow <- X.tow[GEAR_TYPE=="ST"]
-	
 	bad.gmex.CODE <- names(X.spp[,table(CODE)][X.spp[,table(CODE)] > 1])
 	good.gmex.CODE <- names(X.spp[,table(CODE)][X.spp[,table(CODE)] <= 1])
 	setkey(X.spp, CODE)
 	X.spp <- X.spp[good.gmex.CODE]
 	setnames(X.spp, "CODE", "BIO_BGS")
-
-
+	
 	# merge
 	X <- merge(X.bio, X.tow, by=intersect(names(X.bio), names(X.tow)), all.x=TRUE)
 	X <- merge(X, X.sta, by=intersect(names(X), names(X.sta)), all.x=TRUE)
 	X <- merge(X, X.spp[,list(BIO_BGS, TAXONOMIC)], by="BIO_BGS", all.x=TRUE) 
 	X <- merge(X, X.cruises, by=intersect(names(X), names(X.cruises)), all.x=TRUE)
 	
-	
 	return(X)
-	
+}
+
+read.gmex <- function(zippath){
+	gmex_list <- read.gmex_raw(zippath)
+	gmex_merge <- read.gmex_merge(gmex_list)
+	return(gmex_merge)
 }
 
 

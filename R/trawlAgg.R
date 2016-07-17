@@ -227,17 +227,21 @@ trawlAgg <- function(X, FUN=NULL, bio_lvl=c("individual","sex","spp","species","
 	# = Aggregate =
 	# =============
 	dc <- function(x,y){do.call(x, list(y))}
-	out <- X[,j={
+	X[,nAgg:=.N,by=c(byCols)]
+	out1 <- X[nAgg==1,eval(s2c(c(byCols,bioCols,envCols,metaCols,"nAgg")))]
+	out <- X[nAgg!=1,j={
 			# I'm still amazed that this works.
 			c(
 				structure(lapply(eval(s2c(bioCols)), bioFun, na.rm=na.rm), .Names=bioCols),
 				structure(lapply(eval(s2c(envCols)), envFun, na.rm=na.rm), .Names=envCols),
 				structure(mapply(dc, metaFun, eval(s2c(metaCols)), SIMPLIFY=FALSE), .Names=metaCols),
-				"nAgg"=if(use_nAgg){(.N)}
+				"nAgg"=nAgg[1]#if(use_nAgg){(.N)}
 			)
 	
 		},by=c(byCols)
 	]
+	out <- rbind(out1, out, fill=TRUE)
+	if(!use_nAgg){out[,nAgg:=NULL]}
 	
 	
 	# ==========

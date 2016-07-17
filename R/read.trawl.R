@@ -182,11 +182,8 @@ read.gmex <- function(zippath){
 # ========
 # = NEUS =
 # ========
-read.neus <- function(zippath){
-	
-	
-	
-	neus.strata <- fread(file.path(zippath, "neus-neusStrata.csv"), select=c('StratumCode', 'Areanmi2')) # Need neusStrata.csv file from Malin (18-Aug-2014)
+read.neus_raw <- function(zippath){
+	X.strata <- fread(file.path(zippath, "neus-neusStrata.csv"), select=c('StratumCode', 'Areanmi2')) # Need neusStrata.csv file from Malin (18-Aug-2014)
 	local({ # create a local environment to read in .RData, to ensure that other objects aren't overwritten
 
 		load(file.path(zippath, "neus-station.RData")) # station
@@ -194,35 +191,39 @@ read.neus <- function(zippath){
 		load(file.path(zippath, "neus-SVSPP.RData")) # spp
 
 		# assign variables in global environment
-		assign("neus.station", station, envir=environment(read.neus))
-		assign("neus.survdat.raw", survdat, envir=environment(read.neus))
-		assign("neus.spp", spp, envir=environment(read.neus))
+		assign("X.station", station, envir=environment(read.neus_raw))
+		assign("X.raw", survdat, envir=environment(read.neus_raw))
+		assign("X.spp", spp, envir=environment(read.neus_raw))
 	
 	}) # end expressions to be carried out in new local environment
+	
+	return(list(X.raw=X.raw, X.spp=X.spp, X.station=X.station, X.strata=X.strata))
+}
 
+read.neus_merge <- function(neus_list){
 	# make changes to neus.strata
-	setkey(neus.strata, StratumCode)
-	setnames(neus.strata, "StratumCode", "STRATUM") # updates the key, too; this was done b/c data.table:::merege.data.table does not accept by.x and by.y
-
-	# make changes to neus.survdat.raw
-	# setkey(neus.survdat.raw, CRUISE6, STATION, STRATUM, SVSPP, CATCHSEX)
+	setkey(neus_list$X.strata, StratumCode)
+	setnames(neus_list$X.strata, "StratumCode", "STRATUM") # updates the key, too; this was done b/c data.table:::merege.data.table does not accept by.x and by.y
 	
 	# LAT exists in both neus.station and neus.survdat.raw
 	# my checks show that they don't match; I'm going to go with the neus.survdat.raw version
 	# when I look carefully, some different by -6E-15 or 6E-15 ... it's just rounding
-	neus.station[,LAT:=NULL]
+	neus_list$X.station[,LAT:=NULL]
 
 	# Merge spp and strata into neus data.table
-	neus <- neus.survdat.raw
-	neus <- merge(neus, neus.spp, by="SVSPP") # add species names
-	neus <- merge(neus, neus.strata, by="STRATUM", all.x=TRUE)
-	neus <- merge(neus, neus.station, all.x=TRUE, by=c("STATION","STRATUM","CRUISE6"))
+	X <- neus_list$X.raw
+	X <- merge(X, neus_list$X.spp, by="SVSPP") # add species names
+	X <- merge(X, neus_list$X.strata, by="STRATUM", all.x=TRUE)
+	X <- merge(X, neus_list$X.station, all.x=TRUE, by=c("STATION","STRATUM","CRUISE6"))
+	trim.autoColumn(X) # trim columns duplicated from merge 
 	
-	# trim columns duplicated from merge 
-	trim.autoColumn(neus)
-	
-	return(neus)
-	
+	return(X)
+}
+
+read.neus <- function(zippath){
+	neus_list <- read.neus_raw(zippath)
+	neus_merge <- read.neus_merge(neus_list)
+	return(neus_merge)
 }
 
 

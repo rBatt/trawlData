@@ -355,54 +355,63 @@ read.sa <- function(zippath){
 # =========
 # = SGULF =
 # =========
-read.sgulf <- function(zippath){
-	
-	# read
+read.sgulf_raw <- function(zippath){
 	X.all <- read.zip(file.path(zippath, "sgulf.zip"), SIMPLIFY=F)
 	X.catch <- X.all[["sgulf-southern Gulf survey data.csv"]]
 	X.set <- X.all[[names(X.all)[grepl("sgulf-sGSL_RV Survey sets.*", names(X.all))]]]
 	X.strata <- X.all[["sgulf-4T_RV_strata.csv"]]
+	return(list(X.catch=X.catch, X.set=X.set, X.strata=X.strata))
+}
 
-
-	# merge
-	sgulf <- merge(X.catch, X.set, all.x=TRUE, all.y=FALSE, by=c("vessel","cruise","year","set"))
+read.sgulf_merge <- function(sgulf_list){
+	sgulf <- merge(sgulf_list$X.catch, sgulf_list$X.set, all.x=TRUE, all.y=FALSE, by=c("vessel","cruise","year","set"))
 	trim.autoColumn(sgulf) # remove redundant columns
 	setnames(sgulf, "strat", "stratum")# formatting needed for merge
-	sgulf <- merge(sgulf, X.strata, all.x=TRUE, by="stratum")
-	
+	sgulf <- merge(sgulf, sgulf_list$X.strata, all.x=TRUE, by="stratum")	
 	return(sgulf)
-	
 }
+
+read.sgulf <- function(zippath){
+	sgulf_list <- read.sgulf_raw(zippath)
+	sgulf_merge <- read.sgulf_merge(sgulf_list)
+	return(sgulf_merge)
+}
+
 
 # =========
 # = SHELF =
 # =========
-read.shelf <- function(zippath){
-	
-	# read in
-	X.all <- read.zip(file.path(zippath, "shelf.zip"), SIMPLIFY=F)
-	X.catch <- X.all[[names(X.all)[grepl("shelf-gscat.*",names(X.all))]]]
-	X.set <- X.all[[names(X.all)[grepl("shelf-gsinf.*",names(X.all))]]]
-	X.spp <- X.all[[names(X.all)[grepl("shelf-species list.*",names(X.all))]]]
-	X.strata <- X.all[[names(X.all)[grepl("shelf-strata.*",names(X.all))]]]
-	
-	
+read.shelf_raw <- function(zippath){
+	X.all <- read.zip(file.path(zippath, "shelf.zip"), SIMPLIFY=FALSE)
+	namesX <- names(X.all)
+	X.catch <- X.all[[namesX[grepl("shelf-gscat.*",namesX)]]]
+	X.set <- X.all[[namesX[grepl("shelf-gsinf.*",namesX)]]]
+	X.spp <- X.all[[namesX[grepl("shelf-species list.*",namesX)]]]
+	X.strata <- X.all[[namesX[grepl("shelf-strata.*",namesX)]]]
+	return(list(X.catch=X.catch, X.set=X.set, X.spp=X.spp, X.strata=X.strata))
+}
+
+read.shelf_merge <- function(shelf_list){
 	# format/ adjustment needed for merge
-	setnames(X.catch, "SPEC","CODE")
-	X.set[,REMARKS:=NULL]
-	setnames(X.set, "STRAT", "stratum")
-	X.strata[,stratum:=as.character(stratum)]
-	
+	setnames(shelf_list$X.catch, "SPEC","CODE")
+	shelf_list$X.set[,REMARKS:=NULL]
+	setnames(shelf_list$X.set, "STRAT", "stratum")
+	shelf_list$X.strata[,stratum:=as.character(stratum)]
 	
 	# merge
-	shelf <- merge(X.catch, X.set, all.x=TRUE, all.y=FALSE, by=c("MISSION","SETNO"))
-	shelf <- merge(shelf, X.strata, all.x=TRUE, by="stratum")
-	shelf <- merge(shelf, X.spp, all.x=TRUE, by="CODE")
-	
+	shelf <- merge(shelf_list$X.catch, shelf_list$X.set, all.x=TRUE, all.y=FALSE, by=c("MISSION","SETNO"))
+	shelf <- merge(shelf, shelf_list$X.strata, all.x=TRUE, by="stratum")
+	shelf <- merge(shelf, shelf_list$X.spp, all.x=TRUE, by="CODE")
 	
 	return(shelf)
-	
 }
+
+read.shelf <- function(zippath){
+	shelf_list <- read.shelf_raw(zippath)
+	shelf_merge <- read.shelf_merge(shelf_list)
+	return(shelf_merge)
+}
+
 
 # ==========
 # = WC ANN =

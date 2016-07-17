@@ -26,19 +26,16 @@ To install this repo, the easiest thing to do is to clone it, then then use `dev
  ```{bash}
 cd path/to/folder/to/hold/repo
 git clone https://github.com/rBatt/trawlData
+cd trawlData
+git lfs pull # get binaries instead of pointers
  ```  
+ If you don't have Git LFS, see the [trawlData Wiki on the topic](https://github.com/rBatt/trawlData/wiki/Keeping-Git-and-Git-LFS-Updated)
  - In R, type:  
 
  ```{r}
 library(devtools)
 setwd("path/to/folder/to/hold/repo/trawlData")
 devtools::install()
- ```
- - There is currently a problem with using the latest version of data.table; thus, to install 1.9.4:  
- 
- ```{r}
- library(devtools)
- install_version("data.table", version="1.9.4")
  ```
  
 ## Package Quickstart

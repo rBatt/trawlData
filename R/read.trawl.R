@@ -15,7 +15,7 @@
 #' ai.data <- read.trawl(reg="ai", zippath=file.path(system.file(package="trawlData"),"inst/extdata"))
 #' }
 #' 
-#' @import data.table
+#' @import data.table bit64
 #' @export read.trawl
 read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf", "sa", "sgulf", "shelf", "wcann", "wctri"), zippath=file.path(system.file(package="trawlData"),"extdata"), ...){
 	reg <- match.arg(reg, several.ok=TRUE)
@@ -416,23 +416,29 @@ read.shelf <- function(zippath){
 # ==========
 # = WC ANN =
 # ==========
-read.wcann <- function(zippath){
-	
-	# read
-	X.all <- read.zip(file.path(zippath, "wcann.zip"), SIMPLIFY=F)
-	X.fish <- X.all[[names(X.all)[grepl("wcann.+fish\\.csv",names(X.all))]]]
-	X.haul <- X.all[[names(X.all)[grepl("wcann.+haul\\.csv",names(X.all))]]]
-	X.invert <- X.all[[names(X.all)[grepl("wcann.+invert\\.csv",names(X.all))]]]
-	
-
-	# merge/ rbind
-	X.invert[,setdiff(names(X.fish), names(X.invert)):=NA]
-	X.catch <- rbind(X.fish[, names(X.invert), with=FALSE], X.invert)
-	wcann <- merge(X.catch, X.haul, by=intersect(names(X.catch), names(X.haul)), all.x=TRUE)
-	
-	return(wcann)
-	
+read.wcann_raw <- function(zippath){
+	X.all <- read.zip(file.path(zippath, "wcann.zip"), colClasses=c(Trawl.Id="integer64"), SIMPLIFY=FALSE)
+	namesX <- names(X.all)
+	X.fish <- X.all[[namesX[grepl("wcann.+fish\\.csv",namesX)]]]
+	X.invert <- X.all[[namesX[grepl("wcann.+invert\\.csv",namesX)]]]
+	X.haul <- X.all[[namesX[grepl("wcann.+haul\\.csv",namesX)]]]
+	return(list(X.fish=X.fish, X.invert=X.invert, X.haul=X.haul))
 }
+
+read.wcann_merge <- function(wcann_list){
+	wcann_list$X.invert[,setdiff(names(wcann_list$X.fish), names(wcann_list$X.invert)):=NA]
+	X.catch <- rbind(wcann_list$X.fish[, names(wcann_list$X.invert), with=FALSE], wcann_list$X.invert)
+	by_cols <- intersect(names(X.catch), names(wcann_list$X.haul))
+	wcann <- merge(X.catch, wcann_list$X.haul, by=by_cols, all.x=TRUE, all.y=FALSE)
+	return(wcann)
+}
+
+read.wcann <- function(zippath){
+	wcann_list <- read.wcann_raw(zippath)
+	wcann_merge <- read.wcann_merge(wcann_list)
+	return(wcann_merge)
+}
+
 
 # ==========
 # = WC TRI =

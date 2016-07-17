@@ -14,3 +14,14 @@ soda.zip
 # Random files to ignore
 tempo-image-spp.key.RData
 inst/doc
+
+# Regions with restricted access
+data/clean.newf.RData
+data/raw.newf.RData
+data/clean.ngulf.RData
+data/raw.ngulf.RData
+data/clean.sgulf.RData
+data/raw.sgulf.RData
+inst/extdata/sgulf.zip
+inst/extdata/ngulf.zip
+inst/extdata/newf.zip

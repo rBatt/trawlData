@@ -114,17 +114,14 @@ read.ai <- function(zippath){
 # =======
 # = EBS =
 # =======
-read.ebs <- function(zippath){
-
+read.ebs_raw <- function(zippath){
 	# Read in all files from X zip file
 	# default pattern is a .csv, and X is all .csv
 	X.all <- read.zip(zipfile=file.path(zippath, "ebs.zip"), SIMPLIFY=F)
 	
-	
 	# Fix whitespace in column names
 	# necessary for combining files
 	X.all <- lapply(X.all, function(x)setnames(x, names(x), gsub("^\\s* | \\s*$", "", names(x))))
-	
 	
 	# Concat raw X data files
 	# Have to make some assumption about which files 
@@ -135,29 +132,37 @@ read.ebs <- function(zippath){
 	which.raw <- which(file.ncol==data.ncol) # list elements from mXn raw files
 	X.raw <- do.call(rbind, X.all[which.raw])
 	
-	
 	# read in stratum data file
 	which.strat <- which(names(X.all)=="ebs-Strata.csv") # use which so next step can use [[]]
-	X.strata <- X.all[[which.strat]][,list(StratumCode, Areakm2)] # subset X.all, then choose 2 columns
+	X.strata <- X.all[[which.strat]]
 	
+	return(list(X.raw=X.raw, X.strata=X.strata))
+	
+}
+
+read.ebs_merge <- function(ebs_list){
+	X.raw <- ebs_list[['X.raw']]
+	X.strata <- ebs_list[['X.strata']][,list(StratumCode, Areakm2)]
 	
 	# adjust strat column to X.strata
 	# to match that in X.raw
 	# so they can be merged
 	setnames(X.strata, "StratumCode", "STRATUM")
 	
-	
 	# set keys
 	setkey(X.raw, STRATUM)
 	setkey(X.strata, STRATUM)
 	
-	
 	# merge X.raw and X.strata
 	X <- merge(X.raw, X.strata, all.x=TRUE)
 	
-	
 	return(X)
+}
 
+read.ebs <- function(zippath){
+	ebs_list <- read.ebs_raw(zippath)
+	ebs_merge <- read.ebs_merge(ebs_list)
+	return(ebs_merge)
 }
 
 

@@ -24,10 +24,10 @@ read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf"
 	
 	get.raw <- function(x){
 		switch(x,
-			ai = read.ai(zippath),
-			ebs = read.ebs(zippath),
+			ai = read.alaskan(zippath, zipName="ai.zip", stratName="ai-Strata.csv"),
+			ebs = read.alaskan(zippath, zipName="ebs.zip", stratName="ebs-Strata.csv"),
 			gmex = read.gmex(zippath),
-			goa = read.goa(zippath),
+			goa = read.alaskan(zippath, zipName="goa.zip", stratName="goa-Strata.csv"),
 			neus = read.neus(file.path(zippath,"neus")),
 			newf = read.newf(zippath),
 			ngulf = read.ngulf(zippath),
@@ -53,71 +53,16 @@ read.trawl <- function(reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "ngulf"
 }
 
 
-# ======
-# = AI =
-# ======
-read.ai_raw <- function(zippath){
-	# Read in all files from ai zip file
-	# default pattern is a .csv, and ai is all .csv
-	ai.all <- read.zip(zipfile=file.path(zippath,"ai.zip"), SIMPLIFY=F)
+# ==========================================================
+# = Functions for all 3 Alaskan Regions (they are similar) =
+# ==========================================================
+read.alaskan_raw <- function(zippath, zipName=c("ai.zip","ebs.zip","goa.zip"), stratName=paste0(c("ai","ebs","goa"),"-Strata.csv")){
+	zipName <- match.arg(zipName)
+	stratName <- match.arg(stratName)
 	
-	# Concat raw ai data files
-	# Have to make some assumption about which files 
-	# If later I list exact names of files, can use those
-	# instead of picking them by the number of columns
-	file.ncol <- sapply(ai.all, function(x)ncol(x))
-	data.ncol <- 17 # the main data files have 17 columns
-	which.raw <- which(file.ncol==data.ncol) # list elements from main raw files
-	ai.raw <- do.call(rbind, ai.all[which.raw])
-	
-	# read in stratum data file
-	which.strat <- which(names(ai.all)=="ai-Strata.csv") # use which so next step can use [[]]; idk why i thot i had to do this
-	ai.strata <- ai.all[[which.strat]] # subset ai.all
-	
-	return(list(ai.raw=ai.raw, ai.strata=ai.strata))
-}
-
-read.ai_merge <- function(ai_list){
-	ai.raw <- ai_list[['ai.raw']]
-	ai.strata <- ai_list[['ai.strata']][,list(StratumCode, Areakm2)]
-	
-	# check for leading or trailing
-	# whitespace in col names
-	strata.spaces <- grepl("^\\s* | \\s*$", "", names(ai.strata))
-	raw.spaces <- grepl("^\\s* | \\s*$", "", names(ai.raw))
-	if(strata.spaces | raw.spaces){
-		message("AI data files have column names with leading or traililing whitespace")
-	}
-
-	# adjust strat column to ai.strata
-	# to match that in ai.raw
-	# so they can be merged
-	setnames(ai.strata, "StratumCode", "STRATUM")
-
-	# set keys
-	setkey(ai.raw, STRATUM)
-	setkey(ai.strata, STRATUM)
-
-	# merge ai.raw and ai.strata
-	ai <- merge(ai.raw, ai.strata, all.x=TRUE)
-
-	return(ai)
-}
-
-read.ai <- function(zippath){
-	ai_list <- read.ai_raw(zippath)
-	ai_merge <- read.ai_merge(ai_list)
-	return(ai_merge)
-}
-
-
-# =======
-# = EBS =
-# =======
-read.ebs_raw <- function(zippath){
 	# Read in all files from X zip file
 	# default pattern is a .csv, and X is all .csv
-	X.all <- read.zip(zipfile=file.path(zippath, "ebs.zip"), SIMPLIFY=F)
+	X.all <- read.zip(zipfile=file.path(zippath, zipName), SIMPLIFY=FALSE)
 	
 	# Fix whitespace in column names
 	# necessary for combining files
@@ -133,16 +78,16 @@ read.ebs_raw <- function(zippath){
 	X.raw <- do.call(rbind, X.all[which.raw])
 	
 	# read in stratum data file
-	which.strat <- which(names(X.all)=="ebs-Strata.csv") # use which so next step can use [[]]
+	which.strat <- which(names(X.all)==stratName) # use which so next step can use [[]]
 	X.strata <- X.all[[which.strat]]
 	
 	return(list(X.raw=X.raw, X.strata=X.strata))
 	
 }
 
-read.ebs_merge <- function(ebs_list){
-	X.raw <- ebs_list[['X.raw']]
-	X.strata <- ebs_list[['X.strata']][,list(StratumCode, Areakm2)]
+read.alaskan_merge <- function(alaskan_list){
+	X.raw <- alaskan_list[['X.raw']]
+	X.strata <- alaskan_list[['X.strata']][,list(StratumCode, Areakm2)]
 	
 	# adjust strat column to X.strata
 	# to match that in X.raw
@@ -159,10 +104,10 @@ read.ebs_merge <- function(ebs_list){
 	return(X)
 }
 
-read.ebs <- function(zippath){
-	ebs_list <- read.ebs_raw(zippath)
-	ebs_merge <- read.ebs_merge(ebs_list)
-	return(ebs_merge)
+read.alaskan <- function(zippath, zipName, stratName){
+	alaskan_list <- read.alaskan_raw(zippath, zipName, stratName)
+	alaskan_merge <- read.alaskan_merge(alaskan_list)
+	return(alaskan_merge)
 }
 
 
@@ -233,56 +178,6 @@ read.gmex <- function(zippath){
 	return(gmex_merge)
 }
 
-
-# =======
-# = GOA =
-# =======
-read.goa <- function(zippath){
-	
-
-	# Read in all files from X zip file
-	# default pattern is a .csv, and X is all .csv
-	X.all <- read.zip(zipfile=file.path(zippath, "goa.zip"), SIMPLIFY=F)
-	
-	
-	# Fix whitespace in column names
-	# necessary for combining files
-	X.all <- lapply(X.all, function(x)setnames(x, names(x), gsub("^\\s* | \\s*$", "", names(x))))
-	
-	
-	# Concat raw X data files
-	# Have to make some assumption about which files 
-	# If later I list exact names of files, can use those
-	# instead of picking them by the number of columns
-	file.ncol <- sapply(X.all, function(x)ncol(x))
-	data.ncol <- 17 # the mXn data files have 17 columns
-	which.raw <- which(file.ncol==data.ncol) # list elements from mXn raw files
-	X.raw <- do.call(rbind, X.all[which.raw])
-	
-	
-	# read in stratum data file
-	which.strat <- which(names(X.all)=="goa-Strata.csv") # use which so next step can use [[]]
-	X.strata <- X.all[[which.strat]][,list(StratumCode, Areakm2)] # subset X.all, then choose 2 columns
-	
-	
-	# adjust strat column to X.strata
-	# to match that in X.raw
-	# so they can be merged
-	setnames(X.strata, "StratumCode", "STRATUM")
-	
-	
-	# set keys
-	setkey(X.raw, STRATUM)
-	setkey(X.strata, STRATUM)
-	
-	
-	# merge X.raw and X.strata
-	X <- merge(X.raw, X.strata, all.x=TRUE)
-	
-	
-	return(X)
-	
-}
 
 # ========
 # = NEUS =

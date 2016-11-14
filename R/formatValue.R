@@ -199,7 +199,8 @@ getDate <-  function(x, orders, year=1957, tz="GMT", ...){
 	year <- as.integer(year)
 	stopifnot(nchar(year) == 4L)
 	if(missing(orders)){
-		orders <- paste0(rep(c("ymd", "mdy", "Ymd", "mdY"),each=5), c(" HMS"," HM", " H", "M", ""))
+		# orders <- paste0(rep(c("ymd", "mdy", "Ymd", "mdY"),each=5), c(" HMS"," HM", " H", "M", ""))
+		orders <- paste0(rep(c("mdy", "mdY", "ymd", "Ymd"),each=5), c(" HMS"," HM", " H", "M", ""))
 	}
 	
 	x <- lubridate::parse_date_time(x, orders=orders, tz=tz, ...)

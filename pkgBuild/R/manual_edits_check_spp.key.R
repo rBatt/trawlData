@@ -169,3 +169,15 @@ sk[spp=="Pomacanthus arcuatus", c("trophicLevel","trophicLevel.se"):=list(3.19, 
 check(sk, sk[,ref=="PERISTEDION GREYAE"]) # spp should be Peristedion greyae, common alligator searobin
 check(sk, sk[,genus=="Peristedion" & !is.na(genus)])
 check(sk, sk[,ref=="GONOSTOMA ATLANTICUM"]) # should be Gonostoma atlanticum
+
+# ---- 25 April 2017 ----
+spp.key[spp=="Homaxinella amphispicula", common:="firm finger sponge"]
+spp.key[spp=="Isodictya rigida", common:="soft finger sponge"]
+spp.key[spp=="Leptasterias coei", common:="aleutian six-rayed sea star"]
+spp.key[spp=="Neoesperiopsis infundibula", common:="rough China hat sponge"]
+spp.key[spp=="Neptunea amianta", common:="white neptune"]
+check_and_set(wrong="Reinhardtius stomias", corrected="Atheresthes stomias")
+check_and_set(wrong="Cross papposus", corrected="Crossaster papposus")#spp.key[ref=="CROSS PAPPOSUS", spp:="Crossaster papposus"] #note that it has the right name in EBS. Make sure to do check_and_set(wrong="Cross papposus", corrected="Crossaster papposus") first
+
+
+

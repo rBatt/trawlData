@@ -4,7 +4,7 @@
 \alias{match.tbl}
 \title{Match Table}
 \usage{
-match.tbl(ref, tbl.ref, tbl.val, exact = FALSE)
+\method{match}{tbl}(ref, tbl.ref, tbl.val, exact = FALSE)
 }
 \arguments{
 \item{ref}{a vector of reference values to lookup}

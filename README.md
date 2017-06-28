@@ -2,6 +2,7 @@
 
 
 # trawlData
+[![DOI](https://zenodo.org/badge/44205244.svg)](https://zenodo.org/badge/latestdoi/44205244)
 <p align="center">
  <!--:shell: :tropical_fish: :octopus: :fish: :fishing_pole_and_fish: -->
 </p>

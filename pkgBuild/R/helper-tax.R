@@ -190,7 +190,7 @@ ref2spp <- function(Ref, Spp, Z=spp.key){
 		# prepare to insert the Spp values in the Ref rows
 		new.vals <- Z[spp==Spp & ref!=Ref,eval(s2c(all.but.noSet))]
 		setkey(new.vals, spp)
-		new.vals <- unique(new.vals)
+		new.vals <- unique(new.vals, by=key(new.vals))
 		
 		# Insert
 		Z[ref==Ref, c(all.but.noSet):=new.vals]	

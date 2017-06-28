@@ -142,7 +142,7 @@ check_and_set <- function(wrong, corrected, Z=spp.key){
 			set2nonNA(Z=Z, index=Z[,spp==corrected&spp!=wrong])
 		}
 		
-		Z[spp==wrong, c(all.but.noSet):=Z[spp==corrected,eval(s2c(all.but.noSet))]]			
+		Z[spp==wrong, c(all.but.noSet):=unique(Z[spp==corrected,eval(s2c(all.but.noSet))])]			
 	}else{
 		# if the corrected name doesn't already exist,
 		# then simply switch the wrong name to the corrected name,
@@ -190,7 +190,7 @@ ref2spp <- function(Ref, Spp, Z=spp.key){
 		# prepare to insert the Spp values in the Ref rows
 		new.vals <- Z[spp==Spp & ref!=Ref,eval(s2c(all.but.noSet))]
 		setkey(new.vals, spp)
-		new.vals <- unique(new.vals)
+		new.vals <- unique(new.vals, by=key(new.vals))
 		
 		# Insert
 		Z[ref==Ref, c(all.but.noSet):=new.vals]	

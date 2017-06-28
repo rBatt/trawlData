@@ -44,7 +44,7 @@ createSppKey <- function(new_ref, save.key=FALSE){
 	# which only contains ref (raw) and spp (tax id) columns
 	ti2 <- copy(taxInfo)
 	setkey(ti2, spp)
-	ti2 <- unique(ti2)
+	ti2 <- unique(ti2, by=key(ti2))
 	ti2[,raw.spp:=NULL]
 	ti2[,correctSpp:=NULL]
 	ti2[,isSpecies:=NULL]

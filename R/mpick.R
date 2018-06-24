@@ -60,7 +60,7 @@ mpick <- function(X, p, weight=FALSE, limit=10, screen=TRUE, dt=FALSE){
 	if(screen){
 		# Reduce data set size
 		setkeyv(X, pName)
-		X1 <- unique(X)
+		X1 <- unique(X, by=key(X))
 
 		# Count combinations
 		t0 <- X1[,table(.SD[,eval(s2c(pName))])]

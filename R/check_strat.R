@@ -88,7 +88,7 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 	# ==================
 	# = Create Stratum =
 	# ==================
-	nT <- X[,lu(year, na.rm=TRUE)]
+	nT <- X[,length(unique(year, na.rm=TRUE))]
 
 	# ===============
 	# = Make Figure =
@@ -109,7 +109,7 @@ check_strat <- function(X, reg=c("ai", "ebs", "gmex", "goa", "neus", "newf", "sa
 
 		# Tolerance vs. Missingness Panels
 		plot(0:(nT-1), nstrata, type="o", xlab="N years missing", ylab="Number of strata missing in fewer than N years", main="# strata vs. tolerance of missingness")
-		image(x=X[,sort(unique(year))], y=X[,1:length(unique(stratum))], z=X[,table(year, stratum)>0], xlab="year", ylab="stratum", main="stratum presence vs. time; red is absent")
+		image(x=X[,sort(unique(year))], y=X[,(1:length(unique(stratum)))], z=X[,table(year, stratum)>0], xlab="year", ylab="stratum", main="stratum presence vs. time; red is absent")
 
 		# Tolerance Maps
 		par(mar=c(1.25,1.25,0.1,0.1), mgp=c(1,0.15,0), tcl=-0.15, ps=8, cex=1, family="Times")
